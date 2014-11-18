@@ -8,13 +8,13 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     
+    <!-- Navigation -->
     <string name="sign_up">Sign Up</string>
 	<string name="login">Login</string>
-	<string name="username">Username</string>
-	<string name="password">Password</string>
 	<string name="search_prompt">What interests you?</string>
 	<string name="search_hint"></string>
 	
+	<!-- Titles -->
 	<string name="title_user_friends">Following:</string>
 	<string name="title_favorite_hub">Most Visited Hub:</string>
 	
@@ -26,4 +26,24 @@
 	<string name="default_user_username">ThatGuy2014</string>
 	<string name="default_user_details">I love going to Bullwinkles every friday.</string>
 	<string name="default_hub_name">DefaultHub</string>
+	
+	<!-- Defaults on Data Creation -->
+	<string name="username">Username</string>
+	<string name="firstname">First Name</string>
+	<string name="lastname">Last Name</string>
+	<string name="password">Password</string>
+	<string name="authpassword">Confirm Password</string>
+	<string name="dateofbirth">DOB - mm/dd/yyyy</string>
+	<string name="email">Email</string>
+	<string name="details">Tell us about you.</string>
+	<string name="setpicdesc">Set Profile Picture</string>
+	<string name="menu_create_event">Create Event</string>
+	<string name="menu_search_event">Search Event</string>
+	<string name="logout">Logout</string>
+	<string name="user_details">User Details</string>
+	<string name="date_and_time">Date and Time</string>
+	<string name="event_name">Event Name</string>
+	<string name="event_details">Details for event</string>
+	<string name="create_user">Create User Account</string>
+	
 </resources>

@@ -22,12 +22,12 @@
         android:layout_alignLeft="@+id/button_sign_up"
         android:layout_alignRight="@+id/button_sign_up"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/teal_button"
+        android:background="@drawable/button_teal"
         android:text="@string/login" />
 
     <Button
         android:id="@+id/button_sign_up"
-        android:background="@drawable/lightblue_button"
+        android:background="@drawable/button_lightblue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/image_hubbub_logo"
