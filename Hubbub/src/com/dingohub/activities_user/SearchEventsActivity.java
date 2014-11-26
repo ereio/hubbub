@@ -13,7 +13,7 @@ public class SearchEventsActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_search_events);
+		setContentView(R.layout.activity_create_bub);
 		
 		// Initializes all static UI elements
 		init_ui();

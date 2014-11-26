@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -85,7 +86,9 @@ public class HubDatabase {
 			
 			event.put("title", bub.title);
 			event.put("location", bub.location);
-			//event.put("picture", bub.picture);
+			//gave picture the title change later to picture title
+			ParseFile e_picture = new ParseFile(bub.title,bub.picture);
+			event.put("picture", e_picture);
 			event.put("details", bub.details);
 			event.put("permission_level", bub.permissions);
 			event.put("start_dt", bub.start_date + "T" + bub.start_time);

@@ -38,6 +38,11 @@
             android:name = "CreateUserActivity">
             
         </activity>
+         <activity 
+             android:windowSoftInputMode="adjustPan"
+            android:name = "com.dingohub.activities_user.CreateEventsActivity">
+            
+        </activity>
         <activity 
             android:name = "UserMainDisplay">
             

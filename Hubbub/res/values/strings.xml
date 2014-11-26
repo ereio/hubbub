@@ -42,8 +42,21 @@
 	<string name="logout">Logout</string>
 	<string name="user_details">User Details</string>
 	<string name="date_and_time">Date and Time</string>
-	<string name="event_name">Event Name</string>
-	<string name="event_details">Details for event</string>
 	<string name="create_user">Create User Account</string>
+	
+	<!-- Defaults on Create Event -->
+	<string name="event_name">Bub Name</string>
+    <string name="event_details">Details for event:</string>
+	<string name="create_bub">Create Bub</string>
+    <string name="bub_location">Location</string>
+    <string name="bub_start_time"> Start Time</string>
+    <string name="bub_end_time">End Time</string>
+    <string name="bub_start_date">Start Date</string>
+    <string name="bub_end_date">End Date</string>
+    <string name="text_pingIn">Choose Ping In time</string>
+    <string name="Privacy">Privacy</string>
+    <string name="event_tag">Tag</string>
+    <string name="text_public">Public</string>
+     <string name="text_private">Private</string>
 	
 </resources>

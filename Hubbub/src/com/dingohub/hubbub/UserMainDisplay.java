@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dingohub.activities_user.CreateEventsActivity;
 import com.dingohub.fragments_user.TodaysBubsFragment;
 import com.dingohub.fragments_user.UserBubsFragment;
 import com.dingohub.fragments_user.UserGroupsFragment;
@@ -90,6 +91,8 @@ public class UserMainDisplay extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			Intent i = new Intent(this,CreateEventsActivity.class);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
