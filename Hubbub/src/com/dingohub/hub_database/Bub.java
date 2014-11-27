@@ -17,9 +17,11 @@ public class Bub {
 	public String end_time;
 	public int yes_counter;
 	public int maybe_counter;
+	public String picture_title;
 	public int no_counter;
 	public JSONArray follower_ids;
 	public JSONArray tags;
+	public int pingIn_time;
 	
 	public Bub(){
 		id = null;
@@ -30,11 +32,13 @@ public class Bub {
 		start_date = null;
 		start_time = null;
 		end_date = null;
+		picture_title=null;
 		end_time = null;
 		picture = new byte[] {};
 		yes_counter = 0;
 		no_counter = 0;
 		maybe_counter = 0;
+		pingIn_time = 0;
 		 
 	}
 	public boolean AddFollower(HubUser usr){

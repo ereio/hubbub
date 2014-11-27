@@ -55,7 +55,7 @@
     <string name="bub_end_date">End Date</string>
     <string name="text_pingIn">Choose Ping In time</string>
     <string name="Privacy">Privacy</string>
-    <string name="event_tag">Tag</string>
+    <string name="bub_tag">Tag</string>
     <string name="text_public">Public</string>
      <string name="text_private">Private</string>
 	
