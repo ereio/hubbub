@@ -1,22 +1,28 @@
 package com.dingohub.fragments_user;
 
 import java.util.ArrayList;
+
 import java.util.Calendar;
 
 import com.dingohub.hub_database.Bub;
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hubbub.R;
+import com.dingohub.hubbub.UserMainDisplay;
 
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+// note : make this fragment refresh ! without having to reopen the activity.
 public class TodaysBubsFragment extends ListFragment{
 	ArrayList<Bub> todays_events;
 	
@@ -30,8 +36,9 @@ public class TodaysBubsFragment extends ListFragment{
         int day = c.get(Calendar.DATE);
         int month = c.get(Calendar.MONTH);
         month++;
+       
         int year = c.get(Calendar.YEAR);
-        String date = "" + day + month + year;
+        String date = "" + day +"/"+ month+"/" + year;
 		todays_events = HubDatabase.FindEventByDate(date);
 		
 		BubListAdapter adapter = new BubListAdapter(getActivity(), todays_events);

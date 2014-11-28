@@ -93,6 +93,8 @@ public class HubDatabase {
 			event.put("permission_level", bub.permissions);
 			event.put("start_dt", bub.start_date + "T" + bub.start_time);
 			event.put("end_dt", bub.end_date + "T" + bub.end_time);
+			event.put("start_date", bub.start_date);
+			event.put("end_date", bub.end_date);
 			event.put("yes_counter", 0);
 			event.put("maybe_counter", 0);
 			event.put("no_counter", 0);
