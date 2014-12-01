@@ -14,9 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.dingohub.activities_user.SearchEventsActivity;
 import com.dingohub.hub_database.HubDatabase;
 import com.parse.ParseObject;
+import com.parse.PushService;
 
 public class LoginActivity extends Activity {
 	public static final String USER_KEY = "UserKey";
@@ -43,6 +45,7 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
+		PushService.setDefaultPushCallback(this,LoginActivity.class);
 		// Initializes all static UI elements
 		init_ui();
 		

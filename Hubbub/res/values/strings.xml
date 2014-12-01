@@ -59,4 +59,23 @@
     <string name="text_public">Public</string>
      <string name="text_private">Private</string>
 	
+     <!-- pingIn Strings -->
+    <string name="YES">Yes</string>
+	<string name="No">No</string>
+	<string name="Maybe">Maybe</string>
+	<string name="Attending">Are you still coming ?</string>
+     
+     
+     <!--  Following Events -->
+     <string name="following">Following:</string>
+     <string name="standard_time_text">Time</string>
+     <string name="textview_tags_header">Tags go here</string>
+     <string name="follow_event">Follow Event</string>
+     <string name="unfollow">Unfollow Event</string>
+     <string name="event_followers_default">No Followers</string>
+     <string name="num_following">0</string>
+     <string name="tapp_in_header">Tapp-In Time:</string>
+     <string name="event_tags">Tags:</string>
+      <string name="event_details_default">No Details</string>
+     
 </resources>

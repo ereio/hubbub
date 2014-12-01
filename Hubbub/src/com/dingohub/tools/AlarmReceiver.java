@@ -22,7 +22,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 	   
-		Toast.makeText(context.getApplicationContext(), "Beginning Tapp-In !!!", Toast.LENGTH_SHORT).show();
+		
 		event_id = intent.getStringExtra(CreateEventsActivity.CHANNEL_KEY);
 
 		ParsePush push = new ParsePush();

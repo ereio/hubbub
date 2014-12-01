@@ -1,9 +1,9 @@
 package com.dingohub.fragments_user;
 
 import java.util.ArrayList;
-
 import java.util.Calendar;
 
+import com.dingohub.activities_user.ViewEventActivity;
 import com.dingohub.hub_database.Bub;
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hubbub.R;
@@ -11,6 +11,7 @@ import com.dingohub.hubbub.UserMainDisplay;
 
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +59,8 @@ public class TodaysBubsFragment extends ListFragment{
 		// Intent intent = new Intent(getActivity(), ViewEventFragment.class);
 		// Will need to replace the layout's fragment or start a new activity
 		// .... haven't decided.
+		Intent intent = new Intent(getActivity().getApplicationContext(),ViewEventActivity.class);
+		startActivity(intent);
 	}
 	
 	

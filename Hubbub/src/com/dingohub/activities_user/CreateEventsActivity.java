@@ -198,25 +198,25 @@ public class CreateEventsActivity extends Activity{
 			// Runs tags check
 			//if(checkTags()){
 
-				int event_id = HubDatabase.CreateBub(createEventFromData());
-			//	HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
-			//	Toast.makeText(this, "Event Created Successfully", Toast.LENGTH_SHORT).show();
+				String event_id = HubDatabase.CreateBub(createEventFromData());
+				HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
+				//Toast.makeText(this, "Event Created Successfully"+event_id, Toast.LENGTH_SHORT).show();
 				
-				//alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
-				//Intent intent = new Intent(this, AlarmReceiver.class);
-				//intent.putExtra(CHANNEL_KEY,event_id);
-				//	alarmIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+				alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
+				Intent intent = new Intent(this, AlarmReceiver.class);
+				intent.putExtra(CHANNEL_KEY,event_id);
+			alarmIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
 					//alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
 					    //  SystemClock.elapsedRealtime() +
 					   //    60 * 1000, alarmIntent);
 					
-					//alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-					  //      sysTimeToTSB(tappInTimeInMillis()), alarmIntent);
+				alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+					       sysTimeToTSB(tappInTimeInMillis()), alarmIntent);
 
 					
-				//ParsePush.subscribeInBackground(""+event_id);	
+				ParsePush.subscribeInBackground(""+event_id);	
 				finish();
 			}
 		
@@ -279,7 +279,7 @@ public class CreateEventsActivity extends Activity{
 		time_minute = minute;
 		
 		
-		if(hour > 12)
+		if(hour >= 12)
 		{
 			if(minute >= 10)
 				showTime.setText(""+(hour-12)+": "+minute+ " PM");
@@ -383,39 +383,39 @@ public class CreateEventsActivity extends Activity{
 ////////////////////////////////////////////////////////////////
 // Get tapp in system time
 ///////////////////////////////////////////////////////////////
-private long tappInTimeInMillis(){
-EditText showDate = (EditText)findViewById(R.id.bub_start_date);
-EditText showTime = (EditText)findViewById(R.id.bub_start_time);
+		private long tappInTimeInMillis(){
+			EditText showDate = (EditText)findViewById(R.id.bub_start_date);
+			EditText showTime = (EditText)findViewById(R.id.bub_start_time);
 
-String[] stime = showTime.getText().toString().split("[: ]+");
-String[] sdate = showDate.getText().toString().split("/");
+			String[] stime = showTime.getText().toString().split("[: ]+");
+			String[] sdate = showDate.getText().toString().split("/");
 
-int tappInVal = Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]);
+			int tappInVal = Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]);
 
-int[] tt = new int[5];
-//year
-tt[0] = Integer.parseInt(sdate[2].trim());
-//month (Jan = 0)
-tt[1] = Integer.parseInt(sdate[1].trim())-1;
-//day
-tt[2] = Integer.parseInt(sdate[0].trim());
+			int[] tt = new int[5];
+			//year
+			tt[0] = Integer.parseInt(sdate[2].trim());
+			//month (Jan = 0)
+			tt[1] = Integer.parseInt(sdate[1].trim())-1;
+			//day
+			tt[2] = Integer.parseInt(sdate[0].trim());
 
-//hour
-if(stime[2].trim().equals("PM"))
-tt[3] = Integer.parseInt(stime[0].trim()) + 12;
-else
-tt[3] = Integer.parseInt(stime[0].trim());
+			//hour
+			if(stime[2].trim().equals("PM"))
+				tt[3] = Integer.parseInt(stime[0].trim()) + 12;
+			else
+				tt[3] = Integer.parseInt(stime[0].trim());
 
-//minutes
-tt[4] = Integer.parseInt(stime[1].trim());
+			//minutes
+			tt[4] = Integer.parseInt(stime[1].trim());
 
-Calendar cal = Calendar.getInstance();
+			Calendar cal = Calendar.getInstance();
 
-cal.set(tt[0],tt[1],tt[2],tt[3],tt[4],0);
-cal.add(Calendar.HOUR_OF_DAY, - tappInVal);
+			cal.set(tt[0],tt[1],tt[2],tt[3],tt[4],0);
+			cal.add(Calendar.HOUR_OF_DAY, - tappInVal);
 
-Log.i("CreateEvent",DateFormat.getDateTimeInstance().format(cal.getTime()));
-Log.i("CreateEvent","Tapp in: "+tappInVal+" hrs before");
+			Log.i("CreateEvent",DateFormat.getDateTimeInstance().format(cal.getTime()));
+			Log.i("CreateEvent","Tapp in: "+tappInVal+" hrs before");
 
 	return cal.getTimeInMillis();
 }
