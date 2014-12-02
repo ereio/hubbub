@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <type>com.umlet.element.Actor</type>
+    <coordinates>
+      <x>28</x>
+      <y>399</y>
+      <w>56</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>User
+bg=#ADD8E6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Actor</type>
+    <coordinates>
+      <x>798</x>
+      <y>343</y>
+      <w>84</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Commercial User
+bg=#191970</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>441</x>
+      <y>252</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Create Bub
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>427</x>
+      <y>308</y>
+      <w>126</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Search Users
+
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>532</x>
+      <y>511</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Follow Bubs
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>441</x>
+      <y>427</y>
+      <w>112</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>Search Bubs
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>245</y>
+      <w>398</w>
+      <h>181</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>385;21;21;168</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>392</y>
+      <w>398</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>385;63;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Actor</type>
+    <coordinates>
+      <x>805</x>
+      <y>637</y>
+      <w>70</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>SysAdmin
+bg=#C71585</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>392</y>
+      <w>370</w>
+      <h>237</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>357;224;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>413</x>
+      <y>595</y>
+      <w>154</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>Search Hubs
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>532</x>
+      <y>336</y>
+      <w>300</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;119;287;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>840</x>
+      <y>252</y>
+      <w>90</w>
+      <h>118</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>77;21;21;105</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>917</x>
+      <y>252</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Create Commercial Bub
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>539</x>
+      <y>336</y>
+      <w>293</w>
+      <h>286</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;273;280;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>917</x>
+      <y>385</y>
+      <w>126</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>Buy Search Positions
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>840</x>
+      <y>336</y>
+      <w>90</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>77;63;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>511</x>
+      <y>637</y>
+      <w>321</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;91;308;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>448</x>
+      <y>714</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Delete Hubs
+bg=#303030</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>511</x>
+      <y>637</y>
+      <w>321</w>
+      <h>146</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;133;308;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>448</x>
+      <y>756</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Delete Bubs
+bg=#303030</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>392</y>
+      <w>188</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>175;217;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>231</x>
+      <y>595</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Ping-In
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>224</x>
+      <y>637</y>
+      <w>98</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>View Own Profile
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>392</y>
+      <w>188</w>
+      <h>265</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>175;252;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>231</x>
+      <y>560</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Create Profile
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>392</y>
+      <w>188</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>175;182;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>917</x>
+      <y>315</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Create Profile
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>840</x>
+      <y>315</y>
+      <w>90</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>77;21;21;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>553</x>
+      <y>665</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Follow Hubs
+bg=#0de9bd
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>504</x>
+      <y>245</y>
+      <w>328</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;21;315;112</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>504</x>
+      <y>154</y>
+      <w>133</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Set Name and Details
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>588</x>
+      <y>189</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Set Privacy 
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>371</x>
+      <y>147</y>
+      <w>105</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Set Ping-In Time
+bg=#0de9bd
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>266</x>
+      <y>175</y>
+      <w>119</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Set Date and Time
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>322</x>
+      <y>182</y>
+      <w>139</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;includes&gt;&gt;</panel_attributes>
+    <additional_attributes>21;21;126;77</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>399</x>
+      <y>154</y>
+      <w>111</w>
+      <h>111</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;includes&gt;&gt;</panel_attributes>
+    <additional_attributes>35;21;84;98</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>469</x>
+      <y>161</y>
+      <w>105</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;includes&gt;&gt;</panel_attributes>
+    <additional_attributes>77;21;35;91</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>497</x>
+      <y>196</y>
+      <w>146</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;includes&gt;&gt;</panel_attributes>
+    <additional_attributes>133;21;21;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>427</x>
+      <y>98</y>
+      <w>111</w>
+      <h>167</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>63;154;56;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>343</x>
+      <y>84</y>
+      <w>154</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Delete Created Bubs
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>469</x>
+      <y>623</y>
+      <w>111</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>35;21;84;49</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>497</x>
+      <y>448</y>
+      <w>111</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>42;21;77;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>434</x>
+      <y>455</y>
+      <w>105</w>
+      <h>97</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>56;21;56;84</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>448</x>
+      <y>539</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Invite Users
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>252</x>
+      <y>238</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Invite Users
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>315</x>
+      <y>224</y>
+      <w>139</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>126;42;21;28</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>504</x>
+      <y>329</y>
+      <w>105</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>35;21;77;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>567</x>
+      <y>392</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Follow Users
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>385</x>
+      <y>336</y>
+      <w>105</w>
+      <h>69</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>63;21;49;56</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>315</y>
+      <w>384</w>
+      <h>111</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>371;21;21;98</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>532</x>
+      <y>315</y>
+      <w>300</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;21;287;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>357</x>
+      <y>385</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Message Users
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>378</x>
+      <y>448</y>
+      <w>111</w>
+      <h>83</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>77;21;42;70</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>357</x>
+      <y>518</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>View Bub Info
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>420</x>
+      <y>791</y>
+      <w>133</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Approve Hub Requests
+bg=#303030</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>210</x>
+      <y>679</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Request Hub Creation
+bg=#0de9bd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>392</y>
+      <w>174</w>
+      <h>314</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>161;301;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>532</x>
+      <y>637</y>
+      <w>300</w>
+      <h>188</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;175;287;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>595</x>
+      <y>805</y>
+      <w>112</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Terminate Users
+bg=#303030</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>686</x>
+      <y>637</y>
+      <w>146</w>
+      <h>202</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>21;189;133;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Systemborder</type>
+    <coordinates>
+      <x>168</x>
+      <y>70</y>
+      <w>623</w>
+      <h>833</h>
+    </coordinates>
+    <panel_attributes>Hubbub App
+bg=#ffe6ba</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Systemborder</type>
+    <coordinates>
+      <x>882</x>
+      <y>217</y>
+      <w>196</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>Hubbub Commercial Portal
+bg=#ffe6ba</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>504</x>
+      <y>231</y>
+      <w>426</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;includes&gt;&gt;</panel_attributes>
+    <additional_attributes>21;35;413;35</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>392</x>
+      <y>623</y>
+      <w>111</w>
+      <h>69</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>77;21;42;56</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>357</x>
+      <y>672</y>
+      <w>119</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>View Related Bubs
+bg=#0de9bd
+
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>539</x>
+      <y>588</y>
+      <w>105</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>28;35;84;35</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>623</x>
+      <y>609</y>
+      <w>119</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Make Post
+bg=#0de9bd
+
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>210</x>
+      <y>735</y>
+      <w>126</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>View Followed Bubs
+bg=#0de9bd
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>392</y>
+      <w>167</w>
+      <h>377</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>154;364;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>329</x>
+      <y>791</y>
+      <w>91</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Unfollow Bubs
+bg=#0de9bd
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>287</x>
+      <y>742</y>
+      <w>111</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+ 
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>35;21;84;49</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>203</x>
+      <y>798</y>
+      <w>126</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>View Followed Hubs
+bg=#0de9bd
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>245</x>
+      <y>812</y>
+      <w>105</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;extends&gt;&gt;</panel_attributes>
+    <additional_attributes>28;21;84;49</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>56</x>
+      <y>392</y>
+      <w>160</w>
+      <h>433</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>147;420;21;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>329</x>
+      <y>854</y>
+      <w>91</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Unfollow Hubs
+bg=#0de9bd
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
