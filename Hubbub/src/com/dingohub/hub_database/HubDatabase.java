@@ -527,7 +527,8 @@ public class HubDatabase {
 		usr.friend_ids = db_usr.getJSONArray(FRIENDS);
 		try {
 			ParseFile pic = db_usr.getParseFile(PROFILE_PIC);
-			usr.picture = pic.getData();
+			if(pic != null)
+				usr.picture = pic.getData();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
