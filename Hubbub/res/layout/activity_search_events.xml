@@ -15,11 +15,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <fragment
-        android:id="@+id/fragment1"
-        android:name="com.dingohub.fragments_user.TodaysBubsFragment"
+        android:id="@+id/fragment_search_bubs"
+        android:name="com.dingohub.fragments_user.SearchedEventsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_below="@+id/edittext_search_tag"
         android:layout_centerHorizontal="true" />
 
     <EditText

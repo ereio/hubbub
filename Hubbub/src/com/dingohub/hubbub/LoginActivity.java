@@ -155,8 +155,9 @@ public class LoginActivity extends Activity {
 				bundle.putString(UserMainDisplay.PASS_KEY, password);
 				Intent intent = new Intent(getApplicationContext(), UserMainDisplay.class);
 				intent.putExtras(bundle);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				finish();
 			}
 			else{
 				Toast.makeText(getApplicationContext(), "Login Infomation is not valid",

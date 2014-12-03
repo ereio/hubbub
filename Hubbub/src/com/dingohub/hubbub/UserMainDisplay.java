@@ -14,7 +14,9 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
 import com.dingohub.activities_user.CreateEventsActivity;
+import com.dingohub.activities_user.SearchEventsActivity;
 import com.dingohub.fragments_user.TodaysBubsFragment;
 import com.dingohub.fragments_user.UserBubsFragment;
 import com.dingohub.fragments_user.UserGroupsFragment;
@@ -22,6 +24,7 @@ import com.dingohub.fragments_user.UserHubsFragment;
 import com.dingohub.fragments_user.UserProfileFragment;
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hub_database.HubUser;
+import com.parse.ParseUser;
 
 @SuppressWarnings("deprecation")
 public class UserMainDisplay extends Activity {
@@ -91,8 +94,27 @@ public class UserMainDisplay extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			//Intent intent = new Intent(getApplicationContext(), UserSettingsActivity.class);
+			//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//startActivity(intent);
+			//return true;
+		}
+		if (id == R.id.search_bub) {
+			Intent i = new Intent(this,SearchEventsActivity.class);
+			startActivity(i);
+			return true;
+		}
+		if (id == R.id.create_bub) {
 			Intent i = new Intent(this,CreateEventsActivity.class);
 			startActivity(i);
+			return true;
+		}
+		else if(id == R.id.logout){
+			ParseUser.logOut();
+			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			intent.putExtra(LoginActivity.LOGOUT_DEFAULT, true);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -115,9 +137,9 @@ public class UserMainDisplay extends Activity {
 			case 0:
 				return new TodaysBubsFragment();
 			case 1:
-				return new UserBubsFragment();
-			case 2:
 				return new UserHubsFragment();
+			case 2:
+				return new UserBubsFragment();
 			case 3:
 				return new UserGroupsFragment();
 			case 4:

@@ -8,14 +8,14 @@
         android:id="@+id/listitem_bub_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/listitem_bub_picture"
+        android:layout_alignBottom="@+id/listitem_fbub_picture"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/listitem_bub_picture"
+        android:layout_toRightOf="@+id/listitem_fbub_picture"
         android:text="@string/default_event_time"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/listitem_bub_location"
+        android:id="@+id/listitem_fbub_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/listitem_bub_time"
@@ -25,16 +25,16 @@
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/listitem_bub_title"
+        android:id="@+id/listitem_fbub_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/listitem_bub_location"
-        android:layout_toRightOf="@+id/listitem_bub_picture"
+        android:layout_above="@+id/listitem_fbub_location"
+        android:layout_toRightOf="@+id/listitem_fbub_picture"
         android:text="@string/default_event_name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
-        android:id="@+id/listitem_bub_picture"
+        android:id="@+id/listitem_fbub_picture"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"

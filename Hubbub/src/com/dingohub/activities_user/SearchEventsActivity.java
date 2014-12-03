@@ -1,59 +1,70 @@
 package com.dingohub.activities_user;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
+import com.dingohub.fragments_user.SearchedEventsFragment;
+import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hubbub.R;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
 public class SearchEventsActivity extends Activity{
+	public static final String TAG_KEY = "TagKey";
+	EditText eTags;
 	
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_bub);
+		setContentView(R.layout.activity_search_events);
+		eTags = (EditText) findViewById(R.id.edittext_search_tag);
 		
-		// Initializes all static UI elements
-		init_ui();
-		
-		// Initializes all button interactions and event handlers
-		init_buttons();
-		
-	}
+		eTags.setOnEditorActionListener( new EditText.OnEditorActionListener(){
 
-	private void init_ui(){
-
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if(actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
+				   event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+					
+					if(!event.isShiftPressed())
+						searchTags(eTags.getText().toString());
+						return true;
+					}
+				return false;
+			}
+		});
+		
+		eTags.setOnFocusChangeListener( new EditText.OnFocusChangeListener(){
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(!hasFocus){
+					searchTags(eTags.getText().toString());
+				}
+			}
+		});
 	}
 	
-	private void init_buttons(){
-
-		
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+	private boolean checkTags(String tag){
+		if(tag.contains(HubDatabase.INVALID_CHARS)){
+			Toast.makeText(getApplicationContext(), "Tags cannot contain invalid characters",
+			Toast.LENGTH_LONG).show();
+			return false;
+		}
 		return true;
 	}
 	
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu){
-		return super.onPrepareOptionsMenu(menu);
-		
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+	private void searchTags(String tag){
+		if(checkTags(tag)){
+			FragmentManager manager = getFragmentManager();
+			SearchedEventsFragment eventList = new SearchedEventsFragment(tag);
+			manager.beginTransaction().replace(R.id.fragment_search_bubs, eventList).commit();
 		}
-		return super.onOptionsItemSelected(item);
 	}
 }

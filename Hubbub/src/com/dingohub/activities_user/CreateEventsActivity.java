@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.dingohub.tools.AlarmReceiver;
+import com.dingohub.tools.BitmapFileWorker;
 import com.dingohub.hub_database.*;
 import com.dingohub.fragments_user.*;
 import com.dingohub.hubbub.R;
@@ -23,6 +24,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -57,9 +60,11 @@ public class CreateEventsActivity extends Activity{
 	private ImageButton event_picture;
 	private EditText event_location;
 	private String set_noon;
+	
 	//Deatils of the event
 	private EditText event_details;
 	private byte[] picture_bytes;
+	
 	// store the date and time chosen
 	//by the user
 	private int time_hour;
@@ -68,8 +73,8 @@ public class CreateEventsActivity extends Activity{
 	private int date_month;
 	private int date_day;
 	
-	//tap in time chosen by the user
 	
+	boolean pictureSelected = false;
 	RadioButton privacy;
 	Spinner pingIn;
 	private AlarmManager alarmMgr;
@@ -178,13 +183,10 @@ public class CreateEventsActivity extends Activity{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 				}
 			});
 			
-}
-	
-	
+		}
 	
 	//when the create Event button is clicked
 		public void CreateEvent ( View v) throws JSONException
@@ -205,7 +207,7 @@ public class CreateEventsActivity extends Activity{
 				alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
 				Intent intent = new Intent(this, AlarmReceiver.class);
 				intent.putExtra(CHANNEL_KEY,event_id);
-			alarmIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+			alarmIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
 
 					//alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
@@ -216,7 +218,7 @@ public class CreateEventsActivity extends Activity{
 					       sysTimeToTSB(tappInTimeInMillis()), alarmIntent);
 
 					
-				ParsePush.subscribeInBackground(""+event_id);	
+				ParsePush.subscribeInBackground(event_id);	
 				finish();
 			}
 		
@@ -360,8 +362,7 @@ public class CreateEventsActivity extends Activity{
 			newEvent.title = event_name.getText().toString();
 			newEvent.location = event_location.getText().toString();
 			
-			newEvent.picture_title = "PictureTitle";
-			newEvent.picture = picture_bytes;
+			
 			
 			newEvent.details = event_details.getText().toString().trim();
 			newEvent.permissions = "public";
@@ -374,6 +375,17 @@ public class CreateEventsActivity extends Activity{
 			
 			newEvent.tags = JSONTags;
 			newEvent.pingIn_time = Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]);
+			
+			// Converts and compresses for the server side data storage
+			if(pictureSelected){
+				newEvent.picture_title = newEvent.title + " Picture";
+				Bitmap temp = ((BitmapDrawable) event_picture.getDrawable()).getBitmap();
+				
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				temp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+				newEvent.picture = baos.toByteArray();
+			}
+			
 			
 			return newEvent;
 		}
@@ -440,16 +452,21 @@ public class CreateEventsActivity extends Activity{
 			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
 			String picturePath = cursor.getString(columnIndex);
 			cursor.close();
-			event_picture.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-			Bitmap temp = BitmapFactory.decodeFile(picturePath);
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			temp.compress(Bitmap.CompressFormat.PNG, 100, baos);
-			picture_bytes = baos.toByteArray();
-
-
+			
+			
+			// Decodes the file to a bitmap
+			// Runs async task to shrink the photo and set the imagebutton to the picture
+			// server side preperation doesn't begin until the user hits the Create button
+			BitmapFileWorker worker = new BitmapFileWorker(event_picture, picturePath, 250, 250);
+			worker.execute(0);
+			
+			pictureSelected = true;
+			
+			
 		}
 	}
+	
+	
 		
 		
 	

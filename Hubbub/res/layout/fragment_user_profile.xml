@@ -33,7 +33,7 @@
         android:id="@+id/text_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="8dp"
         android:layout_above="@+id/text_fullname"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/image_profile_picture"
@@ -42,12 +42,25 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
+        android:id="@+id/text_about"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/text_username"
+        android:layout_below="@+id/image_profile_picture"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittext_closedblue"
+        android:text="@string/event_details_default"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
         android:id="@+id/text_static_following"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/image_profile_picture"
-        android:layout_marginTop="44dp"
+        android:layout_alignLeft="@+id/text_about"
+        android:layout_below="@+id/text_about"
+        android:layout_marginTop="16dp"
         android:text="@string/title_user_friends"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

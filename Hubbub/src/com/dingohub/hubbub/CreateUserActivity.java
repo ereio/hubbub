@@ -1,11 +1,19 @@
 package com.dingohub.hubbub;
 
 
+import java.io.ByteArrayOutputStream;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +25,7 @@ import android.widget.Toast;
 
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hub_database.HubUser;
+import com.dingohub.tools.BitmapFileWorker;
 
 public class CreateUserActivity extends Activity {
 
@@ -40,11 +49,13 @@ public class CreateUserActivity extends Activity {
 	String mAuthPass = null;
 	String mDetails = null;
 	String mDOB = null;
-	byte[] mProfilPic = null;
+	byte[] mProfilePic = null;
 
 	SharedPreferences prefs;
+	boolean pictureSelected = false;
 	
 	HubUser newuser;
+	private static int RESULT_LOAD_IMAGE = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +113,7 @@ public class CreateUserActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				if(check_fields()){
-					create_tapp_user();
-					//result = DBFunct.CreateUser(mUsername, mPass, mAuthPass, mEmail, mFirstname, mLastname, mProfilPic, mDOB);
+					create_hubbub_user();
 					result = HubDatabase.CreateUser(newuser, mPass, mAuthPass, mDOB);
 					
 					if(result == HubDatabase.FLAG_NULL_QUERY){
@@ -127,11 +137,10 @@ public class CreateUserActivity extends Activity {
 			}});
 		
 		bProfilePic.setOnClickListener(new OnClickListener(){
-
 			@Override
 			public void onClick(View v) {
-				
-				
+				Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				startActivityForResult(i, RESULT_LOAD_IMAGE);
 			}});
 	}
 	
@@ -267,16 +276,46 @@ public class CreateUserActivity extends Activity {
 			mDOB = eDOB.getText().toString().trim();
 			mDetails = eDetail.getText().toString().trim();
 			
+			// Converts and compresses for the server side data storage
+			if(pictureSelected){
+				Bitmap temp = ((BitmapDrawable)bProfilePic.getDrawable()).getBitmap();
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				temp.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+				mProfilePic = baos.toByteArray();
+			}
 	}
 	
-	private void create_tapp_user(){
+	private void create_hubbub_user(){
 		newuser = new HubUser();
 		newuser.username = mUsername;
 		newuser.firstname = mFirstname;
 		newuser.lastname = mLastname;
 		newuser.email = mEmail;
 		newuser.details = mDetails;
+		newuser.picture = mProfilePic;
 		
 		
 	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+			Uri selectedImage = data.getData();
+			String[] filePathColumn = { MediaStore.Images.Media.DATA };
+			Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+			cursor.moveToFirst();
+			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+			String picturePath = cursor.getString(columnIndex);
+			cursor.close();
+	
+			// Runs async task to shrink the photo and set the imagebutton to the picture
+			// server side preperation doesn't begin until the user hits the Create button
+			BitmapFileWorker worker = new BitmapFileWorker(bProfilePic, picturePath, 250, 250);
+			worker.execute(0);
+			
+			pictureSelected = true;
+
+		}
+	}
+	
 }

@@ -137,19 +137,18 @@ public class ViewEventActivity extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// NEED A REMOVE FOLLOWER BUTTON!
-				ParsePush.subscribeInBackground(""+event.id);
+				ParsePush.subscribeInBackground(event.id);
 				HubDatabase.AddFollower(event.id, HubDatabase.getCurrentUser().id);
 				v.setVisibility(View.INVISIBLE);
 				bUnfollow.setVisibility(View.VISIBLE);
 			}});
 		
 		bUnfollow.setOnClickListener(new OnClickListener(){
-
 			@Override
 			public void onClick(View v) {
-				ParsePush.unsubscribeInBackground(""+event.id);
+				ParsePush.unsubscribeInBackground(event.id);
 				deleteFollower();
-				HubDatabase.UpdateEvent(event, "DefaultPictureName");
+				HubDatabase.RemoveFollower(event);
 				v.setVisibility(View.INVISIBLE);
 				bFollow.setVisibility(View.VISIBLE);
 			}});
@@ -200,7 +199,7 @@ public class ViewEventActivity extends Activity{
 		event_tappin = (TextView) findViewById(R.id.eventview_tappin_time);
 		event_tags = (TextView) findViewById(R.id.eventview_tags);
 		event_following = (TextView) findViewById(R.id.eventview_following_list);
-		event_details = (TextView) findViewById(R.id.eventlist_details1);
+		event_details = (TextView) findViewById(R.id.text_about);
 		event_numfollowers = (TextView) findViewById(R.id.eventlist_numfollowers);
 		
 		event_num_yes = (TextView) findViewById(R.id.eventview_num_yes);
@@ -258,7 +257,7 @@ public class ViewEventActivity extends Activity{
 		event_num_maybe.setText(Integer.toString(event.maybe_counter));
 		event_num_no.setText(Integer.toString(event.no_counter));
 		
-		if(event.picture.length > 10){
+		if(event.picture != null){
 			event_picture.setImageBitmap(BitmapFactory.decodeByteArray(event.picture, 0, event.picture.length));
 		}
 	}
@@ -334,6 +333,7 @@ public class ViewEventActivity extends Activity{
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		
 		return print;
 	}
 	

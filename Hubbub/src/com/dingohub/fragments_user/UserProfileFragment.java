@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hub_database.HubUser;
 import com.dingohub.hubbub.R;
+import com.dingohub.tools.BitmapByteWorker;
 
 public class UserProfileFragment extends Fragment{
 	ImageView iProfilePic;
@@ -18,7 +19,7 @@ public class UserProfileFragment extends Fragment{
 	TextView tUsername;
 	TextView tFullName;
 	TextView tEmail;
-	TextView tDetail;
+	TextView tAbout;
 	
 	HubUser user;
 	
@@ -40,7 +41,7 @@ public class UserProfileFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_currentuser_profile, container,
+		return inflater.inflate(R.layout.fragment_user_profile, container,
 				false);
 	}
 	
@@ -48,14 +49,17 @@ public class UserProfileFragment extends Fragment{
 		iProfilePic = (ImageView) getView().findViewById(R.id.image_profile_picture);
 		tUsername = (TextView) getView().findViewById(R.id.text_username);
 		tFullName = (TextView) getView().findViewById(R.id.text_fullname);
-		//tEmail = (TextView) getView().findViewById(R.id.text_email);
-		//tDetail = (TextView) getView().findViewById(R.id.text_details);
+		tAbout = (TextView) getView().findViewById(R.id.text_about);
 	}
 	
 	private void set_ui(){
 		tUsername.setText(user.username.toString());
 		tFullName.setText(user.firstname.toString() + " " + user.lastname.toString());
-		//tEmail.setText(user.email.toString());
-		//tDetail.setText(user.details.toString());
+		tAbout.setText(user.details.toString());
+		
+		if(user.picture != null){
+			BitmapByteWorker worker = new BitmapByteWorker(iProfilePic, user.picture, 250, 250);
+			worker.execute(0);
+		}
 	}
 }
