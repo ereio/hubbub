@@ -40,6 +40,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreateEventsActivity extends Activity{
@@ -60,6 +61,7 @@ public class CreateEventsActivity extends Activity{
 	private ImageButton event_picture;
 	private EditText event_location;
 	private String set_noon;
+	TextView header;
 	
 	//Deatils of the event
 	private EditText event_details;
@@ -86,7 +88,7 @@ public class CreateEventsActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_bub);
+		setContentView(R.layout.alt_activity_create_bub);
 		
 		 ping_time = new String[]{"0 hours before", "1 hour before","2 hours before","3 hours before",
 				"4 hours before","5 hours before","6 hours before","7 hours before","8 hours before"};
@@ -101,8 +103,9 @@ public class CreateEventsActivity extends Activity{
 			end_time = (EditText) findViewById(R.id.bub_end_time);
 			start_date = (EditText) findViewById(R.id.bub_start_date);
 			end_date = (EditText) findViewById(R.id.bub_end_date);
-			event_picture = (ImageButton) findViewById(R.id.picture);
+			event_picture = (ImageButton) findViewById(R.id.bub_image_button);
 			create_button = (Button ) findViewById(R.id.bub_create);
+			header = (TextView) findViewById(R.id.bub_name_header);
 			
 			// these are listeners to when the editTexts are pressed
 			start_time.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -169,7 +172,7 @@ public class CreateEventsActivity extends Activity{
 				public void onClick(View v) {
 					Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 					startActivityForResult(i, RESULT_LOAD_IMAGE);
-					
+					header.setVisibility(View.INVISIBLE);
 				}});
 		
 			
@@ -457,7 +460,7 @@ public class CreateEventsActivity extends Activity{
 			// Decodes the file to a bitmap
 			// Runs async task to shrink the photo and set the imagebutton to the picture
 			// server side preperation doesn't begin until the user hits the Create button
-			BitmapFileWorker worker = new BitmapFileWorker(event_picture, picturePath, 250, 250);
+			BitmapFileWorker worker = new BitmapFileWorker(event_picture, picturePath, 200, 200);
 			worker.execute(0);
 			
 			pictureSelected = true;

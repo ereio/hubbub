@@ -28,6 +28,7 @@ import com.dingohub.hubbub.R;
 import com.dingohub.hub_database.Bub;
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hub_database.HubUser;
+import com.dingohub.tools.BitmapByteWorker;
 import com.parse.ParsePush;
 
 public class ViewEventActivity extends Activity{
@@ -105,14 +106,14 @@ public class ViewEventActivity extends Activity{
 		}
 		
 		long sysBootTime = System.currentTimeMillis();
-		long testing = sysBootTime - tappInTimeInMillis();
+		long testing = sysBootTime - pingInTimeInMillis();
 		
 		Log.i("SYSTEM TIME",DateFormat.getDateTimeInstance().toString());
 		Log.i("DIFFERENCE", "" + testing);
 		Log.i("SYSTEM TIME LONG", "" + sysBootTime);
-		Log.i("TAPP TIME LONG", "" + tappInTimeInMillis());
+		Log.i("TAPP TIME LONG", "" + pingInTimeInMillis());
 		
-		if(tappInTimeInMillis() < sysBootTime){
+		if(pingInTimeInMillis() < sysBootTime){
 			event_tappin.setText("STARTED!!");
 			event_num_yes.setVisibility(View.VISIBLE);
 			event_num_no.setVisibility(View.VISIBLE);
@@ -120,7 +121,7 @@ public class ViewEventActivity extends Activity{
 			event_yes.setVisibility(View.VISIBLE);
 			event_no.setVisibility(View.VISIBLE);
 			event_maybe.setVisibility(View.VISIBLE);
-			check_tappin(event.id);
+			check_pingin(event.id);
 		}
 		else{
 			ses = Executors.newSingleThreadScheduledExecutor();
@@ -157,7 +158,7 @@ public class ViewEventActivity extends Activity{
 		
 	}
 	
-	public void check_tappin(String id){
+	public void check_pingin(String id){
 		final String EID = id;
 		ses = Executors.newSingleThreadScheduledExecutor();
 		
@@ -258,7 +259,8 @@ public class ViewEventActivity extends Activity{
 		event_num_no.setText(Integer.toString(event.no_counter));
 		
 		if(event.picture != null){
-			event_picture.setImageBitmap(BitmapFactory.decodeByteArray(event.picture, 0, event.picture.length));
+			BitmapByteWorker worker = new BitmapByteWorker(event_picture, event.picture, 250, 250);
+			worker.execute(0);
 		}
 	}
 	
@@ -338,9 +340,9 @@ public class ViewEventActivity extends Activity{
 	}
 	
 	////////////////////////////////////////////////////////////////
-	// Get tapp in system time - MODDED
+	// Get Ping in system time - MODDED
 	///////////////////////////////////////////////////////////////
-	private long tappInTimeInMillis(){
+	private long pingInTimeInMillis(){
 		String[] stime = event.start_time.split("[: ]+");
 		String[] sdate = event.start_date.split("/");
 		

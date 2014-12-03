@@ -82,8 +82,10 @@ public class FollowedEventListAdapter extends ArrayAdapter<Bub> {
 				event_num_following.setText(String.valueOf(event.follower_ids.length()));
 			
 			if(event.picture != null){
-				event_picture.setImageBitmap(BitmapFactory.decodeByteArray(event.picture, 0, event.picture.length));
+				BitmapByteWorker worker = new BitmapByteWorker(event_picture, event.picture, 250, 250);
+				worker.execute(0);
 			}
+			
 			
 			return row;
 		}

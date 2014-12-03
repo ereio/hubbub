@@ -102,7 +102,7 @@ public class CreateUserActivity extends Activity {
 		eDetail = (EditText) findViewById(R.id.entry_about_me);
 		
 		bCreate = (Button) findViewById(R.id.button_create_user);
-		bProfilePic = (ImageButton) findViewById(R.id.imageButton1);
+		bProfilePic = (ImageButton) findViewById(R.id.bub_image_button);
 		
 	}
 	
