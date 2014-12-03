@@ -547,7 +547,8 @@ public class HubDatabase {
 		
 		try{
 			ParseFile pic = db_event.getParseFile(PICTURE);
-			event.picture = pic.getData();
+			if(pic != null)
+				event.picture = pic.getData();
 		} catch(Exception e){
 			event.picture = null;
 			Log.e(TAG, e.toString());
