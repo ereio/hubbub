@@ -74,7 +74,7 @@
      <string name="unfollow">Unfollow Event</string>
      <string name="event_followers_default">No Followers</string>
      <string name="num_following">0</string>
-     <string name="tapp_in_header">Tapp-In Time:</string>
+     <string name="tapp_in_header">Ping-In Time:</string>
      <string name="event_tags">Tags:</string>
       <string name="event_details_default">No Details</string>
      

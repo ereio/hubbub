@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Random;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -210,7 +211,11 @@ public class CreateEventsActivity extends Activity{
 				alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
 				Intent intent = new Intent(this, AlarmReceiver.class);
 				intent.putExtra(CHANNEL_KEY,event_id);
-			alarmIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+				
+				Random rand = new Random();
+				int randNum = rand.nextInt((2000 - 0) + 1 + 0);
+				
+			alarmIntent = PendingIntent.getBroadcast(this, randNum, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
 					//alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
@@ -218,7 +223,7 @@ public class CreateEventsActivity extends Activity{
 					   //    60 * 1000, alarmIntent);
 					
 				alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-					       sysTimeToTSB(tappInTimeInMillis()), alarmIntent);
+					       sysTimeToTSB(pingInTimeInMillis()), alarmIntent);
 
 					
 				ParsePush.subscribeInBackground(event_id);	
@@ -398,7 +403,7 @@ public class CreateEventsActivity extends Activity{
 ////////////////////////////////////////////////////////////////
 // Get tapp in system time
 ///////////////////////////////////////////////////////////////
-		private long tappInTimeInMillis(){
+		private long pingInTimeInMillis(){
 			EditText showDate = (EditText)findViewById(R.id.bub_start_date);
 			EditText showTime = (EditText)findViewById(R.id.bub_start_time);
 
