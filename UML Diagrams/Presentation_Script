@@ -1,9 +1,9 @@
-Introduction:
+Introduction: (TAYLOR)
 	Hi, we're team "How Do You Turn This On?" / "DingoHub." Our application is Hubbub, a social event
 	sharing application. We plan on discussing how Hubbub will improve current social networks' implementations of
 	event planning and sharing. Afterward, we'll cover Hubbub's functionality and implementation.
 	Finally, we'll talk about what makes Hubbub unique and what we are working to achieve with general and commercial users.
-Slide 3:
+Slide 3: (TAYLOR)
 	1) I'm going to say it now, I do not hate facebook. We are not out to destory facebook. We'd like to
 	steal facebook users and be bought by facebook much like instagram. However, we, as many others, think
 	facebook has become bloated and cumbersome. 
@@ -16,42 +16,49 @@ Slide 3:
 	4) If so many people dislike facebook, why are we still using it?! Because there's simply no
 	popular alternative for certain functionality.
 	
-Slide 4:
-	1.) Events and Groups are crucial to the curretn facebook platform. Many use facebook as a means
-	simply to access social events and coordinate group meetings for interaction.
-	2.) However, facebook fails in many ways to even make this service something enjoyable and efficent to
-	use.
-	3.) for example, people often mass invite everyone for events, even people all accross the globe. 
-	many end up with over 1k people invited and before the event occurs, over 200 people could say they're
-	going. By the time the event occurs and people show up, only 50 people have arrived. 
-	3.5) This is seen as the nature of simply using facebook. WPosthy is it ok and accepted for that to be inaccurate?
-	4.) Additionaly, many only find events because they were invited to them. Vary few, if anyone,searches
-	events they have yet to hear about. people attempting to find events for a specific topic or interest
-	seldom look on facebook due to the accepted facade of legitamacy. Many events don't look real, fall
-	through without notice or simple are overlooked in response to the way facebook handles its standard notifications.
-	5.) lastly, facebook fells disconnected from a "social" environment all together. Many people use
-	facebook to actually become more anti-social. The evironment on facebook has created a disconnect with
-	youth and allowed for the term "stalking" to become a understandable, inevitable occurance on facebook
-Slide 5:
-	1.) with these problems at hand, we are attempting to create a social, social network. We want people
-	to interact, react, and feel like the social networking experience they're having is alive. A dynamic
-	real-time experience that makes the user feel less like they are still at their desk and more on the
-	go.
-	2.) With hubbub, we intend for people to create groups, events, and chat in real-time (like facebook) 
-	with the acception of interactive notifications and dynamic searching and interest updates for local
-	geofenced events. Think YikYak meets facebook events meets twitter.
-
-Slide 6:
-	1) How is hubbub different than facebook events? You.
-
-Slide 7:
-	1) Hubbub consist of two very important ideas. A Hub and a Bub.
-	2) A Hub is a user created or default hashtag that is an established environment for the interest or
-	topic it represents. For example, #Football would be a Hub. A hub's enviroment includes posts, chat,
-	and a list of bub's that have been tagged under that Hub. Think subreddit of reddit or a hashtag in instagram
-	3) Anyone can post in a hub or a bub and join at there discresion.
+		1.) Events and Groups are crucial to the curretn facebook platform. Many use facebook as a means
+		simply to access social events and coordinate group meetings for interaction.
+		2.) However, facebook fails in many ways to even make this service something enjoyable and efficent to
+		use.
+		3.) for example, people often mass invite everyone for events, even people all accross the globe. 
+		many end up with over 1k people invited and before the event occurs, over 200 people could say they're
+		going. By the time the event occurs and people show up, only 50 people have arrived. 
+		3.5) This is seen as the nature of simply using facebook. WPosthy is it ok and accepted for that to be inaccurate?
+		4.) Additionaly, many only find events because they were invited to them. Vary few, if anyone,searches
+		events they have yet to hear about. people attempting to find events for a specific topic or interest
+		seldom look on facebook due to the accepted facade of legitamacy. Many events don't look real, fall
+		through without notice or simple are overlooked in response to the way facebook handles its standard notifications.
+		5.) lastly, facebook fells disconnected from a "social" environment all together. Many people use
+		facebook to actually become more anti-social. The evironment on facebook has created a disconnect with
+		youth and allowed for the term "stalking" to become a understandable, inevitable occurance on facebook
+Slide 4: (ZACH)
+	Hubbub is our solution to the problems we see in current social event sharing implementations. 
+	We are attempting to create a social social network. We want users to interact, react, and feel like 
+	the social networking experience they're having is alive. A dynamic real-time experience which interconnects the user
+	more closely with their community and their friends.
 	
-Slide 8:
+	With Hubbub, we intend for people to create groups, events, and chat in real-time using 
+	interactive notifications, dynamic searching, and geolocation to show a user nearby events.
+
+Slide 5: (ZACH)
+	As you can see with our prototype images, Hubbub is focused on tailoring the experience to each particular user.
+	Users can search for an interest, such as soccer, and see nearby events tagged with that interest, such as a pick-up
+	soccer game. Users can also browse a feed of all nearby events at a certain date. 
+	
+	Users will be able to create an account, as seen in the prototype image to the right, but functionality will also be
+	available for users who wish to simply use their Facebook, Google, or Twitter accounts to log in.
+
+Slide 6: (ZACH)
+	The core functionality of Hubbub is focused on two very important concepts: Hubs and Bubs.
+	A Hub is a user requested or default category, whcih is an established environment for the interest or
+	topic it represents. For example, football, video games, and poetry could all be Hubs. 
+	A Bub is an event categorized under a Hub, such as a football game, a LAN party, or a poetry slam. Users can view
+	a particular Hub to see all nearby tagged Bubs. Bubs have more functionality than simply being an event; each Bub
+	has its own live chat, privacy features, and each creator has fine-tuned control over each particular aspect of a Bub.
+	Hubs and Bubs come together to form what makes Hubbub unique; a dynamic environment for users to meet up with other
+	like-minded users.
+	
+Slide 7: (ALI)
 	1) A Bub at it's core is simply an event. The event has it's own interaction environment
 	with several time managment and update information devices we'll discuss soon.
 	A Bub has it's own followers and posts for people to interact.
@@ -60,15 +67,8 @@ Slide 8:
 	Lan Party, and tag it with Lan Party, Video Games, Nerds, Smash Brothers, And Christmas. When searching Super Smash,
 	for Bub's, the Smash Brothers Tag will include it in your searched list. But the bub can be found in the Video Game hub,
 	the Lan Party hub, and so forth.
-Slide 9:
-	1) Hubbub is GeoFenced. My favorite part about this app. No more looking at events in tampa when
-	you're not even there. No searching for events locally and come to find they're in jacksonville or 2k people aren't actually attending
-	cause all the people listed live in state away. Hubbub is for a social experience where you are and won't allow people to spam events miles away.
-	2) Again, think yikyak meets facebook events and groups. Hop on and see today's popular events over the weekend or
-	search for events over the weekend based on your interest. Want to go to a Lan Party? Search Video Games or even Lan Party
-	and find what you're looking for. If the bub shows up there, you know it's within traveling distance.
 	
-Slide 10:
+Slide 8: (ALI)
 	1) Ping-In is my second favorite feature. Pinging-In allows for users to establish a frame of reference for each bub they follow.
 	At a specfic time set by the bub creator, a dialog will appear on everyone's devices with information about the bub and 3 decisions:
 	going, not going, or idk yet. The default time for a ping-in is an hour before the start time.
@@ -77,36 +77,42 @@ Slide 10:
 	on whether or not their going. With current event handling social networks, users commit to events weeks in advance and never show up.
 	Now, users will feel less secluded and more involved with real-time ping-in tickers and viewing of adding followers that truely represent the number
 	of attendies.
+	5) Posts also make way for additional information and hype. Users can post in both Hubs and Bubs allowing for additional conversion and bub preplaning outside of just creating a underdeveloped bub.
 	
+Slide 9: (ALI)
+	1) Hubbub is GeoFenced. My favorite part about this app. No more looking at events in tampa when
+	you're not even there. No searching for events locally and come to find they're in jacksonville or 2k people aren't actually attending
+	cause all the people listed live in state away. Hubbub is for a social experience where you are and won't allow people to spam events miles away.
+	2) Again, think yikyak meets facebook events and groups. Hop on and see today's popular events over the weekend or
+	search for events over the weekend based on your interest. Want to go to a Lan Party? Search Video Games or even Lan Party
+	and find what you're looking for. If the bub shows up there, you know it's within traveling distance.
 
-	5) Posts also make way for additional information and hype. Users can post in both Hubs and Bubs allowing for additional conversion and bub 		preplaning outside of just creating a underdeveloped bub.
-
-Slide 11:
+Slide 10: (RICARDO)
 	1) Here's a breakdown of our use case diagram. Something we haven't touched on is how this can be profitable. But Hubbub is profitable in the
 	very nature of it's operation. It can easily be used to provide non-intrusive, meaningful event advertisment that doesn't plague the user
 	with apathy towards hubbub as a whole.
 
-Slide 12:
+Slide 11: (RICARDO)
 	1) Hubbub commercial users will be allowed to create verified, commericial events under certain tags. For example, if Recess is having a crazy party
 	or special over the weekend, they can pay to put their event higher than another under a specific tag. 
 	2) So if users search for Bubs under the tag Club, their special event will be listed as the highest bub on the list. Limiting purchase of position 		to specific tags helps filter the spamming of references and allows users to actually find meaningful advertisments that don't feel exagurated and 		flooded.
 	3) Large community events will also be more easily established. Blood Drives and philanthropic events or bubs will be easy to discover and get 		involved with.
 	4) Users will be able to gauge the amount of involvement and hold friends more accountable when a ping-in occurs.
-Slide 13:
-	1) We've covered a lot so lets review what we've gone over.
-	2) Social networking has become a bloated, unfocused, unsocial experience. The amount of viable alternatives is staggeringly low.
-	3) Hubbub aims to make social networking more real-time, intuitive, and overall a legitmite social experience.
-	4) The main focus for hubbub will be letting people easily discover and enjoy events they're interested with the ability to organize
-	ones if they're not already being arranged.
-	5) Lastly, Hubbub will encorporate meaningful advertisments and better establish an community presence for events and interaction.
 
-Slide 14:
+Slide 12: (TAYLOR)
 	1) Our mimimal goal is to at least finish the working android app by the due date.
 	2) Our second goal is to finish an iOS port by the CEN4021 due date. The backend we are using allows for this to be a smooth process
 	as long as we have a solid system architecture in place.
 	3) Lastly, our long-term/final goal will be to port the application over to a web app. People will be able to use it on any device and
 	on their computers when they're not on a mobile device.
 	
+Slide 13: (TAYLOR)
+	1) We've covered a lot so lets review what we've gone over.
+	2) Social networking has become a bloated, unfocused, unsocial experience. The amount of viable alternatives is staggeringly low.
+	3) Hubbub aims to make social networking more real-time, intuitive, and overall a legitmite social experience.
+	4) The main focus for hubbub will be letting people easily discover and enjoy events they're interested with the ability to organize
+	ones if they're not already being arranged.
+	5) Lastly, Hubbub will encorporate meaningful advertisments and better establish an community presence for events and interaction.
 
 
 
