@@ -1,13 +1,8 @@
-Slide 1:
-	Hello, our team name was originally How Do you turn this on? but over time we became DingoHub. 
-Thanks for coming to class, we hope we can make your attendence to events, even like this, more of a social and 
-accessable experience with our application, Hubbub.
-
-Slide 2:
-	Today I'm going to talk to you about our current Social Network Experience and it's pitfalls.
-	Then we'll discuss How we think we can improve the current social experience we all have today.
-	Afterwords, we'll jump into our app Hubbub and user workflow and functionality.
-	Lastly, what makes it unique and what we are woring to achieve with general users and commercially.
+Introduction:
+	Hi, we're team "How Do You Turn This On?" / "DingoHub." Our application is Hubbub, a social event
+	sharing application. We plan on discussing how Hubbub will improve current social networks' implementations of
+	event planning and sharing. Afterward, we'll cover Hubbub's functionality and implementation.
+	Finally, we'll talk about what makes Hubbub unique and what we are working to achieve with general and commercial users.
 Slide 3:
 	1) I'm going to say it now, I do not hate facebook. We are not out to destory facebook. We'd like to
 	steal facebook users and be bought by facebook much like instagram. However, we, as many others, think
