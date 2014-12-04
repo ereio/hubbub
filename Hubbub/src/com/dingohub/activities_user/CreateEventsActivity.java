@@ -344,11 +344,11 @@ public class CreateEventsActivity extends Activity{
 	
 		private JSONArray convertTags(){
 			// splits entries into an array based on deliminating commas
-			String[] tagStrings = eTags.getText().toString().split(",");
+			String[] tagStrings = eTags.getText().toString().split(", ");
 			
 			// omits any user inputed hashtags from the database log
 			for(String tag : tagStrings){
-				tag = tag.replaceAll("\\s", "");
+				tag = tag.replaceAll(" ", "");
 				tag = tag.replaceAll("#", "");
 			}
 			// creates a JSON array from the String vector as a list 
