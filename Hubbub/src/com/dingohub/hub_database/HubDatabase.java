@@ -569,8 +569,8 @@ public class HubDatabase {
 		event.end_time = end_dt[1];
 		
 		event.yes_counter = db_event.getInt(YES);
-		event.maybe_counter = db_event.getInt(NO);
-		event.no_counter = db_event.getInt(MAYBE);
+		event.maybe_counter = db_event.getInt(MAYBE);
+		event.no_counter = db_event.getInt(NO);
 		event.tags = db_event.getJSONArray(TAGS);
 		
 		event.follower_ids = db_event.getJSONArray(FOLLOWERS);

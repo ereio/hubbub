@@ -213,9 +213,9 @@ public class CreateEventsActivity extends Activity{
 				intent.putExtra(CHANNEL_KEY,event_id);
 				
 				Random rand = new Random();
-				int randNum = rand.nextInt((2000 - 0) + 1 + 0);
+				int randNum = rand.nextInt((20000000 - 0) + 1 + 0);
 				
-			alarmIntent = PendingIntent.getBroadcast(this, randNum, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+			alarmIntent = PendingIntent.getBroadcast(this, randNum, intent, PendingIntent.FLAG_ONE_SHOT);
 
 
 					//alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
@@ -226,7 +226,9 @@ public class CreateEventsActivity extends Activity{
 					       sysTimeToTSB(pingInTimeInMillis()), alarmIntent);
 
 					
-				ParsePush.subscribeInBackground(event_id);	
+				ParsePush.subscribeInBackground(event_id);
+				Toast.makeText(this, 
+						"Event Creation Succeeded", Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		
