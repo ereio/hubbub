@@ -8,6 +8,7 @@ public class Bub {
 	public String id;
 	public String title;
 	public String location;
+	public String geolocation;
 	public byte[] picture;
 	public String details;
 	public String permissions;
@@ -26,6 +27,7 @@ public class Bub {
 	public Bub(){
 		id = null;
 		title = null;
+		geolocation = null;
 		location = null;
 		details = null;
 		permissions = null;

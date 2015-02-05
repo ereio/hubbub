@@ -39,6 +39,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
     private LocationRequest locationRequest;
     private GoogleApiClient googleApiClient;
     private Location location;
+    private String locality;
     private FusedLocationProviderApi fusedLocationProviderApi = LocationServices.FusedLocationApi;
     Activity locationActivity;
     
@@ -50,24 +51,29 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 		locationRequest.setFastestInterval(HALF_MIN);
 		locationActivity = activity;
 		
-		googleApiClient = new GoogleApiClient.Builder(activity)
-					.addApi(LocationServices.API)
-					.addConnectionCallbacks(this)
-					.addOnConnectionFailedListener(this)
-					.build();
+		if(googlePlayServicesAvailable()){
+			googleApiClient = new GoogleApiClient.Builder(activity)
+						.addApi(LocationServices.API)
+						.addConnectionCallbacks(this)
+						.addOnConnectionFailedListener(this)
+						.build();
 		
-		if(googleApiClient != null){
-			googleApiClient.connect();
+			if(googleApiClient != null){
+				googleApiClient.connect();
+			}
+		}
+		else{
+			Log.e(TAG, "GooglePlayServices not available");
 		}
 	}
     
-    
-    
+	
     @Override
 	public void onLocationChanged(Location location) {
+    	Log.i(TAG, "Connection Changed");
 		if(null == this.location || location.getAccuracy() < this.location.getAccuracy()){
 			this.location = location;
-			
+			locality = new GetAddressTask(locationActivity.getApplicationContext()).doInBackground(location);
 			if(this.location.getAccuracy() < MIN_ACCURACY){
 				fusedLocationProviderApi.removeLocationUpdates(googleApiClient, this);
 			}
@@ -77,15 +83,17 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
-		// TODO Auto-generated method stub
+		Log.i(TAG, "Connection Failed");
 		
 	}
 
 	@Override
 	public void onConnected(Bundle arg0) {
+		Log.i(TAG, "Connection Complete");
 		Location currentLocation = fusedLocationProviderApi.getLastLocation(googleApiClient);
 		if(currentLocation != null && currentLocation.getTime() > REFRESH_TIME){
 			location = currentLocation;
+			locality = new GetAddressTask(locationActivity.getApplicationContext()).doInBackground(location);
 		} else {
 			fusedLocationProviderApi.requestLocationUpdates(googleApiClient, locationRequest, this);
             // Schedule a Thread to unregister location listeners
@@ -102,14 +110,24 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 
 	@Override
 	public void onConnectionSuspended(int arg0) {
-		// TODO Auto-generated method stub
+		Log.i(TAG, "Connection Suspended");
 		
 	}
+	
+	//
+	// FUNCTIONS FOR SEARCHING
+	//
 	
 	public Location getLocation(){
 		return this.location;
 	}
 
+	public String getLocality(){
+		if(location != null)
+			return locality;
+		else
+			return "Location found as null";
+	}
 	
     public boolean googlePlayServicesAvailable(){
     	int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(locationActivity);
@@ -117,6 +135,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
     		return true;
     	else{
     		GooglePlayServicesUtil.getErrorDialog(status, locationActivity, 0).show();
+    		locationActivity.finish();
     		return false;
     	}
     }
@@ -152,13 +171,18 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 						address.getCountryName());
 				Log.i(TAG, addressText);
 				
-				String locality = new String(address.getLocality() + "_" + address.getAdminArea());
+				locality = new String(address.getLocality() + "_" + address.getAdminArea());
 				return locality;
 			} else {
 				return "No Address Found";
 			}
 		}
 	}
+	
+
+	
+	
+	
 	/*
 	///////////////Service Implemenations///////////////////
     @Override
