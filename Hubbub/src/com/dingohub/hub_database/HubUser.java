@@ -10,8 +10,10 @@ public class HubUser {
 	public String firstname;
 	public String lastname;
 	public String details;
+	public String location;
 	public byte[] picture;
 	public JSONArray friend_ids;
+	
 	
 	public boolean SendFriendRequest(){
 		return true;

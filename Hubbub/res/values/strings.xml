@@ -77,5 +77,8 @@
      <string name="tapp_in_header">Ping-In Time:</string>
      <string name="event_tags">Tags:</string>
       <string name="event_details_default">No Details</string>
+      <string name="connect">Connect</string>
+      <string name="find_address">Find Address</string>
+      <string name="DEBUG_GEO">DEBUG_GEO</string>
      
 </resources>
