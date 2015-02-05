@@ -151,11 +151,7 @@ public class CreateUserActivity extends Activity {
 		eSettings.commit();
 		
 		Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-		Bundle bundle = new Bundle();
 		login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		bundle.putString(LoginActivity.USER_KEY, mUsername);
-		bundle.putString(LoginActivity.PASS_KEY, mPass);
-		login.putExtras(bundle);
 		startActivity(login);
 	}
 	

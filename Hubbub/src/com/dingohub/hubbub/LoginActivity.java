@@ -14,17 +14,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.dingohub.activities_user.SearchEventsActivity;
 import com.dingohub.hub_database.HubDatabase;
 import com.parse.ParseObject;
 import com.parse.PushService;
 
 public class LoginActivity extends Activity {
+	// part of the Login Settings shared preferences
 	public static final String USER_KEY = "UserKey";
 	public static final String PASS_KEY = "PassKey";
-	public final static String AUTO_LOG = "AutoLogin";
+	public static final String AUTO_LOG = "AutoLogin";
+	
+	// bundle attribute
 	public final static String LOGOUT_DEFAULT = "LogoutDefault";
+	
+	// shared preferences key
 	public static final String LOGIN_SETTINGS = "LoginSettings";
 
 	
@@ -40,6 +44,7 @@ public class LoginActivity extends Activity {
 	String savedPassword;
 	
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -114,32 +119,17 @@ public class LoginActivity extends Activity {
 	// - Checks sharedPrefs for past auto login set
 	private void auto_login_check(){
 		settings = getSharedPreferences(LOGIN_SETTINGS,0);
-		Bundle bundle = getIntent().getExtras();
-		boolean unforce_login = false;
+		boolean autoLogin = settings.getBoolean(AUTO_LOG, false);
+		savedUsername = settings.getString(USER_KEY, null);
+		savedPassword = settings.getString(PASS_KEY, null);
 		
-		// BUNDLE CHECK
-		if(bundle != null){
-			unforce_login = bundle.getBoolean(LOGOUT_DEFAULT, false);
-			
-			savedUsername = bundle.getString(USER_KEY);
-			savedPassword = bundle.getString(PASS_KEY);
-			
-			username.setText(savedUsername, TextView.BufferType.EDITABLE);
-			password.setText(savedPassword, TextView.BufferType.EDITABLE);
-			
-		} // AUTO LOGIN CHECK
-		else if(settings.contains(USER_KEY) && settings.contains(PASS_KEY) && !unforce_login){
-			savedUsername = settings.getString(USER_KEY, null);
-			savedPassword = settings.getString(PASS_KEY, null);
-			
-			boolean autoLogin = settings.getBoolean(AUTO_LOG, false);
-			
+		if(savedUsername != null && savedPassword != null){
 			username.setText(savedUsername, TextView.BufferType.EDITABLE);
 			password.setText(savedPassword, TextView.BufferType.EDITABLE);
 			
 			if(autoLogin){
-				authenticate_login(savedUsername, savedPassword);
-			}
+					authenticate_login(savedUsername, savedPassword);
+			}			
 		}
 	}
 	
@@ -150,11 +140,12 @@ public class LoginActivity extends Activity {
 			int result = HubDatabase.AuthoLogin(username, password);
 			
 			if( HubDatabase.FLAG_QUERY_SUCCESSFUL == result ){
-				Bundle bundle = new Bundle();
-				bundle.putString(UserMainDisplay.USER_KEY, username);
-				bundle.putString(UserMainDisplay.PASS_KEY, password);
+				SharedPreferences.Editor editSettings = settings.edit();
+				editSettings.putString(USER_KEY, username);
+				editSettings.putString(PASS_KEY, password);
+				editSettings.putBoolean(AUTO_LOG, true);
+				editSettings.apply();
 				Intent intent = new Intent(getApplicationContext(), UserMainDisplay.class);
-				intent.putExtras(bundle);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
 				finish();
@@ -171,6 +162,7 @@ public class LoginActivity extends Activity {
 	}
 	
 	// DEBUG ACTIVITES
+	@SuppressWarnings("unused")
 	private void DEBUG_ToEventSearch(){
 		Intent intent = new Intent(getApplicationContext(),SearchEventsActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -178,6 +170,7 @@ public class LoginActivity extends Activity {
 	}
 	
 	// DEBUG PARSE
+	@SuppressWarnings("unused")
 	private void DEBUG_PARSE(){
 		ParseObject testObject = new ParseObject("TestObject");
 		testObject.put("foo", "bar");

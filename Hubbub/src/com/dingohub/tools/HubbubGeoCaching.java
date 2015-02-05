@@ -1,23 +1,24 @@
 package com.dingohub.tools;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
-import android.app.PendingIntent;
-import android.app.Service;
-import android.content.Intent;
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Looper;
+import android.util.Log;
 
-import com.google.android.gms.ads.a;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -30,7 +31,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 	public static final long HALF_MIN = 1000 * 30;
 	public static final long REFRESH_TIME = ONE_MIN * 5;
 	public static final float MIN_ACCURACY = 500.0f;
-	
+	public static final String TAG = "HubbubGeocaching";
 	/// Vars
     int mStartMode;       // indicates how to behave if the service is killed
     IBinder mBinder;      // interface for clients that bind
@@ -108,7 +109,56 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 	public Location getLocation(){
 		return this.location;
 	}
+
 	
+    public boolean googlePlayServicesAvailable(){
+    	int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(locationActivity);
+    	if(ConnectionResult.SUCCESS == status)
+    		return true;
+    	else{
+    		GooglePlayServicesUtil.getErrorDialog(status, locationActivity, 0).show();
+    		return false;
+    	}
+    }
+	
+	public class GetAddressTask extends AsyncTask<Location, Void, String>{
+		Context mContext;
+		
+		public GetAddressTask(Context context){
+			super();
+			mContext = context;
+		}
+		
+		@Override
+		protected String doInBackground(Location... locations) {
+			Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
+			Location location = locations[0];
+			
+			List<Address> addresses = null;
+			try{
+			addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+			} catch (IOException e){
+				Log.e(TAG, "geocoder hit IOException\n\n");
+				e.printStackTrace();
+			}
+			
+			if(addresses != null && addresses.size() > 0){
+				Address address = addresses.get(0);
+				
+				String addressText = String.format("%s, %s, %s, %s",
+						address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "",
+						address.getLocality(),
+						address.getAdminArea(),
+						address.getCountryName());
+				Log.i(TAG, addressText);
+				
+				String locality = new String(address.getLocality() + "_" + address.getAdminArea());
+				return locality;
+			} else {
+				return "No Address Found";
+			}
+		}
+	}
 	/*
 	///////////////Service Implemenations///////////////////
     @Override
