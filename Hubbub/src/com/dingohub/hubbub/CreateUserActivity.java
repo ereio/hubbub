@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hub_database.HubUser;
-import com.dingohub.tools.BitmapFileWorker;
+import com.dingohub.tools.BitmapWorker;
 
 public class CreateUserActivity extends Activity {
 
@@ -158,6 +158,8 @@ public class CreateUserActivity extends Activity {
 	public boolean check_fields(){
 		clearFieldError();
 		boolean status = true;
+		
+		// MAKE A MAX CHAR CHECK OF 16
 		if(eUsername.getText().toString().trim().length() < 4){
 			eUsername.setHintTextColor(Color.RED);
 			Toast.makeText(getApplicationContext(), "Username should be more than 4 Characters", 
@@ -306,7 +308,7 @@ public class CreateUserActivity extends Activity {
 	
 			// Runs async task to shrink the photo and set the imagebutton to the picture
 			// server side preperation doesn't begin until the user hits the Create button
-			BitmapFileWorker worker = new BitmapFileWorker(bProfilePic, picturePath, 250, 250);
+			BitmapWorker worker = new BitmapWorker(bProfilePic, picturePath, 250, 250);
 			worker.execute(0);
 			
 			pictureSelected = true;

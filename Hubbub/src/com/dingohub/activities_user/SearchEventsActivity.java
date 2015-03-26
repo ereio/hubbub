@@ -1,10 +1,5 @@
 package com.dingohub.activities_user;
 
-import com.dingohub.fragments_user.SearchedEventsFragment;
-import com.dingohub.hub_database.HubDatabase;
-import com.dingohub.hubbub.R;
-
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -14,8 +9,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dingohub.base_activities.BaseGoogleActivity;
+import com.dingohub.fragments_user.SearchedEventsFragment;
+import com.dingohub.hub_database.HubDatabase;
+import com.dingohub.hubbub.R;
 
-public class SearchEventsActivity extends Activity{
+
+public class SearchEventsActivity extends BaseGoogleActivity{
 	public static final String TAG_KEY = "TagKey";
 	EditText eTags;
 	
@@ -31,9 +31,8 @@ public class SearchEventsActivity extends Activity{
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if(actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
-				   event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+				   event.getAction() == KeyEvent.ACTION_UP && event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
 					
-					if(!event.isShiftPressed())
 						searchTags(eTags.getText().toString());
 						return true;
 					}
@@ -56,6 +55,10 @@ public class SearchEventsActivity extends Activity{
 			Toast.makeText(getApplicationContext(), "Tags cannot contain invalid characters",
 			Toast.LENGTH_LONG).show();
 			return false;
+		}
+		if(tag != null){
+			Toast.makeText(getApplicationContext(), "Have to type a tag first!",
+			Toast.LENGTH_LONG).show();
 		}
 		return true;
 	}

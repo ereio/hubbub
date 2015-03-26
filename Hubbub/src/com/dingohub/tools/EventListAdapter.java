@@ -55,7 +55,7 @@ public class EventListAdapter extends ArrayAdapter<Bub> {
 		time.setText("At " + event.start_time + " on " + event.start_date);
 		location.setText(event.details);
 		if(event.picture != null){
-			BitmapByteWorker worker = new BitmapByteWorker(picture, event.picture, 250, 250);
+			BitmapWorker worker = new BitmapWorker(picture, event.picture, 250, 250);
 			worker.execute(0);
 		}
 		

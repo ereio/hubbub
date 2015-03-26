@@ -1,4 +1,4 @@
-package com.dingohub.tools;
+package com.dingohub.base_activities;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,14 +24,15 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-public class HubbubGeoCaching implements 
+public class BaseGoogleActivity extends Activity implements 
 LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+	private static final String TAG = "BaseGoogleActivity";
 	
 	public static final long ONE_MIN = 1000 * 60;
 	public static final long HALF_MIN = 1000 * 30;
 	public static final long REFRESH_TIME = ONE_MIN * 5;
 	public static final float MIN_ACCURACY = 500.0f;
-	public static final String TAG = "HubbubGeocaching";
+	
 	/// Vars
     int mStartMode;       // indicates how to behave if the service is killed
     IBinder mBinder;      // interface for clients that bind
@@ -41,18 +42,16 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
     private Location location;
     private String locality;
     private FusedLocationProviderApi fusedLocationProviderApi = LocationServices.FusedLocationApi;
-    Activity locationActivity;
     
     ////// Function Block //////
-	public HubbubGeoCaching(Activity activity) {
+	public BaseGoogleActivity() {
 		locationRequest = LocationRequest.create();
 		locationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
 		locationRequest.setInterval(ONE_MIN);
 		locationRequest.setFastestInterval(HALF_MIN);
-		locationActivity = activity;
 		
 		if(googlePlayServicesAvailable()){
-			googleApiClient = new GoogleApiClient.Builder(activity)
+			googleApiClient = new GoogleApiClient.Builder(this)
 						.addApi(LocationServices.API)
 						.addConnectionCallbacks(this)
 						.addOnConnectionFailedListener(this)
@@ -61,9 +60,8 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 			if(googleApiClient != null){
 				googleApiClient.connect();
 			}
-		}
-		else{
-			Log.e(TAG, "GooglePlayServices not available");
+		} else {
+			Log.i(TAG, "GooglePlayServices not available");
 		}
 	}
     
@@ -73,7 +71,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
     	Log.i(TAG, "Connection Changed");
 		if(null == this.location || location.getAccuracy() < this.location.getAccuracy()){
 			this.location = location;
-			locality = new GetAddressTask(locationActivity.getApplicationContext()).doInBackground(location);
+			locality = new GetAddressTask(getApplicationContext()).doInBackground(location);
 			if(this.location.getAccuracy() < MIN_ACCURACY){
 				fusedLocationProviderApi.removeLocationUpdates(googleApiClient, this);
 			}
@@ -93,7 +91,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 		Location currentLocation = fusedLocationProviderApi.getLastLocation(googleApiClient);
 		if(currentLocation != null && currentLocation.getTime() > REFRESH_TIME){
 			location = currentLocation;
-			locality = new GetAddressTask(locationActivity.getApplicationContext()).doInBackground(location);
+			locality = new GetAddressTask(getApplicationContext()).doInBackground(location);
 		} else {
 			fusedLocationProviderApi.requestLocationUpdates(googleApiClient, locationRequest, this);
             // Schedule a Thread to unregister location listeners
@@ -101,11 +99,10 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
                 @Override
                 public void run() {
                     fusedLocationProviderApi.removeLocationUpdates(googleApiClient,
-                    		HubbubGeoCaching.this);
+                    		BaseGoogleActivity.this);
                 }
             }, ONE_MIN, TimeUnit.MILLISECONDS);
 		}
-		
 	}
 
 	@Override
@@ -113,29 +110,22 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 		Log.i(TAG, "Connection Suspended");
 		
 	}
-	
-	//
-	// FUNCTIONS FOR SEARCHING
-	//
-	
+
 	public Location getLocation(){
 		return this.location;
 	}
 
 	public String getLocality(){
-		if(location != null)
-			return locality;
-		else
-			return "Location found as null";
+		return this.locality;
 	}
 	
     public boolean googlePlayServicesAvailable(){
-    	int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(locationActivity);
+    	int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
     	if(ConnectionResult.SUCCESS == status)
     		return true;
     	else{
-    		GooglePlayServicesUtil.getErrorDialog(status, locationActivity, 0).show();
-    		locationActivity.finish();
+    		GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
+    		finish();
     		return false;
     	}
     }
@@ -172,50 +162,11 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 				Log.i(TAG, addressText);
 				
 				locality = new String(address.getLocality() + "_" + address.getAdminArea());
+				
 				return locality;
 			} else {
 				return "No Address Found";
 			}
 		}
 	}
-	
-
-	
-	
-	
-	/*
-	///////////////Service Implemenations///////////////////
-    @Override
-    public void onCreate() {
-        // The service is being created
-    }
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        // The service is starting, due to a call to startService()
-        return mStartMode;
-    }
-    @Override
-    public IBinder onBind(Intent intent) {
-        // A client is binding to the service with bindService()
-        return mBinder;
-    }
-    @Override
-    public boolean onUnbind(Intent intent) {
-        // All clients have unbound with unbindService()
-        return mAllowRebind;
-    }
-    @Override
-    public void onRebind(Intent intent) {
-        // A client is binding to the service with bindService(),
-        // after onUnbind() has already been called
-    }
-    @Override
-    public void onDestroy() {
-        // The service is no longer used and is being destroyed
-    }
-    
-    	*/
-
-
-
 }

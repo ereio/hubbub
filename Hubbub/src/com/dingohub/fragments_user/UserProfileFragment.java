@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hub_database.HubUser;
 import com.dingohub.hubbub.R;
-import com.dingohub.tools.BitmapByteWorker;
+import com.dingohub.tools.BitmapWorker;
 
 public class UserProfileFragment extends Fragment{
 	ImageView iProfilePic;
@@ -58,7 +58,7 @@ public class UserProfileFragment extends Fragment{
 		tAbout.setText(user.details.toString());
 		
 		if(user.picture != null){
-			BitmapByteWorker worker = new BitmapByteWorker(iProfilePic, user.picture, 250, 250);
+			BitmapWorker worker = new BitmapWorker(iProfilePic, user.picture, 250, 250);
 			worker.execute(0);
 		}
 	}

@@ -29,15 +29,12 @@ public class SearchedEventsFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		
 		// This is a defense against Events will Null tags (ONLY HAPPENS IN DEBUGGING)
-		if(tag != null)
-			search_events = HubDatabase.FindEventByTag(tag);
-		else
-			search_events = new ArrayList<Bub>();
+		search_events = tag != null ? HubDatabase.FindEventByTag(tag) : new ArrayList<Bub>();
+
+		EventListAdapter adapter = new EventListAdapter(getActivity(), search_events);
+		setListAdapter(adapter);
 		
-			
-			EventListAdapter adapter = new EventListAdapter(getActivity(), search_events);
-			setListAdapter(adapter);
-		}
+	}
 		
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id){
@@ -49,7 +46,8 @@ public class SearchedEventsFragment extends ListFragment {
 		String eventId = a.id;
 		
 		Intent intent = new Intent(getActivity(), ViewEventActivity.class);
-		intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);					// MAKE Bub parcelable
+		// If keeping "Parse" service, needs to be parcelable
+		intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);
 		startActivity(intent);
 	}
 }

@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.dingohub.activities_user.CreateEventsActivity;
 import com.dingohub.activities_user.SearchEventsActivity;
+import com.dingohub.base_activities.BaseGoogleActivity;
 import com.dingohub.debug.DebugGeolocation;
 import com.dingohub.fragments_user.TodaysBubsFragment;
 import com.dingohub.fragments_user.UserBubsFragment;
@@ -26,12 +27,11 @@ import com.dingohub.fragments_user.UserHubsFragment;
 import com.dingohub.fragments_user.UserProfileFragment;
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hub_database.HubUser;
-import com.dingohub.tools.HubbubGeoCaching;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.ParseUser;
 
 @SuppressWarnings("deprecation")
-public class UserMainDisplay extends Activity implements GoogleApiClient.ConnectionCallbacks{
+public class UserMainDisplay extends BaseGoogleActivity {
 	
 	public final static String TAG = "UserMainDisplay";
 
@@ -52,7 +52,6 @@ public class UserMainDisplay extends Activity implements GoogleApiClient.Connect
 	
 	// Current User Data
 	HubUser user;
-	HubbubGeoCaching geoCache;
 	SharedPreferences settings;
 	
 	/**
@@ -77,10 +76,6 @@ public class UserMainDisplay extends Activity implements GoogleApiClient.Connect
 		// init user
 		user = HubDatabase.getCurrentUser();
 		
-		// init and save location locality
-		geoCache = new HubbubGeoCaching(this);
-		
-		
 		// Checks if activity reached without user data
 		if(user == null){
 			Intent intent = new Intent(this, LoginActivity.class);
@@ -94,25 +89,33 @@ public class UserMainDisplay extends Activity implements GoogleApiClient.Connect
 		
 	}
 
-	@Override
-	public void onResume(){
-		super.onResume();
-		//Location location = geoCache.getLocation();
-		String test = geoCache.getLocality();
-		Log.i(TAG, test);
-		
-	}
-
+	
 	@Override
 	public void onConnected(Bundle arg0) {
-		String test = geoCache.getLocality();
-		Toast.makeText(this, "Locality found: " + test, Toast.LENGTH_LONG).show();
+		super.onConnected(arg0);
+		Toast.makeText(getApplicationContext(), "TESTING HIT", Toast.LENGTH_LONG).show();
+		
+		String locality = null;
+		while(locality == null){
+			locality = this.getLocality();
+			Log.e(TAG, "Searching..." + locality);
+		}
+		Log.e(TAG, "Locality found = " + locality);
 		
 	}
 
 	@Override
 	public void onConnectionSuspended(int arg0) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		
+
+		
 		
 	}
 	
@@ -302,6 +305,8 @@ public class UserMainDisplay extends Activity implements GoogleApiClient.Connect
 		}
 		
 	}
+
+
 
     
 }

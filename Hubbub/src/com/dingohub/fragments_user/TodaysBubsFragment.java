@@ -27,11 +27,11 @@ import android.widget.Toast;
 
 // note : make this fragment refresh ! without having to reopen the activity.
 public class TodaysBubsFragment extends ListFragment{
+	private static final int MONTH_OFFSET = 1;
 	ArrayList<Bub> todays_events = null;
 	EventListAdapter adapter;
 	
-	public TodaysBubsFragment() {
-	}
+	public TodaysBubsFragment() {}
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
@@ -65,10 +65,9 @@ public class TodaysBubsFragment extends ListFragment{
 		 super.onResume();
 	     final Calendar c = Calendar.getInstance();
 	     int day = c.get(Calendar.DATE);
-	     int month = c.get(Calendar.MONTH);
-	     month++;
+	     int month = c.get(Calendar.MONTH) + MONTH_OFFSET;
 	     int year = c.get(Calendar.YEAR);
-	     String date = "" + day + "/" + month + "/" + year;
+	     String date = day + "/" + month + "/" + year;
 	     todays_events = HubDatabase.FindEventByDate(date);
 			
 	     if(todays_events.size() != 0){
