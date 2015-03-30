@@ -67,18 +67,21 @@ public class HubDatabase {
 	public static final String PROFILE_PIC = "profile_picture";
 	public static final String ABOUT = "about_me";
 	
+	public static String locality = null;
 	
 	//INITIALIZE DATABASE
 	public static boolean init_db(Context c){
 		try{
 			Parse.initialize(c, parse_app_id, parse_client_key);
-			
 		} catch(Exception e){
 			Log.e(TAG, e.toString());
-			
 			return false;
 		}
 		return true;
+	}
+	
+	public static void SetLocation(String local){
+		locality = local;
 	}
 	
 	// CREATES USER IN DATABASE
@@ -207,7 +210,6 @@ public class HubDatabase {
 		return usr;
 	}
 	
-	/**////////////////   BUBS + EVENT QUERYING METHODS   ////////////////**/
 	
 	
 	////////////////////////////////////////////////////////////
@@ -336,38 +338,37 @@ public class HubDatabase {
 	}
 	
 	// Main function for decoding bitmap - Runs the calculations and then scales
-	public static Bitmap decodeSampledBitmapFile(String filepath, int reqWidth, int reqHeight){
+	public static Bitmap decodePicture(Object picture, int reqWidth, int reqHeight) throws Exception{
 	    final BitmapFactory.Options options = new BitmapFactory.Options();
 	    options.inJustDecodeBounds = true;
-	    BitmapFactory.decodeFile(filepath,options);
-
-	    // Calculate inSampleSize
-	    options.inSampleSize = calcImageSampleSize(options, reqWidth, reqHeight);
-
-	    // Decode bitmap with inSampleSize set
-	    options.inJustDecodeBounds = false;
-	    return BitmapFactory.decodeFile(filepath,options);
+	    
+	    if(picture instanceof String){
+		    // Calculate inSampleSize
+	    	BitmapFactory.decodeFile((String)picture,options);
+		    options.inSampleSize = calcImageSampleSize(options, reqWidth, reqHeight);
+	    	// Decode bitmap with inSampleSize set
+		    options.inJustDecodeBounds = false;
+		    return BitmapFactory.decodeFile((String)picture,options);
+		    
+	    } else if(picture instanceof byte[]){
+	    	 // Calculate inSampleSize
+	    	BitmapFactory.decodeByteArray((byte[])picture, 0, ((byte[])picture).length, options);
+	    	options.inSampleSize = calcImageSampleSize(options, reqWidth, reqHeight);
+	    	
+	    	// Decode bitmap with inSampleSize set
+	    	options.inJustDecodeBounds = false;
+	    	return BitmapFactory.decodeByteArray((byte[])picture, 0, ((byte[])picture).length, options);
+	    	
+	    } else {
+	    	throw new Exception("Invalid Picture Accessor");
+	    }
 		
 	}
-	
-	// Main function for decoding bitmap - Runs the calculations and then scales
-	public static Bitmap decodeSampledBitmapBytes(byte[] pictureBytes, int reqWidth, int reqHeight){
-	    final BitmapFactory.Options options = new BitmapFactory.Options();
-	    options.inJustDecodeBounds = true;
-	    BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length, options);
-	  
-	    // Calculate inSampleSize
-	    options.inSampleSize = calcImageSampleSize(options, reqWidth, reqHeight);
 
-	    // Decode bitmap with inSampleSize set
-	    options.inJustDecodeBounds = false;
-	    return BitmapFactory.decodeByteArray(pictureBytes, 0, pictureBytes.length, options);
-		
-	}
-/////////////////////////////////////////////////////////////
-// Update event details
-// Pass null for detail to remain unchanged
-////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////
+	// Update event details
+	// Pass null for detail to remain unchanged
+	////////////////////////////////////////////////////////////
 	public static int UpdateEvent(Bub event, String pic_name){
 	ParseQuery<ParseObject> query = ParseQuery.getQuery(EVENT);
 

@@ -98,9 +98,6 @@ public class ShowDialogActivity extends Activity {
 	}
 
 	public void init_ui(){
-		
-
-		    
 		    event_title = (TextView) findViewById(R.id.dialog_event_title);
 		    event_location = (TextView) findViewById(R.id.dialog_bub_location);
 		    event_time = (TextView) findViewById(R.id.dialog_bub_time);

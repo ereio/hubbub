@@ -2,21 +2,16 @@ package com.dingohub.fragments_user;
 
 import java.util.Calendar;
 
-import com.dingohub.activities_user.*;
-
-
-
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.view.View;
 import android.widget.TimePicker;
 
-public class TimePickerFragment  extends DialogFragment
+import com.dingohub.activities_user.CreateEventsActivity;
 
+public class TimePickerFragment extends DialogFragment
 implements TimePickerDialog.OnTimeSetListener {
 
 	@Override

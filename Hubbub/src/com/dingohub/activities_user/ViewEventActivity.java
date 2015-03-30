@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.app.Activity;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,14 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
-
-import com.dingohub.hubbub.R;
 import com.dingohub.hub_database.Bub;
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hub_database.HubUser;
-import com.dingohub.tools.BitmapByteWorker;
+import com.dingohub.hubbub.R;
+import com.dingohub.tools.BitmapWorker;
 import com.parse.ParsePush;
 
 public class ViewEventActivity extends Activity{
@@ -259,7 +255,7 @@ public class ViewEventActivity extends Activity{
 		event_num_no.setText(Integer.toString(event.no_counter));
 		
 		if(event.picture != null){
-			BitmapByteWorker worker = new BitmapByteWorker(event_picture, event.picture, 250, 250);
+			BitmapWorker worker = new BitmapWorker(event_picture, event.picture, 250, 250);
 			worker.execute(0);
 		}
 	}

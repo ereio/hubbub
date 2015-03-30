@@ -11,8 +11,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.dingohub.tools.AlarmReceiver;
-import com.dingohub.tools.BitmapFileWorker;
+import com.dingohub.tools.BitmapWorker;
 import com.dingohub.hub_database.*;
+import com.dingohub.base_activities.BaseGoogleActivity;
 import com.dingohub.fragments_user.*;
 import com.dingohub.hubbub.R;
 import com.parse.ParsePush;
@@ -44,7 +45,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CreateEventsActivity extends Activity{
+public class CreateEventsActivity extends BaseGoogleActivity{
 	private String [] ping_time;
 	
 	
@@ -64,7 +65,7 @@ public class CreateEventsActivity extends Activity{
 	private String set_noon;
 	TextView header;
 	
-	//Deatils of the event
+	//Details of the event
 	private EditText event_details;
 	private byte[] picture_bytes;
 	
@@ -86,8 +87,7 @@ public class CreateEventsActivity extends Activity{
 	private Button create_button;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alt_activity_create_bub);
 		
@@ -324,12 +324,14 @@ public class CreateEventsActivity extends Activity{
 				"Events cannot have more than 5 tags, sorry :/", Toast.LENGTH_SHORT).show();
 				check = false;
 			}
+			
 			// check if tag is too long
 			if(tagList[0].length() > 20){
 				Toast.makeText(this, 
 				"Tags cannot be more than 20 characters long :(", Toast.LENGTH_SHORT).show();
 				check = false;
 			}
+			
 			// check if an extra comma or invalid characters where inserted
 			for(String cTag : tagList){
 				//if(cTag.contains(DBFunct.INVALID_CHARS)){
@@ -456,23 +458,21 @@ public class CreateEventsActivity extends Activity{
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
 			Uri selectedImage = data.getData();
+			
 			String[] filePathColumn = { MediaStore.Images.Media.DATA };
 			Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
 			cursor.moveToFirst();
+			
 			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
 			String picturePath = cursor.getString(columnIndex);
 			cursor.close();
 			
-			
 			// Decodes the file to a bitmap
 			// Runs async task to shrink the photo and set the imagebutton to the picture
 			// server side preperation doesn't begin until the user hits the Create button
-			BitmapFileWorker worker = new BitmapFileWorker(event_picture, picturePath, 200, 200);
+			BitmapWorker worker = new BitmapWorker(event_picture, picturePath, 200, 200);
 			worker.execute(0);
-			
 			pictureSelected = true;
-			
-			
 		}
 	}
 	

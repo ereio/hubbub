@@ -2,7 +2,6 @@ package com.dingohub.hubbub;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -11,12 +10,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import com.dingohub.activities_user.CreateEventsActivity;
+import com.dingohub.activities_user.LoginActivity;
 import com.dingohub.activities_user.SearchEventsActivity;
+import com.dingohub.base_activities.BaseGoogleActivity;
 import com.dingohub.fragments_user.TodaysBubsFragment;
 import com.dingohub.fragments_user.UserBubsFragment;
 import com.dingohub.fragments_user.UserGroupsFragment;
@@ -27,10 +28,19 @@ import com.dingohub.hub_database.HubUser;
 import com.parse.ParseUser;
 
 @SuppressWarnings("deprecation")
-public class UserMainDisplay extends Activity {
+public class UserMainDisplay extends BaseGoogleActivity {
+	
+	public final static String TAG = "UserMainDisplay";
+
+	// Keys for shared preferences strings
 	public final static String USER_KEY = "UserKey";
 	public final static String PASS_KEY = "PassKey";
+	public final static String USER_LOC = "CurrentLocation";
+	
+	// Actual Shared Preferences File
 	public final static String USER_SETTINGS = "UserSettings";
+	
+	// Tabs
 	public final static String TAB_TODAY = "Today";
 	public final static String TAB_HUBS = "Hubs";
 	public final static String TAB_BUBS = "Bubs";
@@ -56,12 +66,14 @@ public class UserMainDisplay extends Activity {
 	ViewPager mViewPager;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		// init user
 		user = HubDatabase.getCurrentUser();
 		
-		// If user no current user, serious security breach!
+		// Checks if activity reached without user data
 		if(user == null){
 			Intent intent = new Intent(this, LoginActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -71,15 +83,33 @@ public class UserMainDisplay extends Activity {
 		// Initialize Pager to view separate fragments and ActionBarTabs (deprecated)
 		TABS = new String[] {TAB_TODAY, TAB_HUBS, TAB_BUBS, TAB_GROUPS,  user.username};
 		init_pager_tabs();
-
-		// Setting up Auto Log in to previously logged in account
-		settings = getSharedPreferences(LoginActivity.LOGIN_SETTINGS, 0);
-		SharedPreferences.Editor editAuto = settings.edit();
-		editAuto.putBoolean(LoginActivity.AUTO_LOG, true);
-		editAuto.commit();
 		
 	}
 
+	
+	@Override
+	public void onConnected(Bundle arg0) {
+		super.onConnected(arg0);
+		
+		Log.i(TAG, "Locality found = " + getLocality());
+		
+	} 
+
+	@Override
+	public void onConnectionSuspended(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		
+
+		
+		
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -112,14 +142,51 @@ public class UserMainDisplay extends Activity {
 		else if(id == R.id.logout){
 			ParseUser.logOut();
 			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			SharedPreferences settings = getSharedPreferences(LoginActivity.LOGIN_SETTINGS, 0);
+			SharedPreferences.Editor editSettings = settings.edit();
+			editSettings.putBoolean(LoginActivity.AUTO_LOG, false);
+			editSettings.putString(USER_KEY, null);
+			editSettings.putString(PASS_KEY, null);
+			editSettings.apply();
 			intent.putExtra(LoginActivity.LOGOUT_DEFAULT, true);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
 			return true;
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void init_pager_tabs(){
+		
+		// Set up the action bar.
+		final ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		ActionBar.TabListener tabListener = new HubActionBarListener();
+		
+		// Create the adapter that will return a fragment for each of the three
+		// primary sections of the activity.
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+
+		// Set up the ViewPager with the sections adapter.
+		mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setAdapter(mSectionsPagerAdapter);
+		
+		// Set listener and what to do onPageSelected
+		mViewPager.setOnPageChangeListener(new HubPagerListener());
+
+		// For each of the sections in the app, add a tab to the action bar.
+		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+			// Create a tab with text corresponding to the page title defined by
+			// the adapter. Also specify this Activity object, which implements
+			// the TabListener interface, as the callback (listener) for when
+			// this tab is selected.
+			actionBar.addTab(actionBar.newTab()
+					.setText(mSectionsPagerAdapter.getPageTitle(i))
+					.setTabListener(tabListener));
+		}
+	}
+	
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
@@ -175,36 +242,6 @@ public class UserMainDisplay extends Activity {
 		}
 	}
 
-	private void init_pager_tabs(){
-		
-		// Set up the action bar.
-		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		ActionBar.TabListener tabListener = new HubActionBarListener();
-		
-		// Create the adapter that will return a fragment for each of the three
-		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-
-		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
-		
-		// Set listener and what to do onPageSelected
-		mViewPager.setOnPageChangeListener(new HubPagerListener());
-
-		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
-			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					.setTabListener(tabListener));
-		}
-	}
-	
 	// WILL BE DELETED - SCHEDULED DEPRECATION
 	public class HubActionBarListener implements ActionBar.TabListener{
 
@@ -256,4 +293,7 @@ public class UserMainDisplay extends Activity {
 		
 	}
 
+
+
+    
 }
