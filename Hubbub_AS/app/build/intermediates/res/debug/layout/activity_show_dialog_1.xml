@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="225dp" >
+
+    <!-- Beginner / Intermediate and so on -->
+
+    <TextView
+        android:id="@+id/dialog_text_num_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/buttons_yes"
+        android:layout_below="@+id/dialog_bub_location"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="40dp"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/dialog_text_num_maybe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttons_yes"
+        android:layout_centerHorizontal="true"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/buttons_maybe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttons_yes"
+        android:layout_alignBottom="@+id/buttons_yes"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_teal"
+        android:text="Maybe" />
+
+    <TextView
+        android:id="@+id/dialog_bub_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_bub_location"
+        android:layout_toRightOf="@+id/dialog_event_picture"
+        android:text="@string/bub_start_time" />
+
+    <TextView
+        android:id="@+id/dialog_text_num_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dialog_text_num_maybe"
+        android:layout_alignBottom="@+id/dialog_text_num_maybe"
+        android:layout_alignLeft="@+id/button_no"
+        android:layout_marginLeft="24dp"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/buttons_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dialog_event_picture"
+        android:layout_below="@+id/dialog_text_num_yes"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/button_teal"
+        android:text="YES" />
+
+    <TextView
+        android:id="@+id/dialog_event_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttons_maybe"
+        android:layout_alignTop="@+id/dialog_event_picture"
+        android:layout_marginTop="15dp"
+        android:text="@string/event_name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/dialog_bub_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dialog_event_title"
+        android:layout_below="@+id/dialog_event_title"
+        android:text="@+string/bub_location" />
+
+    <ImageView
+        android:id="@+id/dialog_event_picture"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="1dp"
+        android:layout_toLeftOf="@+id/dialog_event_title"
+        android:src="@drawable/hubbub_logo" />
+
+    <Button
+        android:id="@+id/button_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttons_maybe"
+        android:layout_alignBottom="@+id/buttons_maybe"
+        android:layout_toRightOf="@+id/buttons_maybe"
+        android:layout_marginLeft="25dp"
+        android:background="@drawable/button_teal"
+        android:text="No" />
+
+    <TextView
+        android:id="@+id/dialog_bub_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dialog_bub_time"
+        android:layout_alignBottom="@+id/dialog_bub_time"
+        android:layout_alignLeft="@+id/button_no"
+        android:text="@+string/bub_start_date" />
+
+</RelativeLayout><!-- From: file:/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/src/main/res/layout/activity_show_dialog_1.xml -->

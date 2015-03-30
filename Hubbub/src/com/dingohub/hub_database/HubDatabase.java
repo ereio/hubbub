@@ -67,18 +67,21 @@ public class HubDatabase {
 	public static final String PROFILE_PIC = "profile_picture";
 	public static final String ABOUT = "about_me";
 	
+	public static String locality = null;
 	
 	//INITIALIZE DATABASE
 	public static boolean init_db(Context c){
 		try{
 			Parse.initialize(c, parse_app_id, parse_client_key);
-			
 		} catch(Exception e){
 			Log.e(TAG, e.toString());
-			
 			return false;
 		}
 		return true;
+	}
+	
+	public static void SetLocation(String local){
+		locality = local;
 	}
 	
 	// CREATES USER IN DATABASE
@@ -207,7 +210,6 @@ public class HubDatabase {
 		return usr;
 	}
 	
-	/**////////////////   BUBS + EVENT QUERYING METHODS   ////////////////**/
 	
 	
 	////////////////////////////////////////////////////////////

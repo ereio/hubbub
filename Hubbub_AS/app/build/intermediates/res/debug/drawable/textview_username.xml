@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:padding="5dp"
+    android:shape="rectangle">
+    
+    <size android:width="30sp"
+          android:height="30sp"/>
+    
+    <padding 
+        android:left ="7dp" />
+    
+    <solid 
+        android:color="@color/DarkTurquoise"/>
+    
+    <corners
+        android:radius="5dp"/>
+    
+</shape>
+<!-- From: file:/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/src/main/res/drawable/textview_username.xml -->

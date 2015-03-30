@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.dingohub.hub_database.HubDatabase;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -37,34 +38,36 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
     int mStartMode;       // indicates how to behave if the service is killed
     IBinder mBinder;      // interface for clients that bind
     boolean mAllowRebind; // indicates whether onRebind should be used
+    
     private LocationRequest locationRequest;
-    private GoogleApiClient googleApiClient;
     private Location location;
     private String locality;
-    private FusedLocationProviderApi fusedLocationProviderApi = LocationServices.FusedLocationApi;
     
-    ////// Function Block //////
-	public BaseGoogleActivity() {
+    protected FusedLocationProviderApi fusedLocationProviderApi = LocationServices.FusedLocationApi;   
+    protected GoogleApiClient googleApiClient;
+    
+	@Override
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		
 		locationRequest = LocationRequest.create();
 		locationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
 		locationRequest.setInterval(ONE_MIN);
 		locationRequest.setFastestInterval(HALF_MIN);
 		
-		if(googlePlayServicesAvailable()){
-			googleApiClient = new GoogleApiClient.Builder(this)
+		googleApiClient = new GoogleApiClient.Builder(this)
 						.addApi(LocationServices.API)
 						.addConnectionCallbacks(this)
 						.addOnConnectionFailedListener(this)
 						.build();
 		
-			if(googleApiClient != null){
+		if(googleApiClient != null)
 				googleApiClient.connect();
-			}
-		} else {
-			Log.i(TAG, "GooglePlayServices not available");
-		}
+			
+		Log.i(TAG, "GooglePlayServices not available");
+		
 	}
-    
+	
 	
     @Override
 	public void onLocationChanged(Location location) {
@@ -72,6 +75,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 		if(null == this.location || location.getAccuracy() < this.location.getAccuracy()){
 			this.location = location;
 			locality = new GetAddressTask(getApplicationContext()).doInBackground(location);
+			HubDatabase.SetLocation(locality);
 			if(this.location.getAccuracy() < MIN_ACCURACY){
 				fusedLocationProviderApi.removeLocationUpdates(googleApiClient, this);
 			}
@@ -81,7 +85,11 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
-		Log.i(TAG, "Connection Failed");
+		GooglePlayServicesUtil.getErrorDialog(		
+		GooglePlayServicesUtil.isGooglePlayServicesAvailable(this), this, 0).show();
+		Log.i(TAG, "Failed to connect to Google API client");
+		finish();
+		
 		
 	}
 
@@ -92,6 +100,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 		if(currentLocation != null && currentLocation.getTime() > REFRESH_TIME){
 			location = currentLocation;
 			locality = new GetAddressTask(getApplicationContext()).doInBackground(location);
+			HubDatabase.SetLocation(locality);
 		} else {
 			fusedLocationProviderApi.requestLocationUpdates(googleApiClient, locationRequest, this);
             // Schedule a Thread to unregister location listeners
@@ -118,17 +127,6 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 	public String getLocality(){
 		return this.locality;
 	}
-	
-    public boolean googlePlayServicesAvailable(){
-    	int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-    	if(ConnectionResult.SUCCESS == status)
-    		return true;
-    	else{
-    		GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
-    		finish();
-    		return false;
-    	}
-    }
 	
 	public class GetAddressTask extends AsyncTask<Location, Void, String>{
 		Context mContext;

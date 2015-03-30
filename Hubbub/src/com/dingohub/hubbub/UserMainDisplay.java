@@ -2,7 +2,6 @@ package com.dingohub.hubbub;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -14,12 +13,11 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.dingohub.activities_user.CreateEventsActivity;
+import com.dingohub.activities_user.LoginActivity;
 import com.dingohub.activities_user.SearchEventsActivity;
 import com.dingohub.base_activities.BaseGoogleActivity;
-import com.dingohub.debug.DebugGeolocation;
 import com.dingohub.fragments_user.TodaysBubsFragment;
 import com.dingohub.fragments_user.UserBubsFragment;
 import com.dingohub.fragments_user.UserGroupsFragment;
@@ -27,7 +25,6 @@ import com.dingohub.fragments_user.UserHubsFragment;
 import com.dingohub.fragments_user.UserProfileFragment;
 import com.dingohub.hub_database.HubDatabase;
 import com.dingohub.hub_database.HubUser;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.parse.ParseUser;
 
 @SuppressWarnings("deprecation")
@@ -69,7 +66,7 @@ public class UserMainDisplay extends BaseGoogleActivity {
 	ViewPager mViewPager;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
@@ -93,16 +90,10 @@ public class UserMainDisplay extends BaseGoogleActivity {
 	@Override
 	public void onConnected(Bundle arg0) {
 		super.onConnected(arg0);
-		Toast.makeText(getApplicationContext(), "TESTING HIT", Toast.LENGTH_LONG).show();
 		
-		String locality = null;
-		while(locality == null){
-			locality = this.getLocality();
-			Log.e(TAG, "Searching..." + locality);
-		}
-		Log.e(TAG, "Locality found = " + locality);
+		Log.i(TAG, "Locality found = " + getLocality());
 		
-	}
+	} 
 
 	@Override
 	public void onConnectionSuspended(int arg0) {
@@ -162,11 +153,7 @@ public class UserMainDisplay extends BaseGoogleActivity {
 			startActivity(intent);
 			return true;
 		}
-		else if (id == R.id.DEBUG_GEO){
-			Intent i = new Intent(this, DebugGeolocation.class);
-			startActivity(i);
-			return true;
-		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 

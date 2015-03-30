@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/src/main/res/values-v21/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Material.Light">
+        <!-- API 21 theme customizations can go here. -->
+     	
+        <item name="android:colorPrimary">@color/MistyRose</item>
+    	<!--   darker variant for the status bar and contextual app bars -->
+   		<item name="android:colorPrimaryDark">@color/Gold</item>
+   		
+    	<!--   theme UI controls like checkboxes and text fields -->
+    	<item name="android:colorAccent">@color/LightSalmon</item>
+    
+    </style>
+</resources>

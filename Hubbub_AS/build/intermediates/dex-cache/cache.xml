@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-4f79de171316e185dbb6934f51e4d12514263b87.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/libs/android-support-v13.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="131fecd943fb4a6bdf00258660310d85e6297f62">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/android-support-v13-f25a9c801b3cb0447e2962f1431c8166d81c9f8c.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/libs/bolts-android-1.1.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e61e3dfc57eaa5c97f9e7061db5608fc7d02d39e">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.3-32176692e8f094b629bd85bf47112614f5b5247f.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-fbfc86e9988f1874670873c4acfca5df739269b4.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-00e4213f8aeb33ffdc9e26d20f1dd3cacad55e39.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-ed84e0d837c32bb53642b863dbbf66ed577356c2.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-e77a184df24503e8c43c8f8eb6811d4a38a924df.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/libs/Parse-1.7.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="87c45f9f66da531a65f065ee32f603c7e6db1528">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/Parse-1.7.1-308715e31604241a48f0273b454ce5ccbd6c71fa.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-385e4005219484f2c0a166741519360765b6fff2.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-b3562ad345576ea835fa25a1f91fcdbec4c4e969.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-b644f68de41d3ba9976d0e6ded37c1e72d7f2fab.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-833292735860ec042015faf33705b00687f6fa67.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-7fddeadcd263639f162b621a73d814ee8879a926.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-25b072554088ddaae7d66169dc55b4370da8535d.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-5bed689f2d5a910642ec06cc3c298d39a59ae31a.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-ea6c0c74460f29a50dbf2afa294b1bed2c98933a.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-4238ac6e47a95ea9f2429c68e2d1562ab27850b7.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-9345c3d6cfcccfb1de44870336f9809761cfdee5.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-207ad48aa40807234a418bd26e353d3fc679cef6.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-9019daf7325f530b55a5408cd35b4daf14a9741a.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-07b9bc269c47bf550ce2da3ac205546ac05bb4ea.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-ac8c699937fc119d09d8c8a74d882e0ead510c5d.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-6fef8d067f7deb41c42f8bc82631ca7d16584110.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-22d0d6eebbf200110769fe4bf9fcafb84af600b8.jar" />
+    </item>
+    <item
+        jar="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/build/intermediates/pre-dexed/debug/classes-b6e16cafcc8beff83b11a4d98ebc5166122685ec.jar" />
+    </item>
+
+</items>

@@ -17,9 +17,8 @@ public class SearchedEventsFragment extends ListFragment {
 	ArrayList<Bub> search_events;
 	String tag = null;
 	
-	public SearchedEventsFragment(){
-		
-	}
+	public SearchedEventsFragment(){}
+	
 	public SearchedEventsFragment(String passedTag) {
 		tag = passedTag;
 	}
@@ -42,10 +41,9 @@ public class SearchedEventsFragment extends ListFragment {
 		// Can't just send it, needs to be parcelable.
 		Bub a = (Bub) search_events.get(position);
 		
-		// CREATE PARCELALBE SO NO NEED TO REQUERY ITEMS
 		String eventId = a.id;
-		
 		Intent intent = new Intent(getActivity(), ViewEventActivity.class);
+		
 		// If keeping "Parse" service, needs to be parcelable
 		intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);
 		startActivity(intent);

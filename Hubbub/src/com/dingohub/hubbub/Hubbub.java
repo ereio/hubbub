@@ -1,10 +1,8 @@
 package com.dingohub.hubbub;
 
-import com.dingohub.hub_database.HubDatabase;
-import com.parse.Parse;
-
 import android.app.Application;
-import android.util.Log;
+
+import com.dingohub.hub_database.HubDatabase;
 
 public class Hubbub extends Application {
 	

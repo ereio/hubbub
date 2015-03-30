@@ -87,8 +87,7 @@ public class CreateEventsActivity extends BaseGoogleActivity{
 	private Button create_button;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alt_activity_create_bub);
 		
