@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/AntiqueWhite" >
+
+    <ImageView
+        android:id="@+id/image_hubbub_logo"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/hubbub_logo_teal" />
+
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_sign_up"
+        android:layout_alignLeft="@+id/button_sign_up"
+        android:layout_alignRight="@+id/button_sign_up"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button_teal"
+        android:text="@string/login" />
+
+    <Button
+        android:id="@+id/button_sign_up"
+        android:background="@drawable/button_lightblue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/image_hubbub_logo"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/image_hubbub_logo"
+        android:layout_marginBottom="16dp"
+        android:text="@string/sign_up" />
+
+    <EditText
+        android:id="@+id/edittext_password"
+        android:background="@drawable/edittext_openblue"
+        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edittext_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_above="@+id/edittext_password"
+        android:layout_alignLeft="@+id/edittext_password"
+        android:layout_alignRight="@+id/edittext_password"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/edittext_openblue"
+        android:ems="10"
+        android:hint="@string/username" />
+
+</RelativeLayout>

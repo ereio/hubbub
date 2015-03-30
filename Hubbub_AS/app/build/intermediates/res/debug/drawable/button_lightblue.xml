@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape android:shape="rectangle" >
+            <corners android:radius="10dp" />
+
+            <solid android:color="@color/CadetBlue" />
+        </shape>
+    </item>
+    <item android:top="1dp">
+        <shape android:shape="rectangle" >
+            <corners android:radius="10dp" />
+
+            <solid android:color="@color/LightSlateGray" />
+        </shape>
+    </item>
+    <item
+        android:bottom="1dp"
+        android:top="1dp">
+        <shape android:shape="rectangle" >
+            <corners android:radius="10dp" />
+
+            <solid android:color="@color/CadetBlue" />
+        </shape>
+    </item>
+
+</layer-list>
+<!-- From: file:/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/src/main/res/drawable/button_lightblue.xml -->

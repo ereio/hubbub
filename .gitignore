@@ -4,10 +4,15 @@ gen/
 ./gen/
 ./bin/
 gen/*
+Hubbub_AS.gradle
+Hubbub_AS/local.properties
+Hubbub_AS/.idea/workspace.xml
+Hubbub_AS/.idea/libraries
+Hubbub_AS.DS_Store
+Hubbub_AS/app/build
 .gradle
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
-/build
-
+*/build

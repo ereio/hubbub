@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/DarkCyan" >
+
+    <TextView
+        android:id="@+id/listitem_bub_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/listitem_fbub_picture"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/listitem_fbub_picture"
+        android:text="@string/default_event_time"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/listitem_fbub_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listitem_bub_time"
+        android:layout_alignLeft="@+id/listitem_bub_time"
+        android:layout_alignParentRight="true"
+        android:text="@string/default_event_location"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/listitem_fbub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listitem_fbub_location"
+        android:layout_toRightOf="@+id/listitem_fbub_picture"
+        android:text="@string/default_event_name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/listitem_fbub_picture"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/events_calendar_icon" />
+
+</RelativeLayout>
+<!-- From: file:/home/ereio/Development/DingoHub/hubbub/Hubbub_AS/app/src/main/res/layout/listitem_bub.xml -->
