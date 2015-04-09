@@ -10,10 +10,10 @@ import java.util.Random;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.dingohub.Domain.DataAccess.Bub;
-import com.dingohub.Domain.DataAccess.HubDatabase;
-import com.dingohub.Domain.Utilities.AlarmReceiver;
-import com.dingohub.Domain.Utilities.BitmapWorker;
+import com.dingohub.Model.DataAccess.Bub;
+import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Model.Utilities.AlarmReceiver;
+import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Fragments.*;
 import com.dingohub.hubbub.R;

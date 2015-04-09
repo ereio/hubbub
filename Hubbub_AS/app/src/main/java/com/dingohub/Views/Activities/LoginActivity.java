@@ -18,7 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dingohub.Domain.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Views.DevActivities.MatUserMainDisplay;
 import com.dingohub.hubbub.R;
 import com.parse.ParseObject;
 import com.parse.PushService;
@@ -134,7 +135,7 @@ public class LoginActivity extends Activity {
 				editSettings.putString(PASS_KEY, password);
 				editSettings.putBoolean(AUTO_LOG, true);
 				editSettings.apply();
-				Intent intent = new Intent(getApplicationContext(), UserMainDisplay.class);
+				Intent intent = new Intent(getApplicationContext(), MatUserMainDisplay.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
 				finish();

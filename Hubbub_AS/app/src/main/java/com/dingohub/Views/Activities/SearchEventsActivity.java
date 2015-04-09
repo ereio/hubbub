@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Fragments.SearchedEventsFragment;
-import com.dingohub.Domain.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.hubbub.R;
 
 

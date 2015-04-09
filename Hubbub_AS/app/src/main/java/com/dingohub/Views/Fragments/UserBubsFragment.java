@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.dingohub.Views.Activities.ViewEventActivity;
-import com.dingohub.Domain.DataAccess.Bub;
-import com.dingohub.Domain.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.Bub;
+import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.hubbub.R;
-import com.dingohub.Domain.Utilities.FollowedEventListAdapter;
+import com.dingohub.Model.Utilities.FollowedEventListAdapter;
 
 public class UserBubsFragment extends ListFragment {
 	ArrayList<Bub> followed_events;

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.dingohub.Views.Activities.ViewEventActivity;
-import com.dingohub.Domain.DataAccess.Bub;
-import com.dingohub.Domain.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.Bub;
+import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.hubbub.R;
-import com.dingohub.Domain.Utilities.EventListAdapter;
+import com.dingohub.Model.Utilities.EventListAdapter;
 
 import android.app.ListFragment;
 import android.content.Intent;

@@ -14,17 +14,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.dingohub.Views.Activities.CreateEventsActivity;
-import com.dingohub.Views.Activities.LoginActivity;
-import com.dingohub.Views.Activities.SearchEventsActivity;
 import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Fragments.TodaysBubsFragment;
 import com.dingohub.Views.Fragments.UserBubsFragment;
 import com.dingohub.Views.Fragments.UserGroupsFragment;
 import com.dingohub.Views.Fragments.UserHubsFragment;
 import com.dingohub.Views.Fragments.UserProfileFragment;
-import com.dingohub.Domain.DataAccess.HubDatabase;
-import com.dingohub.Domain.DataAccess.HubUser;
+import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.hubbub.R;
 import com.parse.ParseUser;
 

@@ -2,7 +2,7 @@ package com.dingohub;
 
 import android.app.Application;
 
-import com.dingohub.Domain.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.HubDatabase;
 
 public class Hubbub extends Application {
 	

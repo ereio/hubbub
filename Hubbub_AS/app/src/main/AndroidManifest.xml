@@ -10,8 +10,6 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-      
     
        <!-- permissions for pushed notification -->
 
@@ -65,7 +63,9 @@
         <activity android:name = "com.dingohub.Views.Activities.SearchEventsActivity"></activity>
         <activity android:name = "com.dingohub.Views.Activities.UserMainDisplay"></activity>
         <activity android:name="com.dingohub.Views.Activities.ViewEventActivity"></activity>
-        <activity android:name="com.dingohub.Views.Activities.ShowDialogActivity" android:theme="@android:style/Theme.Holo.Dialog"></activity>
+        <activity android:name="com.dingohub.Views.Activities.ShowDialogActivity"
+        android:theme="@android:style/Theme.Holo.Dialog"></activity>
+        <activity android:name="com.dingohub.Views.DevActivities.MatUserMainDisplay" />
         
         <!-- SERVICES AND RECEIVERS -->
         <service android:name="com.parse.PushService" />
@@ -78,7 +78,7 @@
         </receiver>
         
         <receiver
-            android:name="com.dingohub.Domain.Utilities.MyParseReceiver"
+            android:name="com.dingohub.Model.Utilities.MyParseReceiver"
             android:exported="false"
              >
             <intent-filter>
@@ -99,7 +99,7 @@
             </intent-filter>
         </receiver>
         
-        <receiver android:name="com.dingohub.Domain.Utilities.AlarmReceiver"></receiver>
+        <receiver android:name="com.dingohub.Model.Utilities.AlarmReceiver"></receiver>
          
     </application>
 

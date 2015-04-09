@@ -22,10 +22,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.dingohub.Domain.DataAccess.HubDatabase;
-import com.dingohub.Domain.DataAccess.HubUser;
+import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.hubbub.R;
-import com.dingohub.Domain.Utilities.BitmapWorker;
+import com.dingohub.Model.Utilities.BitmapWorker;
 
 public class CreateUserActivity extends Activity {
 

@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.dingohub.Views.Activities.ViewEventActivity;
-import com.dingohub.Domain.DataAccess.Bub;
-import com.dingohub.Domain.DataAccess.HubDatabase;
-import com.dingohub.Domain.Utilities.EventListAdapter;
+import com.dingohub.Model.DataAccess.Bub;
+import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Model.Utilities.EventListAdapter;
 
 public class SearchedEventsFragment extends ListFragment {
 	ArrayList<Bub> search_events;

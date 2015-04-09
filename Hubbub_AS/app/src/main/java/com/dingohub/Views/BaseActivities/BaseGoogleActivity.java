@@ -14,9 +14,10 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
-import com.dingohub.Domain.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.HubDatabase;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,7 +26,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-public class BaseGoogleActivity extends Activity implements 
+public class BaseGoogleActivity extends ActionBarActivity implements
 LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 	private static final String TAG = "BaseGoogleActivity";
 	
@@ -47,7 +48,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
     protected GoogleApiClient googleApiClient;
     
 	@Override
-	public void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
 		locationRequest = LocationRequest.create();
@@ -127,7 +128,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 	public String getLocality(){
 		return this.locality;
 	}
-	
+
 	public class GetAddressTask extends AsyncTask<Location, Void, String>{
 		Context mContext;
 		

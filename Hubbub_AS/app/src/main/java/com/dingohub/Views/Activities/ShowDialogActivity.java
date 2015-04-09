@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 
 import com.dingohub.hubbub.R;
-import com.dingohub.Domain.DataAccess.Bub;
-import com.dingohub.Domain.DataAccess.HubDatabase;
-import com.dingohub.Domain.Utilities.MyParseReceiver;
+import com.dingohub.Model.DataAccess.Bub;
+import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Model.Utilities.MyParseReceiver;
 
 public class ShowDialogActivity extends Activity {
 
