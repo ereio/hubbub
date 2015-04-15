@@ -36,8 +36,7 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileRecycleAd
         this.context = context;
     }
 
-    // Creating a ViewHolder which extends the RecyclerView View Holder
-    // ViewHolder are used to to store the inflated views in order to recycle them
+    // ViewHolder are used to to store the inflated views
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         int Holderid;
 
@@ -54,8 +53,8 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileRecycleAd
             itemView.setOnClickListener(this);
             itemView.setClickable(true);
             if (ViewType == TYPE_ITEM) {
-                textView = (TextView) itemView.findViewById(R.id.rowText); // Creating TextView object with the id of textView from item_row.xml
-                imageView = (ImageView) itemView.findViewById(R.id.rowIcon);// Creating ImageView object with the id of ImageView from item_row.xml
+                textView = (TextView) itemView.findViewById(R.id.rowText);
+                imageView = (ImageView) itemView.findViewById(R.id.rowIcon);
                 Holderid = TYPE_ITEM;                                               // setting holder id as 1 as the object being populated are of type item row
             } else {
                 Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from header.xml for name
@@ -107,30 +106,23 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileRecycleAd
 
     }
 
-    //Next we override a method which is called when the item in a row is needed to be displayed, here the int position
-    // Tells us item at which position is being constructed to be displayed and the holder id of the holder object tell us
-    // which view type is being created 1 for item row
     @Override
     public void onBindViewHolder(ProfileRecycleAdapter.ViewHolder holder, int position) {
-        if (holder.Holderid == TYPE_ITEM) {                              // as the list view is going to be called after the header view so we decrement the
-            // position by 1 and pass it to the holder while setting the text and image
+        if (holder.Holderid == TYPE_ITEM) {
             holder.textView.setText(mNavTitles[position - 1]);
             holder.imageView.setImageResource(mIcons[position - 1]);
         } else {
-            holder.profile.setImageResource(profile);           // Similarly we set the resources for header view
+            holder.profile.setImageResource(profile);
             holder.Name.setText(name);
             holder.email.setText(email);
         }
     }
 
-    // This method returns the number of items present in the list
     @Override
     public int getItemCount() {
         return mNavTitles.length + 1; // the number of items in the list will be +1 the titles including the header view.
     }
 
-
-    // Witht the following method we check what type of view is being passed
     @Override
     public int getItemViewType(int position) {
         if (position == 0)
