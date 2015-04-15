@@ -27,7 +27,7 @@
             android:layout_marginLeft="101dp"
             android:layout_marginStart="101dp"
             android:layout_marginTop="20dp"
-            android:text="@+string/create_bub"
+            android:text="@string/create_bub"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ImageButton
@@ -51,7 +51,7 @@
             android:layout_below="@+id/picture"
             android:layout_marginTop="19dp"
             android:ems="10"
-            android:hint="@+string/event_name"
+            android:hint="@string/event_name"
             android:maxLines="1" />
 
         <EditText
@@ -129,7 +129,7 @@
             android:layout_below="@+id/bub_name"
             android:layout_marginTop="25dp"
             android:ems="10"
-            android:hint="@+string/bub_location"
+            android:hint="@string/bub_location"
             android:inputType="textPostalAddress" />
 
         <EditText

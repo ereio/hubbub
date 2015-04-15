@@ -9,11 +9,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,6 +55,7 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
 
 
         private Toolbar toolbar;
+        private int TODAY_PANE = 1;
 
         // Current User Data
         HubUser user;
@@ -90,7 +86,7 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.material_user_main_display);
+            setContentView(R.layout.material_activity_user_main_display);
 
             // initalizes user details from database
             init_user();
@@ -192,6 +188,8 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
 
                 @Override
                 public void onPageSelected(int position) {
+                    // Sets toolbar title
+                    toolbar.setTitle(mSectionsPagerAdapter.getPageTitle(position));
 
                 }
 
@@ -201,10 +199,8 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
                 }
             });
 
-            // Just sets the Title for the current page
-            for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++)
-                toolbar.setTitle(mSectionsPagerAdapter.getPageTitle(i));
-
+           // Sets the Pages default
+           mViewPager.setCurrentItem(TODAY_PANE);
         }
 
         private class ProfileRecyclerViewListener implements RecyclerView.OnItemTouchListener{

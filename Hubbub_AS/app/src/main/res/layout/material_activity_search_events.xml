@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/DrawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="7dp">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Aquamarine" >
+
+        <TextView
+            android:id="@+id/search_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:text="@string/search_prompt"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/edittext_search_tag"
+            android:background="@drawable/edittext_closedblue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_prompt"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionSend"
+            android:singleLine="true"
+            android:paddingLeft="10dp"
+            android:ems="10" >
+
+        <fragment
+            android:id="@+id/fragment_search_bubs"
+            android:name="com.dingohub.Views.Fragments.SearchedEventsFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/edittext_search_tag"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+            <requestFocus />
+        </EditText>
+
+    </RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

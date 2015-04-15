@@ -29,7 +29,7 @@ public class UserPanePagerAdapter extends FragmentPagerAdapter {
 
     public UserPanePagerAdapter(FragmentManager fm, String username) {
         super(fm);
-        VIEW_PROFILE = username + " Profile";
+        VIEW_PROFILE = username;
     }
 
     @Override

@@ -43,7 +43,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CreateEventsActivity extends BaseGoogleActivity{
+public class CreateEventsActivity extends BaseGoogleActivity {
 	private String [] ping_time;
 	
 	
