@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Fragments.TodaysBubsFragment;
 import com.dingohub.Views.Fragments.UserBubsFragment;
@@ -25,24 +26,16 @@ import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.hubbub.R;
 import com.parse.ParseUser;
 
-@SuppressWarnings("deprecation")
+
 public class UserMainDisplay extends BaseGoogleActivity {
 	
 	public final static String TAG = "UserMainDisplay";
 
-	// Keys for shared preferences strings
-	public final static String USER_KEY = "UserKey";
-	public final static String PASS_KEY = "PassKey";
-	public final static String USER_LOC = "CurrentLocation";
-	
-	// Actual Shared Preferences File
-	public final static String USER_SETTINGS = "UserSettings";
-	
-	// Tabs
-	public final static String TAB_TODAY = "Today";
-	public final static String TAB_HUBS = "Hubs";
-	public final static String TAB_BUBS = "Bubs";
-	public final static String TAB_GROUPS = "Groups";
+    // Tabs
+    public final static String TAB_TODAY = "Today";
+    public final static String TAB_HUBS = "Hubs";
+    public final static String TAB_BUBS = "Bubs";
+    public final static String TAB_GROUPS = "Groups";
 	public static String [] TABS;
 	
 	// Current User Data
@@ -95,16 +88,12 @@ public class UserMainDisplay extends BaseGoogleActivity {
 
 	@Override
 	public void onConnectionSuspended(int arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
 	public void onResume(){
 		super.onResume();
-		
-
-		
 		
 	}
 	
@@ -140,11 +129,12 @@ public class UserMainDisplay extends BaseGoogleActivity {
 		else if(id == R.id.logout){
 			ParseUser.logOut();
 			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-			SharedPreferences settings = getSharedPreferences(LoginActivity.LOGIN_SETTINGS, 0);
+			SharedPreferences settings = getSharedPreferences(SharedPrefKeys.LOGIN_SETTINGS, 0);
 			SharedPreferences.Editor editSettings = settings.edit();
-			editSettings.putBoolean(LoginActivity.AUTO_LOG, false);
-			editSettings.putString(USER_KEY, null);
-			editSettings.putString(PASS_KEY, null);
+			editSettings.putBoolean(SharedPrefKeys.AUTO_LOG, false);
+			editSettings.putString(SharedPrefKeys.USER_KEY, null);
+			editSettings.putString(SharedPrefKeys.PASS_KEY, null);
+            editSettings.putString(SharedPrefKeys.LOC_KEY, null);
 			editSettings.apply();
 			intent.putExtra(LoginActivity.LOGOUT_DEFAULT, true);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -161,10 +151,10 @@ public class UserMainDisplay extends BaseGoogleActivity {
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		ActionBar.TabListener tabListener = new HubActionBarListener();
-		
-		// Create the adapter that will return a fragment for each of the three
-		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -240,24 +230,21 @@ public class UserMainDisplay extends BaseGoogleActivity {
 		}
 	}
 
-	// WILL BE DELETED - SCHEDULED DEPRECATION
+	// TODO WILL BE DELETED - SCHEDULED DEPRECATION
 	public class HubActionBarListener implements ActionBar.TabListener{
 
 		@Override
 		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			// TODO Auto-generated method stub
 			mViewPager.setCurrentItem(tab.getPosition());
 		}
 
 		@Override
 		public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onTabReselected(Tab tab, FragmentTransaction ft) {
-			// TODO Auto-generated method stub
 			
 		}
 		
@@ -274,12 +261,10 @@ public class UserMainDisplay extends BaseGoogleActivity {
 		
 		@Override
 		public void onPageScrollStateChanged(int position) {
-			// TODO Auto-generated method stub
 		}
 
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
-			// TODO Auto-generated method stub
 			
 		}
 		

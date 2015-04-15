@@ -19,22 +19,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.SharedPrefKeys;
+import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.DevActivities.MatUserMainDisplay;
 import com.dingohub.hubbub.R;
 import com.parse.ParseObject;
 import com.parse.PushService;
 
-public class LoginActivity extends Activity {
-	// part of the Login Settings shared preferences
-	public static final String USER_KEY = "UserKey";
-	public static final String PASS_KEY = "PassKey";
-	public static final String AUTO_LOG = "AutoLogin";
+public class LoginActivity extends BaseGoogleActivity {
+
+
 	
 	// bundle attribute
 	public final static String LOGOUT_DEFAULT = "LogoutDefault";
 	
-	// shared preferences key
-	public static final String LOGIN_SETTINGS = "LoginSettings";
+
 
 	
 	
@@ -131,9 +130,9 @@ public class LoginActivity extends Activity {
 			
 			if( HubDatabase.FLAG_QUERY_SUCCESSFUL == result ){
 				SharedPreferences.Editor editSettings = settings.edit();
-				editSettings.putString(USER_KEY, username);
-				editSettings.putString(PASS_KEY, password);
-				editSettings.putBoolean(AUTO_LOG, true);
+				editSettings.putString(SharedPrefKeys.USER_KEY, username);
+				editSettings.putString(SharedPrefKeys.PASS_KEY, password);
+                editSettings.putBoolean(SharedPrefKeys.AUTO_LOG, true);
 				editSettings.apply();
 				Intent intent = new Intent(getApplicationContext(), MatUserMainDisplay.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -154,10 +153,10 @@ public class LoginActivity extends Activity {
 	// Checks bundle for login information from SignUp
 	// - Checks sharedPrefs for past auto login set
 	private void auto_login_check(){
-		settings = getSharedPreferences(LOGIN_SETTINGS,0);
-		boolean autoLogin = settings.getBoolean(AUTO_LOG, false);
-		savedUsername = settings.getString(USER_KEY, null);
-		savedPassword = settings.getString(PASS_KEY, null);
+		settings = getSharedPreferences(SharedPrefKeys.LOGIN_SETTINGS,0);
+		boolean autoLogin = settings.getBoolean(SharedPrefKeys.AUTO_LOG, false);
+		savedUsername = settings.getString(SharedPrefKeys.USER_KEY, null);
+		savedPassword = settings.getString(SharedPrefKeys.PASS_KEY, null);
 		
 		if(savedUsername != null && savedPassword != null){
 			username.setText(savedUsername, TextView.BufferType.EDITABLE);

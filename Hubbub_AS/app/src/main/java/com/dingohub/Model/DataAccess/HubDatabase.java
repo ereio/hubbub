@@ -61,6 +61,7 @@ public class HubDatabase {
 	
 	// Parse User Table Attributes
 	public static final String FULL_NAME = "full_name";
+    public static final String CURRENT_LOCATION = "location";
 	public static final String DATE_OF_BIRTH = "date_of_birth";
 	public static final String FRIENDS = "friends";
 	public static final String PROFILE_PIC = "profile_picture";
@@ -94,6 +95,7 @@ public class HubDatabase {
 		user.put(ABOUT, newUser.details);
 		user.put(FULL_NAME, newUser.firstname + "_" + newUser.lastname);
 		user.put(DATE_OF_BIRTH, dob);
+        user.put(CURRENT_LOCATION, newUser.location);
 		user.put(FRIENDS, new JSONArray());
 		
 		try {
@@ -532,7 +534,6 @@ public class HubDatabase {
 			if(pic != null)
 				usr.picture = pic.getData();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

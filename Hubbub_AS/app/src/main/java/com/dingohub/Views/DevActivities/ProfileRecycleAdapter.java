@@ -5,99 +5,52 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.hubbub.R;
 
 /**
  * Created by ereio on 3/30/15.
  */
-public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileRecycleAdapter.ViewHolder> {
+public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
 
-    private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
 
-    private static final int TYPE_ITEM = 1;
 
-    private String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
-    private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
+    private String mNavTitles[];
+    private int mIcons[];
 
-    private String name;        //String Resource for header View Name
-    private int profile;        //int Resource for header view profile picture
-    private String email;       //String Resource for header view email
+    private String name;
+    private byte[] profilePicture;
+    private String email;
+    private String location;
     private Context context;
-    ProfileRecycleAdapter(String Titles[], int Icons[], String Name, String Email, int Profile, Context context) {
+
+    ProfileRecycleAdapter(String Titles[], int Icons[], String Name, String Email, byte[] picture, String location, Context context) {
         mNavTitles = Titles;
         mIcons = Icons;
         name = Name;
         email = Email;
-        profile = Profile;
+        this.location = location;
+        profilePicture = picture;
         this.context = context;
     }
 
-    // ViewHolder are used to to store the inflated views
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        int Holderid;
-
-        TextView textView;
-        ImageView imageView;
-        ImageView profile;
-        TextView Name;
-        TextView email;
-        Context context;
-        public ViewHolder(View itemView, int ViewType, Context context) {                 // Creating ViewHolder Constructor with View and viewType As a parameter
-            super(itemView);
-            this.context = context;
-            // Here we set the appropriate view in accordance with the the view type as passed when the holder object is created
-            itemView.setOnClickListener(this);
-            itemView.setClickable(true);
-            if (ViewType == TYPE_ITEM) {
-                textView = (TextView) itemView.findViewById(R.id.rowText);
-                imageView = (ImageView) itemView.findViewById(R.id.rowIcon);
-                Holderid = TYPE_ITEM;                                               // setting holder id as 1 as the object being populated are of type item row
-            } else {
-                Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from header.xml for name
-                email = (TextView) itemView.findViewById(R.id.email);
-                profile = (ImageView) itemView.findViewById(R.id.circleView);
-                Holderid = TYPE_HEADER;                                                // Setting holder id = 0 as the object being populated are of type header view
-            }
-        }
-
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(context, "The Item Clicked is: " + getPosition(), Toast.LENGTH_SHORT).show();
-            switch(getPosition()){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-            }
-        }
-    }
-
     @Override
-    public ProfileRecycleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProfileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        if (viewType == TYPE_ITEM) {
+        if (viewType == ProfileViewHolder.TYPE_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nav_item, parent, false); //Inflating the layout
 
-            ViewHolder vhItem = new ViewHolder(v, viewType, context); //Creating ViewHolder and passing the object of type view
+            ProfileViewHolder vhItem = new ProfileViewHolder(v, viewType, context); //Creating ViewHolder and passing the object of type view
             return vhItem; // Returning the created object
 
             //inflate your layout and pass it to view holder
 
-        } else if (viewType == TYPE_HEADER) {
+        } else if (viewType == ProfileViewHolder.TYPE_HEADER) {
 
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.nav_header, parent, false);
 
-            ViewHolder vhHeader = new ViewHolder(v, viewType, context);
+            ProfileViewHolder vhHeader = new ProfileViewHolder(v, viewType, context);
 
             return vhHeader;
 
@@ -107,14 +60,19 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileRecycleAd
     }
 
     @Override
-    public void onBindViewHolder(ProfileRecycleAdapter.ViewHolder holder, int position) {
-        if (holder.Holderid == TYPE_ITEM) {
-            holder.textView.setText(mNavTitles[position - 1]);
+    public void onBindViewHolder(ProfileViewHolder holder, int position) {
+        if (holder.Holderid == ProfileViewHolder.TYPE_ITEM) {
+            holder.menuItem.setText(mNavTitles[position - 1]);
             holder.imageView.setImageResource(mIcons[position - 1]);
         } else {
-            holder.profile.setImageResource(profile);
+            // decodes the picture in a separate thread
+            if(profilePicture != null){
+                BitmapWorker worker = new BitmapWorker(holder.profile, profilePicture, 250, 250);
+                worker.execute(0);
+            }
             holder.Name.setText(name);
             holder.email.setText(email);
+            holder.location.setText(location);
         }
     }
 
@@ -126,8 +84,8 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileRecycleAd
     @Override
     public int getItemViewType(int position) {
         if (position == 0)
-            return TYPE_HEADER;
+            return ProfileViewHolder.TYPE_HEADER;
 
-        return TYPE_ITEM;
+        return ProfileViewHolder.TYPE_ITEM;
     }
 }

@@ -23,7 +23,6 @@ public class EventListAdapter extends ArrayAdapter<Bub> {
 		super(context, R.layout.listitem_bub, events);
 		this.context = context;
 		tEvents = events;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

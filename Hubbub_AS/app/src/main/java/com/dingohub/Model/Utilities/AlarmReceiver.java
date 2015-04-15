@@ -30,7 +30,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 		try {
 			push.setData(new JSONObject().put(MyParseReceiver.DATA_KEY, event_id));
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

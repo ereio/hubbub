@@ -24,10 +24,12 @@ import android.widget.Toast;
 
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
+import com.dingohub.Model.DataAccess.SharedPrefKeys;
+import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.hubbub.R;
 import com.dingohub.Model.Utilities.BitmapWorker;
 
-public class CreateUserActivity extends Activity {
+public class CreateUserActivity extends BaseGoogleActivity {
 
 	EditText eUsername;
 	EditText ePass;
@@ -145,9 +147,9 @@ public class CreateUserActivity extends Activity {
 	}
 	
 	private void finalize_creation(){
-		SharedPreferences.Editor eSettings = getSharedPreferences(LoginActivity.LOGIN_SETTINGS,0).edit();
-		eSettings.putString(LoginActivity.USER_KEY, mUsername);
-		eSettings.putString(LoginActivity.PASS_KEY, mPass);
+		SharedPreferences.Editor eSettings = getSharedPreferences(SharedPrefKeys.LOGIN_SETTINGS,0).edit();
+		eSettings.putString(SharedPrefKeys.USER_KEY, mUsername);
+		eSettings.putString(SharedPrefKeys.PASS_KEY, mPass);
 		eSettings.commit();
 		
 		Intent login = new Intent(getApplicationContext(), LoginActivity.class);
@@ -289,6 +291,7 @@ public class CreateUserActivity extends Activity {
 		newuser.firstname = mFirstname;
 		newuser.lastname = mLastname;
 		newuser.email = mEmail;
+        newuser.location = getLocality();
 		newuser.details = mDetails;
 		newuser.picture = mProfilePic;
 		

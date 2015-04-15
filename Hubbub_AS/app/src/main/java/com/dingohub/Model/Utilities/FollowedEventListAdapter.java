@@ -24,7 +24,6 @@ public class FollowedEventListAdapter extends ArrayAdapter<Bub> {
 			super(context, R.layout.listitem_followed_bub, events);
 			this.context = context;
 			tEvents = events;
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
