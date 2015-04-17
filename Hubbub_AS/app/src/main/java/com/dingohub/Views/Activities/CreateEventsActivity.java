@@ -240,6 +240,7 @@ public class CreateEventsActivity extends BaseGoogleActivity {
             HashMap<String, Object> params = new HashMap<String, Object>();
 
             params.put("pingIn",UtcTime);
+            params.put(CHANNEL_KEY,event_id);
             ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
 
                 @Override
