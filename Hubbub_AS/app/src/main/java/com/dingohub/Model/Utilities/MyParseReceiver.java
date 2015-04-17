@@ -34,23 +34,23 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
         Bundle bundle = intent.getExtras();
 
 
-        for (String key: bundle.keySet())
-        {
-           Log.d( "myApplication" , key + " is a key in the bundle");
-        }
+
 
         if (bundle != null)
         {
             String data = bundle.getString(DATA_KEY);
             String[] splitData = data.split(":");
             String[] splitAgain = splitData[1].split(",");
-            eventID = splitAgain[1].substring(1,splitAgain[1].length() );
-           // intent = new Intent(context,ShowDialogActivity.class);
-            //intent.putExtra(DATA_KEY, splitData[3]);
-           // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            //context.startActivity(intent);
+            eventID = splitAgain[0].substring(1,splitAgain[0].length() -1 );
+            Log.d("myApplication","event ID:  " +eventID);
+
+            intent = new Intent(context,ShowDialogActivity.class);
+            intent.putExtra(DATA_KEY, eventID);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
         }
+
 
         Toast.makeText(context, "got notification"+eventID, Toast.LENGTH_LONG).show();
 
