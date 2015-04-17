@@ -103,6 +103,11 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
             init_pager_tabs();
         }
 
+        @Override
+        protected void onPause(){
+            super.onPause();
+        }
+
         private void init_user(){
 
             // init user object

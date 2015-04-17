@@ -95,6 +95,8 @@ public class HubDatabase {
 		user.put(ABOUT, newUser.details);
 		user.put(FULL_NAME, newUser.firstname + "_" + newUser.lastname);
 		user.put(DATE_OF_BIRTH, dob);
+        if(newUser.location == null)
+            newUser.location = "Tallahassee_Florida";
         user.put(CURRENT_LOCATION, newUser.location);
 		user.put(FRIENDS, new JSONArray());
 		
@@ -338,7 +340,7 @@ public class HubDatabase {
 		return inSampleSize;
 	}
 	
-	// Main function for decoding bitmap - Runs the calculations and then scales
+	// Main function for decoding bitmp - Runs the calculations and then scales
 	public static Bitmap decodePicture(Object picture, int reqWidth, int reqHeight) throws Exception{
 	    final BitmapFactory.Options options = new BitmapFactory.Options();
 	    options.inJustDecodeBounds = true;
