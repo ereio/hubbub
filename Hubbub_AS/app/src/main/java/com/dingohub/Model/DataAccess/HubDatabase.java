@@ -353,6 +353,8 @@ public class HubDatabase {
 		    
 	    } else if(picture instanceof byte[]){
 	    	 // Calculate inSampleSize
+            if(((byte[]) picture).length <= 1)
+                return null;
 	    	BitmapFactory.decodeByteArray((byte[])picture, 0, ((byte[])picture).length, options);
 	    	options.inSampleSize = calcImageSampleSize(options, reqWidth, reqHeight);
 	    	

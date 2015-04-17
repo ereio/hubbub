@@ -28,6 +28,7 @@ import com.dingohub.Views.Activities.SearchEventsActivity;
 import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.hubbub.R;
 import com.parse.ParseUser;
+import com.melnykov.fab.FloatingActionButton;
 
 /**
  * Created by ereio on 3/30/15.
@@ -47,7 +48,7 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
                        R.drawable.ic_layers_black_24dp, R.drawable.ic_group_work_black_24dp,
                        R.drawable.ic_group_black_24dp, R.drawable.ic_settings_black_24dp};
 
-
+        FloatingActionButton fab;
         String NAME = "Default User";
         String EMAIL = "DefaultEmail@Default.com";
         byte[] PICTURE = null;
@@ -142,6 +143,8 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
             mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
             profileRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
 
+            fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.attachToRecyclerView(profileRecyclerView);
 
             Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
             mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,toolbar, R.string.openDrawer,R.string.app_name){
