@@ -27,18 +27,24 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 			
-			// Getting Push Data
-			Bundle bundle = intent.getExtras();
-			String data = bundle.getString(DATA_KEY);
-			String[] splitData = data.split("\"");		
 
-			intent = new Intent(context,ShowDialogActivity.class);
-			intent.putExtra(DATA_KEY, splitData[3]);
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-			context.startActivity(intent);
-			Toast.makeText(context, "got notification", Toast.LENGTH_LONG).show();
-			
+        //Getting Push Data
+        Bundle bundle = intent.getExtras();
+        /*
+        if (bundle != null)
+        {
+            String data = bundle.getString(DATA_KEY);
+            String[] splitData = data.split("\"");
+
+            intent = new Intent(context,ShowDialogActivity.class);
+            intent.putExtra(DATA_KEY, splitData[3]);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
+        }
+        */
+        Toast.makeText(context, "got notification", Toast.LENGTH_LONG).show();
+
 	}
 
 }
