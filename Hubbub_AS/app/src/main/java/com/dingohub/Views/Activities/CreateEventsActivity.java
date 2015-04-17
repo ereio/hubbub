@@ -3,9 +3,14 @@ package com.dingohub.Views.Activities;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Random;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +22,9 @@ import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Fragments.*;
 import com.dingohub.hubbub.R;
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
 import com.parse.ParsePush;
 
 import android.app.AlarmManager;
@@ -52,6 +60,7 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 	
 	public static final String CHANNEL_KEY = "CHANNEL_KEY";
 
+    private String UtcTime;
 	private EditText start_time;
 	private EditText end_time;
 	private EditText start_date;
@@ -193,6 +202,15 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 		public void CreateEvent ( View v) throws JSONException
 		{
 
+
+
+            Date d = new Date(pingInActualTime());
+            String format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+            SimpleDateFormat dateForm = new SimpleDateFormat (format);
+
+            dateForm.setTimeZone(TimeZone.getTimeZone("UTC"));
+            UtcTime = dateForm.format(d) ;
+
 			event_name = (EditText) findViewById(R.id.bub_name);
 			event_location  = (EditText) findViewById(R.id.bub_location);
 			event_details = (EditText) findViewById(R.id.bub_details);
@@ -205,24 +223,35 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 				HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
 				//Toast.makeText(this, "Event Created Successfully"+event_id, Toast.LENGTH_SHORT).show();
 				
-				alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
-				Intent intent = new Intent(this, AlarmReceiver.class);
-				intent.putExtra(CHANNEL_KEY,event_id);
+			//	alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
+				//Intent intent = new Intent(this, AlarmReceiver.class);
+			//	intent.putExtra(CHANNEL_KEY,event_id);
 				
-				Random rand = new Random();
-				int randNum = rand.nextInt((20000000 - 0) + 1 + 0);
+				//Random rand = new Random();
+			//	int randNum = rand.nextInt((20000000 - 0) + 1 + 0);
 				
-			alarmIntent = PendingIntent.getBroadcast(this, randNum, intent, PendingIntent.FLAG_ONE_SHOT);
+			//alarmIntent = PendingIntent.getBroadcast(this, randNum, intent, PendingIntent.FLAG_ONE_SHOT);
 
-
-					//alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-					    //  SystemClock.elapsedRealtime() +
-					   //    60 * 1000, alarmIntent);
-					
-				alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-					       sysTimeToTSB(pingInTimeInMillis()), alarmIntent);
 
 					
+				//alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+				//	       sysTimeToTSB(pingInTimeInMillis()), alarmIntent);
+
+            HashMap<String, Object> params = new HashMap<String, Object>();
+
+            params.put("pingIn",UtcTime);
+            params.put(CHANNEL_KEY,event_id);
+            ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
+
+                @Override
+                public void done(String object, ParseException e) {
+                    // TODO Auto-generated method stub
+                    if (e == null)
+                        Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
 				ParsePush.subscribeInBackground(event_id);
 				Toast.makeText(this, 
 						"Event Creation Succeeded", Toast.LENGTH_SHORT).show();
@@ -279,13 +308,15 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 		public void setTime(View v,int hour,int minute){
 			
 		EditText showTime;
-		if(evalue.equals("start_time"))
-			showTime = (EditText)findViewById(R.id.bub_start_time);
+		if(evalue.equals("start_time")) {
+            showTime = (EditText) findViewById(R.id.bub_start_time);
+            time_hour = hour;
+            time_minute = minute;
+        }
 		else
 			showTime = (EditText)findViewById(R.id.bub_end_time);
 		
-		time_hour = hour;
-		time_minute = minute;
+
 		
 		
 		if(hour >= 12)
@@ -398,9 +429,19 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			
 			return newEvent;
 		}
-		
-		
-		
+
+
+
+    private long pingInActualTime()
+    {
+
+        Calendar c = new GregorianCalendar(date_year,date_month-1,date_day,time_hour,time_minute);
+        c.add(c.HOUR,-1*Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]) );
+
+        return c.getTimeInMillis();
+
+
+    }
 ////////////////////////////////////////////////////////////////
 // Get tapp in system time
 ///////////////////////////////////////////////////////////////
