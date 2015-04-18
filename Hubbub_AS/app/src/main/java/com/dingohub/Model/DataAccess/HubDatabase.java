@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.dingohub.Hubbub;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -350,8 +351,8 @@ public class HubDatabase {
 			
 		} catch (ParseException e) {
 			status = FLAG_QUERY_FAILED;
-			bubs = null;
-			Log.e(TAG,e.toString());
+			bubs = new ArrayList<>();
+			Log.e(Hubbub.TAG + " " + TAG,e.toString());
 		}
 		
 		return bubs;

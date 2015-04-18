@@ -1,4 +1,4 @@
-package com.dingohub.Views.DevActivities;
+package com.dingohub.Views.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +14,6 @@ import com.dingohub.hubbub.R;
  */
 public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
 
-
-
     private String mNavTitles[];
     private int mIcons[];
 
@@ -25,7 +23,7 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolde
     private String location;
     private Context context;
 
-    ProfileRecycleAdapter(String Titles[], int Icons[], String Name, String Email, byte[] picture, String location, Context context) {
+    public ProfileRecycleAdapter(String Titles[], int Icons[], String Name, String Email, byte[] picture, String location, Context context) {
         mNavTitles = Titles;
         mIcons = Icons;
         name = Name;

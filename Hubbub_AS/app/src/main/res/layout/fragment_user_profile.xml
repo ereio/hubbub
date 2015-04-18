@@ -42,7 +42,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/text_about"
+        android:id="@+id/cardview_text_about"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"
@@ -58,8 +58,8 @@
         android:id="@+id/text_static_following"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_about"
-        android:layout_below="@+id/text_about"
+        android:layout_alignLeft="@+id/cardview_text_about"
+        android:layout_below="@+id/cardview_text_about"
         android:layout_marginTop="16dp"
         android:text="@string/title_user_friends"
         android:textAppearance="?android:attr/textAppearanceLarge" />

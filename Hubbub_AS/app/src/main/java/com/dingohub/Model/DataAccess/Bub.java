@@ -25,18 +25,20 @@ public class Bub {
 	public int pingIn_time;
 	
 	public Bub(){
-		id = null;
-		title = null;
-		geolocation = null;
-		location = null;
-		details = null;
-		permissions = null;
-		start_date = null;
-		start_time = null;
-		end_date = null;
-		picture_title=null;
-		end_time = null;
+		id = new String();
+		title = new String();
+		geolocation = new String();
+		location = new String();
+		details = new String();
+		permissions = new String();
+		start_date = new String();
+		start_time = new String();
+		end_date = new String();
+		picture_title=new String();
+		end_time = new String();
 		picture = new byte[] {};
+        follower_ids = new JSONArray();
+        tags = new JSONArray();
 		yes_counter = 0;
 		no_counter = 0;
 		maybe_counter = 0;

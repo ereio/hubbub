@@ -1,4 +1,4 @@
-package com.dingohub.Views.Fragments;
+package com.dingohub.Views.DevFragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
-import com.dingohub.hubbub.R;
 import com.dingohub.Model.Utilities.BitmapWorker;
+import com.dingohub.hubbub.R;
 
-public class UserProfileFragment extends Fragment{
+public class MatUserProfileFragment extends Fragment{
 	ImageView iProfilePic;
 	
 	TextView tUsername;
@@ -23,7 +23,7 @@ public class UserProfileFragment extends Fragment{
 	
 	HubUser user;
 	
-	public UserProfileFragment() {
+	public MatUserProfileFragment() {
 	}
 
 	@Override
@@ -41,8 +41,9 @@ public class UserProfileFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_user_profile, container,
-				false);
+        View rootView = inflater.inflate(R.layout.material_fragment_todays_bubs, container,
+                false);
+        return rootView;
 	}
 	
 	private void ui_init(){

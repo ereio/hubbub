@@ -21,14 +21,13 @@ import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
-import com.dingohub.Model.Utilities.UserPanePagerAdapter;
-import com.dingohub.Views.Activities.CreateEventsActivity;
+import com.dingohub.Views.Adapters.ProfileRecycleAdapter;
+import com.dingohub.Views.Adapters.UserPanePagerAdapter;
 import com.dingohub.Views.Activities.LoginActivity;
 import com.dingohub.Views.Activities.SearchEventsActivity;
 import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.hubbub.R;
 import com.parse.ParseUser;
-import com.melnykov.fab.FloatingActionButton;
 
 /**
  * Created by ereio on 3/30/15.
@@ -48,12 +47,10 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
                        R.drawable.ic_layers_black_24dp, R.drawable.ic_group_work_black_24dp,
                        R.drawable.ic_group_black_24dp, R.drawable.ic_settings_black_24dp};
 
-        FloatingActionButton fab;
         String NAME = "Default User";
         String EMAIL = "DefaultEmail@Default.com";
         byte[] PICTURE = null;
         String LOCATION = "Default Location";
-
 
         private Toolbar toolbar;
         private int TODAY_PANE = 1;
@@ -148,8 +145,6 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
             mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
             profileRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
 
-            fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.attachToRecyclerView(profileRecyclerView);
 
             Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
             mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,toolbar, R.string.openDrawer,R.string.app_name){
@@ -164,8 +159,6 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
                     super.onDrawerClosed(drawerView);
                     // Code here will execute once drawer is closed
                 }
-
-
 
             }; // Drawer Toggle Object Made
             Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
@@ -291,7 +284,7 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
                 return true;
             }
             if (id == R.id.create_bub) {
-                Intent i = new Intent(this,CreateEventsActivity.class);
+                Intent i = new Intent(this, MatCreateEventsActivity.class);
                 startActivity(i);
                 return true;
             }

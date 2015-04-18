@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/eventview_tag_header"
         android:layout_alignBottom="@+id/eventview_tag_header"
-        android:layout_alignRight="@+id/text_about"
+        android:layout_alignRight="@+id/cardview_text_about"
         android:layout_toRightOf="@+id/eventview_tag_header"
         android:text="@string/textview_tags_header"
         android:layout_marginLeft="5dp"
@@ -102,9 +102,9 @@
         android:id="@+id/eventview_button_follow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_about"
+        android:layout_alignLeft="@+id/cardview_text_about"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/text_about"
+        android:layout_alignRight="@+id/cardview_text_about"
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_lightblue"
         android:text="@string/follow_event" />
@@ -124,9 +124,9 @@
         android:id="@+id/eventview_following_list"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:layout_alignLeft="@+id/text_about"
-        android:layout_alignRight="@+id/text_about"
-        android:layout_below="@+id/text_about"
+        android:layout_alignLeft="@+id/cardview_text_about"
+        android:layout_alignRight="@+id/cardview_text_about"
+        android:layout_below="@+id/cardview_text_about"
         android:layout_marginTop="25dp"
         android:background="@drawable/edittext_openblue"
         android:paddingLeft="6sp"
@@ -134,12 +134,12 @@
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/TextView02"
+        android:id="@+id/text_following"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:layout_alignLeft="@+id/text_about"
-        android:layout_below="@+id/text_about"
+        android:layout_alignLeft="@+id/cardview_text_about"
+        android:layout_below="@+id/cardview_text_about"
         android:text="@string/following"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -167,30 +167,30 @@
         android:id="@+id/eventview_tag_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listitem_fbub_start_date"
+        android:layout_alignLeft="@+id/cardview_fbub_start_date"
         android:layout_below="@+id/eventview_tappin_header"
         android:text="@string/event_tags"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/listitem_fbub_start_date"
+        android:id="@+id/cardview_fbub_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_about"
+        android:layout_alignLeft="@+id/cardview_text_about"
         android:layout_below="@+id/eventview_tags"
         android:layout_marginTop="15dp"
         android:text="@string/event_details"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/text_about"
+        android:id="@+id/cardview_text_about"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_below="@+id/listitem_fbub_start_date"
+        android:layout_below="@+id/cardview_fbub_start_date"
         android:background="@drawable/edittext_closedblue"
         android:paddingLeft="6sp"
         android:text="@string/event_details_default"
