@@ -4,7 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
-import com.dingohub.Views.Fragments.TodaysBubsFragment;
+import com.dingohub.Views.DevFragments.MatTodaysBubsFragment;
 import com.dingohub.Views.Fragments.UserBubsFragment;
 import com.dingohub.Views.Fragments.UserGroupsFragment;
 import com.dingohub.Views.Fragments.UserHubsFragment;
@@ -39,7 +39,7 @@ public class UserPanePagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new UserProfileFragment();
             case 1:
-                return new TodaysBubsFragment();
+                return new MatTodaysBubsFragment();
             case 2:
                 return new UserBubsFragment();
             case 3:

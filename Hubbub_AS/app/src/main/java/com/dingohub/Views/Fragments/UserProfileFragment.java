@@ -49,7 +49,7 @@ public class UserProfileFragment extends Fragment{
 		iProfilePic = (ImageView) getView().findViewById(R.id.image_profile_picture);
 		tUsername = (TextView) getView().findViewById(R.id.text_username);
 		tFullName = (TextView) getView().findViewById(R.id.text_fullname);
-		tAbout = (TextView) getView().findViewById(R.id.text_about);
+		tAbout = (TextView) getView().findViewById(R.id.cardview_text_about);
 	}
 	
 	private void set_ui(){

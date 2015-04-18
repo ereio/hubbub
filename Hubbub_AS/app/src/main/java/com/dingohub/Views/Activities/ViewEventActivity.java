@@ -196,7 +196,7 @@ public class ViewEventActivity extends Activity{
 		event_tappin = (TextView) findViewById(R.id.eventview_tappin_time);
 		event_tags = (TextView) findViewById(R.id.eventview_tags);
 		event_following = (TextView) findViewById(R.id.eventview_following_list);
-		event_details = (TextView) findViewById(R.id.text_about);
+		event_details = (TextView) findViewById(R.id.cardview_text_about);
 		event_numfollowers = (TextView) findViewById(R.id.eventlist_numfollowers);
 		
 		event_num_yes = (TextView) findViewById(R.id.eventview_num_yes);

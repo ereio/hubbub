@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +49,7 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
                        R.drawable.ic_layers_black_24dp, R.drawable.ic_group_work_black_24dp,
                        R.drawable.ic_group_black_24dp, R.drawable.ic_settings_black_24dp};
 
-        FloatingActionButton fab;
+
         String NAME = "Default User";
         String EMAIL = "DefaultEmail@Default.com";
         byte[] PICTURE = null;
@@ -148,8 +149,7 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
             mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
             profileRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
 
-            fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.attachToRecyclerView(profileRecyclerView);
+
 
             Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
             mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,toolbar, R.string.openDrawer,R.string.app_name){
@@ -164,8 +164,6 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
                     super.onDrawerClosed(drawerView);
                     // Code here will execute once drawer is closed
                 }
-
-
 
             }; // Drawer Toggle Object Made
             Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle

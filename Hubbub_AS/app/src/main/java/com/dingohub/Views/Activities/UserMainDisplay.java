@@ -16,7 +16,7 @@ import android.view.MenuItem;
 
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
-import com.dingohub.Views.Fragments.TodaysBubsFragment;
+import com.dingohub.Views.DevFragments.MatTodaysBubsFragment;
 import com.dingohub.Views.Fragments.UserBubsFragment;
 import com.dingohub.Views.Fragments.UserGroupsFragment;
 import com.dingohub.Views.Fragments.UserHubsFragment;
@@ -190,7 +190,7 @@ public class UserMainDisplay extends BaseGoogleActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			switch(position){
 			case 0:
-				return new TodaysBubsFragment();
+				return new MatTodaysBubsFragment();
 			case 1:
 				return new UserHubsFragment();
 			case 2:

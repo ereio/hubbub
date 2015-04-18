@@ -43,16 +43,16 @@ public class FollowedEventListAdapter extends ArrayAdapter<Bub> {
 			
 			//	TextView event_tappin = (TextView) findViewById(R.id.eventview_tappin_time);
 			
-			TextView event_name = (TextView) row.findViewById(R.id.listitem_fbub_title);
-			TextView event_location = (TextView) row.findViewById(R.id.listitem_fbub_location);
+			TextView event_name = (TextView) row.findViewById(R.id.cardview_bub_title);
+			TextView event_location = (TextView) row.findViewById(R.id.cardview_bub_location);
 			
-			TextView event_start_time = (TextView) row.findViewById(R.id.listitem_fbub_start_time);
+			TextView event_start_time = (TextView) row.findViewById(R.id.cardview_fbub_start_time);
 			TextView event_end_time = (TextView) row.findViewById(R.id.listitem_fbub_end_time);
-			TextView event_start_date = (TextView) row.findViewById(R.id.listitem_fbub_start_date);
+			TextView event_start_date = (TextView) row.findViewById(R.id.cardview_fbub_start_date);
 
-			TextView event_details = (TextView) row.findViewById(R.id.text_about);
+			TextView event_details = (TextView) row.findViewById(R.id.cardview_text_about);
 			TextView event_num_following = (TextView) row.findViewById(R.id.listitem_fbub_num_following);
-			ImageView event_picture = (ImageView) row.findViewById(R.id.listitem_fbub_picture);
+			ImageView event_picture = (ImageView) row.findViewById(R.id.cardview_fbub_picture);
 			
 			
 			// Gets the event needed from array in class

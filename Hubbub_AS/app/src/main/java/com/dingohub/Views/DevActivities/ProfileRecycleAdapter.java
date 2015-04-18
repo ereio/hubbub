@@ -14,8 +14,6 @@ import com.dingohub.hubbub.R;
  */
 public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
 
-
-
     private String mNavTitles[];
     private int mIcons[];
 

@@ -20,12 +20,12 @@
 	<string name="title_favorite_hub">Most Visited Hub:</string>
 	
 	<!-- Defaults on Widgets -->
-	<string name="default_event_name">Best Day Ever</string>
-	<string name="default_event_location">Zach\'s House</string>	
+	<string name="default_event_name">Default Event Name</string>
+	<string name="default_event_location">Default Event Location</string>
 	<string name="default_event_time">12/15/2014 12:00pm</string>
 	<string name="default_user_fullname">John Doe</string>
-	<string name="default_user_username">ThatGuy2014</string>
-	<string name="default_user_details">I love going to Bullwinkles every friday.</string>
+	<string name="default_user_username">Default User Name</string>
+	<string name="default_user_details">These are the default user details for bub</string>
 	<string name="default_hub_name">DefaultHub</string>
 	
 	<!-- Defaults on Data Creation -->

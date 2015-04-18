@@ -36,10 +36,10 @@ public class EventListAdapter extends ArrayAdapter<Bub> {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View row = inflater.inflate(R.layout.listitem_bub, parent , false);
 		
-		TextView name = (TextView) row.findViewById(R.id.listitem_fbub_title);
-		TextView time = (TextView) row.findViewById(R.id.listitem_bub_time);
-		TextView location = (TextView) row.findViewById(R.id.listitem_fbub_location);
-		ImageView picture = (ImageView) row.findViewById(R.id.listitem_fbub_picture);
+		TextView name = (TextView) row.findViewById(R.id.cardview_bub_title);
+		TextView time = (TextView) row.findViewById(R.id.cardview_bub_time);
+		TextView location = (TextView) row.findViewById(R.id.cardview_bub_location);
+		ImageView picture = (ImageView) row.findViewById(R.id.cardview_fbub_picture);
 		
 		// Gets the event needed from array in class
 		Bub event = tEvents.get(position);
