@@ -215,14 +215,12 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			event_location  = (EditText) findViewById(R.id.bub_location);
 			event_details = (EditText) findViewById(R.id.bub_details);
 			eTags = (EditText) findViewById(R.id.bub_tag);
-			
-			// Runs tags check
-		//	if(checkTags()) {
+
 
                 String event_id = HubDatabase.CreateBub(createEventFromData());
                 HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
                 HubDatabase.AddBubToHub(event_id,convertTags());
-
+                HubDatabase.AddFollowedBub(event_id, HubDatabase.getCurrentUser().id);
                 HashMap<String, Object> params = new HashMap<String, Object>();
 
                 params.put("pingIn", UtcTime);
@@ -371,6 +369,7 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			String[] tagStrings = eTags.getText().toString().split("#");
 			
 			// omits any user inputed hashtags from the database log
+
             JSONArray tagJSON = new JSONArray();
 			for(int i = 0 ; i < tagStrings.length ; i++){
 				tagStrings[i] = tagStrings[i].toLowerCase().replaceAll(" ","");
@@ -378,31 +377,32 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			}
 
 			
+
 			// returns the array for creation
 			return tagJSON;
 		}
-	
+
 	//fix the ping in time
 		private Bub createEventFromData(){
 			Bub newEvent = new Bub();
 			JSONArray JSONTags = convertTags();
 			newEvent.title = event_name.getText().toString();
 			newEvent.location = event_location.getText().toString();
-			
-			
-			
+
+
+
 			newEvent.details = event_details.getText().toString().trim();
 			newEvent.permissions = "public";
-			
+
 			newEvent.start_time = start_time.getText().toString();
 			newEvent.end_time = end_time.getText().toString();
-			
+
 			newEvent.start_date = start_date.getText().toString();
 			newEvent.end_date = end_date.getText().toString();
-			
+
 			newEvent.tags = JSONTags;
 			newEvent.pingIn_time = Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]);
-			
+
 			// Converts and compresses for the server side data storage
 			if(pictureSelected){
 				newEvent.picture_title = newEvent.title + " Picture";

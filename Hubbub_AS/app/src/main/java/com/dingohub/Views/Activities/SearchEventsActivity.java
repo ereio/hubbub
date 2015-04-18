@@ -27,6 +27,7 @@ public class SearchEventsActivity extends BaseGoogleActivity{
 		setContentView(R.layout.activity_search_events);
 		eTags = (EditText) findViewById(R.id.edittext_search_tag);
 
+
         eTags.setOnEditorActionListener( new EditText.OnEditorActionListener(){
 
             @Override
@@ -41,6 +42,7 @@ public class SearchEventsActivity extends BaseGoogleActivity{
                 return false;
             }
         });
+
 
 
 
@@ -63,7 +65,9 @@ public class SearchEventsActivity extends BaseGoogleActivity{
 			Toast.LENGTH_LONG).show();
 			return false;
 		}
+
 		if(tag == null||tag != ""){
+
 			Toast.makeText(getApplicationContext(), "Have to type a tag first!",
 			Toast.LENGTH_LONG).show();
 		}
@@ -72,9 +76,9 @@ public class SearchEventsActivity extends BaseGoogleActivity{
 	
 	private void searchTags(String tag){
 		if(checkTags(tag)){
-            Toast.makeText(getApplicationContext(),"SEARCHINH!",Toast.LENGTH_LONG).show();
+
 			FragmentManager manager = getFragmentManager();
-			SearchedEventsFragment eventList = new SearchedEventsFragment(tag);
+			SearchedEventsFragment eventList = new SearchedEventsFragment(tag.toLowerCase().trim());
 			manager.beginTransaction().replace(R.id.fragment_search_bubs, eventList).commit();
 		}
 	}
