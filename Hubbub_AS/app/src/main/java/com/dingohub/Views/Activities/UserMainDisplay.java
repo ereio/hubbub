@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.DevFragments.MatTodaysBubsFragment;
+import com.dingohub.Views.DevFragments.MatUserBubsFragment;
 import com.dingohub.Views.DevFragments.MatUserHubsFragment;
 import com.dingohub.Views.Fragments.UserBubsFragment;
 import com.dingohub.Views.Fragments.UserGroupsFragment;
@@ -194,7 +195,7 @@ public class UserMainDisplay extends BaseGoogleActivity {
 			case 1:
 				return new MatUserHubsFragment();
 			case 2:
-				return new UserBubsFragment();
+				return new MatUserBubsFragment();
 			case 3:
 				return new UserGroupsFragment();
 			case 4:

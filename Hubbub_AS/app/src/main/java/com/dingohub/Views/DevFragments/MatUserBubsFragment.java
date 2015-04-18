@@ -27,7 +27,6 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 
 public class MatUserBubsFragment extends Fragment {
-    private static final int MONTH_OFFSET = 1;
     ArrayList<Bub> followed_events = null;
     HubbubRecycleAdapter adapter;
     FloatingActionButton fab;
