@@ -217,45 +217,32 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			eTags = (EditText) findViewById(R.id.bub_tag);
 			
 			// Runs tags check
-			//if(checkTags()){
+		//	if(checkTags()) {
 
-				String event_id = HubDatabase.CreateBub(createEventFromData());
-				HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
-				//Toast.makeText(this, "Event Created Successfully"+event_id, Toast.LENGTH_SHORT).show();
-				
-			//	alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
-				//Intent intent = new Intent(this, AlarmReceiver.class);
-			//	intent.putExtra(CHANNEL_KEY,event_id);
-				
-				//Random rand = new Random();
-			//	int randNum = rand.nextInt((20000000 - 0) + 1 + 0);
-				
-			//alarmIntent = PendingIntent.getBroadcast(this, randNum, intent, PendingIntent.FLAG_ONE_SHOT);
+                String event_id = HubDatabase.CreateBub(createEventFromData());
+                HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
+                HubDatabase.AddBubToHub(event_id,convertTags());
 
+                HashMap<String, Object> params = new HashMap<String, Object>();
 
-					
-				//alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-				//	       sysTimeToTSB(pingInTimeInMillis()), alarmIntent);
+                params.put("pingIn", UtcTime);
+                params.put(CHANNEL_KEY, event_id);
+                ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
 
-            HashMap<String, Object> params = new HashMap<String, Object>();
+                    @Override
+                    public void done(String object, ParseException e) {
+                        // TODO Auto-generated method stub
+                        if (e == null)
+                            Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
 
-            params.put("pingIn",UtcTime);
-            params.put(CHANNEL_KEY,event_id);
-            ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
+                    }
+                });
 
-                @Override
-                public void done(String object, ParseException e) {
-                    // TODO Auto-generated method stub
-                    if (e == null)
-                        Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-				ParsePush.subscribeInBackground(event_id);
-				Toast.makeText(this, 
-						"Event Creation Succeeded", Toast.LENGTH_SHORT).show();
-				finish();
+                ParsePush.subscribeInBackground(event_id);
+                Toast.makeText(this,
+                        "Event Creation Succeeded", Toast.LENGTH_SHORT).show();
+                finish();
+           // }
 			}
 		
 	
@@ -361,13 +348,13 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			}
 			
 			// check if an extra comma or invalid characters where inserted
-			for(String cTag : tagList){
+			//for(String cTag : tagList){
 				//if(cTag.contains(DBFunct.INVALID_CHARS)){
-					Toast.makeText(this, 
-					"Tags cannot contain non-alphabetic characters, except a hashtag", Toast.LENGTH_SHORT).show();
-					check = false;
+				//	Toast.makeText(this,
+				//	"Tags cannot contain non-alphabetic characters, except a hashtag", Toast.LENGTH_SHORT).show();
+				//	check = false;
 				//}
-			}
+			//}
 			
 			if(check)
 				return true;
@@ -381,15 +368,15 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 	
 		private JSONArray convertTags(){
 			// splits entries into an array based on deliminating commas
-			String[] tagStrings = eTags.getText().toString().split(", ");
+			String[] tagStrings = eTags.getText().toString().split("#");
 			
 			// omits any user inputed hashtags from the database log
-			for(String tag : tagStrings){
-				tag = tag.replaceAll(" ", "");
-				tag = tag.replaceAll("#", "");
+            JSONArray tagJSON = new JSONArray();
+			for(int i = 0 ; i < tagStrings.length ; i++){
+				tagStrings[i] = tagStrings[i].toLowerCase().replaceAll(" ","");
+                tagJSON.put(tagStrings[i]);
 			}
-			// creates a JSON array from the String vector as a list 
-			JSONArray tagJSON = new JSONArray(Arrays.asList(tagStrings));
+
 			
 			// returns the array for creation
 			return tagJSON;

@@ -1,14 +1,18 @@
 package com.dingohub.Model.DataAccess;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -41,6 +45,7 @@ public class HubDatabase {
 	public static final String _USERS = "_User";
 	public static final String USERS_TABLE = "_User";
 	public static final String EVENTS_TABLE = "HubEvent";
+    public static final String HUBS_TABLE = "Hubs";
 	
 	// Parse Bub Table Attributes
 	public static final String TITLE = "title";
@@ -68,7 +73,11 @@ public class HubDatabase {
 	public static final String ABOUT = "about_me";
 	
 	public static String locality = null;
-	
+
+
+    //parse Hub Table Attributes
+    public static final String NAME = "name";
+	public static final String BUBS_COL = "Bubs";
 	//INITIALIZE DATABASE
 	public static boolean init_db(Context c){
 		try{
@@ -266,6 +275,29 @@ public class HubDatabase {
 		}
 		return events;
 	}
+
+    public static  ArrayList<Hub> FindHubsByTag(String tag)
+    {
+        ArrayList<Hub> hubs = new ArrayList<Hub>();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+        query.whereEqualTo(TAGS,tag);
+
+        try{
+            List<ParseObject> obj_list = query.find();
+            for(ParseObject obj: obj_list){
+                Log.d("ALI","FOUND HUB");
+                hubs.add(GetHubFromDBObj(obj));
+            }
+            status = FLAG_QUERY_SUCCESSFUL;
+
+        } catch (ParseException e){
+            status = FLAG_QUERY_FAILED;
+            hubs = null;
+            Log.e(TAG,e.toString());
+        }
+        return hubs;
+
+    }
 	
 	////////////////////////////////////////////////
 	// Get an event using an objectId
@@ -320,7 +352,9 @@ public class HubDatabase {
 		
 		return bubs;
 	}
-	
+
+
+
 	///// Used to calculate a nessesary size for Bitmap images
 	// Efficiency in memory allocation and standardization
 	public static int calcImageSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight){
@@ -486,7 +520,54 @@ public class HubDatabase {
 		
 		return status;
 	}
-	
+
+
+
+    public static  void AddBubToHub(String event_id ,JSONArray tags) throws JSONException {
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+
+
+
+        ArrayList<String> tag_list = new ArrayList<String>();
+
+       for(int i = 1 ; i < tags.length(); ++i)
+       {
+            tag_list.add(tags.get(i).toString());
+
+        }
+
+
+            query.whereContainedIn(TAGS, tag_list);
+        //}
+
+
+        try {
+            List<ParseObject> obj_list = query.find();
+
+            for(ParseObject obj: obj_list){
+                JSONArray bubs_list = obj.getJSONArray(BUBS_COL);
+
+                    bubs_list.put(event_id);
+                    obj.put(BUBS_COL, bubs_list);
+                    obj.saveInBackground();
+
+
+            }
+
+
+
+
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG,e.toString());
+        }
+
+    }
+
+
 ///////////////////////////////////////////////////////////////////
 // Increment appropriate counter in event.
 // Returns:
@@ -520,6 +601,9 @@ public class HubDatabase {
 
 		return status;
 	}
+
+
+
 
 	// Converts ParseObject to HubUser
 	private static HubUser GetUserFromDBObj(ParseObject db_usr){
@@ -582,5 +666,31 @@ public class HubDatabase {
 		
 		return event;
 	}
+
+
+
+    private static Hub GetHubFromDBObj(ParseObject db_event){
+        Hub hub = new Hub();
+
+        hub.id = db_event.getObjectId();
+        hub.name = db_event.getString(NAME);
+        hub.location = db_event.getString(LOCATION);
+
+        try{
+            ParseFile pic = db_event.getParseFile(PICTURE);
+            if(pic != null)
+                hub.picture = pic.getData();
+        } catch(Exception e){
+            hub.picture = null;
+            Log.e(TAG, e.toString());
+        }
+
+
+        hub.tags = db_event.getJSONArray(TAGS);
+
+        hub.follower_ids = db_event.getJSONArray(FOLLOWERS);
+
+        return hub;
+    }
 	
 }
