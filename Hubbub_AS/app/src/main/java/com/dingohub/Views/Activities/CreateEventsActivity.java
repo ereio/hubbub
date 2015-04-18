@@ -203,6 +203,7 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 
 				String event_id = HubDatabase.CreateBub(createEventFromData());
 				HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
+                HubDatabase.AddFollowedBub(event_id, HubDatabase.getCurrentUser().id);
 				//Toast.makeText(this, "Event Created Successfully"+event_id, Toast.LENGTH_SHORT).show();
 				
 				alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
@@ -353,38 +354,37 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			String[] tagStrings = eTags.getText().toString().split(", ");
 			
 			// omits any user inputed hashtags from the database log
-			for(String tag : tagStrings){
-				tag = tag.replaceAll(" ", "");
-				tag = tag.replaceAll("#", "");
-			}
-			// creates a JSON array from the String vector as a list 
+			for(int i = 0; i < tagStrings.length; i++) {
+                tagStrings[i] = tagStrings[i].toLowerCase().replaceAll("#", "").replaceAll(" ", "");
+            }
+			// creates a JSON array from the String vector as a list
 			JSONArray tagJSON = new JSONArray(Arrays.asList(tagStrings));
-			
+
 			// returns the array for creation
 			return tagJSON;
 		}
-	
+
 	//fix the ping in time
 		private Bub createEventFromData(){
 			Bub newEvent = new Bub();
 			JSONArray JSONTags = convertTags();
 			newEvent.title = event_name.getText().toString();
 			newEvent.location = event_location.getText().toString();
-			
-			
-			
+
+
+
 			newEvent.details = event_details.getText().toString().trim();
 			newEvent.permissions = "public";
-			
+
 			newEvent.start_time = start_time.getText().toString();
 			newEvent.end_time = end_time.getText().toString();
-			
+
 			newEvent.start_date = start_date.getText().toString();
 			newEvent.end_date = end_date.getText().toString();
-			
+
 			newEvent.tags = JSONTags;
 			newEvent.pingIn_time = Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]);
-			
+
 			// Converts and compresses for the server side data storage
 			if(pictureSelected){
 				newEvent.picture_title = newEvent.title + " Picture";

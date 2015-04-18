@@ -44,13 +44,14 @@ public class Bub {
 		 
 	}
 	public boolean AddFollower(HubUser usr){
-		int status = HubDatabase.AddFollower(id, usr.id);
+		int statusEvent = HubDatabase.AddFollower(id, usr.id);
+        int statusUser = HubDatabase.AddFollowedBub(id, usr.id);
 		
-		if(status == HubDatabase.FLAG_QUERY_SUCCESSFUL){
-			follower_ids.put(usr.id);
-			return true;
+		if(statusEvent == HubDatabase.FLAG_QUERY_FAILED || statusUser == HubDatabase.FLAG_QUERY_FAILED){
+			return false;
 		}
 		else
-			return false;
+            follower_ids.put(usr.id);
+            return true;
 	}
 }

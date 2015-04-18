@@ -31,7 +31,7 @@ public class SearchEventsActivity extends BaseGoogleActivity{
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if(actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
-				   event.getAction() == KeyEvent.ACTION_UP && event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+				   event.getAction() == KeyEvent.ACTION_UP || event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
 					
 						searchTags(eTags.getText().toString());
 						return true;
@@ -56,7 +56,7 @@ public class SearchEventsActivity extends BaseGoogleActivity{
 			Toast.LENGTH_LONG).show();
 			return false;
 		}
-		if(tag != null){
+		if(tag == null){
 			Toast.makeText(getApplicationContext(), "Have to type a tag first!",
 			Toast.LENGTH_LONG).show();
 		}
@@ -66,7 +66,7 @@ public class SearchEventsActivity extends BaseGoogleActivity{
 	private void searchTags(String tag){
 		if(checkTags(tag)){
 			FragmentManager manager = getFragmentManager();
-			SearchedEventsFragment eventList = new SearchedEventsFragment(tag);
+			SearchedEventsFragment eventList = new SearchedEventsFragment(tag.toLowerCase().trim());
 			manager.beginTransaction().replace(R.id.fragment_search_bubs, eventList).commit();
 		}
 	}
