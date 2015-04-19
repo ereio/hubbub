@@ -89,6 +89,8 @@
       <string name="find_address">Find Address</string>
       <string name="DEBUG_GEO">DEBUG_GEO</string>
     <string name="empty_error_default">Default Empty Parse Return</string>
+    <string name="follow_hub">Follow Hub</string>
+    <string name="unfollow_hub">Unfollow Hub</string>
 
 
 </resources>

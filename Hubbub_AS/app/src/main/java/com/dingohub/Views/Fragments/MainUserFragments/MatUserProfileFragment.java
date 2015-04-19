@@ -19,15 +19,9 @@ import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.Model.Utilities.BitmapWorker;
-import com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity;
 import com.dingohub.Views.Activities.DevActivities.MatUserProfileActivity;
-import com.dingohub.Views.Activities.ViewEventActivity;
-import com.dingohub.Views.Adapters.FriendRecycleAdapter;
-import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
-import com.dingohub.Views.Adapters.ProfileRecycleAdapter;
-import com.dingohub.Views.Adapters.ProfileViewHolder;
+import com.dingohub.Views.Adapters.UserRecycleAdapter;
 import com.dingohub.hubbub.R;
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -37,7 +31,7 @@ public class MatUserProfileFragment extends Fragment{
     HubUser user;
     ArrayList<HubUser> friends = new ArrayList<>();
 
-    FriendRecycleAdapter adapter;
+    UserRecycleAdapter adapter;
     RecyclerView friendRecycleView;
 
     ImageView iProfilePic;
@@ -119,15 +113,15 @@ public class MatUserProfileFragment extends Fragment{
         friendRecycleView.setHasFixedSize(true);
         friendRecycleView.setItemAnimator(new DefaultItemAnimator());
         friendRecycleView.setLayoutManager(new GridLayoutManager(getActivity(), FRIENDS_SHOWN));
-        friendRecycleView.addOnItemTouchListener(new FriendRecycleViewListener());
+        friendRecycleView.addOnItemTouchListener(new UserRecyclerViewListener());
 
-        adapter = new FriendRecycleAdapter(friends, getActivity());
+        adapter = new UserRecycleAdapter(friends, getActivity());
 
         friendRecycleView.setAdapter(adapter);
     }
 
 
-    private class FriendRecycleViewListener implements RecyclerView.OnItemTouchListener{
+    private class UserRecyclerViewListener implements RecyclerView.OnItemTouchListener{
         @Override
         public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
             View child = rv.findChildViewUnder(e.getX(), e.getY());

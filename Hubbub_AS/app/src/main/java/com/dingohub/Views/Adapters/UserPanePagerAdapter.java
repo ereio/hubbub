@@ -47,11 +47,9 @@ public class UserPanePagerAdapter extends FragmentPagerAdapter {
             case 2:
                 return new MatUserBubsFragment();
             case 3:
-                return  new MatUserHubsFragment();
+                return new MatUserHubsFragment();
             case 4:
                 return new MatUserGroupsFragment();
-            case 5:
-                // Friends pane instantiation
             default:
                 return new Fragment();
         }
@@ -77,8 +75,6 @@ public class UserPanePagerAdapter extends FragmentPagerAdapter {
                 return VIEW_HUBS;
             case 4:
                 return VIEW_GROUPS;
-            case 5:
-                return VIEW_SETTINGS;
             default:
                 return VIEW_UNKNOWN_PAGE;
         }
