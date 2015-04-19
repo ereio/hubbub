@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="10dp"
+        card_view:cardElevation="5dp"
         android:layout_margin="10dp">
 
         <RelativeLayout
@@ -18,44 +18,35 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/cardview_fbub_picture"
+                android:id="@+id/cardview_hub_picture"
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="150dp"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/events_calendar_icon"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
             <TextView
-                android:id="@+id/cardview_fbub_title"
+                android:id="@+id/cardview_hub_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/default_event_name"
+                android:text="@string/hub_default_name"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_above="@+id/cardview_fbub_location"
-                android:layout_centerHorizontal="true" />
+                android:layout_above="@+id/cardview_hub_location"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
-                android:id="@+id/cardview_fbub_location"
+                android:id="@+id/cardview_hub_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/default_event_location"
+                android:text="@string/hub_default_location"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_below="@+id/cardview_fbub_picture"
-                android:layout_centerHorizontal="true" />
-
-            <TextView
-                android:id="@+id/cardview_fbub_start_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bub_start_date"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_below="@+id/cardview_fbub_start_time"
-                android:layout_alignRight="@+id/cardview_fbub_start_time"
-                android:layout_alignEnd="@+id/cardview_fbub_start_time" />
+                android:layout_alignBottom="@+id/cardview_hub_picture"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/text_following"
@@ -63,9 +54,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/following"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_above="@+id/cardview_fbub_start_date"
-                android:layout_toRightOf="@+id/cardview_fbub_location"
-                android:layout_toEndOf="@+id/cardview_fbub_location" />
+                android:layout_alignTop="@+id/text_num_events"
+                android:layout_centerHorizontal="true" />
 
             <TextView
                 android:id="@+id/cardview_fbub_num_following"
@@ -73,31 +63,48 @@
                 android:layout_height="wrap_content"
                 android:text="@string/num_following"
                 android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
                 android:layout_alignTop="@+id/text_following"
                 android:layout_toRightOf="@+id/text_following"
-                android:layout_toEndOf="@+id/text_following"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp" />
+                android:layout_toEndOf="@+id/text_following" />
 
             <TextView
-                android:id="@+id/cardview_fbub_end_time"
+                android:id="@+id/text_num_events"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/text_following"
-                android:layout_below="@+id/text_following"
-                android:text="@string/bub_end_time"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/cardview_fbub_start_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bub_start_time"
+                android:text="@string/hub_label_num_events"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_below="@+id/cardview_fbub_location"
-                android:layout_toLeftOf="@+id/cardview_fbub_location"
-                android:layout_toStartOf="@+id/cardview_fbub_location" />
+                android:layout_marginTop="41dp"
+                android:layout_below="@+id/cardview_hub_picture"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/carview_hub_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="4"
+                android:lines="1"
+                android:text="@string/hub_default_about"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_below="@+id/cardview_hub_picture"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/cardview_hub_num_events"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/num_following"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_marginLeft="13dp"
+                android:layout_marginStart="13dp"
+                android:layout_alignTop="@+id/text_num_events"
+                android:layout_toRightOf="@+id/text_num_events"
+                android:layout_toEndOf="@+id/text_num_events" />
+
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

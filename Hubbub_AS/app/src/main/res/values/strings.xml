@@ -59,7 +59,14 @@
     <string name="bub_tag">Tag</string>
     <string name="text_public">Public</string>
      <string name="text_private">Private</string>
-	
+
+    <!-- Defaults on Create Hub -->
+    <string name="hub_default_location">Default Hub Location</string>
+    <string name="hub_default_name">Default Hub Name</string>
+    <string name="hub_default_num_followers">0</string>
+    <string name="hub_label_num_events">Events:</string>
+    <string name="hub_default_about">Default details about hub</string>
+
      <!-- pingIn Strings -->
     <string name="YES">Yes</string>
 	<string name="No">No</string>
@@ -81,5 +88,7 @@
       <string name="connect">Connect</string>
       <string name="find_address">Find Address</string>
       <string name="DEBUG_GEO">DEBUG_GEO</string>
-     
+    <string name="empty_error_default">Default Empty Parse Return</string>
+
+
 </resources>

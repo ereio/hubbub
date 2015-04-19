@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/fragment_search_bubs"
-        android:name="com.dingohub.Views.Fragments.SearchedEventsFragment"
+        android:name="com.dingohub.Views.Fragments.MatSearchedEventsFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

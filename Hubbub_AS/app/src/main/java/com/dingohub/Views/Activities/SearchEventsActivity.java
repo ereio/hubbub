@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
-import com.dingohub.Views.Fragments.SearchedEventsFragment;
+import com.dingohub.Views.Fragments.MatSearchedEventsFragment;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.hubbub.R;
 
@@ -37,7 +37,7 @@ public class SearchEventsActivity extends BaseGoogleActivity{
     private void init_ui() {
         toolbar = (Toolbar) findViewById(R.id.material_toolbar);
         toolbar.getMenu().clear();
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_36dp);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,13 +85,13 @@ public class SearchEventsActivity extends BaseGoogleActivity{
 			return false;
 		}
 
-		if(!tag.equals("")){
+		if(tag.equals("")){
 			Toast.makeText(getApplicationContext(), "Have to type a tag first!",
 			Toast.LENGTH_LONG).show();
             return false;
 		}
 
-        if(!tag.contains(" ")){
+        if(tag.contains(" ")){
             Toast.makeText(getApplicationContext(), "Cannot saerch multiple tags or multi-word tags",
                     Toast.LENGTH_LONG).show();
             return false;
@@ -109,7 +109,7 @@ public class SearchEventsActivity extends BaseGoogleActivity{
             bundle.putString(TAG_KEY, tag.toLowerCase().trim());
 
             // Sets arguments for new eventList from searched tag
-			SearchedEventsFragment eventList = new SearchedEventsFragment();
+			MatSearchedEventsFragment eventList = new MatSearchedEventsFragment();
             eventList.setArguments(bundle);
 
 			manager.beginTransaction().replace(R.id.fragment_search_bubs, eventList).commit();

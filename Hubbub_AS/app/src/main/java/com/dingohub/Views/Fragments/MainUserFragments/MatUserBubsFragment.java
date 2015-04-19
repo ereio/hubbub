@@ -95,10 +95,6 @@ public class MatUserBubsFragment extends Fragment {
     private void init_user_bubs(){
         followed_events = HubDatabase.FindBubByFollower(HubDatabase.getCurrentUser().id);
 
-        if(followed_events.size() == 0){
-            noEventsFound();
-        }
-
     }
 
     private void init_fab(View rootView){
@@ -111,12 +107,6 @@ public class MatUserBubsFragment extends Fragment {
                 startActivity(i);
             }
         });
-    }
-
-    private void noEventsFound(){
-            Bub emptyNoftication = new Bub();
-            emptyNoftication.title = "You haven't subscribed to any bubs :(";
-            followed_events.add(0,emptyNoftication);
     }
 
 

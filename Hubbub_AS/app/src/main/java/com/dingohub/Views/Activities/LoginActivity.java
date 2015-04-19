@@ -27,15 +27,9 @@ import com.parse.PushService;
 
 public class LoginActivity extends BaseGoogleActivity {
 
-
-	
 	// bundle attribute
 	public final static String LOGOUT_DEFAULT = "LogoutDefault";
-	
 
-
-	
-	
 	ImageView AppLogo;
 	Button SignUp;
 	Button Login;

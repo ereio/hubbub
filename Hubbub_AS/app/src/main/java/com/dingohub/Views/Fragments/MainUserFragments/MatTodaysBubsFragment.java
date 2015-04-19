@@ -71,8 +71,8 @@ public class MatTodaysBubsFragment extends Fragment{
         bubRecycleView.setItemAnimator(new DefaultItemAnimator());
         bubRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
         bubRecycleView.addOnItemTouchListener(new BubRecyclerViewListener());
-        findTodaysEvents();
 
+        findTodaysEvents();
         adapter = new HubbubRecycleAdapter(getActivity(), todays_events, HubbubRecycleAdapter.NORMAL_BUB);
         bubRecycleView.setAdapter(adapter);
 
@@ -112,19 +112,6 @@ public class MatTodaysBubsFragment extends Fragment{
 
         String date = day + "/" + month + "/" + year;
         todays_events = HubDatabase.FindEventByDate(date);
-        noEventsFound(todays_events.size());
-    }
-
-    private void noEventsFound(int numOfEvents){
-        if(numOfEvents < 1){
-            Bub emptyNoftication = new Bub();
-            emptyNoftication.title = "Sorry there doesn't seem to be any bubs \n" +
-                    "in your area today :(";
-            emptyNoftication.end_time = "";
-            emptyNoftication.start_time = "";
-            emptyNoftication.start_date = "";
-            todays_events.add(0,emptyNoftication);
-        }
     }
 
     private class BubRecyclerViewListener implements RecyclerView.OnItemTouchListener{
