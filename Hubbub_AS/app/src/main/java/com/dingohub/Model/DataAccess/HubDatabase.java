@@ -1,14 +1,20 @@
 package com.dingohub.Model.DataAccess;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+
+import org.json.JSONObject;
+
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.dingohub.Hubbub;
 import com.parse.Parse;
@@ -26,7 +32,7 @@ public class HubDatabase {
 	public static final int FLAG_NULL_QUERY = 1;
 	public static final int FLAG_QUERY_FAILED = -1;
 	public static final int FLAG_QUERY_SUCCESSFUL = 0;
-	public static int status = FLAG_NULL_QUERY;
+    public static int status = FLAG_NULL_QUERY;
 	
 	// Ping-In Status
 	public static final int RESPONSE_YES = 1;
@@ -42,6 +48,7 @@ public class HubDatabase {
 	public static final String _USERS = "_User";
 	public static final String USERS_TABLE = "_User";
 	public static final String EVENTS_TABLE = "HubEvent";
+    public static final String HUBS_TABLE = "Hubs";
 	
 	// Parse Bub Table Attributes
 	public static final String TITLE = "title";
@@ -52,6 +59,7 @@ public class HubDatabase {
 	public static final String START_DATE = "start_date";
 	public static final String END_DATE = "end_date";
 	public static final String FOLLOWERS = "followers";
+    public static final String FOLLOWED_BUBS = "followed_bubs";
 	public static final String TAGS = "tags";
 	public static final String PERMISSION = "permission_level";
 	public static final String YES = "yes_counter";
@@ -59,6 +67,7 @@ public class HubDatabase {
 	public static final String MAYBE = "maybe_counter";
 	public static final String CREATOR = "event_creator_id";
 	public static final String NUM_FOL = "num_followers";
+    public static final String NUM_FRIENDS = "num_friends";
 	
 	// Parse User Table Attributes
 	public static final String FULL_NAME = "full_name";
@@ -69,7 +78,14 @@ public class HubDatabase {
 	public static final String ABOUT = "about_me";
 	
 	public static String locality = null;
-	
+
+
+    //parse Hub Table Attributes
+    public static final String NAME = "name";
+	public static final String BUBS_COL = "Bubs";
+
+    private static HubUser currentUser = new HubUser();
+
 	//INITIALIZE DATABASE
 	public static boolean init_db(Context c){
 		try{
@@ -178,12 +194,20 @@ public class HubDatabase {
 	// Object return
 	///////////////////////////////////////
 	public static HubUser getCurrentUser(){
-		ParseUser cur_user = ParseUser.getCurrentUser();
-		
-		if(cur_user != null)
-			return GetUserFromDBObj(cur_user);
-		else
-			return null;
+
+        // Saves calls to the database as the user will be cached
+        // locally
+        if(currentUser.id != null && !currentUser.id.equals(""))
+            return currentUser;
+
+        ParseUser cur_user = ParseUser.getCurrentUser();
+
+		if(cur_user != null) {
+            currentUser = GetUserFromDBObj(cur_user);
+            return GetUserFromDBObj(cur_user);
+        } else {
+            return null;
+        }
 	}
 	
 	
@@ -267,6 +291,29 @@ public class HubDatabase {
 		}
 		return events;
 	}
+
+    public static  ArrayList<Hub> FindHubsByTag(String tag)
+    {
+        ArrayList<Hub> hubs = new ArrayList<Hub>();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+        query.whereEqualTo(TAGS,tag);
+
+        try{
+            List<ParseObject> obj_list = query.find();
+            for(ParseObject obj: obj_list){
+                Log.d("ALI","FOUND HUB");
+                hubs.add(GetHubFromDBObj(obj));
+            }
+            status = FLAG_QUERY_SUCCESSFUL;
+
+        } catch (ParseException e){
+            status = FLAG_QUERY_FAILED;
+            hubs = null;
+            Log.e(TAG,e.toString());
+        }
+        return hubs;
+
+    }
 	
 	////////////////////////////////////////////////
 	// Get an event using an objectId
@@ -321,7 +368,50 @@ public class HubDatabase {
 		
 		return bubs;
 	}
+
+
+    /**
+     * Finds all of the Bubs which a particular user is following
+     * @param userId the user to find Bubs for
+     * @return ArrayList containing followed Bubs
+     */
+    public static ArrayList<Bub> FindBubsFollowed(String userId) {
+        ArrayList<Bub> bubs = new ArrayList<Bub>();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+        query.whereContainedIn(TAGS, new ArrayList<String>());
+
+        try {
+            ParseObject object = query.get(userId);
+            JSONArray followed_array = object.getJSONArray(FOLLOWED_BUBS);
+            int len = followed_array.length();
+
+            for (int i = 0; i < len; i++) {
+                Bub tmp = GetBubFromID(followed_array.get(i).toString());
+
+                if (tmp == null) throw new Exception("Specified event ID not found in event table.");
+
+                bubs.add(tmp);
+            }
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            bubs = null;
+            Log.e(TAG, e.toString());
+        } catch (JSONException e) {
+            status = FLAG_QUERY_FAILED;
+            bubs = null;
+            Log.e(TAG, e.toString());
+        } catch (Exception e) {
+            status = FLAG_QUERY_FAILED;
+            bubs = null;
+            Log.e(TAG, e.toString());
+        }
+
+        return bubs;
+    }
 	
+
 	///// Used to calculate a nessesary size for Bitmap images
 	// Efficiency in memory allocation and standardization
 	public static int calcImageSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight){
@@ -487,7 +577,210 @@ public class HubDatabase {
 		
 		return status;
 	}
-	
+
+
+
+
+    public static  void AddBubToHub(String event_id ,JSONArray tags) throws JSONException {
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+
+
+        ArrayList<String> tag_list = new ArrayList<String>();
+
+        for (int i = 1; i < tags.length(); ++i) {
+            tag_list.add(tags.get(i).toString());
+
+        }
+
+
+        query.whereContainedIn(TAGS, tag_list);
+        //}
+
+
+        try {
+            List<ParseObject> obj_list = query.find();
+
+            for (ParseObject obj : obj_list) {
+                JSONArray bubs_list = obj.getJSONArray(BUBS_COL);
+
+                bubs_list.put(event_id);
+                obj.put(BUBS_COL, bubs_list);
+                obj.saveInBackground();
+
+
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+        /**
+     * When a user follows a Bub, it adds it to an array for that particular user for easier access
+     * than parsing every single event.
+     * @param event_id the ID of the Bub being added
+     * @param follower_id the ID of the follower
+     * @return indication of success or failure
+     */
+    public static int AddFollowedBub(String event_id, String follower_id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+
+        try {
+            ParseObject object = query.get(follower_id);
+
+            JSONArray followed_array = object.getJSONArray(FOLLOWED_BUBS);
+            followed_array.put(event_id);
+            object.put(FOLLOWED_BUBS, followed_array);
+            object.saveInBackground();
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        }
+
+        return status;
+    }
+
+    /**
+     * When a user unfollows a Bub, it is removed from the array stored on a per-user basis.
+     * @param event_id the ID of the Bub being removed
+     * @param follower_id the ID of the follower
+     * @return indication of success or failure
+     */
+    public static int DeleteFollowedBub(String event_id, String follower_id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+
+         try {
+             ParseObject object = query.get(follower_id);
+             JSONArray followed_array = object.getJSONArray(FOLLOWED_BUBS);
+             ArrayList<String> list = new ArrayList<String>();
+             int len = followed_array.length();
+
+             if (followed_array != null) {
+                 for (int i = 0; i < len; i++) {
+                     list.add(followed_array.get(i).toString());
+                 }
+             }
+
+             list.remove(event_id);
+             object.put(FOLLOWED_BUBS, new JSONArray(list));
+
+             status = FLAG_QUERY_SUCCESSFUL;
+         } catch (ParseException e) {
+             status = FLAG_QUERY_FAILED;
+             Log.e(TAG, e.toString());
+         } catch (JSONException e) {
+             status = FLAG_QUERY_FAILED;
+             Log.e(TAG, e.toString());
+         }
+
+        return status;
+    }
+
+    /**
+     * When a user follows another user, he is added as a 'friend'.
+     * This relationship is one-way, and frankly a bit creepy.
+     * @param user_id the user adding a friend
+     * @param friend_id the user being added
+     * @return indication of success or failure
+     */
+    public static int AddFriend(String user_id, String friend_id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+
+        try {
+            ParseObject object = query.get(user_id);
+            JSONArray friend_array = object.getJSONArray(FRIENDS);
+            friend_array.put(friend_id);
+            object.put(FRIENDS, friend_array);
+            object.increment(NUM_FRIENDS);
+            object.saveInBackground();
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        }
+
+        return status;
+    }
+
+    /**
+     * If a user gets sick of stalking another user, they are able
+     * to delete said user. Also applies when a user files a restraining order.
+     * @param user_id the user unfollowing another
+     * @param friend_id the user being unfollowed
+     * @return indication of success or failure
+     */
+    public static int DeleteFriend(String user_id, String friend_id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+
+        try {
+            ParseObject object = query.get(user_id);
+            JSONArray friend_array = object.getJSONArray(FRIENDS);
+            ArrayList<String> list = new ArrayList<String>();
+            int len = friend_array.length();
+
+            if (friend_array != null) {
+                for (int i = 0; i < len; i++) {
+                    list.add(friend_array.get(i).toString());
+                }
+            }
+
+            list.remove(friend_id);
+            object.put(FRIENDS, new JSONArray(list));
+            object.increment(NUM_FRIENDS, -1);
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        } catch (JSONException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        }
+
+        return status;
+    }
+
+    /**
+     * Get a list of all friends of a user, returned as an ArrayList of HubUsers
+     * @param userId user to find friends of
+     * @return an ArrayList of HubUsers
+     */
+    public static ArrayList<HubUser> GetFriends(String userId) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+        ArrayList<HubUser> friends = new ArrayList<HubUser>();
+
+        try {
+            ParseObject object = query.get(userId);
+            JSONArray friend_array = object.getJSONArray(FRIENDS);
+            int len = friend_array.length();
+
+            if (friend_array != null) {
+                for (int i = 0; i < len; i++) {
+                    friends.add(GetUserFromID(friend_array.get(i).toString()));
+                }
+            }
+
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+
+            friends = null;
+            Log.e(TAG, e.toString());
+        } catch (JSONException e) {
+            status = FLAG_QUERY_FAILED;
+            friends = null;
+            Log.e(TAG, e.toString());
+        }
+
+        return friends;
+    }
+
 ///////////////////////////////////////////////////////////////////
 // Increment appropriate counter in event.
 // Returns:
@@ -521,6 +814,9 @@ public class HubDatabase {
 
 		return status;
 	}
+
+
+
 
 	// Converts ParseObject to HubUser
 	private static HubUser GetUserFromDBObj(ParseObject db_usr){
@@ -583,5 +879,62 @@ public class HubDatabase {
 		
 		return event;
 	}
+
+
+
+
+    private static Hub GetHubFromDBObj(ParseObject db_event) {
+        Hub hub = new Hub();
+
+        hub.id = db_event.getObjectId();
+        hub.name = db_event.getString(NAME);
+        hub.location = db_event.getString(LOCATION);
+
+        try {
+            ParseFile pic = db_event.getParseFile(PICTURE);
+            if (pic != null)
+                hub.picture = pic.getData();
+        } catch (Exception e) {
+            hub.picture = null;
+            Log.e(TAG, e.toString());
+        }
+
+
+        hub.tags = db_event.getJSONArray(TAGS);
+
+        hub.follower_ids = db_event.getJSONArray(FOLLOWERS);
+
+        return hub;
+    }
+    /**
+     * Create a HubUser object given an userID
+     * @param userId ID of user to lookup
+     * @return HubUser object representation
+     */
+    private static HubUser GetUserFromID(String userId) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+
+        try {
+            return GetUserFromDBObj(query.get(userId));
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Create a Bub object given an eventID
+     * @param eventId event to instantiate
+     * @return instantiation of given eventID
+     */
+    private static Bub GetBubFromID(String eventId) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(EVENTS_TABLE);
+
+        try {
+            return GetBubFromDBObj(query.get(eventId));
+        } catch (ParseException e) {
+            return null;
+        }
+
+    }
 	
 }

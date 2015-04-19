@@ -3,7 +3,6 @@ package com.dingohub.Views.Activities;
 
 import java.io.ByteArrayOutputStream;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -25,7 +24,7 @@ import android.widget.Toast;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
-import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
+import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.hubbub.R;
 import com.dingohub.Model.Utilities.BitmapWorker;
 
@@ -119,7 +118,7 @@ public class CreateUserActivity extends BaseGoogleActivity {
 					result = HubDatabase.CreateUser(newuser, mPass, mAuthPass, mDOB);
 					
 					if(result == HubDatabase.FLAG_NULL_QUERY){
-						Toast.makeText(getApplicationContext(), "An Error has occured, Please Try again later",
+						Toast.makeText(getApplicationContext(), "An unspecified error has occurred, please try again later",
 						Toast.LENGTH_LONG).show();
 					}
 					else if(result == HubDatabase.FLAG_QUERY_FAILED){
@@ -127,12 +126,12 @@ public class CreateUserActivity extends BaseGoogleActivity {
 						Toast.LENGTH_SHORT).show();
 					}
 					else if(result == HubDatabase.FLAG_QUERY_SUCCESSFUL){
-						Toast.makeText(getApplicationContext(), "Account Creation Success", 
+						Toast.makeText(getApplicationContext(), "Account creation success",
 						Toast.LENGTH_SHORT).show();
 						finalize_creation();
 					}
 					else{
-						Toast.makeText(getApplicationContext(), "There is some weird parse shit going on", 
+						Toast.makeText(getApplicationContext(), "There is some weird Parse shit going on",
 						Toast.LENGTH_SHORT).show();
 					}	
 				}

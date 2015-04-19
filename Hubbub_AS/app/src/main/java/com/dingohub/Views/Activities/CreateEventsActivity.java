@@ -4,12 +4,10 @@ package com.dingohub.Views.Activities;
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.TimeZone;
 
 import org.json.JSONArray;
@@ -17,9 +15,8 @@ import org.json.JSONException;
 
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
-import com.dingohub.Model.Utilities.AlarmReceiver;
 import com.dingohub.Model.Utilities.BitmapWorker;
-import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
+import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Fragments.*;
 import com.dingohub.hubbub.R;
 import com.parse.FunctionCallback;
@@ -215,47 +212,32 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			event_location  = (EditText) findViewById(R.id.bub_location);
 			event_details = (EditText) findViewById(R.id.bub_details);
 			eTags = (EditText) findViewById(R.id.bub_tag);
-			
-			// Runs tags check
-			//if(checkTags()){
-
-				String event_id = HubDatabase.CreateBub(createEventFromData());
-				HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
-				//Toast.makeText(this, "Event Created Successfully"+event_id, Toast.LENGTH_SHORT).show();
-				
-			//	alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
-				//Intent intent = new Intent(this, AlarmReceiver.class);
-			//	intent.putExtra(CHANNEL_KEY,event_id);
-				
-				//Random rand = new Random();
-			//	int randNum = rand.nextInt((20000000 - 0) + 1 + 0);
-				
-			//alarmIntent = PendingIntent.getBroadcast(this, randNum, intent, PendingIntent.FLAG_ONE_SHOT);
 
 
-					
-				//alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-				//	       sysTimeToTSB(pingInTimeInMillis()), alarmIntent);
+                String event_id = HubDatabase.CreateBub(createEventFromData());
+                HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
+                HubDatabase.AddBubToHub(event_id,convertTags());
+                HubDatabase.AddFollowedBub(event_id, HubDatabase.getCurrentUser().id);
+                HashMap<String, Object> params = new HashMap<String, Object>();
 
-            HashMap<String, Object> params = new HashMap<String, Object>();
+                params.put("pingIn", UtcTime);
+                params.put(CHANNEL_KEY, event_id);
+                ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
 
-            params.put("pingIn",UtcTime);
-            params.put(CHANNEL_KEY,event_id);
-            ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
+                    @Override
+                    public void done(String object, ParseException e) {
+                        // TODO Auto-generated method stub
+                        if (e == null)
+                            Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
 
-                @Override
-                public void done(String object, ParseException e) {
-                    // TODO Auto-generated method stub
-                    if (e == null)
-                        Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-                }
-            });
-
-				ParsePush.subscribeInBackground(event_id);
-				Toast.makeText(this, 
-						"Event Creation Succeeded", Toast.LENGTH_SHORT).show();
-				finish();
+                ParsePush.subscribeInBackground(event_id);
+                Toast.makeText(this,
+                        "Event Creation Succeeded", Toast.LENGTH_SHORT).show();
+                finish();
+           // }
 			}
 		
 	
@@ -359,20 +341,19 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 				"Tags cannot be more than 20 characters long :(", Toast.LENGTH_SHORT).show();
 				check = false;
 			}
-			
+
+			// TODO - CHECK TAGS FOR CONSISTANCY
 			// check if an extra comma or invalid characters where inserted
-			for(String cTag : tagList){
+			//for(String cTag : tagList){
 				//if(cTag.contains(DBFunct.INVALID_CHARS)){
-					Toast.makeText(this, 
-					"Tags cannot contain non-alphabetic characters, except a hashtag", Toast.LENGTH_SHORT).show();
-					check = false;
+				//	Toast.makeText(this,
+				//	"Tags cannot contain non-alphabetic characters, except a hashtag", Toast.LENGTH_SHORT).show();
+				//	check = false;
 				//}
-			}
-			
-			if(check)
-				return true;
-			else
-				return false;
+			//}
+
+			return check;
+
 
 		}
 	
@@ -381,41 +362,43 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 	
 		private JSONArray convertTags(){
 			// splits entries into an array based on deliminating commas
-			String[] tagStrings = eTags.getText().toString().split(", ");
+			String[] tagStrings = eTags.getText().toString().split("#");
 			
 			// omits any user inputed hashtags from the database log
-			for(String tag : tagStrings){
-				tag = tag.replaceAll(" ", "");
-				tag = tag.replaceAll("#", "");
+
+            JSONArray tagJSON = new JSONArray();
+			for(int i = 0 ; i < tagStrings.length ; i++){
+				tagStrings[i] = tagStrings[i].toLowerCase().replaceAll(" ","");
+                tagJSON.put(tagStrings[i]);
 			}
-			// creates a JSON array from the String vector as a list 
-			JSONArray tagJSON = new JSONArray(Arrays.asList(tagStrings));
+
 			
+
 			// returns the array for creation
 			return tagJSON;
 		}
-	
+
 	//fix the ping in time
 		private Bub createEventFromData(){
 			Bub newEvent = new Bub();
 			JSONArray JSONTags = convertTags();
 			newEvent.title = event_name.getText().toString();
 			newEvent.location = event_location.getText().toString();
-			
-			
-			
+
+
+
 			newEvent.details = event_details.getText().toString().trim();
 			newEvent.permissions = "public";
-			
+
 			newEvent.start_time = start_time.getText().toString();
 			newEvent.end_time = end_time.getText().toString();
-			
+
 			newEvent.start_date = start_date.getText().toString();
 			newEvent.end_date = end_date.getText().toString();
-			
+
 			newEvent.tags = JSONTags;
 			newEvent.pingIn_time = Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]);
-			
+
 			// Converts and compresses for the server side data storage
 			if(pictureSelected){
 				newEvent.picture_title = newEvent.title + " Picture";

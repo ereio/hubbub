@@ -47,7 +47,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/ic_account_circle_black_24dp"
-        android:id="@+id/circleView"
+        android:id="@+id/picture_circle_friend"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -61,7 +61,7 @@
         android:textColor="#ffffff"
         android:text="User Location"
         android:id="@+id/text_user_location"
-        android:layout_above="@+id/circleView"
-        android:layout_alignLeft="@+id/circleView"
-        android:layout_alignStart="@+id/circleView" />
+        android:layout_above="@+id/picture_circle_friend"
+        android:layout_alignLeft="@+id/picture_circle_friend"
+        android:layout_alignStart="@+id/picture_circle_friend" />
 </RelativeLayout>

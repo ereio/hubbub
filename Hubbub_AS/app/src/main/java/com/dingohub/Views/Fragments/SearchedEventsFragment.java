@@ -7,21 +7,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.dingohub.Model.DataAccess.Hub;
 import com.dingohub.Views.Activities.ViewEventActivity;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.Utilities.EventListAdapter;
 
 public class SearchedEventsFragment extends ListFragment {
+    public static final String TAG_KEY = "TAG_KEY";
 	ArrayList<Bub> search_events;
+    ArrayList<Hub> search_hubs;
 	String tag = null;
 	
-	public SearchedEventsFragment(){}
-	
-	public SearchedEventsFragment(String passedTag) {
-		tag = passedTag;
-	}
+	public SearchedEventsFragment(){
+
+        if(getArguments() != null) {
+            Bundle bundle = getArguments();
+            tag = bundle.getString(TAG_KEY);
+        }
+    }
+
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
@@ -29,8 +36,9 @@ public class SearchedEventsFragment extends ListFragment {
 		
 		// This is a defense against Events will Null tags (ONLY HAPPENS IN DEBUGGING)
 		search_events = tag != null ? HubDatabase.FindEventByTag(tag) : new ArrayList<Bub>();
+        search_hubs = tag != null ? HubDatabase.FindHubsByTag(tag) : new ArrayList<Hub>();
 
-		EventListAdapter adapter = new EventListAdapter(getActivity(), search_events);
+        EventListAdapter adapter = new EventListAdapter(getActivity(), search_events);
 		setListAdapter(adapter);
 		
 	}

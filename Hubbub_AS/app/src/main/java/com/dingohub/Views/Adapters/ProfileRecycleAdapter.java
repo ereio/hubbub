@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.hubbub.R;
 
@@ -14,23 +15,32 @@ import com.dingohub.hubbub.R;
  */
 public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
 
-    private String mNavTitles[];
-    private int mIcons[];
+    String LOCATION = "Default Location";
+
+    // Titles and Icons for Drawer display
+    String mNavTitles[] = {"Today","Bubs","Hubs","Groups","Friends", "Settings"};
+
+    int mIcons[] = {R.drawable.ic_public_black_24dp, R.drawable.ic_event_note_black_24dp,
+            R.drawable.ic_layers_black_24dp, R.drawable.ic_group_work_black_24dp,
+            R.drawable.ic_group_black_24dp, R.drawable.ic_settings_black_24dp};
 
     private String name;
     private byte[] profilePicture;
     private String email;
     private String location;
+
     private Context context;
 
-    public ProfileRecycleAdapter(String Titles[], int Icons[], String Name, String Email, byte[] picture, String location, Context context) {
-        mNavTitles = Titles;
-        mIcons = Icons;
-        name = Name;
-        email = Email;
-        this.location = location;
-        profilePicture = picture;
+    public ProfileRecycleAdapter(HubUser user, Context context) {
+        name = user.firstname + "  " + user.lastname;
+        email = user.email;
+
+        if(user.location == null)
+            this.location = LOCATION;
+
+        profilePicture = user.picture;
         this.context = context;
+
     }
 
     @Override
@@ -52,8 +62,9 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolde
 
             return vhHeader;
 
+        } else {
+            return null;
         }
-        return null;
 
     }
 
@@ -62,15 +73,17 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolde
         if (holder.Holderid == ProfileViewHolder.TYPE_ITEM) {
             holder.menuItem.setText(mNavTitles[position - 1]);
             holder.imageView.setImageResource(mIcons[position - 1]);
-        } else {
+
+        } else if (holder.Holderid == ProfileViewHolder.TYPE_HEADER) {
             // decodes the picture in a separate thread
             if(profilePicture != null){
-                BitmapWorker worker = new BitmapWorker(holder.profile, profilePicture, 250, 250);
+                BitmapWorker worker = new BitmapWorker(holder.navProfile, profilePicture, 250, 250);
                 worker.execute(0);
             }
-            holder.Name.setText(name);
-            holder.email.setText(email);
-            holder.location.setText(location);
+            holder.navName.setText(name);
+            holder.navEmail.setText(email);
+            holder.navLocation.setText(location);
+
         }
     }
 
@@ -81,9 +94,11 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0)
-            return ProfileViewHolder.TYPE_HEADER;
-
-        return ProfileViewHolder.TYPE_ITEM;
+        // If it's not a user view being passed in
+        // create the navigation drawer
+            if (position == 0)
+                return ProfileViewHolder.TYPE_HEADER;
+            else
+                return ProfileViewHolder.TYPE_ITEM;
     }
 }

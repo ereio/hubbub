@@ -1,6 +1,5 @@
 package com.dingohub.Views.Activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,8 +19,8 @@ import android.widget.Toast;
 
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
-import com.dingohub.Views.BaseActivities.BaseGoogleActivity;
-import com.dingohub.Views.DevActivities.MatUserMainDisplay;
+import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
+import com.dingohub.Views.Activities.DevActivities.MatUserMainDisplay;
 import com.dingohub.hubbub.R;
 import com.parse.ParseObject;
 import com.parse.PushService;

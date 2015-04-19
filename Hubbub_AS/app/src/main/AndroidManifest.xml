@@ -62,14 +62,14 @@
         <!-- NON_MATERIAL ACTIVITIES -->
         <activity android:name = "com.dingohub.Views.Activities.CreateUserActivity"></activity>
         <activity android:name = "com.dingohub.Views.Activities.SearchEventsActivity"></activity>
-        <activity android:name = "com.dingohub.Views.Activities.UserMainDisplay"></activity>
+        <activity android:name = "com.dingohub.Views.Deprecated.UserMainDisplay"></activity>
         <activity android:name="com.dingohub.Views.Activities.ViewEventActivity"></activity>
         <activity android:name="com.dingohub.Views.Activities.ShowDialogActivity"
         android:theme="@android:style/Theme.Holo.Dialog"></activity>
 
         <!-- MATERIAL ACTIVITIES -->
-        <activity android:name="com.dingohub.Views.DevActivities.MatUserMainDisplay" />
-        <activity android:name="com.dingohub.Views.DevActivities.MatCreateEventsActivity" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatUserMainDisplay" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity" />
         
         <!-- SERVICES AND RECEIVERS -->
         <service android:name="com.parse.PushService" />

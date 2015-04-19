@@ -136,6 +136,7 @@ public class ViewEventActivity extends Activity{
 				// NEED A REMOVE FOLLOWER BUTTON!
 				ParsePush.subscribeInBackground(event.id);
 				HubDatabase.AddFollower(event.id, HubDatabase.getCurrentUser().id);
+                HubDatabase.AddFollowedBub(event.id, HubDatabase.getCurrentUser().id);
 				v.setVisibility(View.INVISIBLE);
 				bUnfollow.setVisibility(View.VISIBLE);
 			}});
@@ -146,6 +147,7 @@ public class ViewEventActivity extends Activity{
 				ParsePush.unsubscribeInBackground(event.id);
 				deleteFollower();
 				HubDatabase.RemoveFollower(event);
+                HubDatabase.DeleteFollowedBub(event.id, HubDatabase.getCurrentUser().id);
 				v.setVisibility(View.INVISIBLE);
 				bFollow.setVisibility(View.VISIBLE);
 			}});
