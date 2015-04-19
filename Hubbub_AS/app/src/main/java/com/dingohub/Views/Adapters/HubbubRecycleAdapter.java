@@ -71,7 +71,7 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
             return vhFollowedBub;
 
         } else if (viewType == HubbubViewHolder.HUB_ENVIRONMENT) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.material_cardview_followed_bubs, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.material_cardview_hubs, parent, false);
 
             HubbubViewHolder vhHubEnv = new HubbubViewHolder(v, viewType, context);
 
@@ -124,8 +124,10 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
         } else if (holder.Holderid == HubbubViewHolder.EMPTY_HUBS){
             int colorIndex = randomColor.nextInt(6);                             //sets random color index for
                                                                                  //randomized error messages
-            holder.emptyStatement.setText("There doesn't seem to be any hubs here :(");
-            holder.emptyPicture.setImageDrawable(context.getDrawable(R.drawable.intro_events));
+            holder.emptyStatement.setText("You haven't followed any hubs yet! \n" +
+                    "Hubs are how you findm more bubs similar to your" +
+                    "interests. Use the search glass above to find some");
+            holder.emptyPicture.setImageDrawable(context.getResources().getDrawable(R.drawable.intro_events));
             holder.layout.setBackgroundColor(context.getResources().getColor(color_array[colorIndex]));
 
         } else if(holder.Holderid == HubbubViewHolder.EMPTY_BUBS) {
@@ -133,14 +135,14 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
 
             // Sees whether the bubs being passed were of a followed bubs list or normal
             if(adapter_type == FOLLOWED_BUB){
-                holder.emptyStatement.setText("You haven't followed any hubs yet! Look for\n" +
+                holder.emptyStatement.setText("You haven't followed any bubs yet! \n Look for" +
                         "bubs in todays events or search with the search glass above.");
             } else {
-                holder.emptyStatement.setText("There doesn't seem to be any hubs here :(");
+                holder.emptyStatement.setText("There doesn't seem to be any bubs here :(");
             }
 
             holder.layout.setBackgroundColor(context.getResources().getColor(color_array[colorIndex]));
-            holder.emptyPicture.setImageDrawable(context.getDrawable(R.drawable.intro_events));
+            holder.emptyPicture.setImageDrawable(context.getResources().getDrawable(R.drawable.intro_events));
 
 
         }
