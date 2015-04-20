@@ -59,6 +59,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
 
 	public static final String CHANNEL_KEY = "CHANNEL_KEY";
     public static final String HUBS_CHANNELS = "HUBS_CHANNELS";
+    public static final String PUSH_TYPE = "PUSH_TYPE";
     private String UtcTime;
 	private EditText start_time;
 	private EditText end_time;
@@ -90,7 +91,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
 	private PendingIntent alarmIntent;
 	private Button create_button;
     private Toolbar toolbar;
-
+    private String[] tagStrings;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -219,7 +220,6 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
 
 
             String event_id = HubDatabase.CreateBub(createEventFromData());
-            HubDatabase.AddFollower(event_id, HubDatabase.GetCurrentUser().id);
             hubs_to_subscribe = HubDatabase.GetHubsIdFromTags(convertTags());
             HubDatabase.AddFollower(event_id, HubDatabase.GetCurrentUser().id);
             HubDatabase.AddBubToHub(event_id,convertTags());
@@ -238,6 +238,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         params.put("pingIn",UtcTime);
         params.put(CHANNEL_KEY,event_id);
         params.put(HUBS_CHANNELS,hubs_to_subscribe);
+
 
         ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
             @Override
@@ -375,7 +376,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
     private JSONArray convertTags(){
 
         // splits entries into an array based on deliminating commas
-        String[] tagStrings = eTags.getText().toString().split("#");
+        tagStrings = eTags.getText().toString().split("#");
 
         // omits any user inputed hashtags from the database log
 
