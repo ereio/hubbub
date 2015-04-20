@@ -343,6 +343,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
             check = false;
         }
 
+
         // check if an extra comma or invalid characters where inserted
         for(String cTag : tagList){
             //if(cTag.contains(DBFunct.INVALID_CHARS)){

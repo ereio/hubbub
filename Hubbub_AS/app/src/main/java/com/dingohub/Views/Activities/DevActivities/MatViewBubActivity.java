@@ -1,10 +1,14 @@
 package com.dingohub.Views.Activities.DevActivities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,11 +20,14 @@ import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
+import com.dingohub.Model.DataAccess.HubbubReceivers;
+import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Adapters.UserRecycleAdapter;
 import com.dingohub.hubbub.R;
 import com.parse.ParsePush;
+import com.parse.ParseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
