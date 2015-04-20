@@ -44,6 +44,7 @@ import org.json.JSONException;
 import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -57,7 +58,8 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
 	String evalue;
 
 	public static final String CHANNEL_KEY = "CHANNEL_KEY";
-
+    public static final String HUBS_CHANNELS = "HUBS_CHANNELS";
+    public static final String PUSH_TYPE = "PUSH_TYPE";
     private String UtcTime;
 	private EditText start_time;
 	private EditText end_time;
@@ -89,7 +91,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
 	private PendingIntent alarmIntent;
 	private Button create_button;
     private Toolbar toolbar;
-
+    private String[] tagStrings;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -205,6 +207,9 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
     //when the create Event button is clicked
     public void CreateEvent ( View v) throws JSONException {
 
+         //will contain ID of hubs to subscribe to
+        ArrayList<String> hubs_to_subscribe = new ArrayList<String>();
+
         Date d = new Date(pingInActualTime());
         String format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
         SimpleDateFormat dateForm = new SimpleDateFormat (format);
@@ -212,31 +217,29 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         dateForm.setTimeZone(TimeZone.getTimeZone("UTC"));
         UtcTime = dateForm.format(d) ;
 
-        // Runs tags check
-        //if(checkTags()){
+
 
             String event_id = HubDatabase.CreateBub(createEventFromData());
+            hubs_to_subscribe = HubDatabase.GetHubsIdFromTags(convertTags());
             HubDatabase.AddFollower(event_id, HubDatabase.GetCurrentUser().id);
-            //Toast.makeText(this, "Event Created Successfully"+event_id, Toast.LENGTH_SHORT).show();
+            HubDatabase.AddBubToHub(event_id,convertTags());
+            //function giving null pointer exception
+           // HubDatabase.AddFollowedBub(event_id, HubDatabase.GetCurrentUser().id);
 
-        //	alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
-            //Intent intent = new Intent(this, AlarmReceiver.class);
-        //	intent.putExtra(CHANNEL_KEY,event_id);
+        //subscribes to every hub returned from tags
+        for (int i = 0 ; i < hubs_to_subscribe.size(); ++i)
+            ParsePush.subscribeInBackground(hubs_to_subscribe.get(i));
 
-            //Random rand = new Random();
-        //	int randNum = rand.nextInt((20000000 - 0) + 1 + 0);
-
-        //alarmIntent = PendingIntent.getBroadcast(this, randNum, intent, PendingIntent.FLAG_ONE_SHOT);
-
-
-
-            //alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            //	       sysTimeToTSB(pingInTimeInMillis()), alarmIntent);
+            //subscribes user to the bub created
+            ParsePush.subscribeInBackground(event_id);
 
         HashMap<String, Object> params = new HashMap<String, Object>();
 
         params.put("pingIn",UtcTime);
         params.put(CHANNEL_KEY,event_id);
+        params.put(HUBS_CHANNELS,hubs_to_subscribe);
+
+
         ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
             @Override
             public void done(String object, ParseException e) {
@@ -247,8 +250,18 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
             }
         });
 
-            ParsePush.subscribeInBackground(event_id);
-            Toast.makeText(this,
+            //sends notification to everyone following the hub
+        ParseCloud.callFunctionInBackground("NewBubPush", params, new FunctionCallback<String>() {
+            @Override
+            public void done(String object, ParseException e) {
+                // TODO Auto-generated method stub
+                if (e == null)
+                    Toast.makeText(getApplicationContext(), "new push worked", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        Toast.makeText(this,
                     "Event Creation Succeeded", Toast.LENGTH_SHORT).show();
             finish();
     }
@@ -360,16 +373,19 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
     }
 
     private JSONArray convertTags(){
+
         // splits entries into an array based on deliminating commas
-        String[] tagStrings = eTags.getText().toString().split(", ");
+        tagStrings = eTags.getText().toString().split("#");
 
         // omits any user inputed hashtags from the database log
-        for(String tag : tagStrings){
-            tag = tag.replaceAll(" ", "");
-            tag = tag.replaceAll("#", "");
+
+        JSONArray tagJSON = new JSONArray();
+        for(int i = 0 ; i < tagStrings.length ; i++){
+            tagStrings[i] = tagStrings[i].toLowerCase().replaceAll(" ","");
+            tagJSON.put(tagStrings[i]);
         }
-        // creates a JSON array from the String vector as a list
-        JSONArray tagJSON = new JSONArray(Arrays.asList(tagStrings));
+
+
 
         // returns the array for creation
         return tagJSON;
