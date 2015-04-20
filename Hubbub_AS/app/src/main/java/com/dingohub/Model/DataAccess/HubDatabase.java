@@ -288,6 +288,12 @@ public class HubDatabase {
 		return events;
 	}
 
+
+    /**
+     * Gets the Hub from a specific tag
+     * @param tag the tag used to get  the hub
+     * @return list of hubs
+     */
     public static  ArrayList<Hub> GetHubsByTag(String tag)
     {
         ArrayList<Hub> hubs = new ArrayList<Hub>();
@@ -573,7 +579,11 @@ public class HubDatabase {
 		
 		return status;
 	}
-
+    /**
+     * Adds a bub to the Hub using the tag
+     * @param event_id to store the bub
+     * @param tags to get the hubs
+     */
     public static void AddBubToHub(String event_id, JSONArray tags) throws JSONException {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
 
@@ -600,6 +610,42 @@ public class HubDatabase {
         }
     }
 
+
+
+
+    public static ArrayList<String> GetHubsIdFromTags( JSONArray tags) throws JSONException {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+
+        ArrayList<String> tag_list = new ArrayList<String>();
+        ArrayList<String> hub_ids = new ArrayList<String>();
+
+        for (int i = 1; i < tags.length(); ++i)
+            tag_list.add(tags.get(i).toString());
+
+        query.whereContainedIn(TAGS, tag_list);
+
+        try {
+            List<ParseObject> obj_list = query.find();
+
+            for (ParseObject obj : obj_list) {
+                String  id = obj.getObjectId();
+                hub_ids.add(id);
+
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return hub_ids;
+    }
+
+
+    /**
+     * Gets list of bubs in a hub
+     * @param hubid the ID of the Hub to add the follower to
+     * @return list of bubs in the hub
+     */
     public static ArrayList<Bub> GetBubsFromHub(String hubid) {
         ArrayList<Bub> bubs = new ArrayList<Bub>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
