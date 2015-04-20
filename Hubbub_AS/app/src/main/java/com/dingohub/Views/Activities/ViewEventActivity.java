@@ -54,8 +54,10 @@ public class ViewEventActivity extends Activity{
 	
 	Button bFollow;
 	Button bUnfollow;
+
 	Button bEdit;
-	Bub event;
+
+    Bub event;
 	HubUser curUser;
 	ArrayList<String> tagList;
 	ScheduledExecutorService ses;
@@ -189,29 +191,29 @@ public class ViewEventActivity extends Activity{
 	}
 	
 	public void init_ui(){
-		event_name = (TextView) findViewById(R.id.eventview_name);
-		event_location = (TextView) findViewById(R.id.eventlist_location);
-		event_start_time = (TextView) findViewById(R.id.eventlist_start_time);
-		event_end_time = (TextView) findViewById(R.id.eventlist_end_time);
-		event_start_date = (TextView) findViewById(R.id.eventlist_start_date);
-		event_end_date = (TextView) findViewById(R.id.eventlist_end_date);
-		event_tappin = (TextView) findViewById(R.id.eventview_tappin_time);
-		event_tags = (TextView) findViewById(R.id.eventview_tags);
-		event_following = (TextView) findViewById(R.id.eventview_following_list);
-		event_details = (TextView) findViewById(R.id.cardview_text_about);
-		event_numfollowers = (TextView) findViewById(R.id.eventlist_numfollowers);
-		
-		event_num_yes = (TextView) findViewById(R.id.eventview_num_yes);
-		event_num_maybe = (TextView) findViewById(R.id.eventview_num_maybe);
-		event_num_no = (TextView) findViewById(R.id.eventview_num_no); 
-		event_yes = (TextView) findViewById(R.id.eventview_yes); 
-		event_no = (TextView) findViewById(R.id.eventview_no); 
-		event_maybe = (TextView) findViewById(R.id.eventview_maybe); 
-		
-		bFollow = (Button) findViewById(R.id.eventview_button_follow);
-		bUnfollow = (Button) findViewById(R.id.eventview_button_unfollow);
-		
-		event_picture = (ImageView) findViewById(R.id.event_image);
+        event_name = (TextView) findViewById(R.id.eventview_name);
+        event_location = (TextView) findViewById(R.id.eventlist_location);
+        event_start_time = (TextView) findViewById(R.id.eventlist_start_time);
+        event_end_time = (TextView) findViewById(R.id.eventlist_end_time);
+        event_start_date = (TextView) findViewById(R.id.eventlist_start_date);
+        event_end_date = (TextView) findViewById(R.id.eventlist_end_date);
+        event_tappin = (TextView) findViewById(R.id.eventview_tappin_time);
+        event_tags = (TextView) findViewById(R.id.eventview_tags);
+        event_following = (TextView) findViewById(R.id.eventview_following_list);
+        event_details = (TextView) findViewById(R.id.cardview_text_about);
+        event_numfollowers = (TextView) findViewById(R.id.eventlist_numfollowers);
+
+        event_num_yes = (TextView) findViewById(R.id.eventview_num_yes);
+        event_num_maybe = (TextView) findViewById(R.id.eventview_num_maybe);
+        event_num_no = (TextView) findViewById(R.id.eventview_num_no);
+        event_yes = (TextView) findViewById(R.id.eventview_yes);
+        event_no = (TextView) findViewById(R.id.eventview_no);
+        event_maybe = (TextView) findViewById(R.id.eventview_maybe);
+
+        bFollow = (Button) findViewById(R.id.eventview_button_follow);
+        bUnfollow = (Button) findViewById(R.id.eventview_button_unfollow);
+
+        event_picture = (ImageView) findViewById(R.id.bubview_image);
 	}
 	
 	public void set_ui(){

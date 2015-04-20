@@ -24,7 +24,7 @@ import com.dingohub.Model.DataAccess.HubbubReceivers;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Views.Adapters.ProfileRecycleAdapter;
 import com.dingohub.Views.Adapters.UserPanePagerAdapter;
-import com.dingohub.Views.Activities.LoginActivity;
+import com.dingohub.Views.Deprecated.LoginActivity;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.hubbub.R;
 import com.parse.ParseUser;

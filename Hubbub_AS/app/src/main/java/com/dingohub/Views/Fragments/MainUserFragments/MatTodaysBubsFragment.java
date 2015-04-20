@@ -6,6 +6,7 @@ import java.util.Calendar;
 import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Views.Activities.DevActivities.MatViewBubActivity;
 import com.dingohub.Views.Activities.ViewEventActivity;
 import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
 import com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity;
@@ -129,7 +130,7 @@ public class MatTodaysBubsFragment extends Fragment{
                             rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
 
                 String eventId = todays_events.get(rv.getChildPosition(child)).id;
-                Intent intent = new Intent(getActivity(), ViewEventActivity.class);
+                Intent intent = new Intent(getActivity(), MatViewBubActivity.class);
                 intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);					// MAKE Bub parcelable
                 startActivity(intent);
             }

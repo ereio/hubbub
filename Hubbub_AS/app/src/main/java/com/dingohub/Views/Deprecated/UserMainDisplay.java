@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
-import com.dingohub.Views.Activities.LoginActivity;
 import com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Fragments.MainUserFragments.MatUserGroupsFragment;

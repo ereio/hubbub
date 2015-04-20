@@ -148,7 +148,6 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:src="@drawable/create_bub"
-                android:layout_below="@+id/material_toolbar"
                 android:layout_toLeftOf="@+id/bub_end_time"
                 android:layout_toStartOf="@+id/bub_end_time" />
 
@@ -164,7 +163,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:ems="10"
-                android:hint="@+string/bub_location"
+                android:hint="@string/bub_location"
                 android:inputType="textPostalAddress" />
 
             <EditText
