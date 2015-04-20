@@ -6,7 +6,6 @@ import com.dingohub.Model.DataAccess.Hub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Views.Activities.DevActivities.MatViewBubActivity;
 import com.dingohub.Views.Activities.ShowDialogActivity;
-import com.dingohub.Views.Activities.ViewEventActivity;
 import com.dingohub.hubbub.R;
 import com.parse.ParsePushBroadcastReceiver;
 

@@ -99,10 +99,8 @@ public class MatViewHubActivity extends BaseGoogleActivity{
         // Get Event to View from event id passed
         if(bundle != null){
             String hubID = bundle.getString(HUB_KEY);
-            // TODO - create a get hub by id function
-            //currentHub = HubDatabase.GetHubById(hubID);
-        }
-        else{
+            currentHub = HubDatabase.GetHubFromId(hubID);
+        } else {
             currentHub = new Hub();
             Log.e(Hubbub.TAG, "Hub Not found in database upon viewing call");
         }

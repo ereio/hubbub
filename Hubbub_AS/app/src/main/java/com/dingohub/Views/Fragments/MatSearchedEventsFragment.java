@@ -117,14 +117,14 @@ public class MatSearchedEventsFragment extends Fragment {
                         return false;
                     String hubId = search_hubs.get(rv.getChildPosition(child)).id;
                     Intent intent = new Intent(getActivity(), MatViewHubActivity.class);
-                    intent.putExtra(ViewEventActivity.EVENT_KEY, hubId);
+                    intent.putExtra(MatViewHubActivity.HUB_KEY, hubId);
                     startActivity(intent);
                 } else {
                     if(search_events.size() == 0)
                         return false;
                     String eventId = search_events.get(rv.getChildPosition(child)).id;
                     Intent intent = new Intent(getActivity(), MatViewBubActivity.class);
-                    intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);
+                    intent.putExtra(MatViewBubActivity.EVENT_KEY, eventId);
                     startActivity(intent);
                 }
             }
