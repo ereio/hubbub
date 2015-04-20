@@ -20,11 +20,11 @@ import android.widget.Toast;
 import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
+import com.dingohub.Model.DataAccess.HubbubReceivers;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Views.Adapters.ProfileRecycleAdapter;
 import com.dingohub.Views.Adapters.UserPanePagerAdapter;
 import com.dingohub.Views.Activities.LoginActivity;
-import com.dingohub.Views.Activities.SearchEventsActivity;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.hubbub.R;
 import com.parse.ParseUser;
@@ -257,19 +257,27 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
                 //startActivity(intent);
                 //return true;
             } else if (id == R.id.search_bub) {
-                Intent i = new Intent(this,SearchEventsActivity.class);
+                Intent i = new Intent(this,MatSearchEventsActivity.class);
                 startActivity(i);
                 return true;
+
             } else if(id == R.id.logout){
                 ParseUser.logOut();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+
+                // TODO - create a broadcast receiver to shutdown every hub activity
+                Intent intent = new Intent(getApplicationContext(), MatLoginActivity.class);
                 SharedPreferences settings = getSharedPreferences(SharedPrefKeys.LOGIN_SETTINGS, 0);
                 SharedPreferences.Editor editSettings = settings.edit();
                 editSettings.putBoolean(SharedPrefKeys.AUTO_LOG, false);
                 editSettings.putString(SharedPrefKeys.USER_KEY, null);
                 editSettings.putString(SharedPrefKeys.PASS_KEY, null);
                 editSettings.apply();
-                intent.putExtra(LoginActivity.LOGOUT_DEFAULT, true);
+
+                // Creates an intent to shut down all other activities
+                Intent broadcastIntent = new Intent();
+                broadcastIntent.setAction(HubbubReceivers.ACTION_LOGOUT);
+                sendBroadcast(broadcastIntent);
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 return true;

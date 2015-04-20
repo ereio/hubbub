@@ -23,7 +23,6 @@ public class UserPanePagerAdapter extends FragmentPagerAdapter {
     public final static String VIEW_HUBS = "Hubs";
     public final static String VIEW_BUBS = "Bubs";
     public final static String VIEW_GROUPS = "Groups";
-    public final static String VIEW_SETTINGS = "Settings";
     public final static String VIEW_UNKNOWN_PAGE = "Default Page Title";
     public static String VIEW_PROFILE = "Default Profile";
 
@@ -57,7 +56,7 @@ public class UserPanePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 6;
+        return 5;
     }
 
     // Implemented to modulate pages separate from current Tab implementation

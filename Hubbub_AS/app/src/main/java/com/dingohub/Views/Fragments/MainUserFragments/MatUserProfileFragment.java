@@ -26,7 +26,7 @@ import com.dingohub.hubbub.R;
 import java.util.ArrayList;
 
 public class MatUserProfileFragment extends Fragment{
-    public static int FRIENDS_SHOWN = 20;
+    public static int FRIENDS_SHOWN = 5;
 
     HubUser user;
     ArrayList<HubUser> friends = new ArrayList<>();
@@ -110,7 +110,7 @@ public class MatUserProfileFragment extends Fragment{
 
         // Setting the recycle view for the friends grid view
         friendRecycleView = (RecyclerView) rootView.findViewById(R.id.grid_recycle_view);
-        friendRecycleView.setHasFixedSize(true);
+        friendRecycleView.setHasFixedSize(false);
         friendRecycleView.setItemAnimator(new DefaultItemAnimator());
         friendRecycleView.setLayoutManager(new GridLayoutManager(getActivity(), FRIENDS_SHOWN));
         friendRecycleView.addOnItemTouchListener(new UserRecyclerViewListener());

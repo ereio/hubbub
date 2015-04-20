@@ -119,7 +119,7 @@ public class HubDatabase {
 			status = FLAG_QUERY_SUCCESSFUL;
 			
 			if(newUser.picture != null){
-				ParseFile picture = new ParseFile(newUser.username + " Profile Picture", newUser.picture);
+				ParseFile picture = new ParseFile(newUser.id + "_profile_picture", newUser.picture);
 				user.put(PROFILE_PIC, picture);
 				user.saveInBackground();
 			}
