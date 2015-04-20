@@ -620,7 +620,7 @@ public class HubDatabase {
 
         ArrayList<String> tag_list = new ArrayList<String>();
 
-        for (int i = 1; i < tags.length(); ++i)
+        for (int i = 0; i < tags.length(); ++i)
             tag_list.add(tags.get(i).toString());
 
         query.whereContainedIn(TAGS, tag_list);

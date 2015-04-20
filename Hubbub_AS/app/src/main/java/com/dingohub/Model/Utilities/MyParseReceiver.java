@@ -86,7 +86,7 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
                 Random rand = new Random();
 
 
-                int randomNum = rand.nextInt((20 - 5) + 1) + 5;
+                int randomNum = rand.nextInt((50 - 5) + 1) + 5;
 
                 notificationmanager.notify(randomNum, notificationbuilder.build());
 
