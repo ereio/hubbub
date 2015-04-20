@@ -6,7 +6,10 @@ import java.util.Locale;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,6 +23,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.HubbubReceivers;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -51,9 +55,22 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
     protected GoogleApiClient googleApiClient;
     protected GestureDetector mGestureDetector;
 
+    protected BroadcastReceiver logoutBroadcast;
     @Override
     protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(HubbubReceivers.ACTION_LOGOUT);
+        logoutBroadcast = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("onReceive","Logout in progress");
+                finish();
+            }
+        };
+
+        registerReceiver(logoutBroadcast, intentFilter);
 
         mGestureDetector = new GestureDetector(this,new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -108,6 +125,12 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 		}
 		
 	}
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        unregisterReceiver(logoutBroadcast);
+    }
 
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {

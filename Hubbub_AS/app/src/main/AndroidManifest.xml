@@ -45,7 +45,7 @@
          
         <!-- ACTIVITES -->
         <activity
-            android:name="com.dingohub.Views.Activities.LoginActivity"
+            android:name="com.dingohub.Views.Activities.DevActivities.MatLoginActivity"
             android:windowSoftInputMode="adjustPan"
             android:label="@string/app_name" >
             <intent-filter>
@@ -55,21 +55,24 @@
         </activity>
         
          <activity 
-            android:windowSoftInputMode="adjustPan"
+
             android:name = "com.dingohub.Views.Activities.CreateEventsActivity">
         </activity>
 
         <!-- NON_MATERIAL ACTIVITIES -->
         <activity android:name = "com.dingohub.Views.Activities.CreateUserActivity"></activity>
-        <activity android:name = "com.dingohub.Views.Activities.SearchEventsActivity"></activity>
+        <activity android:name = "com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity"></activity>
         <activity android:name = "com.dingohub.Views.Deprecated.UserMainDisplay"></activity>
         <activity android:name="com.dingohub.Views.Activities.ViewEventActivity"></activity>
         <activity android:name="com.dingohub.Views.Activities.ShowDialogActivity"
-        android:theme="@android:style/Theme.Holo.Dialog"></activity>
+        android:theme="@android:style/Theme.Holo.Light.Dialog"/>
 
         <!-- MATERIAL ACTIVITIES -->
         <activity android:name="com.dingohub.Views.Activities.DevActivities.MatUserMainDisplay" />
-        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity" />
+        <activity android:windowSoftInputMode="adjustPan"
+            android:name="com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity"/>
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatViewHubActivity"/>
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatUserProfileActivity"/>
         
         <!-- SERVICES AND RECEIVERS -->
         <service android:name="com.parse.PushService" />

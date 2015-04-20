@@ -1,9 +1,11 @@
-package com.dingohub.Views.Activities;
+package com.dingohub.Views.Activities.DevActivities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,19 +21,19 @@ import android.widget.Toast;
 
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
+import com.dingohub.Model.Utilities.SlideshowAnimator;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
-import com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity;
-import com.dingohub.Views.Activities.DevActivities.MatUserMainDisplay;
+import com.dingohub.Views.Activities.CreateUserActivity;
 import com.dingohub.hubbub.R;
-import com.parse.ParseObject;
 import com.parse.PushService;
 
-public class LoginActivity extends BaseGoogleActivity {
+import java.util.Timer;
+import java.util.TimerTask;
 
-	// bundle attribute
-	public final static String LOGOUT_DEFAULT = "LogoutDefault";
+public class MatLoginActivity extends BaseGoogleActivity {
 
-	ImageView AppLogo;
+
+	TextView appLogo;
 	Button SignUp;
 	Button Login;
 	EditText username;
@@ -40,26 +42,31 @@ public class LoginActivity extends BaseGoogleActivity {
 	SharedPreferences settings;
 	String savedUsername;
 	String savedPassword;
-	
+
+    final int delay = 2000;
+    final long period = 2000;
+    final Timer timer = new Timer();
+    final Handler mHandler = new Handler();
 	
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.material_activity_login);
 		
-		PushService.setDefaultPushCallback(this,LoginActivity.class);
+		PushService.setDefaultPushCallback(this, MatLoginActivity.class);
+
 		// Initializes all static UI elements
 		init_ui();
-
-        // initalizes background footage for login page
-        init_bg_video();
 
 		// Initializes all button interactions and event handlers
 		init_buttons();
 		
 		// Checks if past user has set AutoLogin
 		auto_login_check();
+
+        // initalizes background footage for login page
+        init_bg_video();
 		
 		// Init key enter checks
 		key_check();
@@ -92,16 +99,26 @@ public class LoginActivity extends BaseGoogleActivity {
 	}
 
     private void init_bg_video(){
-
+        final Runnable slideShowRunnable = new SlideshowAnimator(getApplicationContext(), this);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                slideShowRunnable.run();
+            }
+        }, delay, period);
     }
 
 
 	private void init_ui(){
-		AppLogo = (ImageView) findViewById(R.id.image_hubbub_logo);
+		appLogo = (TextView) findViewById(R.id.textview_app_name);
 		SignUp = (Button) findViewById(R.id.button_sign_up);
 		Login = (Button) findViewById(R.id.button_login);
 		username = (EditText) findViewById(R.id.edittext_username);
 		password = (EditText) findViewById(R.id.edittext_password);
+
+        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/Bowhouse-Regular.otf");
+
+        if(type != null)
+            appLogo.setTypeface(type);
 	}
 	
 	private void init_buttons(){
@@ -195,4 +212,10 @@ public class LoginActivity extends BaseGoogleActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        timer.cancel();
+    }
 }

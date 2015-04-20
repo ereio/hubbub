@@ -17,4 +17,7 @@ public class SharedPrefKeys {
 
     // shared preferences key for user settings
     public static final String USER_SETTINGS = "UserSettings";
+
+        // Create a shared pref for showing real name
+    public static final String SETTING_SHOW_NAME = "SettingShowName";
 }
