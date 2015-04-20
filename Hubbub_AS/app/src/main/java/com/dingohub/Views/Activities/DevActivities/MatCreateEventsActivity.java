@@ -382,6 +382,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         newEvent.title = event_name.getText().toString();
         newEvent.location = event_location.getText().toString();
 
+        newEvent.geolocation = HubDatabase.GetCurrentUser().location;
 
         newEvent.details = event_details.getText().toString().trim();
         newEvent.permissions = "public";

@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Hub;
+import com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity;
+import com.dingohub.Views.Activities.DevActivities.MatViewBubActivity;
+import com.dingohub.Views.Activities.DevActivities.MatViewHubActivity;
 import com.dingohub.Views.Deprecated.ViewEventActivity;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
@@ -24,7 +27,6 @@ import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
 import com.dingohub.hubbub.R;
 
 public class MatSearchedEventsFragment extends Fragment {
-    public static final String TAG_KEY = "TAG_KEY";
     ArrayList<Bub> search_events;
     ArrayList<Hub> search_hubs;
     String tag = null;
@@ -33,20 +35,28 @@ public class MatSearchedEventsFragment extends Fragment {
     RecyclerView bubRecycleView;
     protected GestureDetector mGestureDetector;
 
-    public MatSearchedEventsFragment() {
-        if (getArguments() != null) {
-            Bundle bundle = getArguments();
-            tag = bundle.getString(TAG_KEY);
+    public MatSearchedEventsFragment() { }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+
+        if (bundle != null) {
+            tag = bundle.getString(MatSearchEventsActivity.TAG_KEY);
         }
+
+        // This is a defense against Events will Null tags (ONLY HAPPENS IN DEBUGGING)
+        search_events = tag != null ? HubDatabase.GetBubsByTag(tag) : new ArrayList<Bub>();
+        search_hubs = tag != null ? HubDatabase.GetHubsByTag(tag) : new ArrayList<Hub>();
+
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // This is a defense against Events will Null tags (ONLY HAPPENS IN DEBUGGING)
-        search_events = tag != null ? HubDatabase.GetBubsByTag(tag) : new ArrayList<Bub>();
-        search_hubs = tag != null ? HubDatabase.GetHubsByTag(tag) : new ArrayList<Hub>();
+
 
         mGestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -75,6 +85,7 @@ public class MatSearchedEventsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.material_fragment_todays_bubs, container,
                 false);
+
         bubRecycleView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         bubRecycleView.setHasFixedSize(true);
         bubRecycleView.setItemAnimator(new DefaultItemAnimator());
@@ -99,15 +110,20 @@ public class MatSearchedEventsFragment extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), "The Item Clicked is: " +
                             rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
 
+                // meant to catch the empty hub notice
+
                 if (rv.getChildPosition(child) == 0) {
+                    if(search_hubs.size() == 0)
+                        return false;
                     String hubId = search_hubs.get(rv.getChildPosition(child)).id;
-                    Intent intent = new Intent(getActivity(), ViewEventActivity.class);
+                    Intent intent = new Intent(getActivity(), MatViewHubActivity.class);
                     intent.putExtra(ViewEventActivity.EVENT_KEY, hubId);
                     startActivity(intent);
-
                 } else {
+                    if(search_events.size() == 0)
+                        return false;
                     String eventId = search_events.get(rv.getChildPosition(child)).id;
-                    Intent intent = new Intent(getActivity(), ViewEventActivity.class);
+                    Intent intent = new Intent(getActivity(), MatViewBubActivity.class);
                     intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);
                     startActivity(intent);
                 }
