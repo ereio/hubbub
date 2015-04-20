@@ -116,15 +116,13 @@ public class MatViewBubActivity extends BaseGoogleActivity{
 
         if(pingInTimeInMillis() < sysBootTime){
             event_tappin.setText("Ping-In Happening Now");
-
+            ses = Executors.newSingleThreadScheduledExecutor();
             event_yes.setVisibility(View.VISIBLE);
             event_no.setVisibility(View.VISIBLE);
             event_maybe.setVisibility(View.VISIBLE);
-            check_pingin(event.id);
+            PingInUpdater(event.id);
         }
         else{
-            ses = Executors.newSingleThreadScheduledExecutor();
-
             event_yes.setVisibility(View.INVISIBLE);
             event_no.setVisibility(View.INVISIBLE);
             event_maybe.setVisibility(View.INVISIBLE);
@@ -164,7 +162,7 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         bFollow.setText("Follow Hub");
     }
 
-	public void check_pingin(String id){
+	public void PingInUpdater(String id){
 		final String EID = id;
 		ses = Executors.newSingleThreadScheduledExecutor();
 		
