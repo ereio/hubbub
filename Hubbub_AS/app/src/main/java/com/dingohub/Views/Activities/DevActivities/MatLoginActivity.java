@@ -59,14 +59,14 @@ public class MatLoginActivity extends BaseGoogleActivity {
 		// Initializes all static UI elements
 		init_ui();
 
-        // initalizes background footage for login page
-        init_bg_video();
-
 		// Initializes all button interactions and event handlers
 		init_buttons();
 		
 		// Checks if past user has set AutoLogin
 		auto_login_check();
+
+        // initalizes background footage for login page
+        init_bg_video();
 		
 		// Init key enter checks
 		key_check();
@@ -215,6 +215,7 @@ public class MatLoginActivity extends BaseGoogleActivity {
 
     @Override
     public void onDestroy(){
+        super.onDestroy();
         timer.cancel();
     }
 }

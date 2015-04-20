@@ -88,7 +88,8 @@ public class SlideshowAnimator implements Runnable {
             @Override
             public void run() {
                 TextView appName = (TextView) activity.findViewById(R.id.textview_app_name);
-                appName.setTextColor(currentColor);
+                appName.setTextColor(context.getResources().getColor(currentColor));
+
             }
         });
 
@@ -111,6 +112,7 @@ public class SlideshowAnimator implements Runnable {
     private void background_animation(){
         cropHeight = 0;
         cropWidth = 0;
+
 
         imageIndex %= IMAGES.length;
         backgroundBitmap = BitmapFactory.decodeResource(context.getResources(),
@@ -140,9 +142,6 @@ public class SlideshowAnimator implements Runnable {
                 //backgroundImage.startAnimation(animationSet);
             }
         });
-
-
-
     }
 
     private void find_crop_dimentions(){
@@ -159,6 +158,5 @@ public class SlideshowAnimator implements Runnable {
         fadeInAnimation.setStartOffset(0);
         fadeOutAnimation.setDuration(2000);
         fadeOutAnimation.setStartOffset(2000 + 1000);   // offset is meant to continue to display
-
     }
 }
