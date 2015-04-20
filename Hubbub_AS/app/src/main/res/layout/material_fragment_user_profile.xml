@@ -8,12 +8,15 @@
         <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:elevation="10dp">
 
             <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="312dp"
+            android:layout_height="372dp"
             android:background="@color/AntiqueWhite" >
+
                 <ImageView
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
@@ -21,6 +24,7 @@
                     android:background="@drawable/polygon_background6"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"
+                    android:elevation="10dp"
                     android:layout_above="@+id/text_fullname" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -29,8 +33,7 @@
                     android:src="@drawable/ic_account_circle_black_24dp"
                     android:id="@+id/image_profile_picture"
                     android:layout_centerVertical="true"
-                    android:layout_alignRight="@+id/text_static_following"
-                    android:layout_alignEnd="@+id/text_static_following" />
+                    android:elevation="13dp" />
 
                 <TextView
                     android:id="@+id/text_fullname"
@@ -46,43 +49,39 @@
                     android:id="@+id/text_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="@string/username"
+                    android:elevation="15dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_above="@+id/text_fullname"
-                    android:layout_toRightOf="@+id/text_static_following"
-                    android:layout_toEndOf="@+id/text_static_following" />
+                    android:layout_alignBottom="@+id/image_profile_background_picture"
+                    android:layout_toRightOf="@+id/image_profile_picture"
+                    android:layout_toEndOf="@+id/image_profile_picture" />
 
                 <TextView
                     android:id="@+id/cardview_text_about"
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"
-                    android:background="@drawable/edittext_closedblue"
                     android:text="@string/event_details_default"
+                    android:elevation="10dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:layout_above="@+id/text_static_following"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:layout_below="@+id/text_fullname"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
+                    android:layout_marginTop="30dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
-
-                <TextView
-                    android:id="@+id/text_static_following"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/title_user_friends"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
 
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/grid_recycle_view"
+                android:paddingTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:cacheColorHint="@android:color/transparent"
-                android:scrollbars="vertical"/>
+                android:background="@color/AntiqueWhite"
+                android:fadingEdge="horizontal"
+                android:scrollbars="horizontal" />
     </LinearLayout>
 </ScrollView>

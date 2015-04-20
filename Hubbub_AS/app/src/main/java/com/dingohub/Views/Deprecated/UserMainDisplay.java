@@ -15,9 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
-import com.dingohub.Views.Activities.CreateEventsActivity;
 import com.dingohub.Views.Activities.LoginActivity;
-import com.dingohub.Views.Activities.SearchEventsActivity;
+import com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Fragments.MainUserFragments.MatUserGroupsFragment;
 import com.dingohub.Views.Fragments.MainUserFragments.MatTodaysBubsFragment;
@@ -118,7 +117,7 @@ public class UserMainDisplay extends BaseGoogleActivity {
 			//startActivity(intent);
 			//return true;
 		} else if (id == R.id.search_bub) {
-            Intent i = new Intent(this, SearchEventsActivity.class);
+            Intent i = new Intent(this, MatSearchEventsActivity.class);
             startActivity(i);
             return true;
         } else if(id == R.id.logout){

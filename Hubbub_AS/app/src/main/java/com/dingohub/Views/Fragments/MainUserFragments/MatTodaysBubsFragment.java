@@ -39,6 +39,9 @@ public class MatTodaysBubsFragment extends Fragment{
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
 		super.onActivityCreated(savedInstanceState);
+
+        // TODO - change to get a hold on the activity created version of this
+        // should be in the base google activity
         mGestureDetector = new GestureDetector(getActivity() ,new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDown(MotionEvent e) {

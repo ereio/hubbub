@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
+import com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity;
 import com.dingohub.Views.Activities.DevActivities.MatUserMainDisplay;
 import com.dingohub.hubbub.R;
 import com.parse.ParseObject;
@@ -50,7 +51,10 @@ public class LoginActivity extends BaseGoogleActivity {
 		PushService.setDefaultPushCallback(this,LoginActivity.class);
 		// Initializes all static UI elements
 		init_ui();
-		
+
+        // initalizes background footage for login page
+        init_bg_video();
+
 		// Initializes all button interactions and event handlers
 		init_buttons();
 		
@@ -86,6 +90,11 @@ public class LoginActivity extends BaseGoogleActivity {
 			}});
 		
 	}
+
+    private void init_bg_video(){
+
+    }
+
 
 	private void init_ui(){
 		AppLogo = (ImageView) findViewById(R.id.image_hubbub_logo);
@@ -156,7 +165,7 @@ public class LoginActivity extends BaseGoogleActivity {
 			password.setText(savedPassword, TextView.BufferType.EDITABLE);
 			
 			if(autoLogin){
-					authenticate_login(savedUsername, savedPassword);
+				authenticate_login(savedUsername, savedPassword);
 			}			
 		}
 	}
@@ -185,22 +194,5 @@ public class LoginActivity extends BaseGoogleActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	
-	// DEBUG ACTIVITES
-	@SuppressWarnings("unused")
-	private void DEBUG_ToEventSearch(){
-		Intent intent = new Intent(getApplicationContext(),SearchEventsActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		startActivity(intent);
-	}
-	
-	// DEBUG PARSE
-	@SuppressWarnings("unused")
-	private void DEBUG_PARSE(){
-		ParseObject testObject = new ParseObject("TestObject");
-		testObject.put("foo", "bar");
-		testObject.saveInBackground();
 	}
 }
