@@ -17,7 +17,7 @@ import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Views.Activities.DevActivities.MatViewBubActivity;
-import com.dingohub.Views.Activities.ViewEventActivity;
+import com.dingohub.Views.Deprecated.ViewEventActivity;
 import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
 import com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity;
 import com.dingohub.hubbub.R;

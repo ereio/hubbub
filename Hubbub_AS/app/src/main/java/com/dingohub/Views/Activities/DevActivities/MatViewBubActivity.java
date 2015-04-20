@@ -279,6 +279,7 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         HubDatabase.RemoveFollower(event);
         HubDatabase.RemoveFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
         bFollow.setText("Unfollow Hub");
+        bFollow.setBackgroundColor(getResources().getColor(R.color.ColorPrimary));
         followingStatus = false;
     }
 
@@ -289,6 +290,7 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         HubDatabase.AddFollower(event.id, HubDatabase.GetCurrentUser().id);
         HubDatabase.AddFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
         bFollow.setText("Follow Hub");
+        bFollow.setBackgroundColor(getResources().getColor(R.color.ColorPrimaryDark));
         followingStatus = true;
     }
 
