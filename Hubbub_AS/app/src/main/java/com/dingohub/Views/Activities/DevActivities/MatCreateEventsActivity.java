@@ -381,8 +381,13 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
 
         JSONArray tagJSON = new JSONArray();
         for(int i = 0 ; i < tagStrings.length ; i++){
-            tagStrings[i] = tagStrings[i].toLowerCase().replaceAll(" ","");
-            tagJSON.put(tagStrings[i]);
+            if(!tagStrings[i].equals(" ") &&
+                    !tagStrings[i].toLowerCase().replaceAll(" ", "").equals(" ")
+                    && !tagStrings[i].equals(""))
+            {
+                tagStrings[i] = tagStrings[i].toLowerCase().replaceAll(" ", "");
+                tagJSON.put(tagStrings[i]);
+            }
         }
 
 
@@ -399,7 +404,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         newEvent.location = event_location.getText().toString();
 
         newEvent.geolocation = HubDatabase.GetCurrentUser().location;
-
+      //newEvent.geolocation = "USA";
         newEvent.details = event_details.getText().toString().trim();
         newEvent.permissions = "public";
 

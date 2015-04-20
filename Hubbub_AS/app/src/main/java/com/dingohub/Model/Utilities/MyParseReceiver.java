@@ -6,7 +6,7 @@ import com.dingohub.Model.DataAccess.Hub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Views.Activities.DevActivities.MatViewBubActivity;
 import com.dingohub.Views.Activities.ShowDialogActivity;
-import com.dingohub.Views.Activities.ViewEventActivity;
+
 import com.dingohub.hubbub.R;
 import com.parse.ParsePushBroadcastReceiver;
 
@@ -56,7 +56,7 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
 
             pushType = splitType[1].replaceAll("\"", "");
             eventID = splitEvent[1].replaceAll("\"", "");
-
+            Log.d("myApplication",pushType);
 
             if (pushType.equals("1")) {
                 intent = new Intent(context, ShowDialogActivity.class);
