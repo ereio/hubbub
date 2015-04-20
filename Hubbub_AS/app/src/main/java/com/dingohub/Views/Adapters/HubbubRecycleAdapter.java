@@ -23,13 +23,17 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
     public static final int NORMAL_HUB = 2;
     public static final int HUBBUB_SEARCH = 3;
 
+    int color_array[] = {R.color.ColorAccent, R.color.ColorPrimary, R.color.ColorPrimaryDark, R.color.Khaki,
+            R.color.DarkTurquoise, R.color.DarkSeaGreen};
+
     private int adapter_type = 0;
     private final Context context;
+    private boolean emptyHubSearch = false;
+    private boolean emptyBubSearch = false;
+    private boolean initSearch = false;
     ArrayList<Bub> events = new ArrayList<>();
     ArrayList<Hub> hubs = new ArrayList<>();
     Random randomColor = new Random();
-    int color_array[] = {R.color.ColorAccent, R.color.ColorPrimary, R.color.ColorPrimaryDark, R.color.Khaki,
-                         R.color.DarkTurquoise, R.color.DarkSeaGreen};
 
     public HubbubRecycleAdapter(Context context, ArrayList<Bub> events, int adapter_type){
         this.context = context;
@@ -91,6 +95,12 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
     @Override
     public void onBindViewHolder(HubbubViewHolder holder, int position) {
 
+        // if in the hubbub search adapter type, we want to skip the position
+        // set the position of the events to compensate for the Hub that is appearing
+        // at the top of the list
+        if(adapter_type == HUBBUB_SEARCH && !emptyHubSearch && position != 0)
+            position -= 1;
+
         if(holder.Holderid == HubbubViewHolder.FOLLOWED_BUB_EVENT) {
             holder.fBubTitle.setText(events.get(position).title);
             holder.fBubLocation.setText(events.get(position).location);
@@ -113,52 +123,87 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
 
         } else if (holder.Holderid == HubbubViewHolder.HUB_ENVIRONMENT) {
             holder.hubAbout.setText(hubs.get(position).name);
-            holder.hubNumEvents.setText(hubs.get(position).name);
-            holder.hubNumFollowing.setText(hubs.get(position).name);
-            holder.hubLocation.setText(hubs.get(position).name);
+            holder.hubNumEvents.setText(hubs.get(position).bubs.length());
+            holder.hubNumFollowing.setText(hubs.get(position).follower_ids.length());
+            holder.hubLocation.setText(hubs.get(position).location);
 
             if(hubs.get(position).picture != null){
                 BitmapWorker worker = new BitmapWorker(holder.hubPicture, hubs.get(position).picture, 250, 250);
                 worker.execute(0);
             }
         } else if (holder.Holderid == HubbubViewHolder.EMPTY_HUBS){
-            int colorIndex = randomColor.nextInt(6);                             //sets random color index for
-                                                                                 //randomized error messages
-            holder.emptyStatement.setText("You haven't followed any hubs yet! \n" +
-                    "Hubs are how you findm more bubs similar to your" +
-                    "interests. Use the search glass above to find some");
-            holder.emptyPicture.setImageDrawable(context.getResources().getDrawable(R.drawable.intro_events));
-            holder.layout.setBackgroundColor(context.getResources().getColor(color_array[colorIndex]));
+            empty_hubs_message(holder);
 
         } else if(holder.Holderid == HubbubViewHolder.EMPTY_BUBS) {
-            int colorIndex = randomColor.nextInt(6);
-
-            // Sees whether the bubs being passed were of a followed bubs list or normal
-            if(adapter_type == FOLLOWED_BUB){
-                holder.emptyStatement.setText("You haven't followed any bubs yet! \n Look for" +
-                        "bubs in todays events or search with the search glass above.");
-            } else {
-                holder.emptyStatement.setText("There doesn't seem to be any bubs here :(");
-            }
-
-            holder.layout.setBackgroundColor(context.getResources().getColor(color_array[colorIndex]));
-            holder.emptyPicture.setImageDrawable(context.getResources().getDrawable(R.drawable.intro_events));
-
-
+            empty_bubs_message(holder);
         }
     }
 
+    private void empty_bubs_message(HubbubViewHolder holder) {
+        int colorIndex = randomColor.nextInt(6);
+
+        // Sees whether the bubs being passed were of a followed bubs list or normal
+        if(adapter_type == FOLLOWED_BUB){
+            holder.emptyStatement.setText("You haven't followed any bubs yet! \n Look for" +
+                    "bubs in todays events or search with the search glass above");
+        } else if( adapter_type == HUBBUB_SEARCH) {
+            holder.emptyStatement.setText("There doesn't seem to be any bubs here :(");
+        }
+
+        emptyBubSearch = false;
+        holder.layout.setBackgroundColor(context.getResources().getColor(color_array[colorIndex]));
+        holder.emptyPicture.setImageDrawable(context.getResources().getDrawable(R.drawable.intro_events));
+
+    }
+
+    private void empty_hubs_message(HubbubViewHolder holder){
+        int colorIndex = randomColor.nextInt(6);         //sets random color index for
+
+        if(adapter_type == HUBBUB_SEARCH){
+            // TODO - create a first search shared preferences
+            if(emptyBubSearch && emptyHubSearch && initSearch){
+                holder.emptyStatement.setText("Nothing was found for the tag you've entered :(");
+            } else if(emptyHubSearch && !emptyBubSearch){
+                holder.emptyStatement.setText("No hubs were found under that tag :(");
+            } else {
+                holder.emptyStatement.setText("Type in the field above to search for hubs and bubs");
+                initSearch = true;
+            }
+
+        } else {
+            holder.emptyStatement.setText("You haven't followed any hubs yet! \n" +
+                    "Hubs are how you find more bubs similar to your " +
+                    "interests. Use the search glass above to find some");
+        }
+
+        emptyHubSearch = false;
+        holder.emptyPicture.setImageDrawable(context.getResources().getDrawable(R.drawable.intro_events));
+        holder.layout.setBackgroundColor(context.getResources().getColor(color_array[colorIndex]));
+    }
     @Override
     public int getItemCount() {
 
         if(adapter_type == NORMAL_BUB || adapter_type == FOLLOWED_BUB) {
             if(events.size() != 0)
-                return events.size();                   // returns only if there are values
+                return events.size();
+                                   // returns only if there are values
         } else if(adapter_type == NORMAL_HUB) {         // to list
             if(hubs.size() != 0)
                 return hubs.size();
+
         } else if(adapter_type == HUBBUB_SEARCH) {
-            return events.size() + 1;                   // to add the header hub
+            if(hubs.size() > 0 && events.size() > 0){
+                return events.size() + 1;
+
+            } else if(events.size() > 0){
+                emptyHubSearch = true;
+                return events.size();
+
+            } else {
+                emptyBubSearch = true;
+                emptyHubSearch = true;
+                return 1;
+            }
         }
 
         return 1;                                       // otherwise we have an empty list message
@@ -191,15 +236,15 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
         } else if(adapter_type == HUBBUB_SEARCH){
             // Checks to make sure there is something to inflate with
             // whether it be hubs or bubs
-            if(position == 0 && hubs.size() != 0)
+            if(position == 0 && hubs.size() != 0) {
                 return HubbubViewHolder.HUB_ENVIRONMENT;
-             else if(position == 0)
+            } else if(position == 0) {
                 return HubbubViewHolder.EMPTY_HUBS;
-             else if(events.size() != 0)
+            } else if(events.size() != 0) {
                 return HubbubViewHolder.BUB_EVENT;
-             else
+            } else {
                 return HubbubViewHolder.EMPTY_BUBS;
-
+            }
         } else {
             return HubbubViewHolder.EMPTY_BUBS;
         }

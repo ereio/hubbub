@@ -19,19 +19,6 @@
         android:layout_below="@+id/material_toolbar"
         android:layout_centerHorizontal="true" />
 
-    <fragment
-        android:id="@+id/fragment_search_bubs"
-        android:name="com.dingohub.Views.Fragments.MatSearchedEventsFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/edittext_search_tag"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <EditText
         android:id="@+id/edittext_search_tag"
         android:background="@drawable/edittext_closedblue"
@@ -47,5 +34,14 @@
 
         <requestFocus />
     </EditText>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edittext_search_tag"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/fragment_search" />
 
 </RelativeLayout>

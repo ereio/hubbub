@@ -13,8 +13,12 @@ public class HubUser {
 	public String location;
 	public byte[] picture;
 	public JSONArray friend_ids;
+    public JSONArray followed_bubs;
 	
-	
+	public HubUser(){
+        friend_ids = new JSONArray();
+        followed_bubs = new JSONArray();
+    }
 	public boolean SendFriendRequest(){
 		return true;
 	}

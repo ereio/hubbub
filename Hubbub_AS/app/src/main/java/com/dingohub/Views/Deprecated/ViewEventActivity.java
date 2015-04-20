@@ -1,4 +1,4 @@
-package com.dingohub.Views.Activities;
+package com.dingohub.Views.Deprecated;
 
 import java.text.DateFormat;
 import java.util.ArrayList;

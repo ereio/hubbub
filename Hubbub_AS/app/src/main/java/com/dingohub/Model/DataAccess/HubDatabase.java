@@ -79,7 +79,7 @@ public class HubDatabase {
 
     //parse Hub Table Attributes
     public static final String NAME = "name";
-	public static final String BUBS_COL = "Bubs";
+	public static final String CONTAINED_BUBS = "associated_bubs";
 
     private static HubUser currentUser = new HubUser();
 
@@ -145,6 +145,8 @@ public class HubDatabase {
 				ParseFile e_picture = new ParseFile(bub.picture_title,bub.picture);
 				event.put(PICTURE, e_picture);
 			}
+
+            event.put(GEOLOC, bub.geolocation);
 			event.put(DETAILS, bub.details);
 			event.put(PERMISSION, bub.permissions);
 			event.put(START_DATE, bub.start_date + "T" + bub.start_time);
@@ -167,6 +169,34 @@ public class HubDatabase {
 			
 			return event.getObjectId();
 		}
+
+    public static String CreateHub(Hub hub){
+        ParseObject event = new ParseObject(EVENTS_TABLE);
+        String id = ParseUser.getCurrentUser().getObjectId();
+        event.put(NAME, hub.name);
+        event.put(GEOLOC, hub.location);
+        event.put(CREATOR, id);
+
+        if(hub.picture.length != 0){
+            ParseFile e_picture = new ParseFile(hub.name + "_picture",hub.picture);
+            event.put(PICTURE, e_picture);
+        }
+
+        event.put(FOLLOWERS, new JSONArray());
+        event.put(TAGS, hub.tags);
+
+        try{
+            event.save();
+
+            status = FLAG_QUERY_SUCCESSFUL;
+
+        } catch(ParseException e){
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG,e.toString());
+        }
+
+        return event.getObjectId();
+    }
 	
 	//VALIDATES LOGIN INFORMATION
 	public static int AuthoLogin(String username, String password){
@@ -282,7 +312,7 @@ public class HubDatabase {
 			
 		} catch (ParseException e){
 			status = FLAG_QUERY_FAILED;
-			events = null;
+			events = new ArrayList<>();
 			Log.e(TAG,e.toString());
 		}
 		return events;
@@ -303,15 +333,15 @@ public class HubDatabase {
         try{
             List<ParseObject> obj_list = query.find();
             for(ParseObject obj: obj_list){
-                Log.d("ALI","FOUND HUB");
+                Log.d(Hubbub.TAG + TAG,"Hub found as ---" + GetHubFromDBObj(obj).name);
                 hubs.add(GetHubFromDBObj(obj));
             }
             status = FLAG_QUERY_SUCCESSFUL;
 
         } catch (ParseException e){
             status = FLAG_QUERY_FAILED;
-            hubs = null;
-            Log.e(TAG,e.toString());
+            hubs = new ArrayList<>();
+            Log.e(Hubbub.TAG + TAG,e.toString());
         }
         return hubs;
 
@@ -598,10 +628,10 @@ public class HubDatabase {
             List<ParseObject> obj_list = query.find();
 
             for (ParseObject obj : obj_list) {
-                JSONArray bubs_list = obj.getJSONArray(BUBS_COL);
+                JSONArray bubs_list = obj.getJSONArray(CONTAINED_BUBS);
 
                 bubs_list.put(event_id);
-                obj.put(BUBS_COL, bubs_list);
+                obj.put(CONTAINED_BUBS, bubs_list);
                 obj.saveInBackground();
             }
 
@@ -652,7 +682,7 @@ public class HubDatabase {
 
         try {
             ParseObject object = query.get(hubid);
-            JSONArray bubs_array = object.getJSONArray(BUBS_COL);
+            JSONArray bubs_array = object.getJSONArray(CONTAINED_BUBS);
             int len = bubs_array.length();
 
             for (int i = 0; i < len; i++) {
@@ -1038,7 +1068,7 @@ public class HubDatabase {
         hub.id = db_event.getObjectId();
         hub.name = db_event.getString(NAME);
         hub.location = db_event.getString(LOCATION);
-
+        hub.bubs = db_event.getJSONArray(CONTAINED_BUBS);
         try {
             ParseFile pic = db_event.getParseFile(PICTURE);
             if (pic != null)
@@ -1048,9 +1078,7 @@ public class HubDatabase {
             Log.e(TAG, e.toString());
         }
 
-
         hub.tags = db_event.getJSONArray(TAGS);
-
         hub.follower_ids = db_event.getJSONArray(FOLLOWERS);
 
         return hub;

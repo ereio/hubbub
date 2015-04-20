@@ -356,7 +356,6 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
             check = false;
         }
 
-
         // check if an extra comma or invalid characters where inserted
         for(String cTag : tagList){
             //if(cTag.contains(DBFunct.INVALID_CHARS)){
@@ -399,6 +398,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         newEvent.title = event_name.getText().toString();
         newEvent.location = event_location.getText().toString();
 
+        newEvent.geolocation = HubDatabase.GetCurrentUser().location;
 
         newEvent.details = event_details.getText().toString().trim();
         newEvent.permissions = "public";
