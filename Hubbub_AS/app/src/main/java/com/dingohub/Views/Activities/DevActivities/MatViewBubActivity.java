@@ -186,6 +186,7 @@ public class MatViewBubActivity extends BaseGoogleActivity{
 	public void init_ui(){
         toolbar = (Toolbar) findViewById(R.id.material_toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

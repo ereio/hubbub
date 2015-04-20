@@ -142,7 +142,7 @@ public class MatViewHubActivity extends BaseGoogleActivity{
         bubLayoutManager = new LinearLayoutManager(this);
         bubRecyclerView.setLayoutManager(bubLayoutManager);
 
-        //Setting adapter to load designated data
+             //Setting adapter to load designated data
         bubAdapter = new HubbubRecycleAdapter(getApplicationContext(), containedBubs, HubbubRecycleAdapter.NORMAL_BUB);
         bubRecyclerView.setAdapter(userAdapter);
 

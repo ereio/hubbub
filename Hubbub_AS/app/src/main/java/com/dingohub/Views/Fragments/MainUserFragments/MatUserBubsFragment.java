@@ -124,7 +124,7 @@ public class MatUserBubsFragment extends Fragment {
 
                 String eventId = followed_events.get(rv.getChildPosition(child)).id;
                 Intent intent = new Intent(getActivity(), MatViewBubActivity.class);
-                intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);					// MAKE Bub parcelable
+                intent.putExtra(MatViewBubActivity.EVENT_KEY, eventId);					// MAKE Bub parcelable
                 startActivity(intent);
             }
             return false;

@@ -62,6 +62,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
     protected GestureDetector mGestureDetector;
 
     protected BroadcastReceiver logoutBroadcast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
