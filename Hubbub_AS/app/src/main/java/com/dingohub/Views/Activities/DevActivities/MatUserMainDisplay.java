@@ -234,6 +234,7 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
             // Loc data is already fetched in an asynctask, but the update to the ui thread isn't
             TextView loc = (TextView) findViewById(R.id.text_user_location);
             loc.setText(getLocality());
+            HubDatabase.SetLocation(getLocality());
             Log.i(Hubbub.TAG + TAG, "Locality found = " + getLocality());
 
         }

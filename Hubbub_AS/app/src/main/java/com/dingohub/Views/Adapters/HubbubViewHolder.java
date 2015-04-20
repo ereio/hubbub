@@ -78,7 +78,7 @@ public class HubbubViewHolder extends RecyclerView.ViewHolder {
             hubName = (TextView) itemView.findViewById(R.id.cardview_hub_title);
             hubLocation = (TextView) itemView.findViewById(R.id.cardview_hub_location);
             hubAbout = (TextView) itemView.findViewById(R.id.carview_hub_about);
-            hubNumFollowing = (TextView) itemView.findViewById(R.id.cardview_fbub_num_following);
+            hubNumFollowing = (TextView) itemView.findViewById(R.id.cardview_hub_num_following);
             hubNumEvents = (TextView) itemView.findViewById(R.id.cardview_hub_num_events);
             Holderid = HUB_ENVIRONMENT;
 

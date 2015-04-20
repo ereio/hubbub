@@ -8,8 +8,9 @@ import org.json.JSONArray;
 public class Hub {
 
     public String id;
-    public  String name;
+    public String name;
     public String location;
+    public String details;
     public JSONArray tags;
     public JSONArray follower_ids;
     public byte[] picture;
@@ -17,11 +18,13 @@ public class Hub {
 
 
     public Hub(){
-        id = null;
-        name = null;
-        location = null;
+        id = new String();
+        name = new String();
+        location = new String();
+        details = new String();
         picture = new byte[] {};
-
-
+        follower_ids = new JSONArray();
+        bubs = new JSONArray();
+        tags = new JSONArray();
     }
 }

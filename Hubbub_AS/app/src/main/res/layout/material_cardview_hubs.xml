@@ -58,7 +58,7 @@
                 android:layout_centerHorizontal="true" />
 
             <TextView
-                android:id="@+id/cardview_fbub_num_following"
+                android:id="@+id/cardview_hub_num_following"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/num_following"

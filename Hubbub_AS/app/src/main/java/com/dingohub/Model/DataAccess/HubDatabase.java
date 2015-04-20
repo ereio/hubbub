@@ -79,7 +79,8 @@ public class HubDatabase {
 
     //parse Hub Table Attributes
     public static final String NAME = "name";
-	public static final String CONTAINED_BUBS = "associated_bubs";
+	public static final String CONTAINED_BUBS = "Bubs";
+    public static final String HUB_DETAILS = "about";
 
     private static HubUser currentUser = new HubUser();
 
@@ -146,7 +147,7 @@ public class HubDatabase {
 				event.put(PICTURE, e_picture);
 			}
 
-            event.put(GEOLOC, bub.geolocation);
+            event.put(GEOLOC, locality);
 			event.put(DETAILS, bub.details);
 			event.put(PERMISSION, bub.permissions);
 			event.put(START_DATE, bub.start_date + "T" + bub.start_time);
@@ -174,7 +175,7 @@ public class HubDatabase {
         ParseObject event = new ParseObject(EVENTS_TABLE);
         String id = ParseUser.getCurrentUser().getObjectId();
         event.put(NAME, hub.name);
-        event.put(GEOLOC, hub.location);
+        event.put(GEOLOC, locality);
         event.put(CREATOR, id);
 
         if(hub.picture.length != 0){
@@ -1023,6 +1024,8 @@ public class HubDatabase {
         hub.name = db_event.getString(NAME);
         hub.location = db_event.getString(LOCATION);
         hub.bubs = db_event.getJSONArray(CONTAINED_BUBS);
+        hub.details = db_event.getString(ABOUT);
+
         try {
             ParseFile pic = db_event.getParseFile(PICTURE);
             if (pic != null)

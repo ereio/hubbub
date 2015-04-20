@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.Hub;
@@ -122,10 +124,12 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
             }
 
         } else if (holder.Holderid == HubbubViewHolder.HUB_ENVIRONMENT) {
-            holder.hubAbout.setText(hubs.get(position).name);
-            holder.hubNumEvents.setText(hubs.get(position).bubs.length());
-            holder.hubNumFollowing.setText(hubs.get(position).follower_ids.length());
+            holder.hubName.setText(hubs.get(position).name);
+            holder.hubAbout.setText(hubs.get(position).details);
             holder.hubLocation.setText(hubs.get(position).location);
+            holder.hubNumFollowing.setText(Integer.toString(hubs.get(position).follower_ids.length()));
+            holder.hubNumEvents.setText(Integer.toString(hubs.get(position).bubs.length()));
+
 
             if(hubs.get(position).picture != null){
                 BitmapWorker worker = new BitmapWorker(holder.hubPicture, hubs.get(position).picture, 250, 250);
