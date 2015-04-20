@@ -215,9 +215,9 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 
 
                 String event_id = HubDatabase.CreateBub(createEventFromData());
-                HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
+                HubDatabase.AddFollower(event_id, HubDatabase.GetCurrentUser().id);
                 HubDatabase.AddBubToHub(event_id,convertTags());
-                HubDatabase.AddFollowedBub(event_id, HubDatabase.getCurrentUser().id);
+                HubDatabase.AddFollowedBub(event_id, HubDatabase.GetCurrentUser().id);
                 HashMap<String, Object> params = new HashMap<String, Object>();
 
                 params.put("pingIn", UtcTime);

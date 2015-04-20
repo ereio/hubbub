@@ -1,20 +1,16 @@
 package com.dingohub.Model.DataAccess;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import org.json.JSONObject;
 
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dingohub.Hubbub;
 import com.parse.Parse;
@@ -28,6 +24,7 @@ import com.parse.ParseUser;
 public class HubDatabase {
 	public static final String TAG = "HubDatabase";
 	public static final String INVALID_CHARS = ",~%&*{ }\\< >?/|+\";";
+
 	// Query Status
 	public static final int FLAG_NULL_QUERY = 1;
 	public static final int FLAG_QUERY_FAILED = -1;
@@ -133,7 +130,7 @@ public class HubDatabase {
 		
 		return status;
 	}
-	
+
 	// CREATES A BUB(EVENT) IN DATABASE
 	public static String CreateBub(Bub bub){
 		status = FLAG_NULL_QUERY;
@@ -193,7 +190,7 @@ public class HubDatabase {
 	// No different than direct parse call other than Hubuser
 	// Object return
 	///////////////////////////////////////
-	public static HubUser getCurrentUser(){
+	public static HubUser GetCurrentUser(){
 
         // Saves calls to the database as the user will be cached
         // locally
@@ -209,7 +206,6 @@ public class HubDatabase {
             return null;
         }
 	}
-	
 	
 	//////////////////////////////////////////////
 	// Get a user using an objectId
@@ -244,7 +240,7 @@ public class HubDatabase {
 	// Find Bub By Date
 	// FIND EVENTS BY DATE - CAN FIND ANY INCLUDING CURRENT DATE BUB DISPLAY
 	////////////////////////////////////////////////////////////
-	public static ArrayList<Bub> FindEventByDate(String date){
+	public static ArrayList<Bub> GetBubsByDate(String date){
 		
 		ArrayList<Bub> events = new ArrayList<Bub>();
 		
@@ -270,7 +266,7 @@ public class HubDatabase {
 	// Find Bub By Tag
 	// Searches all events through the tag array
 	////////////////////////////////////////////////////////////
-	public static ArrayList<Bub> FindEventByTag(String tag){
+	public static ArrayList<Bub> GetBubsByTag(String tag){
 		
 		ArrayList<Bub> events = new ArrayList<Bub>();
 		
@@ -292,7 +288,7 @@ public class HubDatabase {
 		return events;
 	}
 
-    public static  ArrayList<Hub> FindHubsByTag(String tag)
+    public static  ArrayList<Hub> GetHubsByTag(String tag)
     {
         ArrayList<Hub> hubs = new ArrayList<Hub>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
@@ -321,7 +317,7 @@ public class HubDatabase {
 	//   -populated TappEvent if successful
 	//   -null if error occurred
 	////////////////////////////////////////////////
-	public static Bub GetEventById(String id){
+	public static Bub GetBubsById(String id){
 		Bub event = new Bub();
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(EVENTS_TABLE);
@@ -347,7 +343,7 @@ public class HubDatabase {
 	// Returns events which a sepecfic user has
 	// followered in a bub array.
 	////////////////////////////////////////////////
-	public static  ArrayList<Bub> FindBubByFollower(String userID){
+	public static  ArrayList<Bub> GetBubsByFollower(String userID){
 		ArrayList<Bub> bubs = new ArrayList<Bub>();
 		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(EVENTS_TABLE);
@@ -375,7 +371,7 @@ public class HubDatabase {
      * @param userId the user to find Bubs for
      * @return ArrayList containing followed Bubs
      */
-    public static ArrayList<Bub> FindBubsFollowed(String userId) {
+    public static ArrayList<Bub> GetFollowedBubs(String userId) {
         ArrayList<Bub> bubs = new ArrayList<Bub>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
         query.whereContainedIn(TAGS, new ArrayList<String>());
@@ -386,7 +382,7 @@ public class HubDatabase {
             int len = followed_array.length();
 
             for (int i = 0; i < len; i++) {
-                Bub tmp = GetBubFromID(followed_array.get(i).toString());
+                Bub tmp = GetBubFromId(followed_array.get(i).toString());
 
                 if (tmp == null) throw new Exception("Specified event ID not found in event table.");
 
@@ -414,7 +410,7 @@ public class HubDatabase {
 
 	///// Used to calculate a nessesary size for Bitmap images
 	// Efficiency in memory allocation and standardization
-	public static int calcImageSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight){
+	public static int CalculateImageSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight){
 		final int height = options.outHeight;
 		final int width = options.outWidth;
 		int inSampleSize = 1;
@@ -432,14 +428,14 @@ public class HubDatabase {
 	}
 	
 	// Main function for decoding bitmp - Runs the calculations and then scales
-	public static Bitmap decodePicture(Object picture, int reqWidth, int reqHeight) throws Exception{
+	public static Bitmap DecodePicture(Object picture, int reqWidth, int reqHeight) throws Exception{
 	    final BitmapFactory.Options options = new BitmapFactory.Options();
 	    options.inJustDecodeBounds = true;
 	    
 	    if(picture instanceof String){
 		    // Calculate inSampleSize
 	    	BitmapFactory.decodeFile((String)picture,options);
-		    options.inSampleSize = calcImageSampleSize(options, reqWidth, reqHeight);
+		    options.inSampleSize = CalculateImageSampleSize(options, reqWidth, reqHeight);
 	    	// Decode bitmap with inSampleSize set
 		    options.inJustDecodeBounds = false;
 		    return BitmapFactory.decodeFile((String)picture,options);
@@ -449,7 +445,7 @@ public class HubDatabase {
             if(((byte[]) picture).length <= 1)
                 return null;
 	    	BitmapFactory.decodeByteArray((byte[])picture, 0, ((byte[])picture).length, options);
-	    	options.inSampleSize = calcImageSampleSize(options, reqWidth, reqHeight);
+	    	options.inSampleSize = CalculateImageSampleSize(options, reqWidth, reqHeight);
 	    	
 	    	// Decode bitmap with inSampleSize set
 	    	options.inJustDecodeBounds = false;
@@ -578,25 +574,15 @@ public class HubDatabase {
 		return status;
 	}
 
-
-
-
-    public static  void AddBubToHub(String event_id ,JSONArray tags) throws JSONException {
-
+    public static void AddBubToHub(String event_id, JSONArray tags) throws JSONException {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
-
 
         ArrayList<String> tag_list = new ArrayList<String>();
 
-        for (int i = 1; i < tags.length(); ++i) {
+        for (int i = 1; i < tags.length(); ++i)
             tag_list.add(tags.get(i).toString());
 
-        }
-
-
         query.whereContainedIn(TAGS, tag_list);
-        //}
-
 
         try {
             List<ParseObject> obj_list = query.find();
@@ -607,17 +593,141 @@ public class HubDatabase {
                 bubs_list.put(event_id);
                 obj.put(BUBS_COL, bubs_list);
                 obj.saveInBackground();
-
-
             }
-
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-        /**
+    public static ArrayList<Bub> GetBubsFromHub(String hubid) {
+        ArrayList<Bub> bubs = new ArrayList<Bub>();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+
+        try {
+            ParseObject object = query.get(hubid);
+            JSONArray bubs_array = object.getJSONArray(BUBS_COL);
+            int len = bubs_array.length();
+
+            for (int i = 0; i < len; i++) {
+                Bub tmp = GetBubFromId(bubs_array.get(i).toString());
+
+                if (tmp == null) throw new Exception("Specified event ID not found in event table.");
+
+                bubs.add(tmp);
+            }
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            bubs = null;
+            Log.e(TAG, e.toString());
+        } catch (JSONException e) {
+            status = FLAG_QUERY_FAILED;
+            bubs = null;
+            Log.e(TAG, e.toString());
+        } catch (Exception e) {
+            status = FLAG_QUERY_FAILED;
+            bubs = null;
+            Log.e(TAG, e.toString());
+        }
+
+        return bubs;
+    }
+
+    /**
+     * Adds a user to the array of followers for a given Hub
+     * @param hub_id the ID of the Hub to add the follower to
+     * @param user_id the ID of the user to add as a follower
+     * @return indication of success or failure
+     */
+    public static int AddFollowerToHub(String hub_id, String user_id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+
+        try {
+            ParseObject object = query.get(hub_id);
+
+            JSONArray followers_array = object.getJSONArray(FOLLOWERS);
+            followers_array.put(user_id);
+            object.put(FOLLOWERS, followers_array);
+            object.saveInBackground();
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        }
+
+        return status;
+    }
+
+    /**
+     * Removes a user as a follower of a Hub
+     * @param hub_id the ID of the Hub to remove the user from
+     * @param user_id the ID of the user to be removed from a Hub
+     * @return indication of success or failure
+     */
+    public static int RemoveFollowerFromHub(String hub_id, String user_id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+
+        try {
+            ParseObject object = query.get(hub_id);
+            JSONArray followers_array = object.getJSONArray(FOLLOWERS);
+            ArrayList<String> list = new ArrayList<String>();
+            int len = followers_array.length();
+
+            if (followers_array != null) {
+                for (int i = 0; i < len; i++) {
+                    list.add(followers_array.get(i).toString());
+                }
+            }
+
+            list.remove(user_id);
+            object.put(FOLLOWERS, new JSONArray(list));
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        } catch (JSONException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        }
+
+        return status;
+    }
+
+    public static ArrayList<HubUser> GetFollowersFromHub(String hubid) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+        ArrayList<HubUser> followers = new ArrayList<HubUser>();
+
+        try {
+            ParseObject object = query.get(hubid);
+            JSONArray followers_array = object.getJSONArray(FOLLOWERS);
+            int len = followers_array.length();
+
+            if (followers_array != null) {
+                for (int i = 0; i < len; i++) {
+                    followers.add(GetUserFromId(followers_array.get(i).toString()));
+                }
+            }
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+
+            followers = null;
+            Log.e(TAG, e.toString());
+        } catch (JSONException e) {
+            status = FLAG_QUERY_FAILED;
+            followers = null;
+            Log.e(TAG, e.toString());
+        }
+
+        return followers;
+    }
+
+    /**
      * When a user follows a Bub, it adds it to an array for that particular user for easier access
      * than parsing every single event.
      * @param event_id the ID of the Bub being added
@@ -650,7 +760,7 @@ public class HubDatabase {
      * @param follower_id the ID of the follower
      * @return indication of success or failure
      */
-    public static int DeleteFollowedBub(String event_id, String follower_id) {
+    public static int RemoveFollowedBub(String event_id, String follower_id) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
 
          try {
@@ -714,7 +824,7 @@ public class HubDatabase {
      * @param friend_id the user being unfollowed
      * @return indication of success or failure
      */
-    public static int DeleteFriend(String user_id, String friend_id) {
+    public static int RemoveFriend(String user_id, String friend_id) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
 
         try {
@@ -761,10 +871,9 @@ public class HubDatabase {
 
             if (friend_array != null) {
                 for (int i = 0; i < len; i++) {
-                    friends.add(GetUserFromID(friend_array.get(i).toString()));
+                    friends.add(GetUserFromId(friend_array.get(i).toString()));
                 }
             }
-
 
             status = FLAG_QUERY_SUCCESSFUL;
         } catch (ParseException e) {
@@ -814,9 +923,6 @@ public class HubDatabase {
 
 		return status;
 	}
-
-
-
 
 	// Converts ParseObject to HubUser
 	private static HubUser GetUserFromDBObj(ParseObject db_usr){
@@ -880,9 +986,6 @@ public class HubDatabase {
 		return event;
 	}
 
-
-
-
     private static Hub GetHubFromDBObj(ParseObject db_event) {
         Hub hub = new Hub();
 
@@ -906,12 +1009,13 @@ public class HubDatabase {
 
         return hub;
     }
+
     /**
      * Create a HubUser object given an userID
      * @param userId ID of user to lookup
      * @return HubUser object representation
      */
-    private static HubUser GetUserFromID(String userId) {
+    public static HubUser GetUserFromId(String userId) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
 
         try {
@@ -926,7 +1030,7 @@ public class HubDatabase {
      * @param eventId event to instantiate
      * @return instantiation of given eventID
      */
-    private static Bub GetBubFromID(String eventId) {
+    public static Bub GetBubFromId(String eventId) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(EVENTS_TABLE);
 
         try {
@@ -934,7 +1038,16 @@ public class HubDatabase {
         } catch (ParseException e) {
             return null;
         }
+    }
 
+    public static Hub GetHubFromId(String hubid) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(HUBS_TABLE);
+
+        try {
+            return GetHubFromDBObj(query.get(hubid));
+        } catch (ParseException e) {
+            return null;
+        }
     }
 	
 }

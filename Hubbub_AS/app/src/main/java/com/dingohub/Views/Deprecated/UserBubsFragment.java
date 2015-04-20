@@ -51,8 +51,8 @@ public class UserBubsFragment extends ListFragment {
 	@Override
 	public void onResume(){
 		super.onResume();
-		//followed_events = HubDatabase.FindBubByFollower(HubDatabase.getCurrentUser().id);
-        followed_events = HubDatabase.FindBubsFollowed(HubDatabase.getCurrentUser().id);
+		//followed_events = HubDatabase.GetBubsByFollower(HubDatabase.GetCurrentUser().id);
+        followed_events = HubDatabase.GetFollowedBubs(HubDatabase.GetCurrentUser().id);
 		
 		if(followed_events != null &&followed_events.size() != 0 ){
 			adapter = new FollowedEventListAdapter(getActivity(), followed_events);

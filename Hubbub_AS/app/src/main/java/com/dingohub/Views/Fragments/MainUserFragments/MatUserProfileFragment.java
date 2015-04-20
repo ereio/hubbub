@@ -43,8 +43,8 @@ public class MatUserProfileFragment extends Fragment{
     protected GestureDetector mGestureDetector;
 
     public MatUserProfileFragment() {
-        friends = HubDatabase.GetFriends(HubDatabase.getCurrentUser().id);
-        user = HubDatabase.getCurrentUser();
+        friends = HubDatabase.GetFriends(HubDatabase.GetCurrentUser().id);
+        user = HubDatabase.GetCurrentUser();
     }
 
     @Override

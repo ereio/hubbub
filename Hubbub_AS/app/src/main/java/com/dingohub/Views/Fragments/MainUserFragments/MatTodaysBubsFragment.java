@@ -111,7 +111,7 @@ public class MatTodaysBubsFragment extends Fragment{
         int year = c.get(Calendar.YEAR);
 
         String date = day + "/" + month + "/" + year;
-        todays_events = HubDatabase.FindEventByDate(date);
+        todays_events = HubDatabase.GetBubsByDate(date);
     }
 
     private class BubRecyclerViewListener implements RecyclerView.OnItemTouchListener{

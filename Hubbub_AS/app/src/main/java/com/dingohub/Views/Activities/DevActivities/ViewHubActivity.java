@@ -1,6 +1,5 @@
 package com.dingohub.Views.Activities.DevActivities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -92,35 +91,26 @@ public class ViewHubActivity extends BaseGoogleActivity{
                     follow_hub();
 
 			}});
-		
-		
 	}
-
 
     private void init_hub(){
         Bundle bundle = getIntent().getExtras();
-        curUser = HubDatabase.getCurrentUser();
+        curUser = HubDatabase.GetCurrentUser();
 
         // Get Event to View from event id passed
-        if(bundle != null){
+        if (bundle != null){
             String hubID = bundle.getString(HUB_KEY);
-            // TODO - create a get hub by id function
-            //currentHub = HubDatabase.GetHubById(hubID);
+            currentHub = HubDatabase.GetHubFromId(hubID);
         }
-        else{
+        else {
             currentHub = new Hub();
             Log.e(Hubbub.TAG, "Hub Not found in database upon viewing call");
         }
 
         // Finding values for the users followed and the bubs within the hub
 
-        // TODO - A function to query the users following the hub in the database
-        //followers = HubDatabase.GetUsersByHubID(currentHub.id);
-        // TODO - A function to query the bubs in a hub
-        //containedBubs = HubDatabase.FindBubsByHubID(currentHub.id);
-
-
-
+        followers = HubDatabase.GetFollowersFromHub(currentHub.id);
+        containedBubs = HubDatabase.GetBubsFromHub(currentHub.id);
     }
 
 	public void init_ui(){
@@ -168,13 +158,11 @@ public class ViewHubActivity extends BaseGoogleActivity{
 
 	}
 
-    private void unfollow_hub(){
+    private void unfollow_hub() {
         ParsePush.unsubscribeInBackground(currentHub.id);
         deleteFollower();
 
-        // TODO - Similarly a remove for hub's in users accounts
-        //HubDatabase.RemoveFollower(currentHub);
-        //HubDatabase.DeleteFollowedBub(currentHub.id, HubDatabase.getCurrentUser().id);
+        HubDatabase.RemoveFollowerFromHub(currentHub.id, HubDatabase.GetCurrentUser().id);
         bFollow.setText("Unfollow Hub");
     }
 
@@ -183,9 +171,7 @@ public class ViewHubActivity extends BaseGoogleActivity{
         // NEED A REMOVE FOLLOWER BUTTON!
         ParsePush.subscribeInBackground(currentHub.id);
 
-        // TODO - Need database call to add a hub id to a user's account
-        //HubDatabase.Add(event.id, HubDatabase.getCurrentUser().id);
-        //HubDatabase.AddFollowedBub(event.id, HubDatabase.getCurrentUser().id);
+        HubDatabase.AddFollowerToHub(currentHub.id, HubDatabase.GetCurrentUser().id);
         bFollow.setText("Follow Hub");
     }
 

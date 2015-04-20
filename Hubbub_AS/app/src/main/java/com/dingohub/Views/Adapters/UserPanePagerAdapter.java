@@ -40,7 +40,7 @@ public class UserPanePagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 Bundle bundle = new Bundle();
-                bundle.putString(Hubbub.USER_VIEW_KEY, HubDatabase.getCurrentUser().id);
+                bundle.putString(Hubbub.USER_VIEW_KEY, HubDatabase.GetCurrentUser().id);
                 return new MatUserProfileFragment();
             case 1:
                 return new MatTodaysBubsFragment();

@@ -93,7 +93,7 @@ public class MatUserBubsFragment extends Fragment {
         bubRecycleView.setAdapter(adapter);
     }
     private void init_user_bubs(){
-        followed_events = HubDatabase.FindBubByFollower(HubDatabase.getCurrentUser().id);
+        followed_events = HubDatabase.GetBubsByFollower(HubDatabase.GetCurrentUser().id);
 
     }
 

@@ -47,7 +47,7 @@ public class ShowDialogActivity extends Activity {
 	    Bundle bundle = getIntent().getExtras();
 	    final String event_id = bundle.getString(MyParseReceiver.DATA_KEY);
 	    
-	    event = HubDatabase.GetEventById(event_id);
+	    event = HubDatabase.GetBubsById(event_id);
 	    
 	    // Sets the ui edittext and such variables
 	    init_ui();
@@ -128,7 +128,7 @@ public class ShowDialogActivity extends Activity {
 		ses.scheduleAtFixedRate(new Runnable(){
 			@Override
 			public void run() {
-				final Bub counterEvent = HubDatabase.GetEventById(EID);
+				final Bub counterEvent = HubDatabase.GetBubsById(EID);
 				
 				num_yes.post(new Runnable(){
 					@Override

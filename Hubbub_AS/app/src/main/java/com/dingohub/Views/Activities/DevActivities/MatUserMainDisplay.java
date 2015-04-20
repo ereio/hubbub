@@ -97,7 +97,7 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
         private void init_user(){
 
             // init user object
-            user = HubDatabase.getCurrentUser();
+            user = HubDatabase.GetCurrentUser();
 
             // Checks if activity reached without user data
             if(user == null){

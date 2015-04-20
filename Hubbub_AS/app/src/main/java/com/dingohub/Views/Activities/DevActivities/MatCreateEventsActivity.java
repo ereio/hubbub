@@ -216,7 +216,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         //if(checkTags()){
 
             String event_id = HubDatabase.CreateBub(createEventFromData());
-            HubDatabase.AddFollower(event_id, HubDatabase.getCurrentUser().id);
+            HubDatabase.AddFollower(event_id, HubDatabase.GetCurrentUser().id);
             //Toast.makeText(this, "Event Created Successfully"+event_id, Toast.LENGTH_SHORT).show();
 
         //	alarmMgr = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);

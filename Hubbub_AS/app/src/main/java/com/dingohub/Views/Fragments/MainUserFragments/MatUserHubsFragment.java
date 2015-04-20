@@ -94,7 +94,7 @@ public class MatUserHubsFragment extends Fragment{
     }
     private void init_user_bubs(){
         // TODO - create a database call FindHubsByFollower()
-        //followed_hubs = HubDatabase.FindHubsByFollower(HubDatabase.getCurrentUser().id);
+        //followed_hubs = HubDatabase.FindHubsByFollower(HubDatabase.GetCurrentUser().id);
 
     }
 

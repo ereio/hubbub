@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
-import com.dingohub.Views.Activities.CreateEventsActivity;
 import com.dingohub.Views.Activities.LoginActivity;
 import com.dingohub.Views.Activities.SearchEventsActivity;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
@@ -64,7 +63,7 @@ public class UserMainDisplay extends BaseGoogleActivity {
 		setContentView(R.layout.activity_main);
 		
 		// init user
-		user = HubDatabase.getCurrentUser();
+		user = HubDatabase.GetCurrentUser();
 		
 		// Checks if activity reached without user data
 		if(user == null){

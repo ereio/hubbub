@@ -13,20 +13,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Hub;
-import com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity;
 import com.dingohub.Views.Activities.ViewEventActivity;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
-import com.dingohub.Model.Utilities.EventListAdapter;
 import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
-import com.dingohub.Views.Adapters.HubbubViewHolder;
 import com.dingohub.hubbub.R;
-import com.melnykov.fab.FloatingActionButton;
 
 public class MatSearchedEventsFragment extends Fragment {
     public static final String TAG_KEY = "TAG_KEY";
@@ -50,8 +45,8 @@ public class MatSearchedEventsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // This is a defense against Events will Null tags (ONLY HAPPENS IN DEBUGGING)
-        search_events = tag != null ? HubDatabase.FindEventByTag(tag) : new ArrayList<Bub>();
-        search_hubs = tag != null ? HubDatabase.FindHubsByTag(tag) : new ArrayList<Hub>();
+        search_events = tag != null ? HubDatabase.GetBubsByTag(tag) : new ArrayList<Bub>();
+        search_hubs = tag != null ? HubDatabase.GetHubsByTag(tag) : new ArrayList<Hub>();
 
         mGestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
             @Override

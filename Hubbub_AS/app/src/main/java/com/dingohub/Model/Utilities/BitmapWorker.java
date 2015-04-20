@@ -37,7 +37,7 @@ public class BitmapWorker extends AsyncTask<Object, Void, Bitmap> {
     @Override
     protected Bitmap doInBackground(Object... params) {
         try {
-			return HubDatabase.decodePicture(picture, rWidth, rHeight);
+			return HubDatabase.DecodePicture(picture, rWidth, rHeight);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

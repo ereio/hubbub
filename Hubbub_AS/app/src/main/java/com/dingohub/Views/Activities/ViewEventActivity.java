@@ -77,12 +77,12 @@ public class ViewEventActivity extends Activity{
 		init_ui();
 		
 		Bundle bundle = getIntent().getExtras();
-		curUser = HubDatabase.getCurrentUser();
+		curUser = HubDatabase.GetCurrentUser();
 		
 		// Get Event to View from event id passed
 		if(bundle != null){
 			String eventID = bundle.getString(EVENT_KEY);
-			event = HubDatabase.GetEventById(eventID);
+			event = HubDatabase.GetBubsById(eventID);
 		}
 		else{
 			event = new Bub();
@@ -135,8 +135,8 @@ public class ViewEventActivity extends Activity{
 				// TODO Auto-generated method stub
 				// NEED A REMOVE FOLLOWER BUTTON!
 				ParsePush.subscribeInBackground(event.id);
-				HubDatabase.AddFollower(event.id, HubDatabase.getCurrentUser().id);
-                HubDatabase.AddFollowedBub(event.id, HubDatabase.getCurrentUser().id);
+				HubDatabase.AddFollower(event.id, HubDatabase.GetCurrentUser().id);
+                HubDatabase.AddFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
 				v.setVisibility(View.INVISIBLE);
 				bUnfollow.setVisibility(View.VISIBLE);
 			}});
@@ -147,7 +147,7 @@ public class ViewEventActivity extends Activity{
 				ParsePush.unsubscribeInBackground(event.id);
 				deleteFollower();
 				HubDatabase.RemoveFollower(event);
-                HubDatabase.DeleteFollowedBub(event.id, HubDatabase.getCurrentUser().id);
+                HubDatabase.RemoveFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
 				v.setVisibility(View.INVISIBLE);
 				bFollow.setVisibility(View.VISIBLE);
 			}});
@@ -163,7 +163,7 @@ public class ViewEventActivity extends Activity{
 		ses.scheduleAtFixedRate(new Runnable(){
 			@Override
 			public void run() {
-				final Bub counterEvent = HubDatabase.GetEventById(EID);
+				final Bub counterEvent = HubDatabase.GetBubsById(EID);
 				
 				event_num_yes.post(new Runnable(){
 					@Override

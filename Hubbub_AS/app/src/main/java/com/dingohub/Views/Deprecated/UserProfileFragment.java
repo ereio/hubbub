@@ -30,7 +30,7 @@ public class UserProfileFragment extends Fragment{
 	public void onStart(){
 		super.onStart();
 		ui_init();
-		user = HubDatabase.getCurrentUser();
+		user = HubDatabase.GetCurrentUser();
 	}
 	
 	@Override
