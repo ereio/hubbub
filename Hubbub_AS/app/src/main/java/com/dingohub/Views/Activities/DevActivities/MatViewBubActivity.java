@@ -144,24 +144,6 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         }
     }
 
-    private void unfollow_hub(){
-        ParsePush.unsubscribeInBackground(event.id);
-        deleteFollower();
-
-        // TODO - Similarly a remove for hub's in users accounts
-        HubDatabase.RemoveFollower(event);
-        bFollow.setText("Unfollow Hub");
-    }
-
-    private void follow_hub(){
-        ParsePush.subscribeInBackground(event.id);
-
-        // TODO - Need database call to add a hub id to a user's account
-        //HubDatabase.Add(event.id, HubDatabase.getCurrentUser().id);
-        HubDatabase.AddFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
-        bFollow.setText("Follow Hub");
-    }
-
 	public void PingInUpdater(String id){
 		final String EID = id;
 		ses = Executors.newSingleThreadScheduledExecutor();
@@ -280,8 +262,31 @@ public class MatViewBubActivity extends BaseGoogleActivity{
 
             }});
 	}
-	
-	private boolean searchFollowing(){
+
+
+    private void unfollow_hub(){
+        ParsePush.unsubscribeInBackground(event.id);
+        deleteFollower();
+
+        // TODO - Similarly a remove for hub's in users accounts
+        HubDatabase.RemoveFollower(event);
+        HubDatabase.RemoveFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
+        bFollow.setText("Unfollow Hub");
+        followingStatus = false;
+    }
+
+    private void follow_hub(){
+        ParsePush.subscribeInBackground(event.id);
+
+        // TODO - Need database call to add a hub id to a user's account
+        HubDatabase.AddFollower(event.id, HubDatabase.GetCurrentUser().id);
+        HubDatabase.AddFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
+        bFollow.setText("Follow Hub");
+        followingStatus = true;
+    }
+
+
+    private boolean searchFollowing(){
 		String curId = curUser.id;
 		
 		for(int i = 0; i < event.follower_ids.length(); ++i){
@@ -331,29 +336,8 @@ public class MatViewBubActivity extends BaseGoogleActivity{
 				e.printStackTrace();
 			}
 		}
-		
+
 		event.follower_ids = newJson;
-	}
-	
-	private String getFollowerNames(){
-		String print = new String("");
-		String curId = new String();
-		try {
-			
-		for(int i = 0; i < event.follower_ids.length(); i++){
-				curId = new String(event.follower_ids.getString(i));
-			if(i > 0){
-				print = new String(print + ", " + HubDatabase.GetUserById(curId).username);
-			} else{
-				print = new String(HubDatabase.GetUserById(curId).username);
-			}
-		}
-		
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		
-		return print;
 	}
 	
 	////////////////////////////////////////////////////////////////
