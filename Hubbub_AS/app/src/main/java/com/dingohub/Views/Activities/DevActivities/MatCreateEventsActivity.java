@@ -238,7 +238,6 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         params.put("pingIn",UtcTime);
         params.put(CHANNEL_KEY,event_id);
         ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
-
             @Override
             public void done(String object, ParseException e) {
                 // TODO Auto-generated method stub
@@ -382,7 +381,6 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         JSONArray JSONTags = convertTags();
         newEvent.title = event_name.getText().toString();
         newEvent.location = event_location.getText().toString();
-
 
 
         newEvent.details = event_details.getText().toString().trim();

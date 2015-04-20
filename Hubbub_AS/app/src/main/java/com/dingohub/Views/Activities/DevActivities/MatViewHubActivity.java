@@ -64,7 +64,7 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_view_event);
+		setContentView(R.layout.material_activity_view_hub);
 
         // Init the hub based on id passed by bundle
         // and returned results from database
@@ -97,7 +97,7 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 
     private void init_hub(){
         Bundle bundle = getIntent().getExtras();
-        curUser = HubDatabase.getCurrentUser();
+        curUser = HubDatabase.GetCurrentUser();
 
         // Get Event to View from event id passed
         if(bundle != null){
@@ -113,9 +113,9 @@ public class MatViewHubActivity extends BaseGoogleActivity{
         // Finding values for the users followed and the bubs within the hub
 
         // TODO - A function to query the users following the hub in the database
-        //followers = HubDatabase.GetUsersByHubID(currentHub.id);
+        followers = HubDatabase.GetFriends(currentHub.id);
         // TODO - A function to query the bubs in a hub
-        //containedBubs = HubDatabase.FindBubsByHubID(currentHub.id);
+        containedBubs = HubDatabase.GetBubsFromHub(currentHub.id);
 
 
 
