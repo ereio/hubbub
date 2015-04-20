@@ -20,11 +20,16 @@ import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubbubReceivers;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
+import com.dingohub.Views.Activities.DevActivities.MatLoginActivity;
+import com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity;
+import com.dingohub.hubbub.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -32,6 +37,7 @@ import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.parse.ParseUser;
 
 public class BaseGoogleActivity extends ActionBarActivity implements
 LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -218,4 +224,52 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 			}
 		}
 	}
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            //Intent intent = new Intent(getApplicationContext(), UserSettingsActivity.class);
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            //startActivity(intent);
+            //return true;
+        } else if (id == R.id.search_bub) {
+            Intent i = new Intent(this, MatSearchEventsActivity.class);
+            startActivity(i);
+            return true;
+
+        } else if (id == R.id.logout) {
+            ParseUser.logOut();
+
+            // TODO - create a broadcast receiver to shutdown every hub activity
+            Intent intent = new Intent(getApplicationContext(), MatLoginActivity.class);
+            SharedPreferences settings = getSharedPreferences(SharedPrefKeys.LOGIN_SETTINGS, 0);
+            SharedPreferences.Editor editSettings = settings.edit();
+            editSettings.putBoolean(SharedPrefKeys.AUTO_LOG, false);
+            editSettings.putString(SharedPrefKeys.USER_KEY, null);
+            editSettings.putString(SharedPrefKeys.PASS_KEY, null);
+            editSettings.apply();
+
+            // Creates an intent to shut down all other activities
+            Intent broadcastIntent = new Intent();
+            broadcastIntent.setAction(HubbubReceivers.ACTION_LOGOUT);
+            sendBroadcast(broadcastIntent);
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

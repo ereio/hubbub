@@ -17,6 +17,7 @@ import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity;
+import com.dingohub.Views.Activities.DevActivities.MatViewHubActivity;
 import com.dingohub.Views.Activities.ViewEventActivity;
 import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
 import com.dingohub.hubbub.R;
@@ -123,7 +124,7 @@ public class MatUserHubsFragment extends Fragment{
                             rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
 
                 String eventId = followed_hubs.get(rv.getChildPosition(child)).id;
-                Intent intent = new Intent(getActivity(), ViewEventActivity.class);
+                Intent intent = new Intent(getActivity(), MatViewHubActivity.class);
                 intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);					// MAKE Bub parcelable
                 startActivity(intent);
             }

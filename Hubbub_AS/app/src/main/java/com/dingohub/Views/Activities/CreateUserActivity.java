@@ -25,6 +25,7 @@ import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
+import com.dingohub.Views.Deprecated.LoginActivity;
 import com.dingohub.hubbub.R;
 import com.dingohub.Model.Utilities.BitmapWorker;
 

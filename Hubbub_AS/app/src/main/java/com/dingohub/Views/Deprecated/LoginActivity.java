@@ -1,4 +1,4 @@
-package com.dingohub.Views.Activities;
+package com.dingohub.Views.Deprecated;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,10 +20,9 @@ import android.widget.Toast;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
-import com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity;
+import com.dingohub.Views.Activities.CreateUserActivity;
 import com.dingohub.Views.Activities.DevActivities.MatUserMainDisplay;
 import com.dingohub.hubbub.R;
-import com.parse.ParseObject;
 import com.parse.PushService;
 
 public class LoginActivity extends BaseGoogleActivity {

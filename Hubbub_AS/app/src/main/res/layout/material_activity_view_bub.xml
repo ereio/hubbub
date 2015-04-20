@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/material_activity_view_bub">
+
+    <ImageView
+        android:id="@+id/bubview_image"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_launcher"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/material_toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="5dp"/>
+
+    <include
+        android:id="@+id/material_toolbar"
+        layout="@layout/material_toolbar">
+    </include>
+
+    <TextView
+        android:id="@+id/bubview_textview_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hub_default_name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignBottom="@+id/bubview_image"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/bubview_textview_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hub_default_location"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="10dp"
+        android:layout_alignBottom="@+id/bubview_image"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+    <TextView
+        android:id="@+id/bubview_textview_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/event_details_default"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/bubview_textview_tags"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/bubview_gridrecycleview_following"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:scrollbars="horizontal"
+        android:layout_marginTop="25dp"
+        android:paddingTop="10dp"
+        android:elevation="5dp"
+        android:layout_below="@+id/bubview_textview_details"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/bubview_textview_location"
+        android:layout_alignEnd="@+id/bubview_textview_location" />
+
+    <Button
+        android:id="@+id/bubview_button_follow"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@color/ColorPrimary"
+        android:backgroundTint="@color/ColorPrimary"
+        android:elevation="10dp"
+        android:shadowColor="@color/ColorAccent"
+        android:text="@string/follow_hub"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/bubview_gridrecycleview_following"
+        android:layout_toLeftOf="@+id/bubview_button_invite"
+        android:layout_toStartOf="@+id/bubview_button_invite"
+        android:layout_marginRight="25dp"
+        android:layout_marginEnd="25dp" />
+
+    <Button
+        android:id="@+id/bubview_button_invite"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@color/ColorAccent"
+        android:elevation="10dp"
+        android:shadowColor="@color/ColorPrimaryDark"
+        android:text="@string/invite"
+        android:layout_above="@+id/bubview_maybe"
+        android:layout_toRightOf="@+id/bubview_maybe"
+        android:layout_toEndOf="@+id/bubview_maybe" />
+
+    <TextView
+        android:id="@+id/bubview_start_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bub_start_time"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/bubview_textview_location"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/bubview_end_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bub_end_time"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="10dp"
+        android:layout_above="@+id/bubview_textview_details"
+        android:layout_alignRight="@+id/bubview_textview_location"
+        android:layout_alignEnd="@+id/bubview_textview_location" />
+
+    <TextView
+        android:id="@+id/bubview_ping_in_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_pingIn"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/bubview_textview_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/bubview_textview_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textview_tags_header"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/bubview_ping_in_time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/bubview_textview_followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/following"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="10dp"
+        android:layout_alignTop="@+id/bubview_gridrecycleview_following"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/bubview_maybe"
+        android:layout_below="@+id/bubview_button_follow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/bubview_no"
+        android:layout_alignTop="@+id/bubview_maybe"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/bubview_yes"
+        android:layout_alignTop="@+id/bubview_maybe"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

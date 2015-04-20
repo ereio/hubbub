@@ -18,7 +18,7 @@
         android:id="@+id/eventlist_followingheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/event_image"
+        android:layout_alignBottom="@+id/bubview_image"
         android:layout_alignLeft="@+id/eventlist_start_time"
         android:text="@string/following"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/eventlist_followingheader"
-        android:layout_toRightOf="@+id/event_image"
+        android:layout_toRightOf="@+id/bubview_image"
         android:text="@string/bub_start_time" />
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/eventview_name"
-        android:layout_toRightOf="@+id/event_image"
+        android:layout_toRightOf="@+id/bubview_image"
         android:text="@string/bub_location"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -51,7 +51,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ImageView
-        android:id="@+id/event_image"
+        android:id="@+id/bubview_image"
         android:layout_width="100dip"
         android:layout_height="100dip"
         android:layout_alignLeft="@+id/eventview_tappin_header"
@@ -159,7 +159,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/eventview_tag_header"
-        android:layout_below="@+id/event_image"
+        android:layout_below="@+id/bubview_image"
         android:text="@string/tapp_in_header"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 

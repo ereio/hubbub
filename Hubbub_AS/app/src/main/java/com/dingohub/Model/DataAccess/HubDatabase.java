@@ -141,7 +141,7 @@ public class HubDatabase {
 			event.put(LOCATION, bub.location);
 			event.put(CREATOR, id);
 			//gave picture the title change later to picture title
-			if(bub.picture != null){
+			if(bub.picture.length != 0){
 				ParseFile e_picture = new ParseFile(bub.picture_title,bub.picture);
 				event.put(PICTURE, e_picture);
 			}

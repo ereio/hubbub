@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/event_image"
+        android:id="@+id/bubview_image"
         android:layout_width="100dp"
         android:layout_height="150dp"
         android:src="@drawable/ic_launcher"
@@ -27,12 +27,12 @@
         android:layout_height="wrap_content"
         android:text="@string/hub_default_name"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignBottom="@+id/event_image"
+        android:layout_alignBottom="@+id/bubview_image"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:id="@+id/hubview_button_follow"
+        android:id="@+id/bubview_button_follow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_ripple"
@@ -45,12 +45,12 @@
         android:layout_marginEnd="49dp" />
 
     <TextView
-        android:id="@+id/hubview_textview_location"
+        android:id="@+id/bubview_textview_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hub_default_location"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_below="@+id/event_image"
+        android:layout_below="@+id/bubview_image"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:paddingLeft="10dp"
@@ -58,12 +58,12 @@
 
 
     <TextView
-        android:id="@+id/hubview_textview_about"
+        android:id="@+id/bubview_textview_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hub_default_about"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_below="@+id/hubview_textview_location"
+        android:layout_below="@+id/bubview_textview_location"
         android:paddingLeft="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
