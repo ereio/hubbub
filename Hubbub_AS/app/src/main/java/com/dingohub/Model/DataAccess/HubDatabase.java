@@ -61,6 +61,7 @@ public class HubDatabase {
 	public static final String END_DATE = "end_date";
 	public static final String FOLLOWERS = "followers";
     public static final String FOLLOWED_BUBS = "followed_bubs";
+    public static final String FOLLOWED_HUBS = "followed_hubs";
 	public static final String TAGS = "tags";
 	public static final String PERMISSION = "permission_level";
 	public static final String YES = "yes_counter";
@@ -77,6 +78,7 @@ public class HubDatabase {
 	public static final String FRIENDS = "friends";
 	public static final String PROFILE_PIC = "profile_picture";
 	public static final String ABOUT = "about_me";
+    public static final String BACKGROUND_PICTURE = "background_picture";
 	
 	public static String locality = null;
 
@@ -118,6 +120,11 @@ public class HubDatabase {
             newUser.location = "Tallahassee_Florida";
         user.put(CURRENT_LOCATION, newUser.location);
 		user.put(FRIENDS, new JSONArray());
+        user.put(NUM_FRIENDS, 0);
+        user.put(FOLLOWED_BUBS, new JSONArray());
+        user.put(BACKGROUND_PICTURE, new byte[0]);
+        user.put(PROFILE_PIC, new byte[0]);
+        user.put(FOLLOWED_HUBS, new JSONArray());
 		
 		try {
 			user.signUp();
@@ -460,7 +467,41 @@ public class HubDatabase {
 
         return bubs;
     }
-	
+
+    public static ArrayList<Hub> GetFollowedHubs(String userId) {
+        ArrayList<Hub> hubs = new ArrayList<Hub>();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+
+        try {
+            ParseObject object = query.get(userId);
+            JSONArray followed_array = object.getJSONArray(FOLLOWED_HUBS);
+            int len = followed_array.length();
+
+            for (int i = 0; i < len; i++) {
+                Hub tmp = GetHubFromId(followed_array.get(i).toString());
+
+                if (tmp == null) throw new Exception("Specified Hub ID not found in event table.");
+
+                hubs.add(tmp);
+            }
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            hubs = null;
+            Log.e(TAG, e.toString());
+        } catch (JSONException e) {
+            status = FLAG_QUERY_FAILED;
+            hubs = null;
+            Log.e(TAG, e.toString());
+        } catch (Exception e) {
+            status = FLAG_QUERY_FAILED;
+            hubs = null;
+            Log.e(TAG, e.toString());
+        }
+
+        return hubs;
+    }
 
 	///// Used to calculate a nessesary size for Bitmap images
 	// Efficiency in memory allocation and standardization
@@ -637,7 +678,7 @@ public class HubDatabase {
 
         ArrayList<String> tag_list = new ArrayList<String>();
 
-        for (int i = 1; i < tags.length(); ++i)
+        for (int i = 0; i < tags.length(); ++i)
             tag_list.add(tags.get(i).toString());
 
         query.whereContainedIn(TAGS, tag_list);
@@ -667,7 +708,7 @@ public class HubDatabase {
         ArrayList<String> tag_list = new ArrayList<String>();
         ArrayList<String> hub_ids = new ArrayList<String>();
 
-        for (int i = 1; i < tags.length(); ++i)
+        for (int i = 0; i < tags.length(); ++i)
             tag_list.add(tags.get(i).toString());
 
         query.whereContainedIn(TAGS, tag_list);
@@ -755,6 +796,26 @@ public class HubDatabase {
         return status;
     }
 
+    public static int AddFollowedHub(String hub_id, String user_id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+
+        try {
+            ParseObject object = query.get(hub_id);
+
+            JSONArray followed_hubs = object.getJSONArray(FOLLOWED_HUBS);
+            followed_hubs.put(hub_id);
+            object.put(FOLLOWED_HUBS, followed_hubs);
+            object.saveInBackground();
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        }
+
+        return status;
+    }
+
     /**
      * Removes a user as a follower of a Hub
      * @param hub_id the ID of the Hub to remove the user from
@@ -778,6 +839,36 @@ public class HubDatabase {
 
             list.remove(user_id);
             object.put(FOLLOWERS, new JSONArray(list));
+
+            status = FLAG_QUERY_SUCCESSFUL;
+        } catch (ParseException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        } catch (JSONException e) {
+            status = FLAG_QUERY_FAILED;
+            Log.e(TAG, e.toString());
+        }
+
+        return status;
+    }
+
+    public static int RemoveFollowedHub(String hub_id, String user_id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
+
+        try {
+            ParseObject object = query.get(user_id);
+            JSONArray followed_hubs = object.getJSONArray(FOLLOWED_HUBS);
+            ArrayList<String> list = new ArrayList<String>();
+            int len = followed_hubs.length();
+
+            if (followed_hubs != null) {
+                for (int i = 0; i < len; i++) {
+                    list.add(followed_hubs.get(i).toString());
+                }
+            }
+
+            list.remove(hub_id);
+            object.put(FOLLOWED_HUBS, new JSONArray(list));
 
             status = FLAG_QUERY_SUCCESSFUL;
         } catch (ParseException e) {

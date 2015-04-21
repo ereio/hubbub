@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 
 import java.util.Random;
 
@@ -51,7 +52,7 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
 
             pushType = splitType[1].replaceAll("\"", "");
             eventID = splitEvent[1].replaceAll("\"", "");
-
+            Log.d("myApplication", pushType);
 
             if (pushType.equals("1")) {
                 intent = new Intent(context, ShowDialogActivity.class);
@@ -81,7 +82,7 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
                 Random rand = new Random();
 
 
-                int randomNum = rand.nextInt((20 - 5) + 1) + 5;
+                int randomNum = rand.nextInt((50 - 5) + 1) + 5;
 
                 notificationmanager.notify(randomNum, notificationbuilder.build());
             }

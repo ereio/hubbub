@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.support.annotation.ColorRes;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -53,89 +54,92 @@ import java.util.HashMap;
 import java.util.TimeZone;
 
 public class MatCreateEventsActivity extends BaseGoogleActivity {
-	private String [] ping_time;
-	private static int RESULT_LOAD_IMAGE = 1;
-	String evalue;
+    private String[] ping_time;
+    private static int RESULT_LOAD_IMAGE = 1;
+    String evalue;
 
-	public static final String CHANNEL_KEY = "CHANNEL_KEY";
+    public static final String CHANNEL_KEY = "CHANNEL_KEY";
     public static final String HUBS_CHANNELS = "HUBS_CHANNELS";
     public static final String PUSH_TYPE = "PUSH_TYPE";
     private String UtcTime;
-	private EditText start_time;
-	private EditText end_time;
-	private EditText start_date;
-	private EditText end_date;
-	private EditText eTags;
-	private EditText event_name;
-	private ImageButton event_picture;
-	private EditText event_location;
-	private String set_noon;
-	TextView header;
+    private EditText start_time;
+    private EditText end_time;
+    private EditText start_date;
+    private EditText end_date;
+    private EditText eTags;
+    private EditText event_name;
+    private ImageButton event_picture;
+    private EditText event_location;
+    private String set_noon;
+    TextView header;
 
-	//Details of the event
-	private EditText event_details;
-	private byte[] picture_bytes;
+    //Details of the event
+    private EditText event_details;
+    private byte[] picture_bytes;
 
-	// store the date and time chosen
-	//by the user
-	private int time_hour;
-	private int time_minute;
-	private int date_year;
-	private int date_month;
-	private int date_day;
+    // store the date and time chosen
+    //by the user
+    private int time_hour;
+    private int time_minute;
+    private int date_year;
+    private int date_month;
+    private int date_day;
 
-	boolean pictureSelected = false;
-	RadioButton privacy;
-	Spinner pingIn;
-	private AlarmManager alarmMgr;
-	private PendingIntent alarmIntent;
-	private Button create_button;
+    boolean pictureSelected = false;
+    RadioButton privacy;
+    Spinner pingIn;
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
+    private Button create_button;
     private Toolbar toolbar;
     private String[] tagStrings;
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.material_activity_create_bub);
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.material_activity_create_bub);
 
         init_ui();
 
         init_onClickListeners();
 
-	}
+    }
 
-    private void init_ui(){
+    private void init_ui() {
 
         toolbar = (Toolbar) findViewById(R.id.material_toolbar);
         setSupportActionBar(toolbar);
 
-        ping_time = new String[]{"0 hours before", "1 hour before","2 hours before","3 hours before",
-                "4 hours before","5 hours before","6 hours before","7 hours before","8 hours before"};
+        ping_time = new String[]{"0 hours before", "1 hour before", "2 hours before", "3 hours before",
+                "4 hours before", "5 hours before", "6 hours before", "7 hours before", "8 hours before"};
 
         pingIn = (Spinner) findViewById(R.id.pingIn_spinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item ,ping_time);
+                android.R.layout.simple_spinner_item, ping_time);
         pingIn.setAdapter(adapter);
 
         start_time = (EditText) findViewById(R.id.bub_start_time);
         end_time = (EditText) findViewById(R.id.bub_end_time);
         start_date = (EditText) findViewById(R.id.bub_start_date);
         end_date = (EditText) findViewById(R.id.bub_end_date);
+
         event_picture = (ImageButton) findViewById(R.id.user_background_image);
         create_button = (Button ) findViewById(R.id.bub_create);
+
         header = (TextView) findViewById(R.id.bub_name_header);
         event_name = (EditText) findViewById(R.id.bub_name);
-        event_location  = (EditText) findViewById(R.id.bub_location);
+        event_location = (EditText) findViewById(R.id.bub_location);
         event_details = (EditText) findViewById(R.id.bub_details);
         eTags = (EditText) findViewById(R.id.bub_tag);
     }
 
-    private void init_onClickListeners(){
+    private void init_onClickListeners() {
         // these are listeners to when the editTexts are pressed
         start_time.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
+                if (hasFocus) {
                     OpenTimePicker(v);
                     evalue = "start_time";
                 } else {
@@ -147,7 +151,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         end_time.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
+                if (hasFocus) {
                     OpenTimePicker(v);
                     evalue = "end_time";
                 } else {
@@ -159,7 +163,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         start_date.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
+                if (hasFocus) {
                     OpenDatePicker(v);
                     evalue = "start_date";
                 } else {
@@ -171,24 +175,24 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         end_date.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
-                {
+                if (hasFocus) {
                     OpenDatePicker(v);
                     evalue = "end_date";
-                }else{
+                } else {
                     //Hide your calender here
                 }
             }
         });
 
-        event_picture.setOnClickListener(new OnClickListener(){
+        event_picture.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
                 header.setVisibility(View.INVISIBLE);
-            }});
+            }
+        });
 
 
         create_button.setOnClickListener(new OnClickListener() {
@@ -205,103 +209,105 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
     }
 
     //when the create Event button is clicked
-    public void CreateEvent ( View v) throws JSONException {
+    public void CreateEvent(View v) throws JSONException {
 
-         //will contain ID of hubs to subscribe to
-        ArrayList<String> hubs_to_subscribe = new ArrayList<String>();
 
-        Date d = new Date(pingInActualTime());
-        String format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-        SimpleDateFormat dateForm = new SimpleDateFormat (format);
+        if(CheckInput()) {
+            //will contain ID of hubs to subscribe to
+            ArrayList<String> hubs_to_subscribe = new ArrayList<String>();
 
-        dateForm.setTimeZone(TimeZone.getTimeZone("UTC"));
-        UtcTime = dateForm.format(d) ;
+            Date d = new Date(pingInActualTime());
+            String format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+            SimpleDateFormat dateForm = new SimpleDateFormat(format);
 
+            dateForm.setTimeZone(TimeZone.getTimeZone("UTC"));
+            UtcTime = dateForm.format(d);
 
 
             String event_id = HubDatabase.CreateBub(createEventFromData());
             hubs_to_subscribe = HubDatabase.GetHubsIdFromTags(convertTags());
             HubDatabase.AddFollower(event_id, HubDatabase.GetCurrentUser().id);
-            HubDatabase.AddBubToHub(event_id,convertTags());
+            HubDatabase.AddBubToHub(event_id, convertTags());
             //function giving null pointer exception
-           // HubDatabase.AddFollowedBub(event_id, HubDatabase.GetCurrentUser().id);
+            // HubDatabase.AddFollowedBub(event_id, HubDatabase.GetCurrentUser().id);
 
-        //subscribes to every hub returned from tags
-        for (int i = 0 ; i < hubs_to_subscribe.size(); ++i)
-            ParsePush.subscribeInBackground(hubs_to_subscribe.get(i));
+            //subscribes to every hub returned from tags
+            for (int i = 0; i < hubs_to_subscribe.size(); ++i)
+                ParsePush.subscribeInBackground(hubs_to_subscribe.get(i));
 
             //subscribes user to the bub created
             ParsePush.subscribeInBackground(event_id);
 
-        HashMap<String, Object> params = new HashMap<String, Object>();
+            HashMap<String, Object> params = new HashMap<String, Object>();
 
-        params.put("pingIn",UtcTime);
-        params.put(CHANNEL_KEY,event_id);
-        params.put(HUBS_CHANNELS,hubs_to_subscribe);
+            params.put("pingIn", UtcTime);
+            params.put(CHANNEL_KEY, event_id);
+            params.put(HUBS_CHANNELS, hubs_to_subscribe);
 
 
-        ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
-            @Override
-            public void done(String object, ParseException e) {
-                // TODO Auto-generated method stub
-                if (e == null)
-                    Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
+            ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
+                @Override
+                public void done(String object, ParseException e) {
+                    // TODO Auto-generated method stub
+                    if (e == null)
+                        Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                }
+            });
 
             //sends notification to everyone following the hub
-        ParseCloud.callFunctionInBackground("NewBubPush", params, new FunctionCallback<String>() {
-            @Override
-            public void done(String object, ParseException e) {
-                // TODO Auto-generated method stub
-                if (e == null)
-                    Toast.makeText(getApplicationContext(), "new push worked", Toast.LENGTH_SHORT).show();
+            ParseCloud.callFunctionInBackground("NewBubPush", params, new FunctionCallback<String>() {
+                @Override
+                public void done(String object, ParseException e) {
+                    // TODO Auto-generated method stub
+                    if (e == null)
+                        Toast.makeText(getApplicationContext(), "new push worked", Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                }
+            });
 
-        Toast.makeText(this,
+            Toast.makeText(this,
                     "Event Creation Succeeded", Toast.LENGTH_SHORT).show();
             finish();
+        }
+        else Toast.makeText(this,"Please enter missing fields",Toast.LENGTH_SHORT).show();
     }
-		
-	
+
+
     //This opens the time picker dialog,it is
     //called when the button with id = set_time is called
-    public void OpenTimePicker(View v){
+    public void OpenTimePicker(View v) {
         DialogFragment fragment = new TimePickerFragment();
-        fragment.show(getFragmentManager(),"timePicker");
+        fragment.show(getFragmentManager(), "timePicker");
 
     }
 
 
     //This opens the date picker dialog,it is
     //called when the button with id = set_date is called
-    public void OpenDatePicker(View v){
+    public void OpenDatePicker(View v) {
         DialogFragment fragment = new DatePickerFragment();
         fragment.show(getFragmentManager(), "datepicker");
 
     }
 
 
-
     // this function sets the Date in the text View and sets the
     // date variables to be uploaded to the database
     // It is called from the DatePickerFragment
-    public void setDate(View v,int year ,int month,int day){
+    public void setDate(View v, int year, int month, int day) {
         EditText showDate;
 
-        if(evalue.equals("start_date"))
-            showDate = (EditText)findViewById(R.id.bub_start_date);
+        if (evalue.equals("start_date"))
+            showDate = (EditText) findViewById(R.id.bub_start_date);
         else
-            showDate = (EditText)findViewById(R.id.bub_end_date);
+            showDate = (EditText) findViewById(R.id.bub_end_date);
 
         date_year = year;
         date_month = ++month;
         date_day = day;
 
-        showDate.setText(""+day+"/"+month+"/"+year);
+        showDate.setText("" + day + "/" + month + "/" + year);
 
     }
 
@@ -309,70 +315,69 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
     // this function sets the Time in the text View and sets the
     // time variables to be uploaded to the database
     // it is called from the TimePickerFragment
-    public void setTime(View v,int hour,int minute){
+    public void setTime(View v, int hour, int minute) {
         EditText showTime;
-        if(evalue.equals("start_time")) {
+        if (evalue.equals("start_time")) {
             showTime = (EditText) findViewById(R.id.bub_start_time);
             time_hour = hour;
             time_minute = minute;
-        }else
-            showTime = (EditText)findViewById(R.id.bub_end_time);
+        } else
+            showTime = (EditText) findViewById(R.id.bub_end_time);
 
-        if(hour >= 12){
-            if(minute >= 10)
-                showTime.setText(""+(hour-12)+": "+minute+ " PM");
+        if (hour >= 12) {
+            if (minute >= 10)
+                showTime.setText("" + (hour - 12) + ": " + minute + " PM");
             else
-                showTime.setText(""+(hour-12)+": 0"+minute+ " PM");
+                showTime.setText("" + (hour - 12) + ": 0" + minute + " PM");
 
             set_noon = "PM";
-            } else {
-            if(minute >= 10)
-                showTime.setText(""+(hour)+": "+minute + " AM");
+        } else {
+            if (minute >= 10)
+                showTime.setText("" + (hour) + ": " + minute + " AM");
             else
-                showTime.setText(""+(hour)+": 0"+minute + " AM");
+                showTime.setText("" + (hour) + ": 0" + minute + " AM");
 
             set_noon = "AM";
-            }
+        }
     }
 
 
-
-    private boolean checkTags(){
+    private boolean checkTags() {
         boolean check = true;
         String tagString = eTags.getText().toString();
         String[] tagList = tagString.split(",", 5);
 
         // check if more than five tags, only five tags allowed!
-        if(tagList.length > 5){
+        if (tagList.length > 5) {
             Toast.makeText(this,
-            "Events cannot have more than 5 tags, sorry :/", Toast.LENGTH_SHORT).show();
+                    "Events cannot have more than 5 tags, sorry :/", Toast.LENGTH_SHORT).show();
             check = false;
         }
 
         // check if tag is too long
-        if(tagList[0].length() > 20){
+        if (tagList[0].length() > 20) {
             Toast.makeText(this,
-            "Tags cannot be more than 20 characters long :(", Toast.LENGTH_SHORT).show();
+                    "Tags cannot be more than 20 characters long :(", Toast.LENGTH_SHORT).show();
             check = false;
         }
 
         // check if an extra comma or invalid characters where inserted
-        for(String cTag : tagList){
+        for (String cTag : tagList) {
             //if(cTag.contains(DBFunct.INVALID_CHARS)){
-                Toast.makeText(this,
-                "Tags cannot contain non-alphabetic characters, except a hashtag", Toast.LENGTH_SHORT).show();
-                check = false;
+            Toast.makeText(this,
+                    "Tags cannot contain non-alphabetic characters, except a hashtag", Toast.LENGTH_SHORT).show();
+            check = false;
             //}
         }
 
-        if(check)
+        if (check)
             return true;
         else
             return false;
 
     }
 
-    private JSONArray convertTags(){
+    private JSONArray convertTags() {
 
         // splits entries into an array based on deliminating commas
         tagStrings = eTags.getText().toString().split("#");
@@ -380,11 +385,14 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         // omits any user inputed hashtags from the database log
 
         JSONArray tagJSON = new JSONArray();
-        for(int i = 0 ; i < tagStrings.length ; i++){
-            tagStrings[i] = tagStrings[i].toLowerCase().replaceAll(" ","");
-            tagJSON.put(tagStrings[i]);
+        for (int i = 0; i < tagStrings.length; i++) {
+            if (!tagStrings[i].equals(" ") &&
+                    !tagStrings[i].toLowerCase().replaceAll(" ", "").equals(" ")
+                    && !tagStrings[i].equals("")) {
+                tagStrings[i] = tagStrings[i].toLowerCase().replaceAll(" ", "");
+                tagJSON.put(tagStrings[i]);
+            }
         }
-
 
 
         // returns the array for creation
@@ -392,14 +400,14 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
     }
 
     //fix the ping in time
-    private Bub createEventFromData(){
+    private Bub createEventFromData() {
         Bub newEvent = new Bub();
         JSONArray JSONTags = convertTags();
         newEvent.title = event_name.getText().toString();
         newEvent.location = event_location.getText().toString();
 
         newEvent.geolocation = HubDatabase.GetCurrentUser().location;
-
+        //newEvent.geolocation = "USA";
         newEvent.details = event_details.getText().toString().trim();
         newEvent.permissions = "public";
 
@@ -413,7 +421,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         newEvent.pingIn_time = Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]);
 
         // Converts and compresses for the server side data storage
-        if(pictureSelected){
+        if (pictureSelected) {
             newEvent.picture_title = newEvent.title + " Picture";
             Bitmap temp = ((BitmapDrawable) event_picture.getDrawable()).getBitmap();
 
@@ -426,10 +434,10 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         return newEvent;
     }
 
-    private long pingInActualTime(){
+    private long pingInActualTime() {
 
-        Calendar c = new GregorianCalendar(date_year,date_month-1,date_day,time_hour,time_minute);
-        c.add(c.HOUR,-1*Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]) );
+        Calendar c = new GregorianCalendar(date_year, date_month - 1, date_day, time_hour, time_minute);
+        c.add(c.HOUR, -1 * Integer.parseInt(pingIn.getSelectedItem().toString().split(" ")[0]));
 
         return c.getTimeInMillis();
 
@@ -438,9 +446,9 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
     ////////////////////////////////////////////////////////////////
     // Get tapp in system time
     ///////////////////////////////////////////////////////////////
-    private long pingInTimeInMillis(){
-        EditText showDate = (EditText)findViewById(R.id.bub_start_date);
-        EditText showTime = (EditText)findViewById(R.id.bub_start_time);
+    private long pingInTimeInMillis() {
+        EditText showDate = (EditText) findViewById(R.id.bub_start_date);
+        EditText showTime = (EditText) findViewById(R.id.bub_start_time);
 
         String[] stime = showTime.getText().toString().split("[: ]+");
         String[] sdate = showDate.getText().toString().split("/");
@@ -451,12 +459,12 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         //year
         tt[0] = Integer.parseInt(sdate[2].trim());
         //month (Jan = 0)
-        tt[1] = Integer.parseInt(sdate[1].trim())-1;
+        tt[1] = Integer.parseInt(sdate[1].trim()) - 1;
         //day
         tt[2] = Integer.parseInt(sdate[0].trim());
 
         //hour
-        if(stime[2].trim().equals("PM"))
+        if (stime[2].trim().equals("PM"))
             tt[3] = Integer.parseInt(stime[0].trim()) + 12;
         else
             tt[3] = Integer.parseInt(stime[0].trim());
@@ -466,8 +474,8 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
 
         Calendar cal = Calendar.getInstance();
 
-        cal.set(tt[0],tt[1],tt[2],tt[3],tt[4],0);
-        cal.add(Calendar.HOUR_OF_DAY, - tappInVal);
+        cal.set(tt[0], tt[1], tt[2], tt[3], tt[4], 0);
+        cal.add(Calendar.HOUR_OF_DAY, -tappInVal);
 
         Log.i(Hubbub.TAG,DateFormat.getDateTimeInstance().format(cal.getTime()));
         Log.i(Hubbub.TAG,"Tapp in: "+tappInVal+" hrs before");
@@ -475,27 +483,27 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         return cal.getTimeInMillis();
     }
 
-	//////////////////////////////////////////
-	// Convert system time to time since boot
-	//////////////////////////////////////////
-	public long sysTimeToTSB(long sysTimeOfEvent){
-		long sysBootTime = System.currentTimeMillis() - SystemClock.elapsedRealtime();
+    //////////////////////////////////////////
+    // Convert system time to time since boot
+    //////////////////////////////////////////
+    public long sysTimeToTSB(long sysTimeOfEvent) {
+        long sysBootTime = System.currentTimeMillis() - SystemClock.elapsedRealtime();
 
-		return sysTimeOfEvent - sysBootTime;
-	}
+        return sysTimeOfEvent - sysBootTime;
+    }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         GetLocalPicture(requestCode, resultCode, data);
-	}
+    }
 
-    private void GetLocalPicture(int requestCode, int resultCode, Intent data){
+    private void GetLocalPicture(int requestCode, int resultCode, Intent data) {
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
 
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-            Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
             cursor.moveToFirst();
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
@@ -510,9 +518,63 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
             pictureSelected = true;
         }
     }
-	
-	
-		
-		
-	
+
+
+    private boolean CheckInput() {
+
+        boolean clean = true;
+
+        if (start_time.getText().toString().equals(" ") ||
+                start_time.getText().toString().equals("")) {
+
+            clean = false;
+        }
+
+        if (end_time.getText().toString().equals(" ")||
+                end_time.getText().toString().equals("")) {
+
+            clean = false;
+        }
+
+
+        if (start_date.getText().toString().equals(" ")||
+                start_date.getText().toString().equals("")) {
+
+            clean =false;
+        }
+
+
+        if (event_name.getText().toString().equals(" ")||
+                event_name.getText().toString().equals("")) {
+            event_name.setHintTextColor((getResources().getColor(R.color.Red)));
+            event_name.setHint("Please Enter Bub name");
+            event_name.setText("");
+            clean = false;
+        }
+
+        if (event_location.getText().toString().equals(" ")||
+                event_location.getText().toString().equals("")) {
+            event_location.setHintTextColor((getResources().getColor(R.color.Red)));
+            event_location.setHint("Please Enter location");
+            event_location.setText("");
+            clean = false;
+        }
+
+        if(eTags.getText().toString().equals(" ")||
+                eTags.getText().toString().equals(""))  {
+
+           eTags.setHintTextColor((getResources().getColor(R.color.Red)));
+           eTags.setHint("Please Enter Tags ex: #soccer");
+           eTags.setText("");
+            clean = false;
+
+        }
+
+        return clean;
+    }
+
+
 }
+		
+	
+
