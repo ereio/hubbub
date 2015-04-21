@@ -108,7 +108,7 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			end_time = (EditText) findViewById(R.id.bub_end_time);
 			start_date = (EditText) findViewById(R.id.bub_start_date);
 			end_date = (EditText) findViewById(R.id.bub_end_date);
-			event_picture = (ImageButton) findViewById(R.id.bub_image_button);
+			event_picture = (ImageButton) findViewById(R.id.user_background_image);
 			create_button = (Button ) findViewById(R.id.bub_create);
 			header = (TextView) findViewById(R.id.bub_name_header);
 			

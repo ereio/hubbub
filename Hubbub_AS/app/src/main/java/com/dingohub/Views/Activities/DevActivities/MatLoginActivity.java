@@ -134,7 +134,7 @@ public class MatLoginActivity extends BaseGoogleActivity {
 		SignUp.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent (getApplicationContext(), CreateUserActivity.class);
+				Intent intent = new Intent (getApplicationContext(), MatCreateUserActivity.class);
 				startActivity(intent);
 			}
 		});

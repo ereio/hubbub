@@ -45,7 +45,7 @@ public class ProfileViewHolder extends RecyclerView.ViewHolder {
         } else if(ViewType == TYPE_HEADER) {
             navName = (TextView) itemView.findViewById(R.id.text_user_name);         // Creating Text View object from header.xml for name
             navEmail = (TextView) itemView.findViewById(R.id.text_user_email);
-            navProfile = (ImageView) itemView.findViewById(R.id.picture_circle_friend);
+            navProfile = (ImageView) itemView.findViewById(R.id.imagebutton_account_picture);
             navLocation = (TextView) itemView.findViewById(R.id.text_user_location);
             Holderid = TYPE_HEADER;                                                // Setting holder id = 0 as the object being populated are of type header view
         }

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/bub_image_button" >
+        android:layout_below="@+id/user_background_image" >
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -175,7 +175,7 @@
     </ScrollView>
 
     <ImageButton
-        android:id="@+id/bub_image_button"
+        android:id="@+id/user_background_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/entry_username"

@@ -72,22 +72,8 @@ public class MatViewAllUsersActivity extends BaseGoogleActivity{
 
     }
 
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-
-    }
     private void init_ui(){
-        toolbar = (Toolbar) findViewById(R.id.material_toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Testing the touch", Toast.LENGTH_LONG).show();
-            }
-        });
-        setSupportActionBar(toolbar);
-
+       SetDrawerAsBackButton(false, 0);
     }
 
     // TODO - Implement the onPause call to save the hub data stored

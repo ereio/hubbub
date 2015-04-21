@@ -76,12 +76,6 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
         init_adapters();
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
     private void init_user_info(){
         Bundle extras = getIntent().getExtras();
 
@@ -101,23 +95,9 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
 
     }
 
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-
-    }
     private void init_ui(){
-        toolbar = (Toolbar) findViewById(R.id.material_toolbar);
-        toolbar.getBackground().mutate().setAlpha(50);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Testing the touch", Toast.LENGTH_SHORT).show();
-            }
-        });
-        setSupportActionBar(toolbar);
 
+        SetDrawerAsBackButton(false, 50);
 
         iProfilePic = (ImageView) findViewById(R.id.image_profile_picture);
         tUsername = (TextView) findViewById(R.id.text_username);

@@ -29,7 +29,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
                          // Setting holder id = 0 as the object being populated are of type header view
         if (ViewType == TYPE_FRIEND) {
             friendUsername = (TextView) itemView.findViewById(R.id.textview_friend_username);
-            friendPicture = (ImageView) itemView.findViewById(R.id.picture_circle_friend);
+            friendPicture = (ImageView) itemView.findViewById(R.id.imagebutton_account_picture);
             Holderid = TYPE_FRIEND;
         }
     }

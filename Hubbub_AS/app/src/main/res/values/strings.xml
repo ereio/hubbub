@@ -88,6 +88,8 @@
       <string name="connect">Connect</string>
       <string name="find_address">Find Address</string>
       <string name="DEBUG_GEO">DEBUG_GEO</string>
+
+
     <string name="empty_error_default">Default Empty Parse Return</string>
     <string name="follow_hub">Follow Hub</string>
     <string name="unfollow_hub">Unfollow Hub</string>
@@ -95,5 +97,6 @@
     <string name="invite">Invite</string>
     <string name="text_follow">Follow</string>
     <string name="empty_follower_list"> You are not following anyone</string>
+    <string name="background_image_instructions">Upload a profile background</string>
 
 </resources>

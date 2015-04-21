@@ -144,7 +144,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <ImageButton
-                android:id="@+id/bub_image_button"
+                android:id="@+id/user_background_image"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:src="@drawable/create_bub"
@@ -192,7 +192,7 @@
                 android:id="@+id/bub_name_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/bub_image_button"
+                android:layout_alignTop="@+id/user_background_image"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:text="@string/create_bub"

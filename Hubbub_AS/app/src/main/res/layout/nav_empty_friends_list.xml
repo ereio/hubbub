@@ -7,7 +7,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/ic_account_circle_black_24dp"
-        android:id="@+id/picture_circle_friend"
+        android:id="@+id/imagebutton_account_picture"
         android:elevation="5dp"
         android:background="@color/MediumTurquoise"
         android:layout_alignParentTop="true"

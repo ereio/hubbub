@@ -1,13 +1,12 @@
 package com.dingohub.Views.Activities.DevActivities;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,14 +19,11 @@ import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
-import com.dingohub.Model.DataAccess.HubbubReceivers;
-import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Adapters.UserRecycleAdapter;
 import com.dingohub.hubbub.R;
 import com.parse.ParsePush;
-import com.parse.ParseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,9 +74,10 @@ public class MatViewBubActivity extends BaseGoogleActivity{
     RecyclerView.Adapter userAdapter;
     RecyclerView.LayoutManager userLayoutManager;
 
+    DrawerLayout mDrawerLayout;
+
 	ScheduledExecutorService ses;
 
-    private Toolbar toolbar;
     private boolean followingStatus = false;
 
 	@Override
@@ -184,11 +181,9 @@ public class MatViewBubActivity extends BaseGoogleActivity{
 	}
 	
 	public void init_ui(){
-        toolbar = (Toolbar) findViewById(R.id.material_toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        SetDrawerAsBackButton(true, 0);
+        reset_elevation();
 
         event_name = (TextView) findViewById(R.id.bubview_textview_name);
         event_location = (TextView) findViewById(R.id.bubview_textview_location);
@@ -213,6 +208,12 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         userRecyclerView = (RecyclerView) findViewById(R.id.bubview_gridrecycleview_following);
 
 	}
+
+    @TargetApi(21)
+    private void reset_elevation(){
+        toolbar.setElevation(2f);
+        setSupportActionBar(toolbar);
+    }
 	
 	public void set_ui(){
 
@@ -291,6 +292,7 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         bFollow.setText("Unfollow Hub");
         bFollow.setBackgroundColor(getResources().getColor(R.color.ColorPrimary));
         followingStatus = false;
+        bInvite.setEnabled(false);
     }
 
     private void follow_hub(){
@@ -302,6 +304,7 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         bFollow.setText("Follow Hub");
         bFollow.setBackgroundColor(getResources().getColor(R.color.ColorPrimaryDark));
         followingStatus = true;
+        bInvite.setEnabled(true);
     }
 
 

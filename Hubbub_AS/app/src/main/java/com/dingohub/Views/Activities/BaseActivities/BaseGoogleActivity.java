@@ -17,12 +17,17 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubbubReceivers;
@@ -62,6 +67,11 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
     protected GestureDetector mGestureDetector;
 
     protected BroadcastReceiver logoutBroadcast;
+
+    protected Toolbar toolbar;
+    protected ActionBar mActionBar;
+    protected ActionBarDrawerToggle mActionBarDrawerToggle;
+    DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -238,6 +248,11 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+        if(mActionBarDrawerToggle != null)
+            if(mActionBarDrawerToggle.onOptionsItemSelected(item))
+                return true;
+
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             //Intent intent = new Intent(getApplicationContext(), UserSettingsActivity.class);
@@ -271,6 +286,51 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
+    }
+
+
+    // All this is literally just to set the back button up to go back
+    // I swear to god this is the most overly complex thing android
+    // has ever allowed. It's because they assumed the actionbar would always be
+    // used as a device for a drawer. Not taking into account they might actually use
+    // it for tabs and to hell with anyone who might want to use their own custom Toolbar
+    protected void SetDrawerAsBackButton(boolean state, int alpha){
+
+        toolbar = (Toolbar) findViewById(R.id.material_toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+
+        if(alpha != 0)
+            toolbar.getBackground().mutate().setAlpha(alpha);
+
+        setSupportActionBar(toolbar);
+
+        if(state){
+            mActionBar = getSupportActionBar();
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.viewbub_drawer);
+            mActionBarDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,toolbar, R.string.openDrawer, R.string.app_name){
+                @Override
+                public void onDrawerOpened(View drawerView) { super.onDrawerOpened(drawerView); }
+
+                @Override
+                public void onDrawerClosed(View drawerView) { super.onDrawerClosed(drawerView); }
+
+            }; // Drawer Toggle Object Made
+
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            mActionBarDrawerToggle.setDrawerIndicatorEnabled(false);
+            mActionBarDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+            mDrawerLayout.setDrawerListener(mActionBarDrawerToggle); // Drawer Listener set to the Drawer toggle
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }

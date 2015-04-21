@@ -75,7 +75,8 @@
         <activity android:name="com.dingohub.Views.Activities.DevActivities.MatViewBubActivity"/>
         <activity android:name="com.dingohub.Views.Activities.DevActivities.MatUserProfileActivity"/>
         <activity android:name="com.dingohub.Views.Activities.DevActivities.MatViewAllUsersActivity"/>
-        <activity android:name = "com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity"></activity>
+        <activity android:name = "com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity"/>
+        <activity android:name = "com.dingohub.Views.Activities.DevActivities.MatCreateUserActivity"/>
         
         <!-- SERVICES AND RECEIVERS -->
         <service android:name="com.parse.PushService" />

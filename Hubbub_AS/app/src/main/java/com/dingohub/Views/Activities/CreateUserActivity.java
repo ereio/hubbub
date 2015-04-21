@@ -104,7 +104,7 @@ public class CreateUserActivity extends BaseGoogleActivity {
 		eDetail = (EditText) findViewById(R.id.entry_about_me);
 		
 		bCreate = (Button) findViewById(R.id.button_create_user);
-		bProfilePic = (ImageButton) findViewById(R.id.bub_image_button);
+		bProfilePic = (ImageButton) findViewById(R.id.user_background_image);
 		
 	}
 	
@@ -153,7 +153,7 @@ public class CreateUserActivity extends BaseGoogleActivity {
 		eSettings.commit();
 		
 		Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-		login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		startActivity(login);
 	}
 	

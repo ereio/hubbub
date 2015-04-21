@@ -45,7 +45,6 @@ import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -121,7 +120,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         end_time = (EditText) findViewById(R.id.bub_end_time);
         start_date = (EditText) findViewById(R.id.bub_start_date);
         end_date = (EditText) findViewById(R.id.bub_end_date);
-        event_picture = (ImageButton) findViewById(R.id.bub_image_button);
+        event_picture = (ImageButton) findViewById(R.id.user_background_image);
         create_button = (Button ) findViewById(R.id.bub_create);
         header = (TextView) findViewById(R.id.bub_name_header);
         event_name = (EditText) findViewById(R.id.bub_name);

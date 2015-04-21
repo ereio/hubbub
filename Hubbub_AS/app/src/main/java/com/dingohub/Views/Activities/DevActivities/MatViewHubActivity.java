@@ -57,7 +57,6 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 	Hub currentHub;
 	HubUser curUser;
     boolean followingStatus = false;
-    private Toolbar toolbar;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -118,8 +117,7 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 
 	public void init_ui(){
 
-        toolbar = (Toolbar) findViewById(R.id.material_toolbar);
-        setSupportActionBar(toolbar);
+        SetDrawerAsBackButton(false, 0);
 
         // Sets recycler for the Follower User Circles
             // Finding View
