@@ -289,7 +289,7 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         // TODO - Similarly a remove for hub's in users accounts
         HubDatabase.RemoveFollower(event);
         HubDatabase.RemoveFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
-        bFollow.setText("Unfollow Hub");
+        bFollow.setText("Unfollow Bub");
         bFollow.setBackgroundColor(getResources().getColor(R.color.ColorPrimary));
         followingStatus = false;
         bInvite.setEnabled(false);

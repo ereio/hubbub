@@ -115,7 +115,7 @@ public class MatSearchEventsActivity extends BaseGoogleActivity{
 		}
 
         if(tag.contains(" ")){
-            Toast.makeText(getApplicationContext(), "Cannot saerch multiple tags or multi-word tags",
+            Toast.makeText(getApplicationContext(), "Cannot search multiple tags or multi-word tags",
                     Toast.LENGTH_LONG).show();
             return false;
         }

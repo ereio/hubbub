@@ -92,7 +92,9 @@
 
     <string name="empty_error_default">Default Empty Parse Return</string>
     <string name="follow_hub">Follow Hub</string>
+    <string name="follow_bub">Follow Bub</string>
     <string name="unfollow_hub">Unfollow Hub</string>
+    <string name="unfollow_bub">Unfollow Bub</string>
     <string name="app_motto">Be with what you love.</string>
     <string name="invite">Invite</string>
     <string name="text_follow">Follow</string>
