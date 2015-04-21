@@ -260,6 +260,10 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         // Find if the current user if following the hub
         followingStatus = searchFollowing();
 
+        bFollow.setText(followingStatus ? "Unfollow Bub" : "Follow Bub");
+        bFollow.setBackgroundColor(followingStatus ? getResources().getColor(R.color.ColorAccent)
+                : getResources().getColor(R.color.ColorPrimary));
+
         bFollow.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -293,7 +297,6 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         bFollow.setText("Unfollow Bub");
         bFollow.setBackgroundColor(getResources().getColor(R.color.ColorPrimary));
         followingStatus = false;
-        bInvite.setEnabled(false);
     }
 
     private void follow_hub(){
@@ -303,9 +306,8 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         HubDatabase.AddFollower(event.id, HubDatabase.GetCurrentUser().id);
         HubDatabase.AddFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
         bFollow.setText("Follow Bub");
-        bFollow.setBackgroundColor(getResources().getColor(R.color.ColorPrimaryDark));
+        bFollow.setBackgroundColor(getResources().getColor(R.color.ColorAccent));
         followingStatus = true;
-        bInvite.setEnabled(true);
     }
 
 
