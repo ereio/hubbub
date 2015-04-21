@@ -6,9 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dingohub.Hubbub;
+import com.dingohub.Model.DataAccess.Hub;
 import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.hubbub.R;
+
+import java.util.Random;
 
 /**
  * Created by ereio on 3/30/15.
@@ -26,6 +30,7 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolde
 
     private String name;
     private byte[] profilePicture;
+    private byte[] backgroundPicture;
     private String email;
     private String location;
 
@@ -39,6 +44,7 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolde
             this.location = LOCATION;
 
         profilePicture = user.picture;
+        backgroundPicture = user.backgroundPicture;
         this.context = context;
 
     }
@@ -84,6 +90,16 @@ public class ProfileRecycleAdapter extends RecyclerView.Adapter<ProfileViewHolde
             holder.navEmail.setText(email);
             holder.navLocation.setText(location);
 
+
+            if(backgroundPicture != null){
+                BitmapWorker worker = new BitmapWorker(holder.navBackground, backgroundPicture, 600, 350);
+                worker.execute(0);
+            } else {
+                Random rand = new Random();
+                int index = rand.nextInt(Hubbub.polygons.length);
+
+                holder.navBackground.setImageDrawable(context.getResources().getDrawable(Hubbub.polygons[index]));
+            }
         }
     }
 

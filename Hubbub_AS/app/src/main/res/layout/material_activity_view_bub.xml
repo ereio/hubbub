@@ -35,6 +35,8 @@ android:layout_height="match_parent">
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_alignBottom="@+id/bubview_image"
             android:layout_alignParentLeft="true"
+            android:elevation="6dp"
+            android:paddingLeft="10dp"
             android:layout_alignParentStart="true" />
 
         <TextView

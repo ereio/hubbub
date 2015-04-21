@@ -1120,8 +1120,12 @@ public class HubDatabase {
 		String[] name = db_usr.getString(FULL_NAME).split("_");
 		usr.firstname = name[0];
 		usr.lastname = name[1];
+
 		usr.friend_ids = db_usr.getJSONArray(FRIENDS);
 		try {
+            ParseFile pic_bg = db_usr.getParseFile("background_picture");
+            if(pic_bg != null)
+            usr.backgroundPicture = pic_bg.getData();
 			ParseFile pic = db_usr.getParseFile(PROFILE_PIC);
 			if(pic != null)
 				usr.picture = pic.getData();

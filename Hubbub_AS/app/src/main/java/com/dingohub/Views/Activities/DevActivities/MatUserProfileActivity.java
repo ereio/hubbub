@@ -50,6 +50,7 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
     RecyclerView bubRecyclerView;
 
     ImageView iProfilePic;
+    ImageView iBackgroundPic;
     TextView tUsername;
     TextView tFullName;
     TextView tAbout;
@@ -106,7 +107,16 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
         tFullName = (TextView) findViewById(R.id.text_fullname);
         tAbout = (TextView) findViewById(R.id.cardview_text_about);
         toggleFollow = (Button) findViewById(R.id.button_toggle_friend);
+        iBackgroundPic = (ImageView) findViewById(R.id.image_profile_background_picture);
 
+        if(user.backgroundPicture != null){
+            BitmapWorker worker = new BitmapWorker(iBackgroundPic, user.backgroundPicture, 600, 250);
+            worker.execute(0);
+        } else {
+            Random rand = new Random();
+            int index = rand.nextInt(Hubbub.polygons.length);
+            iBackgroundPic.setImageDrawable(getApplicationContext().getResources().getDrawable(Hubbub.polygons[index]));
+        }
         if(user.picture != null){
             BitmapWorker worker = new BitmapWorker(iProfilePic, user.picture, 250, 250);
             worker.execute(0);

@@ -12,6 +12,7 @@ public class HubUser {
 	public String details;
 	public String location;
 	public byte[] picture;
+    public byte[] backgroundPicture;
 	public JSONArray friend_ids;
     public JSONArray followed_bubs;
 	

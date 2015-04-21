@@ -24,6 +24,7 @@ public class ProfileViewHolder extends RecyclerView.ViewHolder {
     TextView menuItem;
 
     ImageView navProfile;
+    ImageView navBackground;
     TextView navLocation;
     TextView navName;
     TextView navEmail;
@@ -47,6 +48,7 @@ public class ProfileViewHolder extends RecyclerView.ViewHolder {
             navEmail = (TextView) itemView.findViewById(R.id.text_user_email);
             navProfile = (ImageView) itemView.findViewById(R.id.imagebutton_account_picture);
             navLocation = (TextView) itemView.findViewById(R.id.text_user_location);
+            navBackground = (ImageView)  itemView.findViewById(R.id.picture_user_background);
             Holderid = TYPE_HEADER;                                                // Setting holder id = 0 as the object being populated are of type header view
         }
     }
