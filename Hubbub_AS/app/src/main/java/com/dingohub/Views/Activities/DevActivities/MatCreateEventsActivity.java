@@ -505,7 +505,7 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
             // Decodes the file to a bitmap
             // Runs async task to shrink the photo and set the imagebutton to the picture
             // server side preperation doesn't begin until the user hits the Create button
-            BitmapWorker worker = new BitmapWorker(event_picture, picturePath, 200, 200);
+            BitmapWorker worker = new BitmapWorker(event_picture, picturePath, 400, 300);
             worker.execute(0);
             pictureSelected = true;
         }

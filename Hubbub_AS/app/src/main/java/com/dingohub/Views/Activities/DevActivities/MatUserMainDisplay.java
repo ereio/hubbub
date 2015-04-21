@@ -117,6 +117,7 @@ public class MatUserMainDisplay extends BaseGoogleActivity {
 
         private void init_ui(){
             toolbar = (Toolbar) findViewById(R.id.material_toolbar);
+            toolbar.getBackground().setAlpha(255);
             setSupportActionBar(toolbar);
 
             profileRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);

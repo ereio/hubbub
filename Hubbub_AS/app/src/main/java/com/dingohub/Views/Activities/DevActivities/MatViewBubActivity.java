@@ -269,6 +269,15 @@ public class MatViewBubActivity extends BaseGoogleActivity{
                     follow_hub();
 
             }});
+
+        bInvite.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MatViewAllUsersActivity.class);
+                intent.putExtra(MatViewAllUsersActivity.INVITE_KEY, event.id);
+                startActivity(intent);
+            }
+        });
 	}
 
 

@@ -11,6 +11,7 @@ import com.dingohub.Views.Deprecated.ViewEventActivity;
 import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
 import com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity;
 import com.dingohub.hubbub.R;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.melnykov.fab.FloatingActionButton;
 
 import android.app.Fragment;
@@ -129,10 +130,12 @@ public class MatTodaysBubsFragment extends Fragment{
                     Toast.makeText(getActivity().getApplicationContext(), "The Item Clicked is: " +
                             rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
 
-                String eventId = todays_events.get(rv.getChildPosition(child)).id;
-                Intent intent = new Intent(getActivity(), MatViewBubActivity.class);
-                intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);					// MAKE Bub parcelable
-                startActivity(intent);
+                if(todays_events.size() != 0) {
+                    String eventId = todays_events.get(rv.getChildPosition(child)).id;
+                    Intent intent = new Intent(getActivity(), MatViewBubActivity.class);
+                    intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);                    // MAKE Bub parcelable
+                    startActivity(intent);
+                }
             }
             return false;
         }

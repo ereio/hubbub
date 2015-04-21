@@ -122,10 +122,12 @@ public class MatUserHubsFragment extends Fragment{
                     Toast.makeText(getActivity().getApplicationContext(), "The Item Clicked is: " +
                             rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
 
-                String eventId = followed_hubs.get(rv.getChildPosition(child)).id;
-                Intent intent = new Intent(getActivity(), MatViewHubActivity.class);
-                intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);					// MAKE Bub parcelable
-                startActivity(intent);
+                if(followed_hubs.size() != 0) {
+                    String eventId = followed_hubs.get(rv.getChildPosition(child)).id;
+                    Intent intent = new Intent(getActivity(), MatViewHubActivity.class);
+                    intent.putExtra(MatViewHubActivity.HUB_KEY, eventId);                    // MAKE Bub parcelable
+                    startActivity(intent);
+                }
             }
             return false;
         }

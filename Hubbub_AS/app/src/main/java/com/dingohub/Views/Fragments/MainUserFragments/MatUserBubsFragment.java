@@ -122,10 +122,12 @@ public class MatUserBubsFragment extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), "The Item Clicked is: " +
                             rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
 
-                String eventId = followed_events.get(rv.getChildPosition(child)).id;
-                Intent intent = new Intent(getActivity(), MatViewBubActivity.class);
-                intent.putExtra(MatViewBubActivity.EVENT_KEY, eventId);					// MAKE Bub parcelable
-                startActivity(intent);
+                if(followed_events.size() != 0) {
+                    String eventId = followed_events.get(rv.getChildPosition(child)).id;
+                    Intent intent = new Intent(getActivity(), MatViewBubActivity.class);
+                    intent.putExtra(MatViewBubActivity.EVENT_KEY, eventId);                    // MAKE Bub parcelable
+                    startActivity(intent);
+                }
             }
             return false;
         }

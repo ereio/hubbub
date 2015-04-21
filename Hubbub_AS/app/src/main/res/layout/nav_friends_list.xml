@@ -8,6 +8,7 @@
         android:layout_height="70dp"
         android:src="@drawable/ic_account_circle_black_24dp"
         android:id="@+id/picture_circle_friend"
+        android:elevation="3dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 

@@ -1,16 +1,19 @@
 package com.dingohub.Views.Activities.DevActivities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,14 +31,13 @@ import com.dingohub.hubbub.R;
 import com.google.android.gms.wallet.fragment.BuyButtonAppearance;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by ereio on 4/18/15.
  */
 public class MatUserProfileActivity extends BaseGoogleActivity{
     public static int FRIENDS_SHOWN = 5;
-
-    public static final String USERVIEW_ID = "USER_KEY";
 
     HubUser user;
     ArrayList<HubUser> friends = new ArrayList<>();
@@ -50,8 +52,12 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
     TextView tUsername;
     TextView tFullName;
     TextView tAbout;
+    Button toggleFollow;
 
     HubUser viewedUser = new HubUser();
+
+    private Toolbar toolbar;
+    boolean followStatus = false;
 
     public MatUserProfileActivity() { }
 
@@ -70,33 +76,85 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
         init_adapters();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
     private void init_user_info(){
         Bundle extras = getIntent().getExtras();
 
         if(extras != null){
-            viewedUser.id = extras.getString(USERVIEW_ID, "");
+            viewedUser.id = extras.getString(Hubbub.USER_VIEW_KEY, "");
         }
 
         if(!viewedUser.id.equals("")) {
             user = HubDatabase.GetUserById(viewedUser.id);
             friends = HubDatabase.GetFriends(viewedUser.id);
             userBubs = HubDatabase.GetBubsByFollower(viewedUser.id);
+
+            for(int i = 0; i < friends.size(); i++)
+                if(HubDatabase.GetCurrentUser().id.equals(friends.get(i).id))
+                    followStatus = true;
         }
 
     }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+
+    }
     private void init_ui(){
+        toolbar = (Toolbar) findViewById(R.id.material_toolbar);
+        toolbar.getBackground().mutate().setAlpha(50);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Testing the touch", Toast.LENGTH_SHORT).show();
+            }
+        });
+        setSupportActionBar(toolbar);
+
+
         iProfilePic = (ImageView) findViewById(R.id.image_profile_picture);
         tUsername = (TextView) findViewById(R.id.text_username);
         tFullName = (TextView) findViewById(R.id.text_fullname);
         tAbout = (TextView) findViewById(R.id.cardview_text_about);
+        toggleFollow = (Button) findViewById(R.id.button_toggle_friend);
 
         if(user.picture != null){
             BitmapWorker worker = new BitmapWorker(iProfilePic, user.picture, 250, 250);
             worker.execute(0);
         }
+
         tUsername.setText(user.username);
         tFullName.setText(user.firstname + " " + user.lastname);
         tAbout.setText(user.details);
+
+        Random random = new Random();
+        int color_index = random.nextInt(6);
+        tAbout.setBackgroundColor(getResources().getColor(Hubbub.color_array[color_index]));
+
+        toggleFollow.setText(followStatus ? "Unfollow" : "Follow");
+
+        toggleFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!followStatus) {
+                    HubDatabase.AddFriend(HubDatabase.GetCurrentUser().id, viewedUser.id);
+                    toggleFollow.setText("Unfollow");
+                    followStatus = true;
+                } else {
+                    HubDatabase.RemoveFriend(HubDatabase.GetCurrentUser().id, viewedUser.id);
+                    toggleFollow.setText("Follow");
+                    followStatus = false;
+                }
+            }
+        });
+
 
     }
 
@@ -116,7 +174,7 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
 
         // Sets the recycler for the Events associated with a hub
         // Finding View
-        bubRecyclerView = (RecyclerView) findViewById(R.id.hubview_gridrecycleview_eventlist);
+        bubRecyclerView = (RecyclerView) findViewById(R.id.userbub_recycler_view);
         bubRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         bubRecyclerView.addOnItemTouchListener(new BubRecyclerViewListener());
@@ -138,13 +196,17 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
                             rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
 
                 // Find the friend idea of the person clicked
-                String followerId = friends.get(rv.getChildPosition(child)).id;
-
-                // creates a bundle with the friend id in the new fragment
-                Intent intent = new Intent(getApplicationContext(), MatUserProfileActivity.class);
-                intent.putExtra(Hubbub.USER_VIEW_KEY, followerId);
-                startActivity(intent);
-                finish();
+                if(friends.size() != 0) {
+                    String followerId = friends.get(rv.getChildPosition(child)).id;
+                    // checks to make sure you're not recursively calling the followers
+                    if(followerId.equals(viewedUser.id))
+                        return false;
+                    // creates a bundle with the friend id in the new fragment
+                    Intent intent = new Intent(getApplicationContext(), MatUserProfileActivity.class);
+                    intent.putExtra(Hubbub.USER_VIEW_KEY, followerId);
+                    startActivity(intent);
+                    finish();
+                }
             }
             return false;
         }
@@ -165,11 +227,14 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
                     Toast.makeText(getApplicationContext(), "The Item Clicked is: " +
                             rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
 
-                String eventId = userBubs.get(rv.getChildPosition(child)).id;
-                Intent intent = new Intent(getApplicationContext(), MatViewBubActivity.class);
-                intent.putExtra(MatViewBubActivity.EVENT_KEY, eventId);					// MAKE Bub parcelable
-                startActivity(intent);
-                finish();
+                // Checks to make sure a bub is there to even click
+                if(userBubs.size() != 0) {
+                    String eventId = userBubs.get(rv.getChildPosition(child)).id;
+                    Intent intent = new Intent(getApplicationContext(), MatViewBubActivity.class);
+                    intent.putExtra(MatViewBubActivity.EVENT_KEY, eventId);                    // MAKE Bub parcelable
+                    startActivity(intent);
+                    finish();
+                }
             }
             return false;
         }

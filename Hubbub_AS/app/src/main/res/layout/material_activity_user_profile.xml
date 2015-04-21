@@ -72,6 +72,26 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_follow"
+                    android:elevation="0dp"
+                    android:id="@+id/button_toggle_friend"
+                    android:layout_below="@+id/text_username"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <include
+                    android:id="@+id/material_toolbar"
+                    layout="@layout/material_toolbar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+                </include>
+
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView

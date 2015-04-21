@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.Hub;
 import com.dingohub.Model.Utilities.BitmapWorker;
@@ -24,9 +25,6 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
     public static final int NORMAL_BUB = 1;
     public static final int NORMAL_HUB = 2;
     public static final int HUBBUB_SEARCH = 3;
-
-    int color_array[] = {R.color.ColorAccent, R.color.ColorPrimary, R.color.ColorPrimaryDark, R.color.Khaki,
-            R.color.DarkTurquoise, R.color.DarkSeaGreen};
 
     private int adapter_type = 0;
     private final Context context;
@@ -155,7 +153,7 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
         }
 
         emptyBubSearch = false;
-        holder.layout.setBackgroundColor(context.getResources().getColor(color_array[colorIndex]));
+        holder.layout.setBackgroundColor(context.getResources().getColor(Hubbub.color_array[colorIndex]));
         holder.emptyPicture.setImageDrawable(context.getResources().getDrawable(R.drawable.intro_events));
 
     }
@@ -182,7 +180,7 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
 
         emptyHubSearch = false;
         holder.emptyPicture.setImageDrawable(context.getResources().getDrawable(R.drawable.intro_events));
-        holder.layout.setBackgroundColor(context.getResources().getColor(color_array[colorIndex]));
+        holder.layout.setBackgroundColor(context.getResources().getColor(Hubbub.color_array[colorIndex]));
     }
     @Override
     public int getItemCount() {

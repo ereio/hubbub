@@ -61,7 +61,7 @@
 
         <!-- NON_MATERIAL ACTIVITIES -->
         <activity android:name = "com.dingohub.Views.Activities.CreateUserActivity"></activity>
-        <activity android:name = "com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity"></activity>
+
         <activity android:name = "com.dingohub.Views.Deprecated.UserMainDisplay"></activity>
         <activity android:name="com.dingohub.Views.Deprecated.ViewEventActivity"></activity>
         <activity android:name="com.dingohub.Views.Activities.ShowDialogActivity"
@@ -74,6 +74,8 @@
         <activity android:name="com.dingohub.Views.Activities.DevActivities.MatViewHubActivity"/>
         <activity android:name="com.dingohub.Views.Activities.DevActivities.MatViewBubActivity"/>
         <activity android:name="com.dingohub.Views.Activities.DevActivities.MatUserProfileActivity"/>
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatViewAllUsersActivity"/>
+        <activity android:name = "com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity"></activity>
         
         <!-- SERVICES AND RECEIVERS -->
         <service android:name="com.parse.PushService" />

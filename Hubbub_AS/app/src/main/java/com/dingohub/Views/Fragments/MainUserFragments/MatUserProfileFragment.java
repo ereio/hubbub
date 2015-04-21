@@ -140,8 +140,6 @@ public class MatUserProfileFragment extends Fragment{
                 intent.putExtra(Hubbub.USER_VIEW_KEY, followerId);
                 startActivity(intent);
 
-                //
-
             }
             return false;
         }

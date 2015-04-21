@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/bubview_image"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
         android:src="@drawable/ic_launcher"
         android:paddingTop="20dp"
         android:layout_below="@+id/material_toolbar"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hub_default_name"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignBottom="@+id/bubview_image"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hub_default_location"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:paddingLeft="10dp"
         android:layout_alignBottom="@+id/bubview_image"
         android:layout_alignParentRight="true"
@@ -76,7 +76,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:background="@color/ColorPrimary"
-        android:backgroundTint="@color/ColorPrimary"
+
         android:elevation="10dp"
         android:textColor="@color/AntiqueWhite"
         android:shadowColor="@color/ColorAccent"
