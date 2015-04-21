@@ -435,7 +435,6 @@ public class HubDatabase {
     public static ArrayList<Bub> GetFollowedBubs(String userId) {
         ArrayList<Bub> bubs = new ArrayList<Bub>();
         ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
-        query.whereContainedIn(TAGS, new ArrayList<String>());
 
         try {
             ParseObject object = query.get(userId);
@@ -800,7 +799,7 @@ public class HubDatabase {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(USERS_TABLE);
 
         try {
-            ParseObject object = query.get(hub_id);
+            ParseObject object = query.get(user_id);
 
             JSONArray followed_hubs = object.getJSONArray(FOLLOWED_HUBS);
             followed_hubs.put(hub_id);
