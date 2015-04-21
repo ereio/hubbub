@@ -15,7 +15,6 @@ import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +22,6 @@ import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
 import com.dingohub.Model.Utilities.SlideshowAnimator;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
-import com.dingohub.Views.Activities.CreateUserActivity;
 import com.dingohub.hubbub.R;
 import com.parse.PushService;
 
@@ -47,6 +45,7 @@ public class MatLoginActivity extends BaseGoogleActivity {
     final long period = 2000;
     final Timer timer = new Timer();
     final Handler mHandler = new Handler();
+    boolean stopTimer = true;
 	
 	@SuppressWarnings("deprecation")
 	@Override
@@ -66,7 +65,8 @@ public class MatLoginActivity extends BaseGoogleActivity {
 		auto_login_check();
 
         // initalizes background footage for login page
-        init_bg_video();
+        if(!stopTimer)
+            init_bg_video();
 		
 		// Init key enter checks
 		key_check();
@@ -155,6 +155,7 @@ public class MatLoginActivity extends BaseGoogleActivity {
 				editSettings.apply();
 				Intent intent = new Intent(getApplicationContext(), MatUserMainDisplay.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                stopTimer = true;
 				startActivity(intent);
 				finish();
 			}
@@ -216,7 +217,6 @@ public class MatLoginActivity extends BaseGoogleActivity {
     @Override
     public void onDestroy(){
         super.onDestroy();
-        timer.purge();
     }
 
     @Override

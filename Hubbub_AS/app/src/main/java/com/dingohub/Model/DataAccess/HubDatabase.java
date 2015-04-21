@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 
 import android.content.Context;
@@ -17,7 +18,9 @@ import com.dingohub.Hubbub;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -66,7 +69,7 @@ public class HubDatabase {
 	public static final String CREATOR = "event_creator_id";
 	public static final String NUM_FOL = "num_followers";
     public static final String NUM_FRIENDS = "num_friends";
-	
+	public static final String PUSH_USERNAME_KEY = "username";
 	// Parse User Table Attributes
 	public static final String FULL_NAME = "full_name";
     public static final String CURRENT_LOCATION = "location";
@@ -123,16 +126,29 @@ public class HubDatabase {
 			if(newUser.picture != null){
 				ParseFile picture = new ParseFile(newUser.id + "_profile_picture", newUser.picture);
 				user.put(PROFILE_PIC, picture);
-				user.saveInBackground();
+				user.save();
 			}
+
+            ParseInstallation installation = new ParseInstallation().getCurrentInstallation();
+            installation.put(HubDatabase.PUSH_USERNAME_KEY, newUser.id);
+            installation.saveInBackground();
+
 		} catch (ParseException e) {
 			status = FLAG_QUERY_FAILED;
 			Log.e(TAG,e.toString());
-		} 
-		
+		}
+
 		return status;
 	}
 
+    public static void SendInviteNotification(String id, JSONObject data){
+        ParsePush parsePush = new ParsePush();
+        ParseQuery pQuery = ParseInstallation.getQuery();
+        pQuery.whereEqualTo(PUSH_USERNAME_KEY, id);
+        //parsePush.sendMessageInBackground(message, pQuery);
+        parsePush.sendDataInBackground(data, pQuery);
+        //parsePush.sendDataInBackground(data, p!ue);
+    }
 	// CREATES A BUB(EVENT) IN DATABASE
 	public static String CreateBub(Bub bub){
 		status = FLAG_NULL_QUERY;
@@ -166,7 +182,7 @@ public class HubDatabase {
 					
 			} catch(ParseException e){
 				status = FLAG_QUERY_FAILED;
-				Log.e(TAG,e.toString());
+				Log.e(TAG, e.toString());
 			}
 			
 			return event.getObjectId();

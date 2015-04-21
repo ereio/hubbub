@@ -56,11 +56,11 @@
         
          <activity 
 
-            android:name = "com.dingohub.Views.Activities.CreateEventsActivity">
+            android:name = "com.dingohub.Views.Deprecated.CreateEventsActivity">
         </activity>
 
         <!-- NON_MATERIAL ACTIVITIES -->
-        <activity android:name = "com.dingohub.Views.Activities.CreateUserActivity"></activity>
+        <activity android:name = "com.dingohub.Views.Deprecated.CreateUserActivity"></activity>
 
         <activity android:name = "com.dingohub.Views.Deprecated.UserMainDisplay"></activity>
         <activity android:name="com.dingohub.Views.Deprecated.ViewEventActivity"></activity>

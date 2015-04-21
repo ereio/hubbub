@@ -29,6 +29,7 @@ import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Deprecated.LoginActivity;
 import com.dingohub.hubbub.R;
+import com.parse.ParseInstallation;
 
 import java.io.ByteArrayOutputStream;
 
@@ -321,6 +322,7 @@ public class MatCreateUserActivity extends BaseGoogleActivity {
         newuser.location = getLocality();
 		newuser.details = mDetails;
 		newuser.picture = mProfilePic;
+
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -18,8 +19,17 @@ import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Adapters.UserRecycleAdapter;
 import com.dingohub.hubbub.R;
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
+import com.parse.ParsePush;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by ereio on 4/18/15.
@@ -28,6 +38,8 @@ public class MatViewAllUsersActivity extends BaseGoogleActivity{
     public static int FRIENDS_SHOWN = 5;
 
     public static String INVITE_KEY = "INVITE_KEY";
+    public static final String USER_INVITE_KEY = "USER_INVITE_KEY";
+    public static final String BUB_INVITE_KEY = "BUB_INVITE_KEY";
 
     private Toolbar toolbar;
 
@@ -69,7 +81,6 @@ public class MatViewAllUsersActivity extends BaseGoogleActivity{
         }
 
         followedUsers = HubDatabase.GetFriends(HubDatabase.GetCurrentUser().id);
-
     }
 
     private void init_ui(){
@@ -108,7 +119,7 @@ public class MatViewAllUsersActivity extends BaseGoogleActivity{
 
                     // TODO - INVITE PEOPLE TO BUBS
                     // Send a push notification here
-                    invite_friend(followerId);
+                    invite_friend(followerId, invitedBub.id);
 
                     // creates a bundle with the friend id in the new fragment
                     Intent intent = new Intent(getApplicationContext(), MatViewBubActivity.class);
@@ -126,7 +137,17 @@ public class MatViewAllUsersActivity extends BaseGoogleActivity{
         }
     }
 
-    private void invite_friend(String invitedFollower){
+    private void invite_friend(String invitedFollower, String bubId){
+        JSONObject inviteData = new JSONObject();
+
+        try {
+            inviteData.put(USER_INVITE_KEY, invitedFollower);
+            inviteData.put(BUB_INVITE_KEY, bubId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HubDatabase.SendInviteNotification(invitedFollower, inviteData);
 
     }
 }

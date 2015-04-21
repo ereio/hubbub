@@ -89,7 +89,7 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
             userBubs = HubDatabase.GetBubsByFollower(viewedUser.id);
 
             for(int i = 0; i < friends.size(); i++)
-                if(HubDatabase.GetCurrentUser().id.equals(friends.get(i).id))
+                if(viewedUser.id.equals(friends.get(i).id))
                     followStatus = true;
         }
 

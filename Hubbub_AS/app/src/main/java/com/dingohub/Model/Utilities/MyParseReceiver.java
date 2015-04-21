@@ -4,6 +4,7 @@ package com.dingohub.Model.Utilities;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.Hub;
 import com.dingohub.Model.DataAccess.HubDatabase;
+import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.Views.Activities.DevActivities.MatViewBubActivity;
 import com.dingohub.Views.Activities.ShowDialogActivity;
 import com.dingohub.hubbub.R;
@@ -12,16 +13,9 @@ import com.parse.ParsePushBroadcastReceiver;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.util.Log;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.Random;
 
@@ -30,10 +24,12 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
 	public static final String DATA_KEY = "com.parse.Data";
 	public static final String TAG = "MyParseReceiver";
     public static final String EVENT_KEY = "asduiuneukluhasd";
-    Bub event;
+
     String eventID;
     String pushType;
     Hub hub;
+    Bub event;
+    HubUser user;
 
 
 	@Override
@@ -88,12 +84,36 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
                 int randomNum = rand.nextInt((20 - 5) + 1) + 5;
 
                 notificationmanager.notify(randomNum, notificationbuilder.build());
-
-
-
             }
 
+            check_invite_notification(context, intent);
 
+
+        }
+    }
+
+    private void check_invite_notification(Context context, Intent intent){
+        if(pushType.equals("FIND PUSH TYPE")){
+            intent = new Intent(context, MatViewBubActivity.class);
+            intent.putExtra(EVENT_KEY, eventID);
+            user = HubDatabase.GetUserById(pushType);
+            event = HubDatabase.GetBubFromId(eventID);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.drawable.hubbub_logo)
+                    .setContentTitle("New invitation")
+                    .setContentText(user.username + "invited you to " + event.title)
+                    .setContentIntent(pendingIntent);
+
+            notificationBuilder.setAutoCancel(true);
+            NotificationManagerCompat nm = NotificationManagerCompat.from(context);
+
+            Random rand = new Random();
+            int num = rand.nextInt(100000);
+
+            nm.notify(num, notificationBuilder.build());
 
 
         }

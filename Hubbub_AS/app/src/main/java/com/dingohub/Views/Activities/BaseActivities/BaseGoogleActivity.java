@@ -151,11 +151,12 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
 
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
-		GooglePlayServicesUtil.getErrorDialog(		
-		GooglePlayServicesUtil.isGooglePlayServicesAvailable(this), this, 0).show();
-		Log.i(TAG, "Failed to connect to Google API client");
-		finish();
-		
+        if(!this.isFinishing()) {
+            GooglePlayServicesUtil.getErrorDialog(
+                    GooglePlayServicesUtil.isGooglePlayServicesAvailable(this), this, 0).show();
+            Log.i(TAG, "Failed to connect to Google API client");
+            finish();
+        }
 		
 	}
 

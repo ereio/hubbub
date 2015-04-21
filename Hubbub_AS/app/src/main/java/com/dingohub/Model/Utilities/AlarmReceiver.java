@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-import com.dingohub.Views.Activities.CreateEventsActivity;
+import com.dingohub.Views.Deprecated.CreateEventsActivity;
 import com.parse.ParsePush;
 
 import android.content.BroadcastReceiver;
