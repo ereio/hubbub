@@ -12,6 +12,7 @@ import com.dingohub.Views.Fragments.MainUserFragments.MatTodaysBubsFragment;
 import com.dingohub.Views.Fragments.MainUserFragments.MatUserBubsFragment;
 import com.dingohub.Views.Fragments.MainUserFragments.MatUserHubsFragment;
 import com.dingohub.Views.Fragments.MainUserFragments.MatUserProfileFragment;
+import com.dingohub.Views.Fragments.MatSearchedEventsFragment;
 
 /**
  * Created by ereio on 4/15/15.
@@ -49,6 +50,8 @@ public class UserPanePagerAdapter extends FragmentPagerAdapter {
                 return new MatUserHubsFragment();
             case 4:
                 return new MatUserGroupsFragment();
+            case 5:
+                return new MatSearchedEventsFragment();
             default:
                 return new Fragment();
         }

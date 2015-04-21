@@ -41,6 +41,7 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
 
     HubUser user;
     ArrayList<HubUser> friends = new ArrayList<>();
+    ArrayList<HubUser> viewerFriends = new ArrayList<>();
     ArrayList<Bub> userBubs = new ArrayList<>();
 
     RecyclerView friendRecycleView;
@@ -86,10 +87,11 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
         if(!viewedUser.id.equals("")) {
             user = HubDatabase.GetUserById(viewedUser.id);
             friends = HubDatabase.GetFriends(viewedUser.id);
+            viewerFriends = HubDatabase.GetFriends(HubDatabase.GetCurrentUser().id);
             userBubs = HubDatabase.GetBubsByFollower(viewedUser.id);
 
             for(int i = 0; i < friends.size(); i++)
-                if(viewedUser.id.equals(friends.get(i).id))
+                if(viewedUser.id.equals(viewerFriends.get(i).id))
                     followStatus = true;
         }
 
@@ -97,7 +99,7 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
 
     private void init_ui(){
 
-        SetDrawerAsBackButton(false, 50);
+        SetDrawerAsBackButton(false, 100);
 
         iProfilePic = (ImageView) findViewById(R.id.image_profile_picture);
         tUsername = (TextView) findViewById(R.id.text_username);

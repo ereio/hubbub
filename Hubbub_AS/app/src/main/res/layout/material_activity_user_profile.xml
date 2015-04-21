@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -8,12 +8,7 @@
 
     <include
         android:id="@+id/material_toolbar"
-        layout="@layout/material_toolbar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        layout="@layout/material_toolbar">
     </include>
 
     <ScrollView
@@ -121,6 +116,7 @@
             android:background="@color/AntiqueWhite"
             android:fadingEdge="horizontal"
             android:scrollbars="horizontal" />
+
     </LinearLayout>
 </ScrollView>
-</LinearLayout>
+</RelativeLayout>

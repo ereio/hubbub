@@ -17,6 +17,7 @@ import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.Hub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
+import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
 import com.dingohub.Views.Adapters.UserRecycleAdapter;
@@ -142,20 +143,31 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 
              //Setting adapter to load designated data
         bubAdapter = new HubbubRecycleAdapter(getApplicationContext(), containedBubs, HubbubRecycleAdapter.NORMAL_BUB);
-        bubRecyclerView.setAdapter(userAdapter);
+        bubRecyclerView.setAdapter(bubAdapter);
 
         // Sets standard assets
-        hub_name = (TextView) findViewById(R.id.eventview_name);
-        hub_location = (TextView) findViewById(R.id.eventlist_location);
-        hub_num_following = (TextView) findViewById(R.id.eventlist_start_time);
-        hub_about = (TextView) findViewById(R.id.eventlist_end_time);
-        hub_num_events = (TextView) findViewById(R.id.eventlist_end_date);
-        hub_num_events = (TextView) findViewById(R.id.eventview_tappin_time);
-		bFollow = (Button) findViewById(R.id.eventview_button_follow);
+        hub_name = (TextView) findViewById(R.id.hubview_name);
+        hub_location = (TextView) findViewById(R.id.bubview_textview_location);
+        hub_about = (TextView) findViewById(R.id.bubview_textview_details);
+        hub_num_events = (TextView) findViewById(R.id.hubview_label_eventlist);
+        hub_num_following = (TextView) findViewById(R.id.hubview_label_following);
+		bFollow = (Button) findViewById(R.id.hubview_button_follow);
         hub_picture = (ImageView) findViewById(R.id.bubview_image);
+
 	}
 	
 	public void set_ui(){
+        hub_name.setText(currentHub.name);
+        hub_location.setText(currentHub.location);
+        hub_about.setText(currentHub.details);
+        hub_num_events.setText("Followers: " + Integer.toString(currentHub.follower_ids.length()));
+        hub_num_following.setText("Bubs: " +  Integer.toString(currentHub.bubs.length()));
+
+        if(currentHub.picture != null){
+            BitmapWorker worker = new BitmapWorker(hub_picture, currentHub.picture, 250, 250);
+            worker.execute(0);
+        }
+
 
 	}
 
