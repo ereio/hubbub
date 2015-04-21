@@ -122,8 +122,6 @@ public class HubDatabase {
 		user.put(FRIENDS, new JSONArray());
         user.put(NUM_FRIENDS, 0);
         user.put(FOLLOWED_BUBS, new JSONArray());
-        user.put(BACKGROUND_PICTURE, new byte[0]);
-        user.put(PROFILE_PIC, new byte[0]);
         user.put(FOLLOWED_HUBS, new JSONArray());
 		
 		try {
@@ -135,6 +133,8 @@ public class HubDatabase {
 				user.put(PROFILE_PIC, picture);
 				user.save();
 			}
+
+            newUser.id = user.getObjectId();
 
             ParseInstallation installation = new ParseInstallation().getCurrentInstallation();
             installation.put(HubDatabase.PUSH_USERNAME_KEY, newUser.id);
@@ -171,7 +171,7 @@ public class HubDatabase {
 				event.put(PICTURE, e_picture);
 			}
 
-            event.put(GEOLOC, locality);
+            if (locality != null) event.put(GEOLOC, "Tallahassee_Florida");
 			event.put(DETAILS, bub.details);
 			event.put(PERMISSION, bub.permissions);
 			event.put(START_DATE, bub.start_date + "T" + bub.start_time);

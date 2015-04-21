@@ -254,9 +254,8 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
                 @Override
                 public void done(String object, ParseException e) {
                     // TODO Auto-generated method stub
-                    if (e == null)
-                        Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
-
+                    // if (e == null)
+                        // Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -265,8 +264,8 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
                 @Override
                 public void done(String object, ParseException e) {
                     // TODO Auto-generated method stub
-                    if (e == null)
-                        Toast.makeText(getApplicationContext(), "new push worked", Toast.LENGTH_SHORT).show();
+                    // if (e == null)
+                        // Toast.makeText(getApplicationContext(), "new push worked", Toast.LENGTH_SHORT).show();
 
                 }
             });

@@ -290,7 +290,7 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         // TODO - Similarly a remove for hub's in users accounts
         HubDatabase.RemoveFollower(event);
         HubDatabase.RemoveFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
-        bFollow.setText("Unfollow Hub");
+        bFollow.setText("Unfollow Bub");
         bFollow.setBackgroundColor(getResources().getColor(R.color.ColorPrimary));
         followingStatus = false;
         bInvite.setEnabled(false);
@@ -302,7 +302,7 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         // TODO - Need database call to add a hub id to a user's account
         HubDatabase.AddFollower(event.id, HubDatabase.GetCurrentUser().id);
         HubDatabase.AddFollowedBub(event.id, HubDatabase.GetCurrentUser().id);
-        bFollow.setText("Follow Hub");
+        bFollow.setText("Follow Bub");
         bFollow.setBackgroundColor(getResources().getColor(R.color.ColorPrimaryDark));
         followingStatus = true;
         bInvite.setEnabled(true);
