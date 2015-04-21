@@ -51,6 +51,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.TimeZone;
 
 public class MatCreateEventsActivity extends BaseGoogleActivity {
@@ -132,6 +133,10 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         event_location = (EditText) findViewById(R.id.bub_location);
         event_details = (EditText) findViewById(R.id.bub_details);
         eTags = (EditText) findViewById(R.id.bub_tag);
+
+        Random rand = new Random();
+        int polyIndex = rand.nextInt(Hubbub.polygons.length);
+        event_picture.setImageDrawable(getResources().getDrawable(Hubbub.polygons[polyIndex]));
     }
 
     private void init_onClickListeners() {

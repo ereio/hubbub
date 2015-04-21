@@ -22,20 +22,34 @@ import java.util.Random;
 public class SlideshowAnimator implements Runnable {
 
     private static int IMAGES[] = {R.drawable.intro_image1, R.drawable.intro_image2, R.drawable.intro_image3,
-                                   R.drawable.intro_image4, R.drawable.intro_image5, R.drawable.intro_image6};
-    private static int COLOR[] = {R.color.ColorAccent, R.color.ColorPrimary, R.color.ColorPrimaryDark};
+                                   R.drawable.intro_image4, R.drawable.intro_image5, R.drawable.intro_image6,
+                                    R.drawable.intro_image7, R.drawable.intro_image8, R.drawable.intro_image9};
+    private static int COLOR[] = {R.color.ColorPrimary, R.color.ColorPrimaryDark, R.color.ColorPrimary, R.color.ColorAccent,
+                                  R.color.ColorAccentDark, R.color.ColorPrimary};
     private static int currentColor = 0;
     private static int currentPicture = 0;
     
-    final int BG_WIDTH = 850;
-    final int BG_HEIGHT = 1400;
+    final int BG_WIDTH = 1280;
+    final int BG_HEIGHT = 2110;
 
-    Random randomIndex = new Random();
+    int colorIndex = 0;
     int cropWidth = 0;
     int cropHeight = 0;
 
     Bitmap scaledBitmap;
     Bitmap backgroundBitmap;
+
+
+    private int imageIndex = 0;
+    ImageView backgroundImage;
+    Context context;
+    Activity activity;
+
+    public SlideshowAnimator(Context context, Activity activity){
+        this.context = context;
+        this.activity = activity;
+    }
+
     final AnimationSet animationSet = new AnimationSet(true);
     final Animation fadeOutAnimation = new AlphaAnimation(1.0f, 0.0f);
     final Animation fadeInAnimation = new AlphaAnimation(0.0f, 1.0f);
@@ -57,15 +71,6 @@ public class SlideshowAnimator implements Runnable {
         }
     };
 
-    private int imageIndex = 0;
-    ImageView backgroundImage;
-    Context context;
-    Activity activity;
-
-    public SlideshowAnimator(Context context, Activity activity){
-        this.context = context;
-        this.activity = activity;
-    }
     @Override
     public void run() {
         StartNewSlide();
@@ -79,21 +84,23 @@ public class SlideshowAnimator implements Runnable {
 
     private void logo_animation(){
 
-        int colorIndex = randomIndex.nextInt(3);
-        int colorFrom = currentColor;
-        int colorTo = currentColor = COLOR[colorIndex];
+        //int colorIndex = randomIndex.nextInt(3);
+        //int colorFrom = currentColor;
+       // int colorTo = currentColor = COLOR[colorIndex];
+        currentColor %= COLOR.length - 1;
+        currentColor++;
 
         // TODO - ANIMATION - move to looper thread only
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 TextView appName = (TextView) activity.findViewById(R.id.textview_app_name);
-                appName.setTextColor(context.getResources().getColor(currentColor));
+                appName.setTextColor(context.getResources().getColor(COLOR[currentColor]));
 
             }
         });
 
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        //ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
 
         // TODO - ANIMATION - can only be run on a looper thread
         /*

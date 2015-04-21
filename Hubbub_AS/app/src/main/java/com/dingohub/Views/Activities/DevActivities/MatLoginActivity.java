@@ -45,7 +45,7 @@ public class MatLoginActivity extends BaseGoogleActivity {
     final long period = 2000;
     final Timer timer = new Timer();
     final Handler mHandler = new Handler();
-    boolean stopTimer = true;
+    boolean stopTimer = false;
 	
 	@SuppressWarnings("deprecation")
 	@Override
