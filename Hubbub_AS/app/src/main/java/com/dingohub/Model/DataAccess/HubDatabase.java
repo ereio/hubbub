@@ -173,7 +173,7 @@ public class HubDatabase {
 		}
 
     public static String CreateHub(Hub hub){
-        ParseObject event = new ParseObject(EVENTS_TABLE);
+        ParseObject event = new ParseObject(HUBS_TABLE);
         String id = ParseUser.getCurrentUser().getObjectId();
         event.put(NAME, hub.name);
         event.put(GEOLOC, locality);

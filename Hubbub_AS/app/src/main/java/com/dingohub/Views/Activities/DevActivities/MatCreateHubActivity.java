@@ -126,7 +126,7 @@ public class MatCreateHubActivity extends BaseGoogleActivity {
     public void CreateHub ( View v) throws JSONException {
 
         String hub_id = HubDatabase.CreateHub(createHubFromData());
-        HubDatabase.AddFollower(hub_id, HubDatabase.GetCurrentUser().id);
+        HubDatabase.AddFollowerToHub(hub_id, HubDatabase.GetCurrentUser().id);
 
 
         //subscribes user to the bub created
