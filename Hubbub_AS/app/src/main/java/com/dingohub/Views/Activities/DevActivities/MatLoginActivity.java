@@ -216,6 +216,12 @@ public class MatLoginActivity extends BaseGoogleActivity {
     @Override
     public void onDestroy(){
         super.onDestroy();
+        timer.purge();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
         timer.cancel();
     }
 }

@@ -2,14 +2,15 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/frame_activity_signup">
 
     <include
         android:id="@+id/material_toolbar"
         layout="@layout/material_toolbar">
     </include>
 
-    <ScrollView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,12 +19,17 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="1250dp" >
 
             <Button
                 android:id="@+id/button_create_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/WhiteSmoke"
+                android:background="@color/ColorPrimary"
+                android:textSize="16sp"
+                android:elevation="10dp"
+                android:elegantTextHeight="true"
                 android:layout_below="@+id/entry_about_me"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -40,16 +46,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/entry_dob"
-                android:layout_toRightOf="@+id/ImageView05"
                 android:layout_marginRight="10dp"
+                android:fadingEdgeLength="5dp"
                 android:paddingLeft="10dp"
                 android:ems="10"
                 android:gravity="top"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/edittext_openblue"
                 android:hint="@string/details"
                 android:inputType="textMultiLine"
-                android:lines="6" />
+                android:lines="6"
+                android:layout_toLeftOf="@+id/entry_dob"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <EditText
                 android:id="@+id/entry_f_name"
@@ -117,51 +125,6 @@
                 android:ems="10"
                 android:hint="@string/dateofbirth"
                 android:inputType="date" />
-
-            <ImageView
-                android:id="@+id/ImageView02"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignTop="@+id/entry_pass"
-                android:layout_toLeftOf="@+id/entry_pass"
-                android:contentDescription="@string/hello_world"
-                android:src="@drawable/icon_password" />
-
-            <ImageView
-                android:id="@+id/ImageView03"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignTop="@+id/entry_confirm_pass"
-                android:layout_toLeftOf="@+id/entry_confirm_pass"
-                android:contentDescription="@string/hello_world"
-                android:src="@drawable/icon_lock" />
-
-            <ImageView
-                android:id="@+id/ImageView04"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignTop="@+id/entry_email"
-                android:layout_toLeftOf="@+id/entry_email"
-                android:contentDescription="@string/hello_world"
-                android:src="@drawable/icon_mail" />
-
-            <ImageView
-                android:id="@+id/ImageView05"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignTop="@+id/entry_dob"
-                android:layout_toLeftOf="@+id/entry_dob"
-                android:contentDescription="@string/hello_world"
-                android:src="@drawable/events_calendar_icon" />
-
-            <ImageView
-                android:id="@+id/ImageView07"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_below="@+id/entry_dob"
-                android:layout_toLeftOf="@+id/entry_about_me"
-                android:contentDescription="@string/hello_world"
-                android:src="@drawable/icon_essay" />
 
             <ImageButton
                 android:id="@+id/user_background_image"

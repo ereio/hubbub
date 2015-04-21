@@ -146,9 +146,11 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
 
         // Sees whether the bubs being passed were of a followed bubs list or normal
         if(adapter_type == FOLLOWED_BUB){
-            holder.emptyStatement.setText("You haven't followed any bubs yet! \n Look for" +
-                    "bubs in todays events or search with the search glass above");
+            holder.emptyStatement.setText("You haven't followed any bubs yet! \nLook for" +
+                    " bubs in todays events or search with the search glass above");
         } else if( adapter_type == HUBBUB_SEARCH) {
+            holder.emptyStatement.setText("We couldn't find any bub's under that tag :/");
+        } else {
             holder.emptyStatement.setText("There doesn't seem to be any bubs here :(");
         }
 
@@ -213,11 +215,9 @@ public class HubbubRecycleAdapter extends RecyclerView.Adapter<HubbubViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        int testing = -1;
 
         if (adapter_type == NORMAL_BUB) {
             if (events.size() != 0){
-                testing = HubbubViewHolder.BUB_EVENT;
                 return HubbubViewHolder.BUB_EVENT;
             } else {
                 return HubbubViewHolder.EMPTY_BUBS;

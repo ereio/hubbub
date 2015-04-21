@@ -135,10 +135,15 @@ public class MatCreateUserActivity extends BaseGoogleActivity {
 						Toast.makeText(getApplicationContext(), "An unspecified error has occurred, please try again later",
 						Toast.LENGTH_LONG).show();
 					}
-					else if(result == HubDatabase.FLAG_QUERY_FAILED){
-						Toast.makeText(getApplicationContext(), "Server could not create user :(",
-						Toast.LENGTH_SHORT).show();
-					}
+					else if(result == HubDatabase.FLAG_QUERY_FAILED) {
+                        if (!mEmail.contains("@")) {
+                            Toast.makeText(getApplicationContext(), "An invalid email address was entered. Try a different email",
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Server could not create user :(",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
 					else if(result == HubDatabase.FLAG_QUERY_SUCCESSFUL){
 						Toast.makeText(getApplicationContext(), "Account creation success",
 						Toast.LENGTH_SHORT).show();
@@ -175,7 +180,7 @@ public class MatCreateUserActivity extends BaseGoogleActivity {
 		eSettings.putString(SharedPrefKeys.PASS_KEY, mPass);
 		eSettings.commit();
 		
-		Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+		Intent login = new Intent(getApplicationContext(), MatLoginActivity.class);
 		login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(login);
 	}
@@ -232,14 +237,15 @@ public class MatCreateUserActivity extends BaseGoogleActivity {
 	}
 	
 	public void clearFieldError(){
-        int color = getResources().getColor(R.color.LightCoral);
-		eUsername.setTextColor(Color.DKGRAY);
-		eFirstName.setTextColor(Color.DKGRAY);
-		eLastName.setTextColor(Color.DKGRAY);
-		ePass.setTextColor(Color.DKGRAY);
-		eAuthPass.setTextColor(Color.DKGRAY);
-		eEmail.setTextColor(Color.DKGRAY);
-		eDOB.setTextColor(Color.DKGRAY);
+        int color = getResources().getColor(R.color.ColorPrimary);
+
+		eUsername.setTextColor(color);
+		eFirstName.setTextColor(color);
+		eLastName.setTextColor(color);
+		ePass.setTextColor(color);
+		eAuthPass.setTextColor(color);
+		eEmail.setTextColor(color);
+		eDOB.setTextColor(color);
 		
 		eUsername.setHintTextColor(Color.GRAY);
 		eFirstName.setHintTextColor(Color.GRAY);
@@ -334,7 +340,7 @@ public class MatCreateUserActivity extends BaseGoogleActivity {
 			// Runs async task to shrink the photo and set the imagebutton to the picture
 			// server side preperation doesn't begin until the user hits the Create button
             if(CURRENT_DECODING == PROFILE_BACKGROUND){
-                BitmapWorker worker = new BitmapWorker(bBackgroundPic, picturePath, 250, 250);
+                BitmapWorker worker = new BitmapWorker(bBackgroundPic, picturePath, 800, 400);
                 worker.execute(0);
             } else {
                 BitmapWorker worker = new BitmapWorker(bProfilePic, picturePath, 250, 250);
