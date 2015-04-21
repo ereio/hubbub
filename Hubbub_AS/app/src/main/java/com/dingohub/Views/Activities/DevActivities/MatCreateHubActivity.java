@@ -59,7 +59,6 @@ public class MatCreateHubActivity extends BaseGoogleActivity {
     public static final String HUBS_CHANNELS = "HUBS_CHANNELS";
     public static final String PUSH_TYPE = "PUSH_TYPE";
 
-    private String UtcTime;
 	private EditText hub_name;
 	private ImageButton event_picture;
 	private EditText hub_location;
@@ -73,7 +72,6 @@ public class MatCreateHubActivity extends BaseGoogleActivity {
 	//by the user
 	boolean pictureSelected = false;
 	private Button create_button;
-    private String[] tagStrings;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -132,35 +130,8 @@ public class MatCreateHubActivity extends BaseGoogleActivity {
         //subscribes user to the bub created
         ParsePush.subscribeInBackground(hub_id);
 
-        HashMap<String, Object> params = new HashMap<String, Object>();
-
-        params.put("pingIn",UtcTime);
-        params.put(CHANNEL_KEY,hub_id);
-
-
-        ParseCloud.callFunctionInBackground("pushNotification", params, new FunctionCallback<String>() {
-            @Override
-            public void done(String object, ParseException e) {
-                // TODO Auto-generated method stub
-                if (e == null)
-                    Toast.makeText(getApplicationContext(), "worked", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-            //sends notification to everyone following the hub
-        ParseCloud.callFunctionInBackground("NewBubPush", params, new FunctionCallback<String>() {
-            @Override
-            public void done(String object, ParseException e) {
-                // TODO Auto-generated method stub
-                if (e == null)
-                    Toast.makeText(getApplicationContext(), "new push worked", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
         if(Hubbub.DEBUG) {
-            Toast.makeText(this, "Event Creation Succeeded", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Hub Creation Succeeded", Toast.LENGTH_SHORT).show();
         }
             finish();
     }
