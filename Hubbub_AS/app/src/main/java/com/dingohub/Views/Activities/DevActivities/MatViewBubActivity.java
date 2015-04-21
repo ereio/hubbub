@@ -141,6 +141,14 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         if(bundle != null){
             String eventID = bundle.getString(EVENT_KEY);
             event = HubDatabase.GetBubsById(eventID);
+            for(int i = 0; i < event.follower_ids.length(); i ++){
+                try {
+                    followers.add(HubDatabase.GetUserById(event.follower_ids.getString(i)));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
         else{
             event = new Bub();
@@ -183,7 +191,6 @@ public class MatViewBubActivity extends BaseGoogleActivity{
 	public void init_ui(){
 
         SetDrawerAsBackButton(true, 0);
-        reset_elevation();
 
         event_name = (TextView) findViewById(R.id.bubview_textview_name);
         event_location = (TextView) findViewById(R.id.bubview_textview_location);
@@ -208,12 +215,6 @@ public class MatViewBubActivity extends BaseGoogleActivity{
         userRecyclerView = (RecyclerView) findViewById(R.id.bubview_gridrecycleview_following);
 
 	}
-
-    @TargetApi(21)
-    private void reset_elevation(){
-        toolbar.setElevation(2f);
-        setSupportActionBar(toolbar);
-    }
 	
 	public void set_ui(){
 

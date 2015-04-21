@@ -76,13 +76,26 @@
         android:scrollbars="horizontal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/hubview_label_eventlist"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/hubview_label_eventlist" />
+
+    <TextView
+        android:id="@+id/hubview_label_eventlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hub_label_num_events"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="74dp"
+        android:layout_below="@+id/hubview_label_following"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/hubview_gridrecycleview_following"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="20dp"
         android:cacheColorHint="@android:color/transparent"
         android:scrollbars="horizontal"
         android:layout_below="@+id/hubview_label_following"
@@ -96,18 +109,6 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:paddingLeft="10dp"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/hubview_label_eventlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hub_label_num_events"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="66dp"
-        android:layout_below="@+id/hubview_label_following"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
