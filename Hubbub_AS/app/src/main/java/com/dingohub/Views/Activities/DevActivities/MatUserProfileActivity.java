@@ -225,4 +225,6 @@ public class MatUserProfileActivity extends BaseGoogleActivity{
         public void onTouchEvent(RecyclerView rv, MotionEvent e) {
         }
     }
+
+
 }

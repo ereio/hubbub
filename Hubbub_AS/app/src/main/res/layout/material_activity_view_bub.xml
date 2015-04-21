@@ -3,6 +3,7 @@
 android:id="@+id/viewbub_drawer"
 android:layout_width="match_parent"
 android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -156,6 +157,7 @@ android:layout_height="match_parent">
             android:text="@string/following"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:paddingLeft="10dp"
+            android:paddingBottom="20dp"
             android:layout_alignTop="@+id/bubview_gridrecycleview_following"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

@@ -1,16 +1,19 @@
 package com.dingohub.Views.Activities.DevActivities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
@@ -131,6 +134,7 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 
             // Setting adapter
         userAdapter = new UserRecycleAdapter(followers, getApplicationContext());
+        userRecyclerView.addOnItemTouchListener(new UserRecyclerViewListener());
         userRecyclerView.setAdapter(userAdapter);
 
         // Sets the recycler for the Events associated with a hub
@@ -139,10 +143,12 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 
             // Setting layout Manager
         bubLayoutManager = new LinearLayoutManager(this);
+        bubRecyclerView.addOnItemTouchListener(new BubRecyclerViewListener());
         bubRecyclerView.setLayoutManager(bubLayoutManager);
 
              //Setting adapter to load designated data
         bubAdapter = new HubbubRecycleAdapter(getApplicationContext(), containedBubs, HubbubRecycleAdapter.NORMAL_BUB);
+
         bubRecyclerView.setAdapter(bubAdapter);
 
         // Sets standard assets
@@ -160,15 +166,13 @@ public class MatViewHubActivity extends BaseGoogleActivity{
         hub_name.setText(currentHub.name);
         hub_location.setText(currentHub.location);
         hub_about.setText(currentHub.details);
-        hub_num_events.setText("Followers: " + Integer.toString(currentHub.follower_ids.length()));
-        hub_num_following.setText("Bubs: " +  Integer.toString(currentHub.bubs.length()));
+        hub_num_events.setText("Bubs: " + Integer.toString(currentHub.follower_ids.length()));
+        hub_num_following.setText("Followers: " +  Integer.toString(currentHub.bubs.length()));
 
         if(currentHub.picture != null){
             BitmapWorker worker = new BitmapWorker(hub_picture, currentHub.picture, 250, 250);
             worker.execute(0);
         }
-
-
 	}
 
     private void unfollow_hub(){
@@ -228,4 +232,62 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 
         currentHub.follower_ids = newJson;
 	}
+
+    private class UserRecyclerViewListener implements RecyclerView.OnItemTouchListener{
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+
+            if(child!=null && mGestureDetector.onTouchEvent(e)){
+
+                if(Hubbub.DEBUG)
+                    Toast.makeText(getApplicationContext(), "The Item Clicked is: " +
+                            rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
+
+                // Find the friend idea of the person clicked
+                if(followers.size() != 0) {
+                    String followerId = followers.get(rv.getChildPosition(child)).id;
+
+                    // creates a bundle with the friend id in the new fragment
+                    Intent intent = new Intent(getApplicationContext(), MatUserProfileActivity.class);
+                    intent.putExtra(Hubbub.USER_VIEW_KEY, followerId);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+    }
+
+    private class BubRecyclerViewListener implements RecyclerView.OnItemTouchListener{
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+
+            if(child!=null && mGestureDetector.onTouchEvent(e)){
+
+                if(Hubbub.DEBUG)
+                    Toast.makeText(getApplicationContext(), "The Item Clicked is: " +
+                            rv.getChildPosition(child), Toast.LENGTH_SHORT).show();
+
+                // Checks to make sure a bub is there to even click
+                if(containedBubs.size() != 0) {
+                    String eventId = containedBubs.get(rv.getChildPosition(child)).id;
+                    Intent intent = new Intent(getApplicationContext(), MatViewBubActivity.class);
+                    intent.putExtra(MatViewBubActivity.EVENT_KEY, eventId);                    // MAKE Bub parcelable
+                    startActivity(intent);
+                    finish();
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+    }
 }
