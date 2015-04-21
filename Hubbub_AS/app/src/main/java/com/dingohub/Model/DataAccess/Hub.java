@@ -10,10 +10,12 @@ public class Hub {
     public String id;
     public String name;
     public String location;
+    public String geolocation;
     public String details;
     public JSONArray tags;
     public JSONArray follower_ids;
     public byte[] picture;
+    public String picture_title;
     public JSONArray bubs;
 
 

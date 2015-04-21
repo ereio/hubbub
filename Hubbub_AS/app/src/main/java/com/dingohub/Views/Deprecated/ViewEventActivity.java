@@ -370,8 +370,8 @@ public class ViewEventActivity extends Activity{
 		cal.set(tt[0],tt[1],tt[2],tt[3],tt[4],0);
 		cal.add(Calendar.HOUR_OF_DAY, - tappInVal);
 		
-		Log.i("CreateEvent",DateFormat.getDateTimeInstance().format(cal.getTime()));
-		Log.i("CreateEvent","Tapp in: "+tappInVal+" hrs before");
+		Log.i("Somethingelse",DateFormat.getDateTimeInstance().format(cal.getTime()));
+		Log.i("Somethingelse","Tapp in: "+tappInVal+" hrs before");
 		long result = cal.getTimeInMillis();
 		return result;
 	}

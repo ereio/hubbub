@@ -98,5 +98,11 @@
     <string name="text_follow">Follow</string>
     <string name="empty_follower_list"> You are not following anyone</string>
     <string name="background_image_instructions">Upload a profile background</string>
+    <string name="tag_instructions">Type Tags for the bub using #\'s</string>
+    <string name="details_instructions">Tell us about your event</string>
+    <string name="create_hub">Create Hub</string>
+    <string name="hub_details">What is this hub about?</string>
+    <string name="hub_name_hint">Hub Name</string>
+    <string name="background_hub_instructions"> Upload a background for the hub</string>
 
 </resources>

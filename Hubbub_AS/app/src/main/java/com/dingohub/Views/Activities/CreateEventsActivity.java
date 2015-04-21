@@ -50,7 +50,7 @@ import android.widget.Toast;
 
 public class CreateEventsActivity extends BaseGoogleActivity {
 	private String [] ping_time;
-	
+	private static final String TAG = "CreateEvents";
 	
 	private static int RESULT_LOAD_IMAGE = 1;
 	String evalue;
@@ -210,7 +210,7 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 
 			event_name = (EditText) findViewById(R.id.bub_name);
 			event_location  = (EditText) findViewById(R.id.bub_location);
-			event_details = (EditText) findViewById(R.id.bub_details);
+			event_details = (EditText) findViewById(R.id.hub_details);
 			eTags = (EditText) findViewById(R.id.bub_tag);
 
 
@@ -459,8 +459,8 @@ public class CreateEventsActivity extends BaseGoogleActivity {
 			cal.set(tt[0],tt[1],tt[2],tt[3],tt[4],0);
 			cal.add(Calendar.HOUR_OF_DAY, - tappInVal);
 
-			Log.i("CreateEvent",DateFormat.getDateTimeInstance().format(cal.getTime()));
-			Log.i("CreateEvent","Tapp in: "+tappInVal+" hrs before");
+			Log.i(TAG,DateFormat.getDateTimeInstance().format(cal.getTime()));
+			Log.i(TAG,"Tapp in: "+tappInVal+" hrs before");
 
 	return cal.getTimeInMillis();
 }

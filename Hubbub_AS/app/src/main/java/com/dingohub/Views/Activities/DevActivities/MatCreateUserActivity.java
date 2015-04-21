@@ -169,7 +169,7 @@ public class MatCreateUserActivity extends BaseGoogleActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
-                bBackgroundPrompt.setVisibility(View.INVISIBLE);
+
                 CURRENT_DECODING = PROFILE_BACKGROUND;
             }});
 
@@ -342,6 +342,7 @@ public class MatCreateUserActivity extends BaseGoogleActivity {
             if(CURRENT_DECODING == PROFILE_BACKGROUND){
                 BitmapWorker worker = new BitmapWorker(bBackgroundPic, picturePath, 800, 400);
                 worker.execute(0);
+                bBackgroundPrompt.setVisibility(View.INVISIBLE);
             } else {
                 BitmapWorker worker = new BitmapWorker(bProfilePic, picturePath, 250, 250);
                 worker.execute(0);

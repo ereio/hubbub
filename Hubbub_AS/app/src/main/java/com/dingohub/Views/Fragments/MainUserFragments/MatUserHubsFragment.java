@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
+import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity;
+import com.dingohub.Views.Activities.DevActivities.MatCreateHubActivity;
 import com.dingohub.Views.Activities.DevActivities.MatViewHubActivity;
 import com.dingohub.Views.Deprecated.ViewEventActivity;
 import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
@@ -94,7 +96,7 @@ public class MatUserHubsFragment extends Fragment{
     }
     private void init_user_bubs(){
         // TODO - create a database call FindHubsByFollower()
-        //followed_hubs = HubDatabase.FindHubsByFollower(HubDatabase.GetCurrentUser().id);
+        //followed_hubs = HubDatabase.GetHu(HubDatabase.GetCurrentUser().id);
 
     }
 
@@ -104,7 +106,7 @@ public class MatUserHubsFragment extends Fragment{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), MatCreateEventsActivity.class);
+                Intent i = new Intent(getActivity(), MatCreateHubActivity.class);
                 startActivity(i);
             }
         });

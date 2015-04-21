@@ -16,7 +16,7 @@
         android:fillViewport="true" >
 
         <EditText
-            android:id="@+id/bub_details"
+            android:id="@+id/hub_details"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_above="@+id/bub_create"
@@ -111,8 +111,8 @@
             android:id="@+id/text_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/bub_details"
-            android:layout_alignLeft="@+id/bub_details"
+            android:layout_above="@+id/hub_details"
+            android:layout_alignLeft="@+id/hub_details"
             android:layout_marginBottom="27dp"
             android:text="@string/bub_tag" />
 
@@ -174,9 +174,9 @@
             android:id="@+id/bub_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/bub_details"
+            android:layout_alignLeft="@+id/hub_details"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/bub_details"
+            android:layout_alignRight="@+id/hub_details"
             android:layout_marginBottom="31dp"
             android:background="@drawable/button_teal"
             android:text="@string/create_bub" />

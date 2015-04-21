@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:fillViewport="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:background="@color/AntiqueWhite"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/material_toolbar"
+            layout="@layout/material_toolbar">
+        </include>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="934dp"
+            android:background="@color/AntiqueWhite"
+            android:fillViewport="true" >
+
+            <ImageButton
+                android:id="@+id/user_background_image"
+                android:layout_width="150dp"
+                android:layout_height="225dp"
+                android:src="@drawable/polygon3"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <EditText
+                android:id="@+id/hub_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/bub_location"
+                android:inputType="textPostalAddress"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="42dp"
+                android:layout_below="@+id/user_background_image"
+                android:layout_alignLeft="@+id/hub_name"
+                android:layout_alignStart="@+id/hub_name" />
+
+            <EditText
+                android:id="@+id/hub_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hub_name_hint"
+                android:inputType="textPostalAddress"
+                android:layout_alignBottom="@+id/user_background_image"
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/hub_details"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:hint="@string/hub_details"
+                android:layout_marginTop="54dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/hub_location"
+                android:layout_alignLeft="@+id/hub_create_button"
+                android:layout_alignStart="@+id/hub_create_button" />
+
+            <Button
+                android:textColor="@color/WhiteSmoke"
+                android:background="@color/ColorPrimary"
+                android:textSize="16sp"
+                android:elevation="10dp"
+                android:elegantTextHeight="true"
+                android:id="@+id/hub_create_button"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:text="@string/create_hub"
+                android:layout_below="@+id/hub_details"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/background_hub_instructions"
+                android:id="@+id/background_instructions"
+                android:layout_marginBottom="51dp"
+                android:layout_above="@+id/hub_name"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

@@ -18,185 +18,166 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="762dp"
+            android:layout_height="1156dp"
+            android:background="@color/AntiqueWhite"
             android:fillViewport="true" >
-
-
 
             <EditText
                 android:id="@+id/bub_details"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:layout_above="@+id/bub_create"
-                android:layout_alignLeft="@+id/bub_start_date"
-                android:layout_alignRight="@+id/bub_tag"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/edit_text_rectangle"
                 android:ems="10"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:hint="@string/details_instructions"
+                android:layout_centerInParent="@+id/bub_create"
+                android:layout_marginTop="37dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/pingIn_spinner"
+                android:layout_alignLeft="@+id/bub_create"
+                android:layout_alignStart="@+id/bub_create" />
 
             <Spinner
                 android:id="@+id/pingIn_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/text_privacy"
-                android:layout_alignLeft="@+id/private_radio" />
-
-            <RadioButton
-                android:id="@+id/private_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/text_privacy"
-                android:layout_toLeftOf="@+id/bub_end_date"
-                android:text="@string/text_public" />
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/bub_pingIn"
+                android:layout_centerHorizontal="true" />
 
             <EditText
                 android:id="@+id/bub_start_time"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_alignBaseline="@+id/bub_end_time"
-                android:layout_alignBottom="@+id/bub_end_time"
-                android:layout_alignLeft="@+id/bub_location"
-                android:background="@drawable/edit_text_rectangle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:hint="@string/bub_start_time"
-                android:inputType="time" />
+                android:inputType="time"
+                android:layout_below="@+id/bub_location"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp" />
 
             <EditText
                 android:id="@+id/bub_end_time"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_above="@+id/bub_end_date"
-                android:layout_alignRight="@+id/bub_location"
-                android:layout_marginBottom="25dp"
-                android:background="@drawable/edit_text_rectangle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:hint="@string/bub_end_time"
-                android:inputType="time" />
+                android:inputType="time"
+                android:layout_alignTop="@+id/bub_end_date"
+                android:layout_toRightOf="@+id/bub_end_date"
+                android:layout_toEndOf="@+id/bub_end_date" />
 
             <EditText
                 android:id="@+id/bub_start_date"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_above="@+id/bub_pingIn"
-                android:layout_alignLeft="@+id/bub_start_time"
-                android:background="@drawable/edit_text_rectangle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:hint="@string/bub_start_date"
-                android:inputType="date" />
+                android:inputType="date"
+                android:layout_alignTop="@+id/bub_start_time"
+                android:layout_toRightOf="@+id/bub_start_time"
+                android:layout_toEndOf="@+id/bub_start_time" />
 
             <EditText
                 android:id="@+id/bub_end_date"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_alignBaseline="@+id/bub_start_date"
-                android:layout_alignBottom="@+id/bub_start_date"
-                android:layout_alignLeft="@+id/bub_end_time"
-                android:background="@drawable/edit_text_rectangle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
                 android:ems="10"
                 android:hint="@string/bub_end_date"
-                android:inputType="date" />
+                android:inputType="date"
+                android:layout_below="@+id/bub_start_time"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="26dp" />
 
             <RadioButton
                 android:id="@+id/public_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/private_radio"
-                android:layout_alignBottom="@+id/private_radio"
-                android:layout_alignRight="@+id/bub_end_date"
-                android:text="@string/text_private" />
+                android:text="@string/text_public"
+                android:layout_alignTop="@+id/bub_end_time"
+                android:layout_toRightOf="@+id/bub_end_time"
+                android:layout_toEndOf="@+id/bub_end_time"
+                android:checked="false" />
 
             <EditText
                 android:id="@+id/bub_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/text_tag"
-                android:layout_alignBottom="@+id/text_tag"
-                android:layout_alignRight="@+id/public_radio"
-                android:ems="10" />
-
-            <TextView
-                android:id="@+id/text_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/bub_details"
-                android:layout_alignLeft="@+id/bub_details"
-                android:layout_marginBottom="27dp"
-                android:text="@string/bub_tag" />
-
-            <TextView
-                android:id="@+id/text_privacy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/bub_tag"
-                android:layout_alignLeft="@+id/text_tag"
-                android:layout_marginBottom="31dp"
-                android:text="@string/Privacy" />
+                android:ems="10"
+                android:layout_marginTop="34dp"
+                android:layout_below="@+id/bub_end_time"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/tag_instructions"
+                android:phoneNumber="false" />
 
             <TextView
                 android:id="@+id/bub_pingIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/bub_start_date"
-                android:layout_alignTop="@+id/pingIn_spinner"
-                android:layout_marginTop="18dp"
                 android:text="@string/text_pingIn"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_below="@+id/bub_tag"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="21dp" />
 
             <ImageButton
                 android:id="@+id/user_background_image"
                 android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_height="225dp"
                 android:src="@drawable/create_bub"
-                android:layout_toLeftOf="@+id/bub_end_time"
-                android:layout_toStartOf="@+id/bub_end_time" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
             <EditText
                 android:id="@+id/bub_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/bub_start_time"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="23dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:ems="10"
                 android:hint="@string/bub_location"
-                android:inputType="textPostalAddress" />
+                android:inputType="textPostalAddress"
+                android:layout_marginTop="26dp"
+                android:layout_below="@+id/bub_name"
+                android:layout_centerHorizontal="true" />
 
             <EditText
                 android:id="@+id/bub_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/bub_location"
-                android:layout_alignLeft="@+id/bub_location"
-                android:layout_alignRight="@+id/bub_location"
                 android:ems="10"
                 android:hint="@string/event_name"
-                android:inputType="textPostalAddress" />
+                android:inputType="textPostalAddress"
+                android:layout_alignBottom="@+id/user_background_image"
+                android:layout_centerHorizontal="true" />
+
+            <RadioButton
+                android:id="@+id/private_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_private"
+                android:layout_above="@+id/bub_end_date"
+                android:layout_toRightOf="@+id/bub_start_date"
+                android:layout_toEndOf="@+id/bub_start_date"
+                android:checked="false" />
 
             <Button
+                android:textColor="@color/WhiteSmoke"
+                android:background="@color/ColorPrimary"
+                android:textSize="16sp"
+                android:elevation="10dp"
+                android:elegantTextHeight="true"
                 android:id="@+id/bub_create"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/bub_details"
-                android:layout_alignParentBottom="true"
-                android:layout_alignRight="@+id/bub_details"
-                android:layout_marginBottom="31dp"
-                android:background="@drawable/button_teal"
-                android:text="@string/create_bub" />
-
-            <TextView
-                android:id="@+id/bub_name_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/user_background_image"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
                 android:text="@string/create_bub"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:layout_marginTop="49dp"
+                android:layout_below="@+id/bub_details"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
     </LinearLayout>

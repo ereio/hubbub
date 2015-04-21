@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.Utilities.BitmapWorker;
@@ -468,8 +469,8 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
         cal.set(tt[0],tt[1],tt[2],tt[3],tt[4],0);
         cal.add(Calendar.HOUR_OF_DAY, - tappInVal);
 
-        Log.i("CreateEvent",DateFormat.getDateTimeInstance().format(cal.getTime()));
-        Log.i("CreateEvent","Tapp in: "+tappInVal+" hrs before");
+        Log.i(Hubbub.TAG,DateFormat.getDateTimeInstance().format(cal.getTime()));
+        Log.i(Hubbub.TAG,"Tapp in: "+tappInVal+" hrs before");
 
         return cal.getTimeInMillis();
     }
