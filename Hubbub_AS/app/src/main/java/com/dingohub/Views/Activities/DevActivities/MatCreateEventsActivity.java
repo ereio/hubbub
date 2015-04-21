@@ -195,7 +195,6 @@ public class MatCreateEventsActivity extends BaseGoogleActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
-                header.setVisibility(View.INVISIBLE);
             }
         });
 
