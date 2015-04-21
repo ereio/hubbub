@@ -169,6 +169,7 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 
         // TODO - Similarly a remove for hub's in users accounts
         HubDatabase.RemoveFollowerFromHub(currentHub.id, HubDatabase.GetCurrentUser().id);
+        HubDatabase.RemoveFollowedHub(currentHub.id, HubDatabase.GetCurrentUser().id);
         bFollow.setText("Unfollow Hub");
     }
 
@@ -179,6 +180,7 @@ public class MatViewHubActivity extends BaseGoogleActivity{
 
         // TODO - Need database call to add a hub id to a user's account
         HubDatabase.AddFollowerToHub(currentHub.id, HubDatabase.GetCurrentUser().id);
+        HubDatabase.AddFollowedHub(currentHub.id, HubDatabase.GetCurrentUser().id);
         bFollow.setText("Follow Hub");
     }
 

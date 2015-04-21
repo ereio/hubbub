@@ -14,3 +14,6 @@ Hubbub_AS/app/build
 */.idea/libraries
 *.DS_Store
 */build
+Hubbub_AS/.gradle/2.2.1
+Hubbub_AS/app/app.iml
+Hubbub_AS/.idea/misc.xml
