@@ -32,8 +32,8 @@ import android.view.View;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubbubReceivers;
 import com.dingohub.Model.DataAccess.SharedPrefKeys;
-import com.dingohub.Views.Activities.DevActivities.MatLoginActivity;
-import com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity;
+import com.dingohub.Views.Activities.DevActivities.LoginActivity;
+import com.dingohub.Views.Activities.DevActivities.SearchEventsActivity;
 import com.dingohub.hubbub.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -261,7 +261,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
             //startActivity(intent);
             //return true;
         } else if (id == R.id.search_bub) {
-            Intent i = new Intent(this, MatSearchEventsActivity.class);
+            Intent i = new Intent(this, SearchEventsActivity.class);
             startActivity(i);
             return true;
 
@@ -269,7 +269,7 @@ LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnect
             ParseUser.logOut();
 
             // TODO - create a broadcast receiver to shutdown every hub activity
-            Intent intent = new Intent(getApplicationContext(), MatLoginActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             SharedPreferences settings = getSharedPreferences(SharedPrefKeys.LOGIN_SETTINGS, 0);
             SharedPreferences.Editor editSettings = settings.edit();
             editSettings.putBoolean(SharedPrefKeys.AUTO_LOG, false);

@@ -27,7 +27,6 @@ import com.parse.ParseUser;
 
 public class HubDatabase {
 	public static final String TAG = "HubDatabase";
-	public static final String INVALID_CHARS = ",~%&*{ }\\< >?/|+\";";
 
 	// Query Status
 	public static final int FLAG_NULL_QUERY = 1;
@@ -208,7 +207,7 @@ public class HubDatabase {
         }
 
         event.put(FOLLOWERS, new JSONArray());
-        event.put(TAGS, hub.tags);
+        event.put(TAGS, hub.name);
 
         try{
             event.save();

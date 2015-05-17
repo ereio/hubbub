@@ -2,26 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Aquamarine" >
+    android:background="@color/AntiqueWhite" >
+
+    <include
+        android:id="@+id/material_toolbar"
+        layout="@layout/material_toolbar">
+    </include>
 
     <TextView
         android:id="@+id/search_prompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
         android:text="@string/search_prompt"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <fragment
-        android:id="@+id/fragment_search_bubs"
-        android:name="com.dingohub.Views.Fragments.MatSearchedEventsFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/edittext_search_tag"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/material_toolbar"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -29,15 +24,24 @@
         android:background="@drawable/edittext_closedblue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/search_prompt"
-        android:layout_centerHorizontal="true"
         android:hint="@string/search_hint"
         android:imeOptions="actionSend"
         android:singleLine="true"
         android:paddingLeft="10dp"
-        android:ems="10" >
+        android:ems="10"
+        android:layout_below="@+id/search_prompt"
+        android:layout_centerHorizontal="true">
 
         <requestFocus />
     </EditText>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edittext_search_tag"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/fragment_search" />
 
 </RelativeLayout>

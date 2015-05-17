@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/picture_user_background"
-        android:background="@drawable/polygon_background6"
+        android:background="@drawable/polygon6"
         android:scaleType="centerCrop"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"

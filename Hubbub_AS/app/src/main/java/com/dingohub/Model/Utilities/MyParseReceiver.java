@@ -5,8 +5,8 @@ import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.Hub;
 import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
-import com.dingohub.Views.Activities.DevActivities.MatViewBubActivity;
-import com.dingohub.Views.Activities.ShowDialogActivity;
+import com.dingohub.Views.Activities.DevActivities.ViewBubActivity;
+import com.dingohub.Views.Activities.PingInDialogActivity;
 import com.dingohub.hubbub.R;
 import com.parse.ParsePushBroadcastReceiver;
 
@@ -55,7 +55,7 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
             Log.d("myApplication", pushType);
 
             if (pushType.equals("1")) {
-                intent = new Intent(context, ShowDialogActivity.class);
+                intent = new Intent(context, PingInDialogActivity.class);
                 intent.putExtra(DATA_KEY, eventID);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -63,7 +63,7 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
 
             } else {
 
-                intent = new Intent(context,MatViewBubActivity.class);
+                intent = new Intent(context,ViewBubActivity.class);
                 intent.putExtra(EVENT_KEY,eventID);
                 hub = HubDatabase.GetHubFromId(pushType);
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -95,7 +95,7 @@ public class MyParseReceiver extends ParsePushBroadcastReceiver {
 
     private void check_invite_notification(Context context, Intent intent){
         if(pushType.equals("FIND PUSH TYPE")){
-            intent = new Intent(context, MatViewBubActivity.class);
+            intent = new Intent(context, ViewBubActivity.class);
             intent.putExtra(EVENT_KEY, eventID);
             user = HubDatabase.GetUserById(pushType);
             event = HubDatabase.GetBubFromId(eventID);

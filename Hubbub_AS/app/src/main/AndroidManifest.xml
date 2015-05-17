@@ -45,7 +45,7 @@
          
         <!-- ACTIVITES -->
         <activity
-            android:name="com.dingohub.Views.Activities.DevActivities.MatLoginActivity"
+            android:name="com.dingohub.Views.Activities.DevActivities.LoginActivity"
             android:windowSoftInputMode="adjustPan"
             android:label="@string/app_name" >
             <intent-filter>
@@ -64,20 +64,20 @@
 
         <activity android:name = "com.dingohub.Views.Deprecated.UserMainDisplay"></activity>
         <activity android:name="com.dingohub.Views.Deprecated.ViewEventActivity"></activity>
-        <activity android:name="com.dingohub.Views.Activities.ShowDialogActivity"
+        <activity android:name="com.dingohub.Views.Activities.PingInDialogActivity"
         android:theme="@android:style/Theme.Holo.Light.Dialog"/>
 
         <!-- MATERIAL ACTIVITIES -->
-        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatUserMainDisplay" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.UserMainDisplay" />
         <activity android:windowSoftInputMode="adjustPan"
-            android:name="com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity"/>
-        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatViewHubActivity"/>
-        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatViewBubActivity"/>
-        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatUserProfileActivity"/>
-        <activity android:name="com.dingohub.Views.Activities.DevActivities.MatViewAllUsersActivity"/>
-        <activity android:name = "com.dingohub.Views.Activities.DevActivities.MatSearchEventsActivity"/>
-        <activity android:name = "com.dingohub.Views.Activities.DevActivities.MatCreateUserActivity"/>
-        <activity android:name = "com.dingohub.Views.Activities.DevActivities.MatCreateHubActivity"/>
+            android:name="com.dingohub.Views.Activities.DevActivities.CreateEventsActivity"/>
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.ViewHubActivity"/>
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.ViewBubActivity"/>
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.UserProfileActivity"/>
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.ViewAllUsersActivity"/>
+        <activity android:name = "com.dingohub.Views.Activities.DevActivities.SearchEventsActivity"/>
+        <activity android:name = "com.dingohub.Views.Activities.DevActivities.CreateUserActivity"/>
+        <activity android:name = "com.dingohub.Views.Activities.DevActivities.CreateHubActivity"/>
         
         <!-- SERVICES AND RECEIVERS -->
         <service android:name="com.parse.PushService" />

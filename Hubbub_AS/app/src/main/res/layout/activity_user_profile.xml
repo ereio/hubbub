@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:elevation="10dp">
+
+    <include
+        android:id="@+id/material_toolbar"
+        layout="@layout/material_toolbar">
+    </include>
+
+    <ScrollView
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:elevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="372dp"
+            android:background="@color/AntiqueWhite" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:id="@+id/image_profile_background_picture"
+                android:background="@drawable/polygon6"
+                android:scaleType="centerCrop"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:elevation="10dp"
+                android:layout_above="@+id/text_fullname" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_account_circle_black_24dp"
+                android:id="@+id/image_profile_picture"
+                android:layout_centerVertical="true"
+                android:elevation="13dp" />
+
+            <TextView
+                android:id="@+id/text_fullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_user_fullname"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignBottom="@+id/image_profile_picture"
+                android:layout_alignLeft="@+id/text_username"
+                android:layout_alignStart="@+id/text_username" />
+
+            <TextView
+                android:id="@+id/text_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/username"
+                android:elevation="15dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_alignBottom="@+id/image_profile_background_picture"
+                android:layout_toRightOf="@+id/image_profile_picture"
+                android:layout_toEndOf="@+id/image_profile_picture" />
+
+            <TextView
+                android:id="@+id/cardview_text_about"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:text="@string/event_details_default"
+                android:elevation="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_below="@+id/text_fullname"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_follow"
+                android:id="@+id/button_toggle_friend"
+                android:background="@color/AntiqueWhite"
+                android:layout_below="@+id/image_profile_background_picture"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:enabled="true" />
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/grid_recycle_view"
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:cacheColorHint="@android:color/transparent"
+            android:background="@color/AntiqueWhite"
+            android:fadingEdge="horizontal"
+            android:scrollbars="horizontal" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/userbub_recycler_view"
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="380dp"
+            android:cacheColorHint="@android:color/transparent"
+            android:background="@color/AntiqueWhite"
+            android:fadingEdge="horizontal"
+            android:scrollbars="horizontal" />
+
+    </LinearLayout>
+</ScrollView>
+</RelativeLayout>

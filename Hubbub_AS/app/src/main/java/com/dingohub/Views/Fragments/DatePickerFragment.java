@@ -8,8 +8,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
-import com.dingohub.Views.Activities.*;
-import com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity;
+
+import com.dingohub.Views.Activities.DevActivities.CreateEventsActivity;
 
 public class DatePickerFragment extends DialogFragment
 implements DatePickerDialog.OnDateSetListener {
@@ -27,7 +27,7 @@ implements DatePickerDialog.OnDateSetListener {
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        ((MatCreateEventsActivity)getActivity()).setDate(view, year, month, day);
+        ((CreateEventsActivity)getActivity()).setDate(view, year, month, day);
 
     }
 

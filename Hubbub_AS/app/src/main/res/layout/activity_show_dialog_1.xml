@@ -58,11 +58,11 @@
         android:id="@+id/buttons_yes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dialog_event_picture"
-        android:layout_below="@+id/dialog_text_num_yes"
-        android:layout_marginTop="19dp"
         android:background="@drawable/button_teal"
-        android:text="YES" />
+        android:text="YES"
+        android:layout_below="@+id/dialog_text_num_yes"
+        android:layout_alignRight="@+id/dialog_event_picture"
+        android:layout_alignEnd="@+id/dialog_event_picture" />
 
     <TextView
         android:id="@+id/dialog_event_title"
@@ -96,12 +96,11 @@
         android:id="@+id/button_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttons_maybe"
-        android:layout_alignBottom="@+id/buttons_maybe"
-        android:layout_toRightOf="@+id/buttons_maybe"
-        android:layout_marginLeft="25dp"
         android:background="@drawable/button_teal"
-        android:text="No" />
+        android:text="No"
+        android:layout_below="@+id/dialog_text_num_no"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/dialog_bub_date"

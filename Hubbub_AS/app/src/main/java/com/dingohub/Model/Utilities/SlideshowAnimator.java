@@ -1,7 +1,5 @@
 package com.dingohub.Model.Utilities;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dingohub.hubbub.R;
-
-import java.util.Random;
 
 /**
  * Created by ereio on 4/19/15.

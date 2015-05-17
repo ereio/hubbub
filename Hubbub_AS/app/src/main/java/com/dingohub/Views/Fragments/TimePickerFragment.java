@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
-import com.dingohub.Views.Activities.DevActivities.MatCreateEventsActivity;
+import com.dingohub.Views.Activities.DevActivities.CreateEventsActivity;
 
 public class TimePickerFragment extends DialogFragment
 implements TimePickerDialog.OnTimeSetListener {
@@ -29,7 +29,7 @@ implements TimePickerDialog.OnTimeSetListener {
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
     	view.setIs24HourView(false);
-    	((MatCreateEventsActivity)getActivity()).setTime(view,hourOfDay,minute);
+    	((CreateEventsActivity)getActivity()).setTime(view,hourOfDay,minute);
     }
 
 }

@@ -12,8 +12,8 @@ import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.Bub;
 import com.dingohub.Model.DataAccess.Hub;
 import com.dingohub.Model.DataAccess.HubUser;
-import com.dingohub.Views.Activities.DevActivities.MatViewHubActivity;
-import com.dingohub.Views.Deprecated.ViewEventActivity;
+import com.dingohub.Views.Activities.DevActivities.ViewBubActivity;
+import com.dingohub.Views.Activities.DevActivities.ViewHubActivity;
 
 import java.util.ArrayList;
 
@@ -21,9 +21,6 @@ import java.util.ArrayList;
  * Created by ereio on 4/20/15.
  */
 public class MatBaseFragment extends Fragment {
-
-
-
 
     private class BubRecyclerViewListener implements RecyclerView.OnItemTouchListener{
 
@@ -55,8 +52,8 @@ public class MatBaseFragment extends Fragment {
 
                 if (currentType == BUB_TYPE) {
                     String eventId = bubArrayList.get(rv.getChildPosition(child)).id;
-                    Intent intent = new Intent(getActivity(), MatViewHubActivity.class);
-                    intent.putExtra(ViewEventActivity.EVENT_KEY, eventId);                    // MAKE Bub parcelable
+                    Intent intent = new Intent(getActivity(), ViewHubActivity.class);
+                    intent.putExtra(ViewBubActivity.EVENT_KEY, eventId);                    // MAKE Bub parcelable
                     startActivity(intent);
                 } else if (currentType == HUB_TYPE){
 

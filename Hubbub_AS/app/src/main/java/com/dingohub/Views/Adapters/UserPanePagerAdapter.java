@@ -7,12 +7,12 @@ import android.support.v13.app.FragmentPagerAdapter;
 
 import com.dingohub.Hubbub;
 import com.dingohub.Model.DataAccess.HubDatabase;
-import com.dingohub.Views.Fragments.MainUserFragments.MatUserGroupsFragment;
-import com.dingohub.Views.Fragments.MainUserFragments.MatTodaysBubsFragment;
-import com.dingohub.Views.Fragments.MainUserFragments.MatUserBubsFragment;
-import com.dingohub.Views.Fragments.MainUserFragments.MatUserHubsFragment;
-import com.dingohub.Views.Fragments.MainUserFragments.MatUserProfileFragment;
-import com.dingohub.Views.Fragments.MatSearchedEventsFragment;
+import com.dingohub.Views.Fragments.MainUserFragments.UserGroupsFragment;
+import com.dingohub.Views.Fragments.MainUserFragments.TodaysBubsFragment;
+import com.dingohub.Views.Fragments.MainUserFragments.UserBubsFragment;
+import com.dingohub.Views.Fragments.MainUserFragments.UserHubsFragment;
+import com.dingohub.Views.Fragments.MainUserFragments.UserProfileFragment;
+import com.dingohub.Views.Fragments.MainUserFragments.SearchedEventsFragment;
 
 /**
  * Created by ereio on 4/15/15.
@@ -41,17 +41,17 @@ public class UserPanePagerAdapter extends FragmentPagerAdapter {
             case 0:
                 Bundle bundle = new Bundle();
                 bundle.putString(Hubbub.USER_VIEW_KEY, HubDatabase.GetCurrentUser().id);
-                return new MatUserProfileFragment();
+                return new UserProfileFragment();
             case 1:
-                return new MatTodaysBubsFragment();
+                return new TodaysBubsFragment();
             case 2:
-                return new MatUserBubsFragment();
+                return new UserBubsFragment();
             case 3:
-                return new MatUserHubsFragment();
+                return new UserHubsFragment();
             case 4:
-                return new MatUserGroupsFragment();
+                return new UserGroupsFragment();
             case 5:
-                return new MatSearchedEventsFragment();
+                return new SearchedEventsFragment();
             default:
                 return new Fragment();
         }
