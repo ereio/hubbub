@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dingohub.hubbub"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+
+    <uses-permission android:name="com.dingohub.hubbub.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <permission android:name="com.dingohub.hubbub.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.dingohub.hubbub.permission.C2D_MESSAGE" />
+
+    <application
+        android:name="com.dingohub.Hubbub"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppBaseTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <!-- ACTIVITES -->
+        <activity
+            android:name="com.dingohub.Views.Activities.DevActivities.LoginActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- NON_MATERIAL ACTIVITIES -->
+        <activity
+            android:name="com.dingohub.Views.Activities.PingInDialogActivity"
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
+
+        <!-- MATERIAL ACTIVITIES -->
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.UserMainDisplay" />
+        <activity
+            android:name="com.dingohub.Views.Activities.DevActivities.CreateEventsActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.ViewHubActivity" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.ViewBubActivity" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.UserProfileActivity" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.ViewAllUsersActivity" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.SearchEventsActivity" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.CreateUserActivity" />
+        <activity android:name="com.dingohub.Views.Activities.DevActivities.CreateHubActivity" />
+
+        <!-- SERVICES AND RECEIVERS -->
+        <service android:name="com.parse.PushService" />
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.dingohub.Model.Utilities.MyParseReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.dingohub.hubbub" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.dingohub.Model.Utilities.AlarmReceiver"></receiver>
+
+    </application>
+
+</manifest>
