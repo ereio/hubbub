@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dingohub.Model.Utilities.StringMap;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
 import com.dingohub.Views.Fragments.MainUserFragments.SearchedEventsFragment;
 import com.dingohub.Model.DataAccess.HubDatabase;
@@ -102,7 +103,7 @@ public class SearchEventsActivity extends BaseGoogleActivity{
     }
 	
 	private boolean checkTags(String tag){
-		if(tag.contains(HubDatabase.INVALID_CHARS)){
+		if(tag.contains(StringMap.Format.INVALID_CHARS)){
 			Toast.makeText(getApplicationContext(), "Tags cannot contain invalid characters",
 			Toast.LENGTH_LONG).show();
 			return false;

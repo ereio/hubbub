@@ -21,6 +21,7 @@ import com.dingohub.Model.DataAccess.HubDatabase;
 import com.dingohub.Model.DataAccess.HubUser;
 import com.dingohub.Model.Utilities.BitmapWorker;
 import com.dingohub.Views.Activities.BaseActivities.BaseGoogleActivity;
+import com.dingohub.Views.Adapters.RecyclerManager;
 import com.dingohub.Views.Adapters.HubbubRecycleAdapter;
 import com.dingohub.Views.Adapters.UserRecycleAdapter;
 import com.dingohub.hubbub.R;
@@ -133,7 +134,7 @@ public class ViewHubActivity extends BaseGoogleActivity{
 
             // Setting adapter
         userAdapter = new UserRecycleAdapter(followers, getApplicationContext());
-        userRecyclerView.addOnItemTouchListener(new UserRecyclerViewListener());
+        userRecyclerView.addOnItemTouchListener(new RecyclerManager.UserRecycleViewListener(mGestureDetector, followers));
         userRecyclerView.setAdapter(userAdapter);
 
         // Sets the recycler for the Events associated with a hub
@@ -277,7 +278,7 @@ public class ViewHubActivity extends BaseGoogleActivity{
                 if(containedBubs.size() != 0) {
                     String eventId = containedBubs.get(rv.getChildPosition(child)).id;
                     Intent intent = new Intent(getApplicationContext(), ViewBubActivity.class);
-                    intent.putExtra(ViewBubActivity.EVENT_KEY, eventId);                    // MAKE Bub parcelable
+                    intent.putExtra(ViewBubActivity.EVENT_KEY, eventId);
                     startActivity(intent);
                     finish();
                 }

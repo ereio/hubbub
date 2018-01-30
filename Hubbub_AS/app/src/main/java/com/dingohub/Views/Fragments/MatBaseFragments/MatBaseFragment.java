@@ -35,7 +35,7 @@ public class MatBaseFragment extends Fragment {
 
         private int currentType = 0;
 
-        BubRecyclerViewListener(GestureDetector mGestureDectector, ArrayList<?> list){
+        BubRecyclerViewListener(GestureDetector mGestureDectector, ArrayList<> list){
             this.mGestureDetector = mGestureDectector;
             get_list_type(list);
         }
